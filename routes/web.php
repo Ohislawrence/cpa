@@ -21,8 +21,8 @@ Route::get('/', function () {
 });
 
 //Route::get('/assign', function () {
- //   $user = Auth()->user();
- //   $user->assignRole('admin');
+//    $user = Auth()->user();
+//   $user->assignRole('admin');
 //});
 
 Route::middleware([
@@ -78,7 +78,7 @@ Route::middleware([
         Route::get('/dashboard', function () {
             return view('Dashboard');
         })->name('dashboard');
-        
+
     });
 
 //Agency
@@ -91,6 +91,6 @@ Route::middleware([
         Route::get('/dashboard', function () {
             return view('Dashboard');
         })->name('dashboard');
-        
+
     });
 });

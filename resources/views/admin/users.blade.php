@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  'Affiliates' )
+@section('headername',  'Users' )
 @section('bread1',  'Users' )
-@section('bread2',  'Affiliates' )
+@section('bread2',  'User' )
 
 
 @section('header')
@@ -13,14 +13,14 @@
 
 
 @section('footer')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
 	$(function () {
-	
+
 	var table = $('.yajra-datatable').DataTable({
 		processing: true,
 		serverSide: true,
@@ -29,24 +29,25 @@
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 			{data: 'name', name: 'name'},
 			{data: 'email', name: 'email'},
+            {data: 'role', name: 'role'},
 			{
-				data: 'action', 
-				name: 'action', 
-				orderable: true, 
-				searchable: true
+				data: 'action',
+				name: 'action',
+				orderable: true,
+				searchable: false,
 			},
 		]
 	});
-	
+
 	});
 </script>
 @endsection
 
-	
 
-    
 
-  
+
+
+
 @section('slot')
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -139,7 +140,7 @@
 						<!--end::Add user-->
 					</div>
 					<!--end::Toolbar-->
-					@include('admin.components.addusermodal') 
+					@include('admin.components.addusermodal')
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->
@@ -149,11 +150,12 @@
 												<th class="w-10px pe-2">S/N</th>
 												<th class="min-w-125px">User</th>
 												<th class="min-w-125px">Email</th>
+                                                <th class="min-w-125px">Role</th>
 												<th class="text-end min-w-100px">Actions</th>
 											</tr>
 										</thead>
 										<tbody class="text-gray-600 fw-semibold">
-											
+
 										</tbody>
 									</table>
 									<!--end::Table-->
@@ -174,12 +176,12 @@
 									<h2 class="fs-2x fw-bold mb-0">Create New User</h2>
 									<!--end::Title-->
 									<!--begin::Description-->
-									<p class="text-gray-500 fs-4 fw-semibold py-7">Click on the below buttons to 
+									<p class="text-gray-500 fs-4 fw-semibold py-7">Click on the below buttons to
 									<br />n create a new user.</p>
 									<!--end::Description-->
 									<!--begin::Action-->
 									<a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">Create User</a>
-									
+
 									<!--end::Action-->
 								</div>
 								<!--end::Heading-->
@@ -192,9 +194,9 @@
 							<!--end::Card body-->
 						</div>
 						<!--end::Card-->
-					
-				@include('admin.components.addusermodal')	
-				<!--end::Content-->							
+
+				@include('admin.components.addusermodal')
+				<!--end::Content-->
 			@endif
         </div>
     </div>

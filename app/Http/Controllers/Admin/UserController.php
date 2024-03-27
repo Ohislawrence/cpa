@@ -24,10 +24,10 @@ class UserController extends Controller
             'email' => 'required|string|email|unique:Users,email',
             'password' => 'required|string'
         ]);
-        
+
         $user = User::create($validated);
         $user->assignRole($request->role);
-    
+
         //return view('partials.todo-item', compact('user'));
         return back()->with('message','User Created');
     }
@@ -39,10 +39,16 @@ class UserController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a> <a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="viewuser/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+                                    <a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>
+                                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('role',function($row){
+                    $role = $row->getRoleNames()->first();
+                    return $role;
+                })
+                ->rawColumns(['action','role'])
                 ->make(true);
         }
     }

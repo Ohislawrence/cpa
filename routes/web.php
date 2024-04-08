@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Affiliate\OfferController as AffiliateOfferController;
+use App\Http\Controllers\Affiliate\ProfileController;
+use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
+use App\Http\Controllers\ClickController;
 use Illuminate\Support\Facades\Route;
 
 use function Laravel\Prompts\alert;
@@ -19,6 +25,7 @@ use function Laravel\Prompts\alert;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 
 //Route::get('/assign', function () {
 //    $user = Auth()->user();
@@ -66,6 +73,8 @@ Route::middleware([
         Route::get('getuser', [UserController::class, 'getusers'])->name('getusers');
         Route::post('user/post', [UserController::class, 'store'])->name('creatuser');
         Route::get('viewuser/{id}', [UserController::class, 'viewuser'])->name('viewuser');
+        Route::resource('offers', OfferController::class);
+        Route::get('profile', [AdminProfileController::class, 'view'])->name('profile');
     });
 
 //Affiliate
@@ -78,6 +87,10 @@ Route::middleware([
         Route::get('/dashboard', function () {
             return view('Dashboard');
         })->name('dashboard');
+        Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
+        Route::get('offers', [AffiliateOfferController::class, 'index'])->name('offer');
+        Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
+        Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
 
     });
 
@@ -91,6 +104,7 @@ Route::middleware([
         Route::get('/dashboard', function () {
             return view('Dashboard');
         })->name('dashboard');
+        Route::get('profile', [AgencyProfileController::class, 'index'])->name('profile');
 
     });
 });

@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('category_id');
             $table->integer('targeting_id');
             $table->integer('geo_id');
-            $table->string('payout');
             $table->string('actionurl');
             $table->text('desc');
             $table->timestamps();

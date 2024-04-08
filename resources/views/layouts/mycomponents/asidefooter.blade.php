@@ -41,7 +41,7 @@
                         <!--end::Avatar-->
                         <!--begin::Username-->
                         <div class="d-flex flex-column">
-                            <div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }} 
+                            <div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
                             <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
                             <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->getRoleNames()->first() }}</a>
                         </div>
@@ -54,7 +54,15 @@
                 <!--end::Menu separator-->
                 <!--begin::Menu item-->
                 <div class="menu-item px-5">
-                    <a href="account/overview.html" class="menu-link px-5">My Profile</a>
+                    @role('admin')
+                    <a href="{{ route('admin.profile') }}" class="menu-link px-5">My Profile</a>
+                    @endrole
+                    @role('affiliate')
+                    <a href="{{ route('affiliate.myprofile') }}" class="menu-link px-5">My Profile</a>
+                    @endrole
+                    @role('agency')
+                    <a href="{{ route('agency.profile') }}" class="menu-link px-5">My Profile</a>
+                    @endrole
                 </div>
                 <!--end::Menu item-->
                 <!--begin::Menu item-->
@@ -67,7 +75,7 @@
                     </a>
                 </div>
                 <!--end::Menu item-->
-                
+
                 <!--begin::Menu item-->
                 <div class="menu-item px-5">
                     <a href="account/statements.html" class="menu-link px-5">Payment History</a>
@@ -76,7 +84,7 @@
                 <!--begin::Menu separator-->
                 <div class="separator my-2"></div>
                 <!--end::Menu separator-->
-                
+
                 <!--begin::Menu item-->
                 <div class="menu-item px-5 my-1">
                     <a href="{{ route('profile.show') }}" class="menu-link px-5">Account Settings</a>

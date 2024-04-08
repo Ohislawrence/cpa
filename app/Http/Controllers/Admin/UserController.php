@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,10 +26,14 @@ class UserController extends Controller
             'password' => 'required|string'
         ]);
 
-        $user = User::create($validated);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
         $user->assignRole($request->role);
 
-        //return view('partials.todo-item', compact('user'));
+
         return back()->with('message','User Created');
     }
 

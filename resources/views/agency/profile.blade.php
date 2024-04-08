@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  $user->name )
+@section('headername',  auth()->user()->name )
 @section('bread1',  'Users' )
-@section('bread2',  'View User' )
+@section('bread2',  auth()->user()->name )
 
 
 @section('header')
@@ -33,7 +33,7 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
+                            <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" />
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <div class="d-flex flex-column">
                                 <!--begin::Name-->
                                 <div class="d-flex align-items-center mb-2">
-                                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $user->name }}</a>
+                                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ auth()->user()->name }}</a>
                                     <a href="#">
                                         <i class="ki-duotone ki-verify fs-1 text-primary">
                                             <span class="path1"></span>
@@ -62,7 +62,7 @@
                                         <span class="path1"></span>
                                         <span class="path2"></span>
                                         <span class="path3"></span>
-                                    </i>Developer</a>
+                                    </i>{{ auth()->user()->getRoleNames()->first() }}</a>
                                     <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                     <i class="ki-duotone ki-geolocation fs-4 me-1">
                                         <span class="path1"></span>
@@ -72,7 +72,7 @@
                                     <i class="ki-duotone ki-sms fs-4">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
-                                    </i>max@kt.com</a>
+                                    </i>{{ auth()->user()->email }}</a>
                                 </div>
                                 <!--end::Info-->
                             </div>
@@ -90,15 +90,11 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">0</div>
+                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ auth()->user()->balance }}" data-kt-countup-prefix="$">0</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500">Earnings</div>
+                                        <div class="fw-semibold fs-6 text-gray-500 center">Earnings</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->

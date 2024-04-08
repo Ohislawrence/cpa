@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('targets', function (Blueprint $table) {
-            $table->id();
-            $table->integer('offer_id');
-            $table->string('target');
-            $table->string('payout');
-            $table->timestamps();
+        Schema::table('clicks', function (Blueprint $table) {
+            $table->string('ip');
+            $table->string('clickID');
         });
     }
 
@@ -25,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('targets');
+        Schema::table('clicks', function (Blueprint $table) {
+            $table->string('ip');
+            $table->string('clickID');
+        });
     }
 };

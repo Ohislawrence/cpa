@@ -67,18 +67,28 @@
                 <!--end::Menu item-->
                 <!--begin::Menu item-->
                 <div class="menu-item px-5">
-                    <a href="apps/projects/list.html" class="menu-link px-5">
-                        <span class="menu-text">My Offers</span>
-                        <span class="menu-badge">
-                            <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
-                        </span>
+                    @role('affiliate')
+                    <a href="{{ route('affiliate.referral') }}" class="menu-link px-5">
+                        <span class="menu-text">Referral</span>
                     </a>
+                    @endrole
+                    @role('admin')
+                    <a href="{{ route('admin.refferals') }}" class="menu-link px-5">
+                        <span class="menu-text">Referral</span>
+                    </a>
+                    @endrole
                 </div>
                 <!--end::Menu item-->
 
                 <!--begin::Menu item-->
                 <div class="menu-item px-5">
-                    <a href="account/statements.html" class="menu-link px-5">Payment History</a>
+                    @role('affiliate')
+                    <a href="{{ route('affiliate.payments') }}" class="menu-link px-5">Payments</a>
+                    @endrole
+
+                    @role('agency')
+                    <a href="account/statements.html" class="menu-link px-5">Payments</a>
+                    @endrole
                 </div>
                 <!--end::Menu item-->
                 <!--begin::Menu separator-->

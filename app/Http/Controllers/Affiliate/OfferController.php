@@ -77,4 +77,10 @@ class OfferController extends Controller
         $offer = Offer::where('offerid', $id)->first();
         return view('affiliate.viewoffer', compact('offer'));
     }
+
+
+    public function ailink()
+    {
+        return view('affiliate.ailink');
+    }
 }

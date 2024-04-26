@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('headername',  auth()->user()->name )
+@section('headername',  'My Profile' )
 @section('bread1',  'Users' )
 @section('bread2',  auth()->user()->name )
 

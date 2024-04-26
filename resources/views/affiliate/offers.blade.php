@@ -72,7 +72,7 @@
                                     <div class="table-responsive">
 									<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="kt_datatable_responsive1">
 										<thead>
-											<tr class="fw-semibold fs-6 text-gray-200">
+											<tr class="fw-semibold fs-6 text-gray-800">
                                                 <th>Offer ID</th>
 												<th>Name</th>
 												<th>Category</th>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('headername',  $offer->name )
-@section('bread1',  'Agency' )
+@section('headername',  'Our Offer' )
+@section('bread1',  'Offer' )
 @section('bread2',  $offer->name )
 
 
@@ -55,76 +55,129 @@
             <!--end::Col-->
         </div>
         <!--end::Overview-->
-        <!--begin::Stats-->
-        <div class="row">
-            <!--begin::Col-->
-            <div class="col">
-                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                    <span class="fs-4 fw-semibold text-info pb-1 px-2">Clicks</span>
-                    <span class="fs-lg-2tx fw-bold d-flex justify-content-center">$
-                    <span data-kt-countup="true" data-kt-countup-value="63,240.00">0</span></span>
-                </div>
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col">
-                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                    <span class="fs-4 fw-semibold text-success pb-1 px-2">Leads</span>
-                    <span class="fs-lg-2tx fw-bold d-flex justify-content-center">$
-                    <span data-kt-countup="true" data-kt-countup-value="8,530.00">0</span></span>
-                </div>
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col">
-                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                    <span class="fs-4 fw-semibold text-danger pb-1 px-2">Revenue</span>
-                    <span class="fs-lg-2tx fw-bold d-flex justify-content-center">$
-                    <span data-kt-countup="true" data-kt-countup-value="2,600">0</span></span>
-                </div>
-            </div>
-            <!--end::Col-->
-            <!--begin::Col-->
-            <div class="col">
-                <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                    <span class="fs-4 fw-semibold text-primary pb-1 px-2">EPC</span>
-                    <span class="fs-lg-2tx fw-bold d-flex justify-content-center">$
-                    <span data-kt-countup="true" data-kt-countup-value="783&quot;">0</span></span>
-                </div>
-            </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Stats-->
-        <!--begin::Info-->
-        <p class="fs-5 fw-semibold text-gray-600 py-6">Writing headlines for blog posts is as much an art as it is a science, and probably warrants its own post, but for now, all I’d advise is experimenting with what works for your audience, especially if it’s not resonating with your audience</p>
-        <!--end::Info-->
-        <!--begin::Notice-->
-        <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed p-6">
-            <!--begin::Icon-->
-            <i class="ki-duotone ki-bank fs-2tx text-primary me-4">
-                <span class="path1"></span>
-                <span class="path2"></span>
-            </i>
-            <!--end::Icon-->
-            <!--begin::Wrapper-->
-            <div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
-                <!--begin::Content-->
-                <div class="mb-3 mb-md-0 fw-semibold">
-                    <h4 class="text-gray-900 fw-bold">Withdraw Your Money to a Bank Account</h4>
-                    <div class="fs-6 text-gray-700 pe-7">Withdraw money securily to your bank account. Commision is $25 per transaction under $50,000</div>
-                </div>
-                <!--end::Content-->
-                <!--begin::Action-->
-                <a href="#" class="btn btn-primary px-6 align-self-center text-nowrap">Withdraw Money</a>
-                <!--end::Action-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Notice-->
+        
+        
     </div>
     <!--end::Body-->
 </div>
+
+        
+        <div class="card mb-5 mb-xl-10">
+            <!--begin::Card header-->
+            <div class="card-header">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <h2 class="fw-bold">Details</h2>
+                </div>
+                <!--begin::Card title-->
+                
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-3">
+                <!--begin::Section-->
+                <div class="mb-10">
+                    <!--begin::Details-->
+                    <div class="d-flex flex-wrap py-5">
+                        <!--begin::Row-->
+                        <div class="flex-equal me-5">
+                            <!--begin::Details-->
+                            <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2 m-0">
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500 min-w-175px w-175px">Landing Page:</td>
+                                    <td class="text-gray-800 min-w-200px">
+                                        <a href="{{ $offer->actionurl }}" target="_blank" class="text-gray-800 text-hover-primary">Click here to view</a>
+                                    </td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Category:</td>
+                                    <td class="text-gray-800">{{ $offer->category->name }}</td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Pay Out Type:</td>
+                                    <td class="text-gray-800">
+                                        {{ $offer->payouttype->name }}</td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Commission:</td>
+                                    <td class="text-gray-800">@php
+                                        foreach ($offer->targets as $loc) {
+                                            $payout = $loc->payout;
+                                            $payys[] = $payout;
+                                        }
+                                    @endphp
+                                   ${{ round(array_sum($payys)/count($payys),2)}}</td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Countries Allowed:</td>
+                                    <td class="text-gray-800">@foreach ($offer->geos as $loc )
+                                        {{ $loc->country->name }} |
+                                    @endforeach</td>
+                                </tr>
+                                <!--end::Row-->
+                            </table>
+                            <!--end::Details-->
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="flex-equal">
+                            <!--begin::Details-->
+                            <table class="table fs-6 fw-semibold gs-0 gy-2 gx-2 m-0">
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500 min-w-175px w-175px">Device OS allowed:</td>
+                                    <td class="text-gray-800 min-w-200px">
+                                        @foreach ($offer->targets as $loc )
+                                        {{ $loc->target }} |
+                                    @endforeach
+                                    </td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Network EPC:</td>
+                                    <td class="text-gray-800">$149.99 / Year</td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Status/Expiry Date:</td>
+                                    <td class="text-gray-800">{{ $offer->status }}</td>
+                                </tr>
+                                <!--end::Row-->
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Currency:</td>
+                                    <td class="text-gray-800">USD - US Dollar</td>
+                                </tr>
+                                <!--end::Row-->
+                            </table>
+                            <!--end::Details-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Section-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+          
+
+
+
 <!--end::Referral program-->
     </div>
 </div>
+
 @endsection

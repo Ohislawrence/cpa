@@ -1,11 +1,21 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Affiliate\DashboardController;
 use App\Http\Controllers\Affiliate\OfferController as AffiliateOfferController;
+use App\Http\Controllers\Affiliate\PaymentController;
 use App\Http\Controllers\Affiliate\ProfileController;
+use App\Http\Controllers\Affiliate\PromotionalController;
+use App\Http\Controllers\Affiliate\ReferralController;
+use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
+use App\Http\Controllers\Agency\OfferController as AgencyOfferController;
 use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
+use App\Http\Controllers\Agency\ReportController;
+use App\Http\Controllers\Agency\TransactionController;
 use App\Http\Controllers\ClickController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +36,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
+
+
+//offer webhooks
+Route::webhooks('verify-action-taken', 'webhooktest1');
 
 //Route::get('/assign', function () {
 //    $user = Auth()->user();
@@ -65,16 +79,30 @@ Route::middleware([
         'middleware' => 'role:admin',
         'as' => 'admin.',
     ], function () {
-        Route::get('/dashboard', function () {
-            return view('Dashboard');
-        })->name('dashboard');
+        
         //users
         Route::get('user', [UserController::class, 'index'])->name('viewusers');
         Route::get('getuser', [UserController::class, 'getusers'])->name('getusers');
         Route::post('user/post', [UserController::class, 'store'])->name('creatuser');
-        Route::get('viewuser/{id}', [UserController::class, 'viewuser'])->name('viewuser');
+        //Route::get('user/view/{id}', [UserController::class, 'viewuser'])->name('');
+        Route::get('user/refferals', [UserController::class, 'refferals'])->name('refferals');
+        Route::get('user/edit/{id}', [UserController::class, 'edituser'])->name('edituser');
+        Route::put('user/edit/{id}/update', [UserController::class, 'updateuser'])->name('updateuser');
+        Route::put('user/edit/{id}/update/agency', [UserController::class, 'updateuseragency'])->name('updateuseragency');
+        //userTabs
+        Route::get('user/view/{id}/overview', [UserController::class, 'overview'])->name('viewuser');
+        //offers
         Route::resource('offers', OfferController::class);
+        Route::get('ailink', [OfferController::class, 'ailink'])->name('ailink');
+        Route::get('table-data', [OfferController::class, 'viewtable'])->name('viewtable');
+        //payments
+        Route::get('transaction', [PaymentsController::class, 'transaction'])->name('transaction');
+        Route::get('sendpayments', [PaymentsController::class, 'sendpayments'])->name('sendpayments');
+
         Route::get('profile', [AdminProfileController::class, 'view'])->name('profile');
+        //dashboard
+        Route::get('dashboard/main', [AdminDashboardController::class, 'dashboard1'])->name('dashboard');
+        Route::get('dashboard/stats', [AdminDashboardController::class, 'dashboard2'])->name('stats');
     });
 
 //Affiliate
@@ -84,13 +112,17 @@ Route::middleware([
         'middleware' => 'role:affiliate',
         'as' => 'affiliate.',
     ], function () {
-        Route::get('/dashboard', function () {
-            return view('Dashboard');
-        })->name('dashboard');
         Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
         Route::get('offers', [AffiliateOfferController::class, 'index'])->name('offer');
         Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
         Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
+        Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
+        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('dashtwo');
+        Route::get('payments', [PaymentController::class, 'index'])->name('payments');
+        Route::get('referral', [ReferralController::class, 'index'])->name('referral');
+        Route::get('offers/ailink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
+        Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
+        Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
 
     });
 
@@ -101,10 +133,11 @@ Route::middleware([
         'middleware' => 'role:agency',
         'as' => 'agency.',
     ], function () {
-        Route::get('/dashboard', function () {
-            return view('Dashboard');
-        })->name('dashboard');
         Route::get('profile', [AgencyProfileController::class, 'index'])->name('profile');
+        Route::get('dashboard', [AgencyDashboardController::class, 'index'])->name('dashboard');
+        Route::get('offers', [AgencyOfferController::class, 'index'])->name('offers');
+        Route::get('reports', [ReportController::class, 'index'])->name('reports');
+        Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 
     });
 });

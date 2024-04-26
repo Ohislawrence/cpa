@@ -5,23 +5,20 @@
 
 
 @section('header')
-<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 
 
 
 @section('footer')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
 <script type="text/javascript">
 	$(function () {
 
 	var table = $('.yajra-datatable').DataTable({
+		searchDelay: 500,
 		processing: true,
 		serverSide: true,
 		ajax: "{{ route('admin.getusers') }}",
@@ -37,7 +34,7 @@
 				searchable: false,
 			},
 		]
-	});
+	}).ajax.reload();
 
 	});
 </script>
@@ -144,14 +141,14 @@
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->
-									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_table_users">
+									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
 										<thead>
-											<tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-												<th class="w-10px pe-2">S/N</th>
-												<th class="min-w-125px">User</th>
-												<th class="min-w-125px">Email</th>
-                                                <th class="min-w-125px">Role</th>
-												<th class="text-end min-w-100px">Actions</th>
+											<tr class="fw-bold fs-6 text-gray-800 px-7">
+												<th></th>
+												<th>User</th>
+												<th>Email</th>
+                                                <th>Role</th>
+												<th>Actions</th>
 											</tr>
 										</thead>
 										<tbody class="text-gray-600 fw-semibold">

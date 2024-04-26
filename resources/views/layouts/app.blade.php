@@ -58,14 +58,10 @@
 								<!--end::Heading-->
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-semibold fs-base my-1">
-									@isset($bread1)
 									<li class="breadcrumb-item text-muted">
 										<a href="index.html" class="text-muted text-hover-primary">@yield('bread1')</a>
 									</li>
-									@endisset
-									@isset($bread2)
 									<li class="breadcrumb-item text-gray-900">@yield('bread2')</li>
-									@endisset
 
 								</ul>
 								<!--end::Breadcrumb-->
@@ -75,11 +71,17 @@
                             <!--begin::Content-->
 
 							 @yield('slot')
-                            </div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		
                         </div>
                     </div>
-                             @include('layouts.mycomponents.footer')
-                        </div>
+					@include('layouts.mycomponents.footer')
+			</div>
 
         @livewireScripts
         @include('layouts.mycomponents.code')

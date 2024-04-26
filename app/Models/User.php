@@ -63,4 +63,17 @@ class User extends Authenticatable implements Wallet
     protected $appends = [
         'profile_photo_url',
     ];
+
+    
+    public function affiliatedetails()
+    {
+        return $this->hasOne(Affiliatedetail::class);
+    }
+
+    public function agencydetails()
+    {
+        return $this->hasOne(Agencydetails::class);
+    }
+
+
 }

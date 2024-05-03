@@ -10,10 +10,11 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Bavix\Wallet\Traits\HasWallet;
+use Bavix\Wallet\Traits\HasWalletFloat;
+use Bavix\Wallet\Interfaces\WalletFloat;
 use Bavix\Wallet\Interfaces\Wallet;
 
-class User extends Authenticatable implements Wallet
+class User extends Authenticatable implements Wallet, WalletFloat
 {
     use HasApiTokens;
     use HasFactory;
@@ -21,7 +22,7 @@ class User extends Authenticatable implements Wallet
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
-    use HasWallet;
+    use HasWalletFloat;
 
     /**
      * The attributes that are mass assignable.
@@ -64,7 +65,7 @@ class User extends Authenticatable implements Wallet
         'profile_photo_url',
     ];
 
-    
+
     public function affiliatedetails()
     {
         return $this->hasOne(Affiliatedetail::class);

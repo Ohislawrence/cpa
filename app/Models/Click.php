@@ -19,11 +19,17 @@ class Click extends Model
             'offer_id',
             'ip',
             'clickID',
-            'referrerurl'
+            'referrerurl',
+            'earned'
     ];
 
     public function offer()
     {
-        return $this->belongsTo(Offer::class);
+        return $this->hasMany(Offer::class, 'offerid', 'offer_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

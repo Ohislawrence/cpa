@@ -38,12 +38,10 @@
                     {{ $offer->desc }}
                 </p>
 
-                <h3 class="text-dark-800 mb-3 mt-6">Your Link</h3>
+                <h3 class="text-dark-800 mb-3 mt-6">Clicks</h3>
 
-                <div class="d-flex">
-                    <input id="kt_referral_link_input" type="text" class="form-control form-control-solid me-3 flex-grow-1" name="referral-link" value="{{ route('offer', ['aff_id'=>auth()->user()->id, 'offer_id' => $offer->offerid]) }}" />
-                    <button id="kt_referral_program_link_copy_btn" class="btn btn-light btn-active-light-primary fw-bold flex-shrink-0" data-clipboard-target="#kt_referral_link_input">Copy Link</button>
-                </div>
+                <a href="{{ route('admin.offerclicks', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
+                    <i class="ki-duotone ki-view fs-2"></i>View clicks</a>
             </div>
             <!--end::Col-->
             <!--begin::Col-->
@@ -55,13 +53,13 @@
             <!--end::Col-->
         </div>
         <!--end::Overview-->
-        
-        
+
+
     </div>
     <!--end::Body-->
 </div>
 
-        
+
         <div class="card mb-5 mb-xl-10">
             <!--begin::Card header-->
             <div class="card-header">
@@ -70,7 +68,7 @@
                     <h2 class="fw-bold">Details</h2>
                 </div>
                 <!--begin::Card title-->
-                
+
             </div>
             <!--end::Card header-->
             <!--begin::Card body-->
@@ -172,7 +170,7 @@
             <!--end::Card body-->
         </div>
         <!--end::Card-->
-          
+
 
 
 

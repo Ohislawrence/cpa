@@ -90,11 +90,11 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ auth()->user()->balance }}" data-kt-countup-prefix="$">0</div>
+                                            <div class="fs-2 fw-bold">$ {{ auth()->user()->balanceFloat }}</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500 center">Earnings</div>
+                                        <div class="fw-semibold fs-6 text-gray-500 center">Balance</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->

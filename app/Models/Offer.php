@@ -18,7 +18,10 @@ class Offer extends Model
         'category_id',
         'payout_id',
         'actionurl',
-        'desc'
+        'desc',
+        'secretkey',
+        'expiry'
+
     ];
 
     public function category()
@@ -44,5 +47,10 @@ class Offer extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function click()
+    {
+        return $this->belongsTo(Click::class, 'offerid', 'offer_id');
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ClicksController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\EmailControler;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
 use App\Http\Controllers\Agency\ReportController;
 use App\Http\Controllers\Agency\TransactionController;
 use App\Http\Controllers\ClickController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 use function Laravel\Prompts\alert;
@@ -45,6 +48,13 @@ Route::webhooks('verify-action-taken', 'webhooktest1');
 //    $user = Auth()->user();
 //   $user->assignRole('admin');
 //});
+
+Route::get('/deposite', function () {
+    $user = User::find(3);
+   $user->depositFloat(100.00);
+});
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -79,7 +89,7 @@ Route::middleware([
         'middleware' => 'role:admin',
         'as' => 'admin.',
     ], function () {
-        
+
         //users
         Route::get('user', [UserController::class, 'index'])->name('viewusers');
         Route::get('getuser', [UserController::class, 'getusers'])->name('getusers');
@@ -95,9 +105,14 @@ Route::middleware([
         Route::resource('offers', OfferController::class);
         Route::get('ailink', [OfferController::class, 'ailink'])->name('ailink');
         Route::get('table-data', [OfferController::class, 'viewtable'])->name('viewtable');
+        Route::get('offer/{id}/clicks', [ClicksController::class, 'offerclicks'])->name('offerclicks');
+        Route::get('offer/{id}/clicks/table', [ClicksController::class, 'offerclickstable'])->name('offerclickstable');
         //payments
         Route::get('transaction', [PaymentsController::class, 'transaction'])->name('transaction');
+        Route::get('transaction/table', [PaymentsController::class, 'transactiontable'])->name('transactiontable');
         Route::get('sendpayments', [PaymentsController::class, 'sendpayments'])->name('sendpayments');
+        //email
+        Route::get('send/emails', [EmailControler::class, 'index'])->name('emails');
 
         Route::get('profile', [AdminProfileController::class, 'view'])->name('profile');
         //dashboard

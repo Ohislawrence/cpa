@@ -23,7 +23,7 @@ class OfferController extends Controller
     public function index()
     {
         $offers = Offer::latest()->get();
-        
+
         return view('admin.offer', compact('offers'));
     }
 
@@ -143,7 +143,8 @@ class OfferController extends Controller
             return Datatables::of($data)
 
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="offers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>';
+                    $actionBtn = '<a href="offers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+                                    <a href="offer/'.$row->id.'/clicks/" class="edit btn btn-primary btn-sm">Stats</a>';
                     return $actionBtn;
                 })
                 ->addColumn('owner', function($row){

@@ -19,6 +19,7 @@ use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
 use App\Http\Controllers\Agency\ReportController;
 use App\Http\Controllers\Agency\TransactionController;
 use App\Http\Controllers\ClickController;
+use App\Http\Controllers\FrontController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -35,9 +36,20 @@ use function Laravel\Prompts\alert;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//front pages
+Route::get('/', [FrontController::class, 'home'])->name('home');
+Route::get('affiliates', [FrontController::class, 'affiliates'])->name('affiliates');
+Route::get('advertisers', [FrontController::class, 'advertisers'])->name('advertisers');
+Route::get('about-us', [FrontController::class, 'aboutus'])->name('aboutus');
+Route::get('offers', [FrontController::class, 'offers'])->name('offers');
+Route::get('blogs', [FrontController::class, 'blogs'])->name('blogs');
+Route::get('blog/{cat}/{slug}', [FrontController::class, 'blogsingle'])->name('blogsingle');
+Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
+Route::get('terms-of-service', [FrontController::class, 'tos'])->name('tos');
+Route::get('support', [FrontController::class, 'support'])->name('support');
+Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
+
+//all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 
 

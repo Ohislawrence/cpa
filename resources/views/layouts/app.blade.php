@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.mycomponents.meta')
 
-        <title>{{ config('app.name', 'Deals Intel') }}</title>
+        <title>@yield('headername') | {{ config('app.name') }}</title>
 
         <!-- Fonts -->
 

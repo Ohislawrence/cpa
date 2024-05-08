@@ -267,5 +267,5 @@
         </div>    <!-- End row -->
     </div>     <!-- End container -->
 </section>	<!-- END TERMS PAGE -->
-
+ 
 @endsection

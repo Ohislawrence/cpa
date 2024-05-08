@@ -1,7 +1,28 @@
-<x-guest-layout>
-    <x-authentication-card>
+@extends('layouts.guest')
+@section('title',  'Login' )
+@section('type',  '' )
+@section('url',  '' )
+@section('card',  '' )
+@section('description',  '' )
+@section('imagealt',  '' )
+@section('card',  '' )
+
+
+@section('header')
+
+@endsection
+
+
+
+
+@section('footer')
+
+@endsection
+
+
+
+@section('slot')
         <x-slot name="logo">
-            <x-authentication-card-logo />
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -57,4 +78,4 @@
             </div>
         </form>
     </x-authentication-card>
-</x-guest-layout>
+@endsection

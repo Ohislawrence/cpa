@@ -1,8 +1,31 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@extends('layouts.guest')
+@section('title',  'Login' )
+@section('type',  '' )
+@section('url',  '' )
+@section('card',  '' )
+@section('description',  '' )
+@section('imagealt',  '' )
+@section('card',  '' )
+
+
+@section('header')
+
+@endsection
+
+
+
+
+@section('footer')
+
+@endsection
+
+
+
+@section('slot')
+
+
+<section id="hero-19" class="blur--purple gr--ghost hero-section">
+    <div class="container text-center">
 
         <x-validation-errors class="mb-4" />
 
@@ -40,9 +63,11 @@
                 @endif
 
                 <x-button class="ms-4">
-                    {{ __('Log in') }}
+                    Log in
                 </x-button>
             </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+</section>
+    
+    @endsection

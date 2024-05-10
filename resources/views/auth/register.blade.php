@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-@section('title',  'Login' )
+@section('title',  'Register' )
 @section('type',  '' )
 @section('url',  '' )
 @section('card',  '' )
@@ -22,8 +22,8 @@
 
 
 @section('slot')
-        <x-slot name="logo">
-        </x-slot>
+<section id="hero-19" class="blur--purple gr--ghost hero-section">
+    <div class="container text-center">
 
         <x-validation-errors class="mb-4" />
 
@@ -77,5 +77,7 @@
                 </x-button>
             </div>
         </form>
-    </x-authentication-card>
+    </div>
+</section>
+    
 @endsection

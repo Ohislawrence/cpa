@@ -46,13 +46,13 @@
 
 							    	<!-- SIGN IN LINK -->
 							    	<li class="nl-simple reg-fst-link mobile-last-link" aria-haspopup="true">
-							    		<a href="login-2.html" class="h-link">Sign in</a>
+							    		<a href="{{route('login')}}" class="h-link">Sign in</a>
 							    	</li>
 
 
 								    <!-- SIGN UP BUTTON -->
 								    <li class="nl-simple" aria-haspopup="true">
-								    	<a href="signup-2.html" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
+								    	<a href="{{route('register')}}" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
 								    </li> 
 
 

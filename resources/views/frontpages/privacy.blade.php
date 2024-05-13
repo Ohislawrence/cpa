@@ -33,7 +33,7 @@
 							<!-- INNER PAGE TITLE -->
 							<div class="inner-page-title">
 								<h2 class="s-52 w-700">Privacy Policy</h2>
-								<p class="p-lg">This policy is effective as of 11th November 2022</p>
+								<p class="p-lg">This policy is effective as of 11th November 2023</p>
 							</div>
 
 
@@ -41,297 +41,91 @@
 							<div class="txt-block legal-info">
 
 								<!-- Title -->
-								<h4 class="s-30 w-700"><span>1.</span> Introduction</h4>
+								<h4 class="s-30 w-700"> Introduction</h4>
 
 								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lacinia placerat and nulla justo molestie blandit justo 
-								   diam aliquet tortor molestie sagittis lacinia undo and mullam molestie diam luctus donec 
-								   bibendum aliquet massa elementum. Libero quisque lacus and ligula massa lorem.
+								<p>DealsIntel ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [www.dealsintel.com] (the "Site") or use our services.
 								</p>
 
 								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce an aliquam nulla lacinia justo molestie blandit justo 
-								   diam aliquet tortor molestie non sagittis lacinia
+								<p>By accessing or using our Site or services, you agree to this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please do not access the Site or use our services.
 								</p>
 
 								<!-- Title -->
-								<h4 class="s-30 w-700"><span>2.</span> Personal Information We Collect</h4>
+								<h4 class="s-30 w-700"> Information We Collect</h4>
 
-								<!-- Small Title -->
-								<h5 class="s-24 w-700"><span>2.1.</span> Information you provide to us</h5>
 
 								<!-- Text -->
-								<p>Congue augue sagittis egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lorem nulla an aliquam acinia justo molestie blandit 
-								   justo diam an aliquet tortor sagittis lacinia molestie diam egestas
+								<p>We may collect personal information directly from you when you use our Site or services, such as when you create an account, sign up for our newsletter, or contact us for support. The types of personal information we may collect include:
+								</p>
+								<ul class="simple-list">
+									<li class="list-item">Name</li>
+									<li class="list-item">Email address</li>
+									<li class="list-item">Mailing address</li>
+									<li class="list-item">Phone number</li>
+									<li class="list-item">Payment information (e.g., credit card details)</li>
+								</ul>
+								<p>	We may also collect certain non-personal information automatically when you visit our Site, such as your IP address, browser type, operating system, and browsing behavior.
 								</p>
 
-								<!-- List -->	
+
+								<!-- Small Title -->
+								<h5 class="s-24 w-700"> How We Use Your Information</h5>
+
+								<!-- Text -->
+								<p>We may share your information with third parties for the following purposes:
+								</p>
 								<ul class="simple-list">
-
-									<li class="list-item">
-										<p>Quaerat sodales sapien undo velna purus euismod purus velna blandit vitae auctor 
-										   and congue magna tempor sapien gravida laoreet turpis urna augue, viverra a augue 
-										   eget dictum tempor
-										</p>
-									</li>
-
-									<li class="list-item">
-										<p>Nemo ipsam egestas volute turpis dolores ut aliquam quaerat sodales sapien congue 
-										   and augue egestas
-										</p>
-									</li>
-
-									<li class="list-item">
-										<p>Nemo ipsam egestas volute turpis dolores ut aliquam quaerat sodales sapien congue 
-										   augue egestas sagittis massa lorem fusce cursus fusce nulla vitae massa placerat 
-										   vulputate purus
-										</p>
-									</li>
-
-									<li class="list-item">
-										<p>Sapien sodales quaerat undo velna purus euismod purus velna blandit vitae auctor 
-										   and congue magna tempor sapien gravida laoreet turpis urna augue, viverra a augue 
-										   eget dictum pulvinar
-										</p>
-									</li>
-
+									<li class="list-item">Service Providers: We may share your information with third-party service providers who assist us in operating our Site, conducting our business, or providing services on our behalf.</li>
+									<li class="list-item">Business Partners: We may share your information with trusted business partners for marketing or promotional purposes.</li>
+									<li class="list-item">Legal Compliance: We may disclose your information if required to do so by law or in response to a valid legal request or court order.</li>
+									<li class="list-item">Business Transfers: We may transfer your information to a third party in the event of a merger, acquisition, bankruptcy, or other corporate reorganization.</li>
 								</ul>
 
-								<!-- Small Title -->
-								<h5 class="s-24 w-700"><span>2.2.</span> Automatic data collection</h5>
-
-								<!-- Text -->
-								<p>Congue sagittis augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce aliquam 
-								</p>
-
-								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce an aliquam nulla lacinia justo molestie blandit justo 
-								   diam aliquet tortor molestie non sagittis lacinia
-								</p>
+								
 
 								<!-- Small Title -->
-								<h5 class="s-24 w-700"><span>2.3.</span> User comments and content</h5>
+								<h5 class="s-24 w-700">Your Choices</h5>
 
 								<!-- Text -->
-								<p>Integer congue sagittis augue egestas  velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque diam augue fusce sapien nulla a primis lacinia ipsum a molestie blandit 
-								   and justo an aliquet eget molestie sagittis at quaerat sodales
+								<p>You have the right to opt-out of receiving marketing communications from us by following the unsubscribe instructions provided in the communication or by contacting us directly. Please note that even if you opt-out, you may still receive non-marketing communications from us, such as transactional emails or messages related to your account.
 								</p>
 
-								<!-- List -->	
-								<ul class="simple-list">
-
-									<li class="list-item">
-										<p>Quaerat sodales sapien undo velna purus euismod purus velna blandit vitae auctor 
-										   and congue magna tempor sapien gravida laoreet turpis urna augue, viverra a augue 
-										   eget dictum tempor
-										</p>
-									</li>
-
-									<li class="list-item">
-										<p>Nemo ipsam egestas volute turpis dolores ut aliquam quaerat sodales sapien congue 
-										   and augue egestas
-										</p>
-									</li>
-
-								</ul>
 
 								<!-- Small Title -->
-								<h5 class="s-24 w-700"><span>2.4.</span> Information from other sources</h5>
+								<h5 class="s-24 w-700">Data Security</h5>
 
 								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lacinia placerat and nulla justo molestie blandit justo 
-								   diam aliquet tortor molestie sagittis lacinia undo and mullam molestie diam luctus donec 
-								   bibendum aliquet massa elementum. Libero quisque lacus and ligula massa lorem.
+								<p>We take reasonable measures to protect your information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is 100% secure, so we cannot guarantee absolute security.
 								</p>
 
 								<!-- Title -->
-								<h4 class="s-30 w-700"><span>3.</span> Types of Information</h4>	
+								<h4 class="s-30 w-700">Children's Privacy</h4>	
 
 								<!-- Text -->
-								<p>Integer congue sagittis augue egestas  velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque diam augue fusce sapien nulla a primis lacinia ipsum a molestie blandit 
-								   and justo an aliquet eget molestie sagittis at quaerat sodales
+								<p>Our Site and services are not intended for children under the age of 15. We do not knowingly collect personal information from children under the age of 15. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us so that we can delete the information.
 								</p>
 
-								<!-- Text -->
-								<p>Aliqum mullam tincidunt a sapien gravida and diam donec porta.</p>
-
-								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lacinia placerat and nulla justo molestie blandit justo 
-								   diam aliquet tortor molestie sagittis lacinia undo and mullam molestie diam luctus donec 
-								   bibendum aliquet massa elementum. Libero quisque lacus and ligula massa lorem.
-								</p>
-
+								
 								<!-- Title -->
-								<h4 class="s-30 w-700"><span>4.</span> How We Use Personal Information</h4>
+								<h4 class="s-30 w-700">Changes to This Privacy Policy</h4>
 
 								<!-- Text -->
-								<p>Congue augue sagittis egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lorem nulla an aliquam lacinia justo molestie blandit 
-								   justo diam an aliquet tortor sagittis lacinia molestie diam egestas
-								</p>
-
-								<!-- Text -->
-								<p>Sagittis augue congue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque aliquam fusce blandit
+								<p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by posting the updated Privacy Policy on this page.
 								</p>
 
 								<!-- Small Title -->
-								<h5 class="s-24 w-700"><span>4.1.</span> In mails and contact forms</h5>
+								<h5 class="s-24 w-700">Contact Us</h5>
 
 								<!-- Text -->
-								<p>Integer congue sagittis augue egestas  velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque diam augue fusce sapien 
+								<p>If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:contact@dealsintel.com" class="color--theme">contact@dealsintel.com</a>.
 								</p>
 
-								<!-- Title -->
-								<h4 class="s-30 w-700"><span>5.</span> Price and Taxes</h4>
 
-								<!-- List -->	
-								<ul class="simple-list">
+								
 
-									<li class="list-item">
-										<p>Quaerat sodales sapien undo velna purus euismod purus velna blandit vitae auctor 
-										   and congue magna tempor sapien gravida laoreet turpis urna augue, viverra a augue 
-										   eget tempor pulvinar
-										</p>
-									</li>
-
-									<li class="list-item">
-										<p>Nemo ipsam egestas volute turpis dolores ut aliquam quaerat sodales sapien congue 
-										   and augue egestas
-										</p>
-									</li>
-
-								</ul>
-
-								<!-- Text -->
-								<p>Augue congue sagittis egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque donec and ipsum porta diam lorem sodales an aliquam lacinia justo 
-								   sapien congue aliquet and sodales a quaerat tortor lacinia egestas
-								</p>
-
-								<!-- Small Title -->
-								<h4 class="s-30 w-700"><span>5.</span> Children's Privacy</h4>
-
-								<!-- Text -->
-								<p>Integer congue sagittis augue egestas  velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque diam augue fusce sapien 
-								</p>
-
-								<!-- Text -->
-								<p>Sagittis augue congue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec and augue 
-								   luctus congue
-								</p>
-
-								<!-- Title -->
-								<h4 class="s-30 w-700"><span>6.</span> Data Shared with Third Parties</h4>
-
-								<!-- Text -->
-								<p>Integer congue sagittis augue egestas  velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque diam augue fusce sapien nulla a primis lacinia ipsum a molestie blandit 
-								   and justo an aliquet eget molestie sagittis at quaerat sodales
-								</p>
-
-								<!-- Text -->
-								<p>Aliqum mullam tincidunt a sapien gravida and diam donec porta.</p>
-
-								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lacinia placerat and nulla justo molestie blandit justo 
-								   diam aliquet tortor molestie sagittis lacinia undo and mullam molestie diam luctus donec 
-								   bibendum aliquet massa elementum. Libero quisque lacus and ligula massa lorem.
-								</p>
-
-								<!-- Title -->
-								<h4 class="s-30 w-700"><span>7.</span> Security Measures</h4>
-
-								<!-- Text -->
-								<p>Sagittis congue augue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lacinia placerat and nulla justo molestie blandit justo 
-								   diam aliquet tortor molestie sagittis lacinia undo and mullam molestie diam luctus donec 
-								   bibendum aliquet massa elementum. Libero quisque lacus and ligula massa lorem fusce cursus 
-								   fusce nulla vitae massa placerat and mollis, sapien gravida aliquet ipsum ultrices aliquet 
-								   lorem diam purus undo vitae aliquam auris dapibus libero fusce blandit.
-								</p>
-
-								<!-- Title -->
-								<h4 class="s-30 w-700"><span>8.</span> Changes in the Privacy Policy</h4>
-
-								<!-- Text -->
-								<p>Congue augue sagittis egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque blandit fusce lorem nulla an aliquam lacinia justo molestie blandit 
-								   justo diam an aliquet tortor sagittis lacinia molestie diam egestas
-								</p>
-
-								<!-- Text -->
-								<p>Aliqum mullam tincidunt a sapien gravida and diam donec porta.</p>	
-
-								<!-- Text -->
-								<p>Sagittis augue congue egestas integer velna purus purus magna nec suscipit and egestas 
-								   magna aliquam ipsum vitae purus justo lacus ligula ipsum primis cubilia donec undo augue 
-								   luctus vitae egestas a molestie donec libero sapien dapibus congue tempor undo quisque 
-								   fusce cursus neque aliquam fusce blandit
-								</p>
-
-								<!-- Title -->
-								<h4 class="s-30 w-700"><span>9.</span> How to Contact Us</h4>	
-
-								<!-- Text -->  
-								<p>If you have any questions or suggestions about this Terms of Service, do not hesitate to 
-									contact us at <a href="mailto:yourdomain@mail.com" class="color--theme">hello@yourdomain.com</a>
-								</p>
-
-							</div>	<!-- END TEXT BLOCK -->	
-
-
+							</div>
 						</div>
-					</div>    <!-- End row -->
 				</div>     <!-- End container -->
 			</section>	<!-- END PRIVACY PAGE -->
 @endsection

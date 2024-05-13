@@ -123,22 +123,21 @@
 
 		<!-- EXTERNAL SCRIPTS
 		============================================= -->	
-		<script src="publicassets/js/jquery-3.7.0.min.js"></script>
-		<script src="publicassets/js/bootstrap.min.js"></script>	
-		<script src="publicassets/js/modernizr.custom.js"></script>
-		<script src="publicassets/js/jquery.easing.js"></script>
-		<script src="publicassets/js/jquery.appear.js"></script>
-		<script src="publicassets/js/menu.js"></script>
-		<script src="publicassets/js/owl.carousel.min.js"></script>
-		<script src="js/jquery.magnific-popup.min.js"></script>
-		<script src="publicassets/js/jquery.validate.min.js"></script>
-		<script src="publicassets/js/jquery.ajaxchimp.min.js"></script>	
-		<script src="publicassets/js/popper.min.js"></script>
-		<script src="publicassets/js/lunar.js"></script>
-		<script src="publicassets/js/wow.js"></script>
+		<script src="{{ asset('publicassets/js/jquery-3.7.0.min.js') }}"></script>
+		<script src="{{ asset('publicassets/js/bootstrap.min.js') }}"></script>	
+		<script src="{{ asset('publicassets/js/modernizr.custom.js') }}"></script>
+		<script src="{{ asset('publicassets/js/jquery.easing.js') }}"></script>
+		<script src="{{ asset("publicassets/js/jquery.appear.js") }}"></script>
+		<script src="{{ asset('publicassets/js/menu.js') }}"></script>
+		<script src="{{ asset('publicassets/js/owl.carousel.min.js') }}"></script>
+		<script src="{{ asset('publicassets/js/jquery.validate.min.js') }}"></script>
+		<script src="{{ asset('publicassets/js/jquery.ajaxchimp.min.js') }}"></script>	
+		<script src="{{ asset('publicassets/js/popper.min.js') }}"></script>
+		<script src="{{ asset('publicassets/js/lunar.js') }}"></script>
+		<script src="{{ asset('publicassets/js/wow.js') }}"></script>
 				
 		<!-- Custom Script -->		
-		<script src="publicassets/js/custom.js"></script>
+		<script src="{{ asset('publicassets/js/custom.js') }}"></script>
 		<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information. -->															
 		<!--
 		<script>

@@ -13,11 +13,13 @@ use App\Http\Controllers\Affiliate\PaymentController;
 use App\Http\Controllers\Affiliate\ProfileController;
 use App\Http\Controllers\Affiliate\PromotionalController;
 use App\Http\Controllers\Affiliate\ReferralController;
+use App\Http\Controllers\Affiliate\RegistrationController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
 use App\Http\Controllers\Agency\OfferController as AgencyOfferController;
 use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
 use App\Http\Controllers\Agency\ReportController;
 use App\Http\Controllers\Agency\TransactionController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
 use App\Models\User;
@@ -48,6 +50,9 @@ Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
 Route::get('terms-of-service', [FrontController::class, 'tos'])->name('tos');
 Route::get('support', [FrontController::class, 'support'])->name('support');
 Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
+
+//affiliate registration
+Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
 
 //all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
@@ -130,6 +135,14 @@ Route::middleware([
         //dashboard
         Route::get('dashboard/main', [AdminDashboardController::class, 'dashboard1'])->name('dashboard');
         Route::get('dashboard/stats', [AdminDashboardController::class, 'dashboard2'])->name('stats');
+
+        //blogs
+        Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
+        Route::get('blog/create', [BlogController::class, 'create'])->name('blogs.create');
+        Route::post('blog/create', [BlogController::class, 'store'])->name('blogs.store');
+        Route::put('blog/{id}/update', [BlogController::class, 'update'])->name('blogs.update');
+        Route::delete('blog/{id}/delete', [BlogController::class, 'delete'])->name('blogs.delete');
+        Route::post('ckeditor/upload',  [BlogController::class, 'upload'])->name('ckeditor.upload');
     });
 
 //Affiliate
@@ -150,7 +163,7 @@ Route::middleware([
         Route::get('offers/ailink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
         Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
         Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
-
+      
     });
 
 //Agency

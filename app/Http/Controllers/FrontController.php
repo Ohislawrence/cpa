@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -33,12 +34,14 @@ class FrontController extends Controller
 
     public function blogs()
     {
-        return view('frontpages.blogs.list');
+        $blogs = Blog::latest()->get();
+        return view('frontpages.blogs.list' , compact('blogs'));
     }
 
-    public function blogsingle()
+    public function blogsingle(Request $request, $slug)
     {
-        return view('frontpages.blogs.single');
+        $blog = Blog::where('slug', $request->slug)->first();
+        return view('frontpages.blogs.single', compact('blog'));
     }
 
     public function privacy()

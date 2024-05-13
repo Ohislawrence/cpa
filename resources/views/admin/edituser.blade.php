@@ -146,9 +146,9 @@
                                 <select name="status" aria-label="Select a Language" data-control="select2" class="form-select form-select-solid form-select-lg">
                                     <option value="">Select a One...</option>
                                         @isset($user->affiliatedetails->status )
-                                        <option value="{{ Active == $user->affiliatedetails->status  ? 'selected' : ''  }}">Active</option>
-                                        <option value="{{ Rejected == $user->affiliatedetails->status  ? 'selected' : ''  }}">Rejected</option>
-                                        <option value="{{ Pending == $user->affiliatedetails->status  ? 'selected' : ''  }}">Pending</option>
+                                        <option value="{{ 'Active' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Active</option>
+                                        <option value="{{ 'Rejected' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Rejected</option>
+                                        <option value="{{ 'Pending' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Pending</option>
                                         @else
                                         <option value="Active">Active</option>
                                         <option value="Rejected">Rejected</option>

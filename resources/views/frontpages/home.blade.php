@@ -43,7 +43,7 @@
 
 								<!-- Buttons -->	
 								<div class="btns-group">
-									<a href="#banner-7" class="btn r-04 btn--theme hover--theme">I'm an Affiliate</a>
+									<a href="{{ route('affiliatereg') }}" class="btn r-04 btn--theme hover--theme">I'm an Affiliate</a>
 									<a href="" class="video-popup1 btn r-04 btn--tra-black hover--theme ico-20 ico-right">I'm an Adverter</span>
 									</a> 
 								</div>	

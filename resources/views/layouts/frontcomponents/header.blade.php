@@ -44,17 +44,21 @@
 
                                     <li class="nl-simple" aria-haspopup="true"><a href="{{ route('blogs') }}" class="h-link">Blogs</a></li>
 
-							    	<!-- SIGN IN LINK -->
+									@guest()
+									<!-- SIGN IN LINK -->
 							    	<li class="nl-simple reg-fst-link mobile-last-link" aria-haspopup="true">
 							    		<a href="{{route('login')}}" class="h-link">Sign in</a>
 							    	</li>
-
-
 								    <!-- SIGN UP BUTTON -->
 								    <li class="nl-simple" aria-haspopup="true">
-								    	<a href="{{route('register')}}" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
+								    	<a href="{{route('affiliatereg')}}" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
 								    </li> 
-
+									@else
+									<!-- SIGN UP BUTTON -->
+								    <li class="nl-simple" aria-haspopup="true">
+								    	<a href="{{route('dashboard')}}" class="btn r-04 btn--theme hover--theme last-link">Dashboard</a>
+								    </li> 
+									@endguest
 
 	        					</ul>
 	        				</nav>	<!-- END MAIN MENU -->

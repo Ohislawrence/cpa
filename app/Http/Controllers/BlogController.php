@@ -7,6 +7,8 @@ use App\Models\Blogcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
+use DataTables;
+use Yajra\DataTables\Contracts\DataTable;
 
 class BlogController extends Controller
 {
@@ -57,7 +59,7 @@ class BlogController extends Controller
         ]);
         
 
-        return redirect()->route('admin.blogs.list')
+        return redirect()->route('admin.blogs.index')
                         ->with('message','Blog created successfully');
     }
 
@@ -81,9 +83,10 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show($id)
     {
-        //
+        $blog = Blog::find($id);
+        return view('admin.blogs.show', compact('blog'));
     }
 
     /**
@@ -136,5 +139,27 @@ class BlogController extends Controller
         $blog->delete();
         return redirect()->back()
                         ->with('success','Deleted successfully');
+    }
+
+
+    public function getblogs(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Blog::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="blog/'.$row->id.'/show" class="edit btn btn-primary btn-sm">View</a>
+                                    <a href="blog/'.$row->id.'/update" class="edit btn btn-success btn-sm">Edit</a>
+                                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->addColumn('role',function($row){
+                    $role = $row->getRoleNames()->first();
+                    return $role;
+                })
+                ->rawColumns(['action','role'])
+                ->make(true);
+        }
     }
 }

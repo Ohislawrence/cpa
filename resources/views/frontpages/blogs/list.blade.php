@@ -9,7 +9,6 @@
 
 
 @section('header')
-
 @endsection
 
 
@@ -36,18 +35,18 @@
 					</div>
 
 
-                    <!-- WIDE BLOG POST -->
-					<div class="blog-post wide-post wow fadeInUp">
-                        <div class="row d-flex align-items-center">
+                   
+                           
+						<!-- WIDE BLOG POST -->
+						<div class="blog-post wide-post wow fadeInUp">
+							<div class="row d-flex align-items-center">
 
-                                   
-                           <!-- BLOG POST IMAGE -->
-                            <div class="col-md-6">
-                                <div class="blog-post-img">
-                                   <img class="img-fluid r-16" src="{{ asset('publicassets/images/blog/post-11-img.jpg') }}" alt="blog-post-image">
-                               </div>	
-                           </div>
-
+						  <!-- BLOG POST IMAGE -->
+						  <div class="col-md-6">
+							<div class="blog-post-img">
+							   <img class="img-fluid r-16" src="{{ asset('publicassets/images/blog/post-11-img.jpg') }}" alt="blog-post-image">
+						   </div>	
+					   		</div>
 
                            <!-- BLOG POST TEXT -->
                            <div class="col-md-6">
@@ -58,8 +57,7 @@
 
                                    <!-- Post Link -->
                                    <h3 class="s-38 w-700">
-                                       <a href="single-post.html">Congue magna tempor and ipsum Martex sapien turpis 
-                                          laoreet augue
+                                       <a href="single-post.html">{{$blog->title->random(1)}}
                                        </a>
                                    </h3>
 

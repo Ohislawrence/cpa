@@ -139,7 +139,8 @@ Route::middleware([
         //blogs
         Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
         Route::get('blog/create', [BlogController::class, 'create'])->name('blogs.create');
-        Route::post('blog/create', [BlogController::class, 'store'])->name('blogs.store');
+        Route::get('blog/{id}/show', [BlogController::class, 'show'])->name('blogs.show');
+        Route::post('blog/create/store', [BlogController::class, 'store'])->name('blogs.store');
         Route::put('blog/{id}/update', [BlogController::class, 'update'])->name('blogs.update');
         Route::delete('blog/{id}/delete', [BlogController::class, 'delete'])->name('blogs.delete');
         Route::post('ckeditor/upload',  [BlogController::class, 'upload'])->name('ckeditor.upload');

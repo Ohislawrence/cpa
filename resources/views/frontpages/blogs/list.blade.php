@@ -57,7 +57,7 @@
 
                                    <!-- Post Link -->
                                    <h3 class="s-38 w-700">
-                                       <a href="single-post.html">{{$blog->title->random(1)}}
+                                       <a href="single-post.html">rgrgewgret wrt4wt4e
                                        </a>
                                    </h3>
 

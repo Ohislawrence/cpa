@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Mail\WelcomeEmail;
 use App\Models\Affiliatedetail;
 use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class Registration extends Component 
 {
@@ -49,7 +51,7 @@ class Registration extends Component
             Affiliatedetail::create([
                 'user_id' => $user->id,
                 'status' => 'Pending',
-                'city' => 'null',
+                'city' => null,
                 'country' => $this->country,
                 'region' => $this->region,
                 'phonenumber' => $this->phonenumber,
@@ -61,7 +63,7 @@ class Registration extends Component
     
             $this->clearForm();
     
-            
+            Mail::to($user->email)->queue(new WelcomeEmail($user));
             $this->currentSection = 4;
             $this->successMessage = "Great Job! We have received your details and will contact you soon. Check your email for the validation mail.";
            

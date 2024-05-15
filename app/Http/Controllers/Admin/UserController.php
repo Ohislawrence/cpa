@@ -7,6 +7,7 @@ use App\Models\Affiliatedetail;
 use App\Models\Agencydetails;
 use App\Models\Category;
 use App\Models\Country;
+use App\Models\Trafficsource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
@@ -18,7 +19,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::all();
-        return view('admin.users', compact('users'));
+        $countries = Country::all();
+        return view('admin.users', compact('users','countries'));
     }
 
 
@@ -27,7 +29,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:Users,email',
-            'password' => 'required|string'
+            'password' => 'required|string',
         ]);
 
         $user = User::create([
@@ -35,8 +37,10 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $user->assignRole($request->role);
 
+        
+
+        $user->assignRole($request->role);
 
         return back()->with('message','User Created');
     }
@@ -107,13 +111,40 @@ class UserController extends Controller
             'status' => $request->status,
             'city' => 'pending',
             'country' => $request->country,
-            'region' => 'pending',
+            'region' => $request->region,
             'phonenumber' => $request->phone,
             'instantmessageid' => $request->instantmessageid,
         ]);
 
+        Trafficsource::updateOrCreate([
+            'user_id' => $user->id
+        ], [
+            'source' => $request->source,
+            'address' => $request->address,
+            'rank' => $request->rank,
+            'followers' => $request->followers,
+            'monthlyvisit' => $request->monthlyvisit,
+            'note' => $request->note,
+            'status' => 'Active',
+        ]);
+
 
         return back()->with('message','Affiliate Account Updated');
+    }
+
+    public function traffic(Request $request)
+    {
+        Trafficsource::updateOrCreate([
+            'user_id' => $request->userid
+        ], [
+            'source' => $request->source,
+            'address' => $request->address,
+            'rank' => $request->rank,
+            'followers' => $request->followers,
+            'monthlyvisit' => $request->monthlyvisit,
+            'note' => $request->note,
+            'status' => 'Active',
+        ]);
     }
 
     public function updateuseragency(Request $request, $id) {

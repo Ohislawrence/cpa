@@ -115,7 +115,8 @@ Route::middleware([
         Route::get('user/refferals', [UserController::class, 'refferals'])->name('refferals');
         Route::get('user/edit/{id}', [UserController::class, 'edituser'])->name('edituser');
         Route::put('user/edit/{id}/update', [UserController::class, 'updateuser'])->name('updateuser');
-        Route::put('user/edit/{id}/update/agency', [UserController::class, 'updateuseragency'])->name('updateuseragency');
+        Route::put('user/update/traffic', [UserController::class, 'traffic'])->name('traffic');
+        Route::post('user/edit/{id}/update/agency', [UserController::class, 'updateuseragency'])->name('updateuseragency');
         //userTabs
         Route::get('user/view/{id}/overview', [UserController::class, 'overview'])->name('viewuser');
         //offers

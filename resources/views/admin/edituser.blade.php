@@ -123,12 +123,34 @@
                                         @foreach ( $country as $countr)
                                             @isset($user->affiliatedetails->country)
                                                 <option value="{{ $countr->id == $user->affiliatedetails->country  ? 'selected' : ''  }}">{{ $countr->name }}</option>
-                                                @else
+                                            @else
                                                 <option value="{{ $countr->id }}">{{ $countr->name }}</option>
                                             @endisset
                                         
                                         @endforeach   
                                     </select>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">State/Region</label>
+                            <!--end::Label-->
+        
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Row-->
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-lg-12 fv-row">
+                                        <input type="text" name="region" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ isset($user->affiliatedetails->region) ? $user->affiliatedetails->region : '' }}" />
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
                             </div>
                             <!--end::Col-->
                         </div>
@@ -143,7 +165,7 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <!--begin::Input-->
-                                <select name="status" aria-label="Select a Language" data-control="select2" class="form-select form-select-solid form-select-lg">
+                                <select name="status" aria-label="Select a Language" data-control="select" class="form-select form-select-solid form-select-lg">
                                     <option value="">Select a One...</option>
                                         @isset($user->affiliatedetails->status )
                                         <option value="{{ 'Active' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Active</option>
@@ -160,7 +182,7 @@
         
                                 <!--begin::Hint-->
                                 <div class="form-text">
-                                    Active , pend and reject users
+                                    Active , Pending and Reject users
                                 </div>
                                 <!--end::Hint-->
                             </div>
@@ -171,7 +193,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Whatsapp ID</label>
+                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Telegram ID</label>
                             <!--end::Label-->
         
                             <!--begin::Col-->

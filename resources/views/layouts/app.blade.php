@@ -68,9 +68,31 @@
 							</div>
 							<!--end::Page title=-->
                             @include('layouts.mycomponents.rightoptions')
-                            <!--begin::Content-->
-
-							 @yield('slot')
+							@role('affiliate')
+                            @if(Auth::user()->affiliatedetails->status != 'Active')
+								@yield('slot')
+							@else
+							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+								<div class="container-xxl" id="kt_content_container">
+									<p>You active is not active yet, reach out to us on social media or via email hello@dealsintel.com</p>
+								</div>
+							</div>
+							@endif
+							@endrole
+							@role('admin')
+								@yield('slot')
+							@endrole
+							@role('agency')
+							@if(Auth::user()->affiliatedetails->status != 'Active')
+								@yield('slot')
+							@else
+							<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+								<div class="container-xxl" id="kt_content_container">
+									<p>You active is not active yet, reach out to us on social media or via email hello@dealsintel.com</p>
+								</div>
+							</div>
+							@endif
+							@endrole
 						</div>
 					</div>
 				</div>

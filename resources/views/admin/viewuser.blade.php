@@ -168,6 +168,12 @@
                         <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/edit/*') ? 'active' : ''}}" href="{{ route('admin.edituser', $user->id) }}">Update User info</a>
                     </li>
                     <!--end::Nav item-->
+                    @if($user->getRoleNames()->first() == 'affiliate')
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/trafficsource') ? 'active' : ''}}" href="{{ route('admin.viewtrafficsource', $user->id) }}">Traffic Source</a>
+                    </li>
+                    @endif
                 </ul>
                 <!--begin::Navs-->
             </div>

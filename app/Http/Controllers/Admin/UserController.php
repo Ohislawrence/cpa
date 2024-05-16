@@ -116,35 +116,32 @@ class UserController extends Controller
             'instantmessageid' => $request->instantmessageid,
         ]);
 
-        Trafficsource::updateOrCreate([
-            'user_id' => $user->id
-        ], [
-            'source' => $request->source,
-            'address' => $request->address,
-            'rank' => $request->rank,
-            'followers' => $request->followers,
-            'monthlyvisit' => $request->monthlyvisit,
-            'note' => $request->note,
-            'status' => 'Active',
-        ]);
-
-
+    
         return back()->with('message','Affiliate Account Updated');
     }
 
-    public function traffic(Request $request)
+    public function viewtrafficsource($id)
+    {
+        $user = User::find($id);
+        //$source = Trafficsource::where('user_id', $id);
+        return view('admin.trafficsource', compact('user'));
+    }
+
+    public function traffic(Request $request, $id)
     {
         Trafficsource::updateOrCreate([
-            'user_id' => $request->userid
+            'user_id' => $id
         ], [
             'source' => $request->source,
             'address' => $request->address,
-            'rank' => $request->rank,
+            'rank' => 'nil',
             'followers' => $request->followers,
             'monthlyvisit' => $request->monthlyvisit,
             'note' => $request->note,
-            'status' => 'Active',
+            'status' => $request->status,
         ]);
+
+        return back()->with('message','Traffic Source Added');
     }
 
     public function updateuseragency(Request $request, $id) {
@@ -200,5 +197,27 @@ class UserController extends Controller
     {
         $user = User::find($id);
         return view('admin.profiled.overview', compact('user'));
+    }
+
+    public function gettrafficsource(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $user = User::find($id);
+            $data = $user->trafficsource->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="user/view/'.$row->id.'/overview" class="edit btn btn-primary btn-sm">View</a>
+                                    <a href="user/edit/'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a>
+                                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->addColumn('role',function($row){
+                    $role = $row->getRoleNames()->first();
+                    return $role;
+                })
+                ->rawColumns(['action','role'])
+                ->make(true);
+        }
     }
 }

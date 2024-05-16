@@ -115,10 +115,12 @@ Route::middleware([
         Route::get('user/refferals', [UserController::class, 'refferals'])->name('refferals');
         Route::get('user/edit/{id}', [UserController::class, 'edituser'])->name('edituser');
         Route::put('user/edit/{id}/update', [UserController::class, 'updateuser'])->name('updateuser');
-        Route::put('user/update/traffic', [UserController::class, 'traffic'])->name('traffic');
         Route::post('user/edit/{id}/update/agency', [UserController::class, 'updateuseragency'])->name('updateuseragency');
         //userTabs
         Route::get('user/view/{id}/overview', [UserController::class, 'overview'])->name('viewuser');
+        Route::get('user/{id}/trafficsource', [UserController::class, 'viewtrafficsource'])->name('viewtrafficsource');
+        Route::post('user/update/{id}/traffic', [UserController::class, 'traffic'])->name('traffic');
+        Route::post('user/{id}/traffic/source', [UserController::class, 'gettrafficsource'])->name('gettrafficsource');
         //offers
         Route::resource('offers', OfferController::class);
         Route::get('ailink', [OfferController::class, 'ailink'])->name('ailink');

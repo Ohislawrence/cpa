@@ -35,6 +35,7 @@
                             <!--begin::Input-->
                             <select name="source" aria-label="Select a status" data-control="select" data-dropdown-parent="" data-placeholder="status" class="form-select form-select-solid">
                                 <option value="website">Website</option>
+                                <option value="email">Email</option>
                                 <option value="facebook">FaceBook</option>
                                 <option value="instagram">Instagram</option>
                                 <option value="twitter">Twitter</option>

@@ -119,13 +119,10 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <select name="country" aria-label="Select a Country" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
-                                    <option value="">Select a Country...</option>
+                                    
                                         @foreach ( $country as $countr)
-                                            @isset($user->affiliatedetails->country)
-                                                <option value="{{ $countr->id == $user->affiliatedetails->country  ? 'selected' : ''  }}">{{ $countr->name }}</option>
-                                            @else
-                                                <option value="{{ $countr->id }}">{{ $countr->name }}</option>
-                                            @endisset
+                                                <option value="{{ $countr->id }}" {{ ($countr->id == $user->affiliatedetails->country)  ? 'selected' : ''  }}>{{ $countr->name }}</option>
+                                            
                                         
                                         @endforeach   
                                     </select>
@@ -167,16 +164,10 @@
                                 <!--begin::Input-->
                                 <select name="status" aria-label="Select a Language" data-control="select" class="form-select form-select-solid form-select-lg">
                                     <option value="">Select a One...</option>
-                                        @isset($user->affiliatedetails->status )
-                                        <option value="{{ 'Active' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Active</option>
-                                        <option value="{{ 'Rejected' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Rejected</option>
-                                        <option value="{{ 'Pending' == $user->affiliatedetails->status  ? 'selected' : ''  }}">Pending</option>
-                                        @else
-                                        <option value="Active">Active</option>
-                                        <option value="Rejected">Rejected</option>
-                                        <option value="Pending">Pending</option>
-                                        @endisset
-                                        
+                                        <option value="Active" {{ 'Active' == $user->affiliatedetails->status  ? 'selected' : ''  }}>Active</option>
+                                        <option value="Rejected" {{ 'Rejected' == $user->affiliatedetails->status  ? 'selected' : ''  }}>Rejected</option>
+                                        <option value="Pending" {{ 'Pending' == $user->affiliatedetails->status  ? 'selected' : ''  }}>Pending</option>
+
                                     </select>
                                 <!--end::Input-->
         
@@ -212,56 +203,7 @@
                         </div>
                         <!--end::Input group-->
         
-                        <!--begin::Input group-->
-                        <div class="row mb-6">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">Communication</label>
-                            <!--end::Label-->
-        
-                            <!--begin::Col-->
-                            <div class="col-lg-8 fv-row">
-                                <!--begin::Options-->
-                                <div class="d-flex align-items-center mt-3">
-                                    <!--begin::Option-->
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
-                                        <input class="form-check-input" name="communication[]" type="checkbox" value="1"/>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                            Email
-                                        </span>
-                                    </label>
-                                    <!--end::Option-->
-        
-                                    <!--begin::Option-->
-                                    <label class="form-check form-check-custom form-check-inline form-check-solid">
-                                        <input class="form-check-input" name="communication[]" type="checkbox" value="2"/>
-                                        <span class="fw-semibold ps-2 fs-6">
-                                            Phone
-                                        </span>
-                                    </label>
-                                    <!--end::Option-->
-                                </div>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-        
-                        <!--begin::Input group-->
-                        <div class="row mb-0">
-                            <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-semibold fs-6">Allow Marketing</label>
-                            <!--begin::Label-->
-        
-                            <!--begin::Label-->
-                            <div class="col-lg-8 d-flex align-items-center">
-                                <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                    <input class="form-check-input w-45px h-30px" type="checkbox" id="allowmarketing" checked />
-                                    <label class="form-check-label" for="allowmarketing"></label>
-                                </div>
-                            </div>
-                            <!--begin::Label-->
-                        </div>
-                        <!--end::Input group-->
+                       
                     </div>
                     <!--end::Card body-->
         
@@ -297,7 +239,6 @@
                 <!--begin::Form-->
                 <form id="kt_account_profile_details_form" class="form" action="{{ route('admin.updateuseragency', ['id'=> $user->id]) }}" method="POST">
                     @csrf
-                    @method('PUT')
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
                         
@@ -426,7 +367,7 @@
                     <!--begin::Input group-->
                     <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Description</label>
+                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Brand Description</label>
                         <!--end::Label-->
     
                         <!--begin::Col-->
@@ -435,7 +376,7 @@
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-lg-12 fv-row">
-                                    <textarea name="branddesc" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ isset($user->agencydetails->branddesc) ? $user->agencydetails->branddesc : '' }}">{{ isset($user->agencydetails->branddesc) ? $user->agencydetails->branddesc : '' }}</textarea>
+                                    <textarea name="branddesc" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0">{{ isset($user->agencydetails->branddesc) ? $user->agencydetails->branddesc : '' }}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -458,7 +399,7 @@
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-lg-12 fv-row">
-                                    <textarea name="brandaddress" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ isset($user->agencydetails->brandaddress) ? $user->agencydetails->brandaddress : '' }}">{{ isset($user->agencydetails->brandaddress) ? $user->agencydetails->brandaddress : '' }}</textarea>
+                                    <textarea name="brandaddress" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0">{{ isset($user->agencydetails->brandaddress) ? $user->agencydetails->brandaddress : '' }}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -483,11 +424,8 @@
                             <select name="country" aria-label="Select a Country" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
                                 <option value="">Select a Country...</option>
                                     @foreach ( $country as $countr)
-                                        @isset($user->agencydetails->country)
-                                            <option value="{{ $user->agencydetails->place->id }}" {{ $countr->id == $user->agencydetails->country  ? 'selected' : ''  }}>{{ $user->agencydetails->place->name }}</option>
-                                            @else
-                                            <option value="{{ $countr->id }}">{{ $countr->name }}</option>
-                                        @endisset
+                                            <option value="{{ $countr->id }}" {{ $countr->id == $user->agencydetails->country  ? 'selected' : ''  }}>{{ $countr->name }}</option>
+                                            
                                     @endforeach   
                                 </select>
                             </div>
@@ -510,11 +448,8 @@
                             <select name="category" aria-label="Select a Category" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
                                 <option value="">Select a Category...</option>
                                     @foreach ( $categories as $category)
-                                        @isset($user->agencydetails->category_id)
-                                            <option value="{{ $category->id == $user->agencydetails->category_id  ? 'selected' : ''  }}">{{ $user->agencydetails->category_id }}</option>
-                                            @else
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endisset
+                                            <option value="{{ $category->id }} " {{ $category->id == $user->agencydetails->category_id  ? 'selected' : ''  }}>{{ $category->name }}</option>
+                                            
                                     @endforeach   
                                 </select>
                             </div>
@@ -536,15 +471,9 @@
                                 <!--begin::Input-->
                                 <select name="status" aria-label="Select a Language" data-control="select2" class="form-select form-select-solid form-select-lg">
                                     <option value="">Select a One...</option>
-                                        @isset($user->agencydetails->status )
-                                        <option value="{{ 1 == $user->agencydetails->active  ? 'selected' : ''  }}">Active</option>
-                                        <option value="{{ 2 == $user->agencydetails->active  ? 'selected' : ''  }}">Rejected</option>
-                                        <option value="{{ 3 == $user->agencydetails->active  ? 'selected' : ''  }}">Pending</option>
-                                        @else
-                                        <option value="1">Active</option>
-                                        <option value="2">Rejected</option>
-                                        <option value="3">Pending</option>
-                                        @endisset
+                                        <option value="1" {{'1' == $user->agencydetails->active  ? 'selected' : ''  }}>Active</option>
+                                        <option value="2" {{ '2' == $user->agencydetails->active  ? 'selected' : ''  }}>Rejected</option>
+                                        <option value="3" {{ '3' == $user->agencydetails->active  ? 'selected' : ''  }}>Pending</option>
                                         
                                     </select>
                                 <!--end::Input-->
@@ -564,16 +493,10 @@
                                 <!--begin::Input-->
                                 <select name="brandinstantmessager" aria-label="Select a Language" data-control="select2" class="form-select form-select-solid form-select-lg">
                                     <option value="">Select a One...</option>
-                                        @isset($user->agencydetails->brandinstantmessager )
-                                        <option value="{{ $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}">{{ $user->agencydetails->brandinstantmessager }}</option>
-                                        <option value="Twitter">Twitter</option>
-                                        <option value="WhatsApp">WhatsApp</option>
-                                        <option value="InstaGram">InstaGram</option>
-                                        @else
-                                        <option value="Twitter">Twitter</option>
-                                        <option value="WhatsApp">WhatsApp</option>
-                                        <option value="InstaGram">InstaGram</option>
-                                        @endisset
+                                        <option value="Twitter" {{ 'Twitter' ==$user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>Twitter</option>
+                                        <option value="WhatsApp" {{ 'WhatsApp' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>WhatsApp</option>
+                                        <option value="InstaGram" {{ 'InstaGram' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>InstaGram</option>
+                                        <option value="Telegram" {{ 'Telegram' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>Telegram</option>
                                         
                                     </select>
                                 <!--end::Input-->
@@ -638,7 +561,7 @@
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-lg-12 fv-row">
-                                    <textarea name="note" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" value="{{ isset($user->agencydetails->note) ? $user->agencydetails->note : '' }}">{{ isset($user->agencydetails->note) ? $user->agencydetails->note : '' }}</textarea>
+                                    <textarea name="note" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0">{{ isset($user->agencydetails->note) ? $user->agencydetails->note : '' }}</textarea>
                                 </div>
                                 <!--end::Col-->
                             </div>

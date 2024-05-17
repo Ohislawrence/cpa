@@ -154,10 +154,6 @@ class BlogController extends Controller
                                     <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
-                ->addColumn('role',function($row){
-                    $role = $row->getRoleNames()->first();
-                    return $role;
-                })
                 ->rawColumns(['action','role'])
                 ->make(true);
         }

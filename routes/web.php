@@ -140,6 +140,7 @@ Route::middleware([
         Route::get('dashboard/stats', [AdminDashboardController::class, 'dashboard2'])->name('stats');
 
         //blogs
+        Route::get('blogs/getblogs/get', [BlogController::class, 'getblogs'])->name('getblogs');
         Route::get('blogs', [BlogController::class, 'index'])->name('blogs.index');
         Route::get('blog/create', [BlogController::class, 'create'])->name('blogs.create');
         Route::get('blog/{id}/show', [BlogController::class, 'show'])->name('blogs.show');

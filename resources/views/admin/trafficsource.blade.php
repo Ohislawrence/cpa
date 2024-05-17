@@ -21,12 +21,13 @@
 		searchDelay: 500,
 		processing: true,
 		serverSide: true,
-		ajax: "{{ route('admin.gettrafficsource', ['id' => $user-id]) }}",
+		ajax: "{{ route('admin.gettrafficsource', ['id' => $user->id]) }}",
 		columns: [
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'name', name: 'name'},
-			{data: 'email', name: 'email'},
-            {data: 'role', name: 'role'},
+			{data: 'source', name: 'source'},
+			{data: 'address', name: 'address'},
+			{data: 'followers', name: 'followers'},
+            {data: 'monthlyvisit', name: 'monthlyvisit'},
 			{
 				data: 'action',
 				name: 'action',
@@ -101,6 +102,7 @@
 												<th></th>
 												<th>Source</th>
 												<th>Address/Username</th>
+												<th>Followers</th>
                                                 <th>Monthly Visits</th>
 												<th>Actions</th>
 											</tr>

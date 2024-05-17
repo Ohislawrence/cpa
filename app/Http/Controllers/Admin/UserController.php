@@ -123,15 +123,13 @@ class UserController extends Controller
     public function viewtrafficsource($id)
     {
         $user = User::find($id);
-        //$source = Trafficsource::where('user_id', $id);
         return view('admin.trafficsource', compact('user'));
     }
 
     public function traffic(Request $request, $id)
     {
-        Trafficsource::updateOrCreate([
-            'user_id' => $id
-        ], [
+        Trafficsource::create([
+            'user_id' => $id,
             'source' => $request->source,
             'address' => $request->address,
             'rank' => 'nil',
@@ -202,8 +200,8 @@ class UserController extends Controller
     public function gettrafficsource(Request $request, $id)
     {
         if ($request->ajax()) {
-            $user = User::find($id);
-            $data = $user->trafficsource->latest()->get();
+            $data = Trafficsource::where('user_id', $request->id)->get();
+            //dd($data);
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -212,11 +210,7 @@ class UserController extends Controller
                                     <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
-                ->addColumn('role',function($row){
-                    $role = $row->getRoleNames()->first();
-                    return $role;
-                })
-                ->rawColumns(['action','role'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
     }

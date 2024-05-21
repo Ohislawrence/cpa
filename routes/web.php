@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\EmailControler;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Affiliate\DashboardController;
 use App\Http\Controllers\Affiliate\OfferController as AffiliateOfferController;
@@ -148,6 +149,11 @@ Route::middleware([
         Route::put('blog/{id}/update', [BlogController::class, 'update'])->name('blogs.update');
         Route::delete('blog/{id}/delete', [BlogController::class, 'delete'])->name('blogs.delete');
         Route::post('ckeditor/upload',  [BlogController::class, 'upload'])->name('ckeditor.upload');
+
+        //wallet actions
+        Route::post('update/user/wallet', [AdminTransactionController::class, 'creditdebit'])->name('creditdebit');
+        Route::get('user/{id}/payments/request', [AdminTransactionController::class, 'paymentrequests'])->name('paymentrequests');
+        Route::get('user/{id}/transactons', [AdminTransactionController::class, 'transactionuser'])->name('transactionuser');
     });
 
 //Affiliate

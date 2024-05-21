@@ -12,6 +12,8 @@
 
 
 @section('footer')
+
+@include('admin.components.creditdebit')
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
@@ -75,7 +77,7 @@
                             Pay Affiliate</button>
                         <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
                             Transfer</button>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#creditdebituser">
 						Credit/Debit User</button>
 						<!--end::Add user-->
 					</div>

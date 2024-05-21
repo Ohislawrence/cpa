@@ -150,12 +150,12 @@
                     <!--end::Nav item-->
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/security.html">Payments</a>
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/payments/request') ? 'active' : ''}}" href="{{ route('admin.paymentrequests', $user->id) }}">Payment Requests</a>
                     </li>
                     <!--end::Nav item-->
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/billing.html">Billing</a>
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/transactons') ? 'active' : ''}}" href="{{ route('admin.transactionuser', $user->id) }}">Transaction</a>
                     </li>
                     <!--end::Nav item-->
                     <!--begin::Nav item-->

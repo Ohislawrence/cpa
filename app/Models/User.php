@@ -82,5 +82,10 @@ class User extends Authenticatable implements Wallet, WalletFloat
         return $this->hasMany(Trafficsource::class);
     }
 
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
 
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
+use Carbon\Carbon;
 
 class BlogController extends Controller
 {
@@ -154,7 +155,15 @@ class BlogController extends Controller
                                     <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action','role'])
+                ->addColumn('date', function($row){
+                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
+                    return $date;
+                })
+                ->addColumn('category1', function($row){
+                    $category = $row->cat->category;
+                    return $category;
+                })
+                ->rawColumns(['action','date','category1'])
                 ->make(true);
         }
     }

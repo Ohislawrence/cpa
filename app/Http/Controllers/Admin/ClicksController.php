@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Click;
 use App\Models\Offer;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -29,6 +30,30 @@ class ClicksController extends Controller
         if ($request->ajax()) {
             $data1 = Offer::where('id', $id)->first();
             $data = $data1->click->where('offer_id', $data1->offerid)->latest()->get();
+            return Datatables::of($data)
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
+                    return $actionBtn;
+                })
+                ->addColumn('date', function($row){
+                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
+                    return $date;
+                })
+                ->rawColumns(['action','date'])
+                ->make(true);
+        }
+    }
+
+    public function userclickstats($id)
+    {
+        $user = User::find($id);
+        return view('admin.clickstatuser', compact('user'));
+    }
+
+    public function getuserclickstats(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = Click::where('user_id', $id)->latest()->get();
             return Datatables::of($data)
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>';

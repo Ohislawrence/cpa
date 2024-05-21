@@ -70,11 +70,7 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ $user->balance }}" data-kt-countup-prefix="$">0</div>
+                                            <div class="fs-2 fw-bold" data-kt-countup="" >$ {{ number_format($user->balanceFloat,2) }}</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
@@ -86,10 +82,6 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-down fs-3 text-danger me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
                                             <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="80">0</div>
                                         </div>
                                         <!--end::Number-->
@@ -145,7 +137,7 @@
                     <!--end::Nav item-->
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/settings.html">Click Stats</a>
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/clickstats') ? 'active' : ''}}" href="{{ route('admin.userclickstats', $user->id) }}">Click Stats</a>
                     </li>
                     <!--end::Nav item-->
                     <!--begin::Nav item-->
@@ -168,12 +160,10 @@
                         <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/edit/*') ? 'active' : ''}}" href="{{ route('admin.edituser', $user->id) }}">Update User info</a>
                     </li>
                     <!--end::Nav item-->
-                    @if($user->getRoleNames()->first() == 'affiliate')
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
                         <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/trafficsource') ? 'active' : ''}}" href="{{ route('admin.viewtrafficsource', $user->id) }}">Traffic Source</a>
                     </li>
-                    @endif
                 </ul>
                 <!--begin::Navs-->
             </div>

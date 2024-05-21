@@ -197,6 +197,12 @@ class UserController extends Controller
         return view('admin.profiled.overview', compact('user'));
     }
 
+    public function overviewagency($id)
+    {
+        $user = User::find($id);
+        return view('admin.agencyprofile.overview', compact('user'));
+    }
+
     public function gettrafficsource(Request $request, $id)
     {
         if ($request->ajax()) {

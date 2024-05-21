@@ -68,8 +68,8 @@ Route::webhooks('verify-action-taken', 'webhooktest1');
 //});
 
 Route::get('/deposite', function () {
-    $user = User::find(3);
-   $user->depositFloat(100.00);
+    $user = User::find(5);
+   $user->depositFloat(3.55);
 });
 
 
@@ -119,6 +119,7 @@ Route::middleware([
         Route::post('user/edit/{id}/update/agency', [UserController::class, 'updateuseragency'])->name('updateuseragency');
         //userTabs
         Route::get('user/view/{id}/overview', [UserController::class, 'overview'])->name('viewuser');
+        Route::get('user/view/{id}/agency/overview', [UserController::class, 'overviewagency'])->name('overviewagency');
         Route::get('user/{id}/trafficsource', [UserController::class, 'viewtrafficsource'])->name('viewtrafficsource');
         Route::post('user/update/{id}/traffic', [UserController::class, 'traffic'])->name('traffic');
         Route::get('user/{id}/traffic/source', [UserController::class, 'gettrafficsource'])->name('gettrafficsource');
@@ -154,6 +155,15 @@ Route::middleware([
         Route::post('update/user/wallet', [AdminTransactionController::class, 'creditdebit'])->name('creditdebit');
         Route::get('user/{id}/payments/request', [AdminTransactionController::class, 'paymentrequests'])->name('paymentrequests');
         Route::get('user/{id}/transactons', [AdminTransactionController::class, 'transactionuser'])->name('transactionuser');
+        Route::get('user/{id}/request', [AdminTransactionController::class, 'getpaymentrequest'])->name('getpaymentrequest');
+        Route::get('user/{id}/transactions', [AdminTransactionController::class, 'getusertransaction'])->name('getusertransaction');
+        Route::get('user/{id}/transactions/agency', [AdminTransactionController::class, 'agencytransaction'])->name('agencytransaction');
+        //clickstats
+        Route::get('user/{id}/clickstats',[ClicksController::class, 'userclickstats'])->name('userclickstats');
+        Route::get('user/{id}/clickstats/get',[ClicksController::class, 'getuserclickstats'])->name('getuserclickstats');
+        //offer agency
+        Route::get('user/{id}/agency/offers',[OfferController::class, 'agencyoffer'])->name('agencyoffer');
+        Route::get('user/{id}/agency/get/offers',[OfferController::class, 'getagencyoffer'])->name('getagencyoffer');
     });
 
 //Affiliate

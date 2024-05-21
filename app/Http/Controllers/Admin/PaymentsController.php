@@ -33,7 +33,7 @@ class PaymentsController extends Controller
                     return $date;
                 })
                 ->addColumn('amounts',function($row){
-                    $amounts = '$ '.($row->amount*0.01);
+                    $amounts = '$ '.number_format($row->amount/100, 2);
                     return $amounts;
                 })
                 ->addColumn('payable',function($row){

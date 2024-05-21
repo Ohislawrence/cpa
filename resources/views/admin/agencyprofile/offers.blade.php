@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  'Payment Request' )
+@section('headername',  'Offers' )
 @section('bread1',  'Payments' )
-@section('bread2',  'Send Payments' )
+@section('bread2',  'Offers' )
 
 
 @section('header')
@@ -17,17 +17,20 @@
 <script type="text/javascript">
 	$(function () {
 
-	var table = $('.yajra-datatable').DataTable({
+	var table = $('.yajra-datatable-offer').DataTable({
 		searchDelay: 500,
 		processing: true,
 		serverSide: true,
-		ajax: "{{ route('admin.getpaymentrequest', ['id'=> $user->id]) }}",
+		ajax: "{{ route('admin.getagencyoffer', ['id'=> $user->id]) }}",
 		columns: [
-			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'name', name: 'name'},
-            {data: 'amount', name: 'amount'},
-			{data: 'status', name: 'status'},
-            {data: 'date', name: 'date'},
+            {data: 'offerid'},
+			{data: 'name'},
+			{data: 'category'},
+            {data: 'geos'},
+            {data: 'targetting'},
+            {data: 'payout'},
+            {data: 'payouttype'},
+            {data: 'status'},
 			{
 				data: 'action',
 				name: 'action',
@@ -45,7 +48,6 @@
 
 
 
-
 @section('slot')
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -53,7 +55,7 @@
 	<div class="container-xxl" id="kt_content_container">
         @include('admin.components.alert')
         
-        @include('admin.viewuser')
+        @include('admin.viewagency')
 
 
         <!--begin::Card-->
@@ -107,14 +109,17 @@
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->
-									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
+									<table class="table align-middle table-row-dashed fs-6 gy-5 responsive yajra-datatable-offer" id="kt_datatable_responsive">
 										<thead>
-											<tr class="fw-bold fs-6 text-gray-800 px-7">
-												<th></th>
-												<th>User</th>
-												<th>Amount</th>
+											<tr class="fw-semibold fs-6 text-gray-700">
+                                                <th>Offer ID</th>
+												<th>Name</th>
+												<th>Category</th>
+                                                <th>Geos</th>
+                                                <th>Targetting</th>
+                                                <th>Payout</th>
+                                                <th>Payout Type</th>
                                                 <th>Status</th>
-                                                <th>Request Date</th>
 												<th>Actions</th>
 											</tr>
 										</thead>
@@ -129,6 +134,8 @@
 							<!--end::Card-->
                 </div>
             </div>
+    </div>
+</div>
     </div>
 </div>
 @endsection

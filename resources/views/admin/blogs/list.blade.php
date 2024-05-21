@@ -25,9 +25,9 @@
 		ajax: "{{ route('admin.getblogs') }}",
 		columns: [
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'title', name: 'title'},
-			{data: 'category', name: 'category'},
-            {data: 'created_at', name: 'created_at'},
+			{data: 'title'},
+			{data: 'category1'},
+            {data: 'date'},
 			{
 				data: 'action',
 				name: 'action',

@@ -68,11 +68,7 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ $user->balance }}" data-kt-countup-prefix="$">0</div>
+                                            <div class="fs-2 fw-bold" >$ {{ number_format($user->balanceFloat) }}</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
@@ -83,12 +79,8 @@
                                     <!--begin::Stat-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
-                                        <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-down fs-3 text-danger me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="80">0</div>
+                                        <div class="d-flex align-items-center"> 
+                                            <div class="fs-2 fw-bold">{{ $user->offers->count()}}</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
@@ -100,15 +92,11 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
                                             <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">0</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500">Success Rate</div>
+                                        <div class="fw-semibold fs-6 text-gray-500">Last Deposit</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -137,18 +125,18 @@
                 <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/view/*/overview') ? 'active' : ''}}"
-                        href="{{ route('admin.viewuser', $user->id) }}">Overview</a>
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/view/*/agency/overview') ? 'active' : ''}}"
+                        href="{{ route('admin.overviewagency', $user->id) }}">Overview</a>
                     </li>
                     <!--end::Nav item-->
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/settings.html">Offers</a>
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/agency/offers') ? 'active' : ''}}" href="{{ route('admin.agencyoffer', ['id' => $user->id])}}">Offers</a>
                     </li>
                     <!--end::Nav item-->
                     <!--begin::Nav item-->
                     <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/security.html">Transactions</a>
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/transactions/agency') ? 'active' : ''}}" href="{{ route('admin.agencytransaction', ['id' => $user->id])}}">Transactions</a>
                     </li>
                     <!--end::Nav item-->
                     <!--begin::Nav item-->

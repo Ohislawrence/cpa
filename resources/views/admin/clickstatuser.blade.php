@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  'Transactions' )
-@section('bread1',  'Payments' )
-@section('bread2',  'Transactions' )
+@section('headername',  'Click Stats' )
+@section('bread1',  'Offers' )
+@section('bread2',  'Click Stats' )
 
 
 @section('header')
@@ -12,8 +12,6 @@
 
 
 @section('footer')
-
-@include('admin.components.creditdebit')
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
@@ -23,14 +21,18 @@
 		searchDelay: 500,
 		processing: true,
 		serverSide: true,
-		ajax: "{{ route('admin.transactiontable') }}",
+		ajax: "{{ route('admin.getuserclickstats', ['id'=> $user->id]) }}",
 		columns: [
-			{data: 'date',searchable: true},
-			{data: 'type',searchable: true},
-			{data: 'amounts',searchable: true},
-            {data: 'payable',searchable: true},
+			{data: 'DT_RowIndex'},
+			{data: 'offer'},
+            {data: 'device'},
+			{data: 'platform'},
+            {data: 'browser'},
+            {data: 'status'},
+            {data: 'date', name: 'date'},
 			{
 				data: 'action',
+				name: 'action',
 				orderable: true,
 				searchable: false,
 			},
@@ -51,8 +53,12 @@
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Container-->
 	<div class="container-xxl" id="kt_content_container">
-	@include('admin.components.alert')
-		<!--begin::Card-->
+        @include('admin.components.alert')
+        
+        @include('admin.viewuser')
+
+
+        <!--begin::Card-->
 		<div class="card">
 			<!--begin::Card header-->
 			<div class="card-header border-0 pt-6">
@@ -73,26 +79,46 @@
 				<div class="card-toolbar">
 					<!--begin::Toolbar-->
 					<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#payviapaypal">
-                            Pay Affiliate</button>
-                        <button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-                            Transfer</button>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#creditdebituser">
-						Credit/Debit User</button>
-						<!--end::Add user-->
+						<!--begin::Filter-->
+						<button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+						<i class="ki-duotone ki-filter fs-2">
+							<span class="path1"></span>
+							<span class="path2"></span>
+						</i>Filter</button>
+						<!--begin::Menu 1-->
+						<div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
+							<!--begin::Header-->
+							<div class="px-7 py-5">
+								<div class="fs-5 text-gray-900 fw-bold">Filter Options</div>
+							</div>
+							<!--end::Header-->
+							<!--begin::Separator-->
+							<div class="separator border-gray-200"></div>
+							<!--end::Separator-->
+							<!--begin::Content-->
+							<div class="px-7 py-5" data-kt-user-table-filter="form">
+								
+							</div>
+							<!--end::Content-->
+						</div>
+						<!--end::Menu 1-->
+						
 					</div>
 					<!--end::Toolbar-->
-					@include('admin.components.payviapaypal')
+					@include('admin.components.addusermodal')
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->
 									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
 										<thead>
 											<tr class="fw-bold fs-6 text-gray-800 px-7">
-												<th>Date</th>
-												<th>Transaction</th>
-                                                <th>Amount</th>
-                                                <th>Paid To</th>
+												<th></th>
+												<th>Offer</th>
+												<th>Device</th>
+                                                <th>Platform</th>
+                                                <th>Browser</th>
+                                                <th>Status</th>
+                                                <th>Request Date</th>
 												<th>Actions</th>
 											</tr>
 										</thead>
@@ -107,7 +133,6 @@
 							<!--end::Card-->
                 </div>
             </div>
-
-        </div>
     </div>
+</div>
 @endsection

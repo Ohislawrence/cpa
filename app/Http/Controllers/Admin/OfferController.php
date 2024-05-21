@@ -193,4 +193,59 @@ class OfferController extends Controller
     {
         return view('admin.ailink');
     }
+
+    public function agencyoffer($id)
+    {
+        $user = User::find($id);
+        return view('admin.agencyprofile.offers', compact('user'));
+    }
+
+    public function getagencyoffer(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = Offer::where('user_id', $id)->latest()->get();
+            return Datatables::of($data)
+
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="offers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
+                                    <a href="offer/'.$row->id.'/clicks/" class="edit btn btn-primary btn-sm">Stats</a>';
+                    return $actionBtn;
+                })
+                ->addColumn('category', function($row){
+                    $category = $row->category->name;
+                    return $category;
+                })
+                ->addColumn('targetting', function($row){
+                    foreach($row->targets as $tar)
+                    {
+                        $targetting = $tar->target;
+                        $tarrs[] = $targetting;
+                    }
+                    return $tarrs;
+
+                })
+                ->addColumn('payout', function($row){
+                    foreach($row->targets as $tar)
+                    {
+                        $payout = $tar->payout;
+                        $payys[] = $payout;
+                    }
+                    return '$'.round(array_sum($payys)/count($payys),2);
+                })
+                ->addColumn('geos', function($row){
+                    foreach($row->geos as $tar)
+                    {
+                        $geoss = $tar->country->code;
+                        $ge[] = $geoss;
+                    }
+                    return $ge;
+                })
+                ->addColumn('payouttype', function($row){
+                     $payouttype = $row->payouttype->name;
+                    return $payouttype;
+                })
+                ->rawColumns(['action','category','targetting', 'payout', 'payouttype', 'geos'])
+                ->make(true);
+        }
+    }
 }

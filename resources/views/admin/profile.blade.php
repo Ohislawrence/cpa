@@ -90,7 +90,7 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-2 fw-bold">$ {{ auth()->user()->balanceFloat }}</div>
+                                            <div class="fs-2 fw-bold">$ {{ number_format(auth()->user()->balanceFloat,2)  }}</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->

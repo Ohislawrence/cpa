@@ -86,8 +86,8 @@
 						<i class="ki-duotone ki-plus fs-2"></i>Add Offer</a>
 						<!--end::Add offer-->
 					</div>
-					<!--end::Toolbar-->
-                    <!--begin::Card body-->
+				</div>
+			</div>
 								<div class="card-body py-4">
 									<!--begin::Table-->
                                     <div class="table-responsive">

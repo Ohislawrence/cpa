@@ -75,12 +75,12 @@
 					<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
 					
 						<!--begin::Add user-->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-						<i class="ki-duotone ki-plus fs-2"></i>Create Blog</button>
+						<a href="{{ route('admin.blogs.create') }}" class="btn btn-primary" >
+						<i class="ki-duotone ki-plus fs-2"></i>Create Blog</a>
 						<!--end::Add user-->
 					</div>
-					<!--end::Toolbar-->
-					@include('admin.components.addusermodal')
+				</div>
+			</div>
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->

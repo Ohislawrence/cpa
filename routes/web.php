@@ -181,7 +181,7 @@ Route::middleware([
         Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('dashtwo');
         Route::get('payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('referral', [ReferralController::class, 'index'])->name('referral');
-        Route::get('offers/ailink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
+        Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
         Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
         Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
       

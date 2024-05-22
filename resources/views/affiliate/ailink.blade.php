@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  'AI Links' )
+@section('headername',  'SmartLinks' )
 @section('bread1',  'Offers' )
-@section('bread2',  'AI Links' )
+@section('bread2',  'SmartLinks' )
 
 
 @section('header')

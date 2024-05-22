@@ -68,7 +68,7 @@
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
-                    <span class="menu-title">AI Link</span>
+                    <span class="menu-title">SmartLink</span>
                 </span>
                 </a>
             </div>

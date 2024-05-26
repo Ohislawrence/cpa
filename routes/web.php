@@ -178,7 +178,8 @@ Route::middleware([
         Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
         Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
         Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
-        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('dashtwo');
+        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
+        Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
         Route::get('payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('referral', [ReferralController::class, 'index'])->name('referral');
         Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');

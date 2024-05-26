@@ -30,6 +30,9 @@ class ClickController extends Controller
                 'ip' => $request->ip(),
                 'clickID' => $this->generateUniqueCode(),
                 'referrerurl' => request()->headers->get('referer'),
+                'earned'=> 0,
+                'conversion' => 0,
+                'smartlink' => 'no',
             ]);
 
 

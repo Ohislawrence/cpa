@@ -56,10 +56,19 @@ class WebhookHandler extends SpatieProcessWebhookJob implements ShouldQueue
             }
         }
 
+        $status = $this->webhookCall->payload['status'] ;
+        if($status == 'Approved')
+        {
+            $conversion = 1;
+        }else{
+            $conversion = 0;
+        }
+
 
         $click->update([
-            'status' => $this->webhookCall->payload['status'],
+            'status' => $status,
             'earned' => $earned,
+            'conversion' => $conversion,
         ]);
 
         //logger()->info($this->webhookCall->payload);

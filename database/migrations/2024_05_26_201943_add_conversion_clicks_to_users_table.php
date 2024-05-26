@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('requestpayments', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('amount');
-            $table->string('method');
-            $table->enum('status', ['Request', 'Paid', 'On-hold']);
-            $table->timestamps();
+        Schema::table('clicks', function (Blueprint $table) {
+            $table->integer('conversion');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('requestpayments');
+        Schema::table('clicks', function (Blueprint $table) {
+            //
+        });
     }
 };

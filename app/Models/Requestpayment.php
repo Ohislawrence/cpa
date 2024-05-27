@@ -15,6 +15,7 @@ class Requestpayment extends Model
         'amount',
         'status',
         'method',
+        'number',
     ];
 
     public function user()

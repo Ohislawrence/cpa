@@ -15,9 +15,10 @@ class DashboardController extends Controller
 {
     public function dashboardone()
     {
-        $payThisMonth = Click::where('user_id', Auth::user()->id)->where('created_at','>=', Carbon::now()->startOfMonth())->get(); 
-        $payYesterday = Click::where('user_id', Auth::user()->id)->where('created_at','>=', Carbon::yesterday())->get(); 
-        $payToday = Click::where('user_id', Auth::user()->id)->where('created_at','>=', Carbon::today())->get();
+        $clicked = Click::where('user_id', Auth::user()->id);
+        $payThisMonth = $clicked->where('created_at','>=', Carbon::now()->startOfMonth())->get(); 
+        $payYesterday = $clicked->where('created_at','>=', Carbon::yesterday())->get(); 
+        $payToday = $clicked->where('created_at','>=', Carbon::today())->get();
 
         $earnedThisMonth = 0;
         $earnedYesterday = 0;

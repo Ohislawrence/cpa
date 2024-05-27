@@ -64,6 +64,7 @@
 				<div class="card-title">
 
 				</div>
+			</div>
 				<!--begin::Card toolbar-->
 				<div class="card-toolbar">
                     <!--begin::Card body-->

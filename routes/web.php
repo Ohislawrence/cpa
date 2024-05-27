@@ -181,6 +181,8 @@ Route::middleware([
         Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
         Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
         Route::get('payments', [PaymentController::class, 'index'])->name('payments');
+        Route::get('payments/getpaymentdata', [PaymentController::class, 'getpaymentdata'])->name('getpaymentdata');
+        Route::post('payments/post/requestpayment', [PaymentController::class, 'requestpayment'])->name('requestpayment');
         Route::get('referral', [ReferralController::class, 'index'])->name('referral');
         Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
         Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');

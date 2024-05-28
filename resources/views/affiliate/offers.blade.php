@@ -67,35 +67,33 @@
 			</div>
 				<!--begin::Card toolbar-->
 				<div class="card-toolbar">
-                    <!--begin::Card body-->
-								<div class="card-body py-4">
-									<!--begin::Table-->
-                                    <div class="table-responsive">
-									<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="kt_datatable_responsive1">
-										<thead>
-											<tr class="fw-semibold fs-6 text-gray-800">
-                                                <th>Offer ID</th>
-												<th>Name</th>
-												<th>Category</th>
-                                                <th>Geos</th>
-                                                <th>Targetting</th>
-                                                <th>Payout</th>
-                                                <th>Payout Type</th>
-												<th>EPC</th>
-												<th>Actions</th>
-											</tr>
-										</thead>
-										<tbody class="text-gray-600 fw-semibold">
+					<div class="card-body py-4">
+						<!--begin::Table-->
+						<div class="table-responsive">
+						<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="kt_datatable_responsive1">
+							<thead>
+								<tr class="fw-semibold fs-6 text-gray-800">
+									<th>Offer ID</th>
+									<th>Name</th>
+									<th>Category</th>
+									<th>Geos</th>
+									<th>Targetting</th>
+									<th>Payout</th>
+									<th>Payout Type</th>
+									<th>EPC</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody class="text-gray-600 fw-semibold">
 
-										</tbody>
-									</table>
-                                    </div>
-									<!--end::Table-->
-								</div>
-								<!--end::Card body-->
-							</div>
-							<!--end::Card-->
-                </div>
+							</tbody>
+						</table>
+						</div>
+						<!--end::Table-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
             </div>
 
         </div>

@@ -54,7 +54,8 @@ class TransactionController extends Controller
             $data = Requestpayment::where('user_id', $id)->latest()->get();
             return Datatables::of($data)
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
+                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>
+                    <a href="" class="edit btn btn-primary btn-sm">Pay</a>';
                     return $actionBtn;
                 })
                 ->addColumn('date', function($row){

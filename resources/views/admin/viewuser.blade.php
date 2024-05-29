@@ -74,7 +74,7 @@
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500">Earnings</div>
+                                        <div class="fw-semibold fs-6 text-gray-500">Balance</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->

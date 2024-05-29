@@ -23,11 +23,9 @@
 		serverSide: true,
 		ajax: "{{ route('admin.getpaymentrequest', ['id'=> $user->id]) }}",
 		columns: [
-			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'name', name: 'name'},
+            {data: 'date', name: 'date'},
             {data: 'amount', name: 'amount'},
 			{data: 'status', name: 'status'},
-            {data: 'date', name: 'date'},
 			{
 				data: 'action',
 				name: 'action',
@@ -110,11 +108,9 @@
 									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
 										<thead>
 											<tr class="fw-bold fs-6 text-gray-800 px-7">
-												<th></th>
-												<th>User</th>
+                                                <th>Request Date</th>
 												<th>Amount</th>
                                                 <th>Status</th>
-                                                <th>Request Date</th>
 												<th>Actions</th>
 											</tr>
 										</thead>

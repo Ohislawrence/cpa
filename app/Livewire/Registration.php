@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Mail\WelcomeEmail;
 use App\Models\Affiliatedetail;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class Registration extends Component 
 {
     public $currentSection = 1;
-    public $name, $passWord, $email, $phonenumber, $country, $region, $messager;
+    public $name, $passWord, $email, $phonenumber, $country, $region, $messager, $refid;
     public $successMessage;
     public $incompeteMessage;
 
@@ -40,6 +41,14 @@ class Registration extends Component
     }
     public function step3()
     {
+        if(!empty($this->refid)){
+            $refID= $this->refid;
+        }else{
+            $refID= null ;
+        }
+
+        
+        
         if(!empty($this->name) && !empty($this->email) && !empty($this->passWord) && !empty($this->phonenumber)  && !empty($this->country)  && !empty($this->messager))
         {
             $user = User::create([
@@ -51,11 +60,13 @@ class Registration extends Component
             Affiliatedetail::create([
                 'user_id' => $user->id,
                 'status' => 'Pending',
-                'city' => null,
+                'city' => "drdrrr",
                 'country' => $this->country,
                 'region' => $this->region,
                 'phonenumber' => $this->phonenumber,
                 'instantmessageid' => $this->messager,
+                'referral_id' => $this->generateUniqueCode(),
+                'referred_by' => $refID,
             ]);
     
             $role = Role::where('name', 'affiliate')->first();
@@ -63,7 +74,7 @@ class Registration extends Component
     
             $this->clearForm();
     
-            Mail::to($user->email)->queue(new WelcomeEmail($user));
+            //Mail::to($user->email)->queue(new WelcomeEmail($user));
             $this->currentSection = 4;
             $this->successMessage = "Great Job! We have received your details and will contact you soon. Check your email for the validation mail.";
            
@@ -92,6 +103,20 @@ class Registration extends Component
         $this->email = "";
         $this->messager = "";
     }
+
+    public function generateUniqueCode()
+    {
+        do {
+            $code = random_int(10000000, 99999999);
+        } while (Affiliatedetail::where("referral_id", "=", $code)->first());
+
+        return $code;
+    }
+
+    public function mount() 
+  {
+     $this->refid = request()->query('refid') ;
+  }
 
     public function render()
     {

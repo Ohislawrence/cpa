@@ -76,6 +76,7 @@ class PaymentController extends Controller
                 'number' => $this->generateUniqueCode(),
                 'method' => 'PayPal'
             ]);
+            
             return back()->with('message', 'Request sent');
         }else{
             return back()->with('message', 'Check your request and balance and try again.');

@@ -14,6 +14,7 @@
     <div class="row pt-3">
         {{-- Step 1 --}}
         <div id="step1" class="needs-validation" style="display: {{ $currentSection != 1 ? 'none' : '' }}">
+            <input type="hidden" wire:model = "refid" >
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
                 <input type="text" wire:model="name" class="form-control {{$errors->first('name') ? "is-invalid" : "" }}" id="name" aria-describedby="name">

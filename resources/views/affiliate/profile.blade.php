@@ -68,7 +68,9 @@
                                     <i class="ki-duotone ki-geolocation fs-4 me-1">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
-                                    </i>SF, Bay Area</a>
+                                    </i>@isset(auth()->user()->affiliatedetails->place->name)
+                                    {{ auth()->user()->affiliatedetails->place->name }}
+                                    @endisset</a>
                                     <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary mb-2">
                                     <i class="ki-duotone ki-sms fs-4">
                                         <span class="path1"></span>
@@ -95,7 +97,7 @@
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500 center">Earnings</div>
+                                        <div class="fw-semibold fs-6 text-gray-500 center">Balance</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->

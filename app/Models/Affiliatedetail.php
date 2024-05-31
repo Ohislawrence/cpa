@@ -10,7 +10,7 @@ class Affiliatedetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','status','city','country','region','phonenumber','instantmessageid',
+        'user_id','status','city','country','region','phonenumber','instantmessageid', 'referral_id','referred_by',
     ];
 
     public function place()

@@ -105,6 +105,8 @@
 							@endisset
 
 							@endrole
+
+							@include('layouts.mycomponents.footer')
 						</div>
 					</div>
 				</div>
@@ -113,8 +115,9 @@
 		</div>
 		
                         </div>
+						
                     </div>
-					@include('layouts.mycomponents.footer')
+					
 			</div>
 
         @livewireScripts

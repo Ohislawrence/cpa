@@ -4,7 +4,7 @@
     <div class="container d-flex flex-column flex-md-row flex-stack">
         <!--begin::Copyright-->
         <div class="text-gray-900 order-2 order-md-1">
-            <a href="{{ route('dashboard') }}" target="_blank" class="text-muted text-hover-primary fw-semibold me-2 fs-6">DealsIntel App</a>
+            <a href="{{ route('dashboard') }}" target="_blank" class="text-muted text-hover-primary fw-semibold me-2 fs-6">DealsIntel Affiliate Network</a>
         </div>
         <!--end::Copyright-->
         <!--begin::Menu-->

@@ -8,12 +8,9 @@
 					<div class="row justify-content-center">	
 						<div class="col-md-10 col-lg-9">
 							<div class="section-title mb-70">	
-
+			
 								<!-- Title -->	
-								<h2 class="s-50 w-700">Articles & Resources</h2>	
-
-								<!-- Text -->	
-								<p class="s-21 color--grey">See our articles and resources that will help you.</p>
+								<h2 class="s-50 w-700">Keep Reading...</h2>	
 									
 							</div>	
 						</div>
@@ -21,12 +18,11 @@
 
 					<div class="row">
 
-
 						<!-- POSTS WRAPPER -->
 					<div class="posts-wrapper">
 						<div class="row">
 
-							@forelse (\App\Models\Blog::take(3)->get() as $blog )
+							@forelse (\App\Models\Blog::where('category', $blog->category)->take(3)->get() as $blog )
 								<!-- BLOG POST #7 -->
 								<div class="col-md-6 col-lg-4">
 									<div class="blog-post mb-40 wow fadeInUp clearfix">	

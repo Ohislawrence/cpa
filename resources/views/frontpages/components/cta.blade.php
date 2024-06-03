@@ -15,15 +15,14 @@
 									<div class="banner-12-txt color--white">
 
 										<!-- Title -->	
-										<h2 class="s-45 w-700">We are looking for talented individuals</h2>
+										<h2 class="s-45 w-700">Unleash Your Earning Potential with DealsIntel!</h2>
 
 										<!-- Text -->
-										<p class="p-lg">We're constantly looking for talented people to join our team. 
-											Don't hesitate to get in touch with us
+										<p class="p-lg">Are you ready to take your earnings to the next level? Join the DealsIntel Affiliate Program today and turn your passion into profit like never before.
 										</p>
 
 										<!-- Button -->
-										<a href="mailto:yourdomain@mail.com" class="btn r-04 btn--theme hover--tra-white">yourdomain@mail.com</a>
+										<a href="{{ route('login') }}" class="btn r-04 btn--theme hover--tra-white">Join as an Affiliate</a>
 
 									</div>
 								</div>	<!-- END BANNER-12 TEXT -->

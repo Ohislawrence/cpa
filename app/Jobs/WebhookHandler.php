@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Models\Affiliatedetail;
 use App\Models\Click;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -75,12 +77,27 @@ class WebhookHandler extends SpatieProcessWebhookJob implements ShouldQueue
         //$click->offer->user->withdrawFloat(2.74);
         //$click->user->depositFloat(1.37);
         //\App\Models\User::where('id', '1')->first()->depositFloat(1.37);
-        $fees = $earned * 0.3;
 
+        $period = $click->user->created_at->subMonths(6);
+        $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
+        $referral = $referralget->user;
 
-        $click->offer[0]->user->transferFloat($click->user, $earned);
-        $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
+        if($click->user->created_at > $period )
+        {
+            $fees = $earned * 0.25;
+            $refCommision = $earned * 0.05;
 
+            $click->offer[0]->user->transferFloat($click->user, $earned);
+            $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
+            $click->offer[0]->user->transferFloat($referral, $refCommision);
+            
+        }else{
+            $fees = $earned * 0.3;
+
+            $click->offer[0]->user->transferFloat($click->user, $earned);
+            $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
+        }
+        
 
     }
 }

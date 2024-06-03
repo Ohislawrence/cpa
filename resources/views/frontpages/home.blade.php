@@ -135,5 +135,12 @@
 				</div>    <!-- End container --> 
 			</section>	<!-- END HERO-19 -->	
 
+			@include('frontpages.components.blogsection')
+
+
+
+			<!-- DIVIDER LINE -->
+			<hr class="divider">
+
             
 @endsection

@@ -60,7 +60,7 @@ class PaymentController extends Controller
     public function requestpayment(Request $request)
     {
         $this->validate($request, [
-            'amount' => 'required|numeric|min:2',
+            'amount' => 'required|numeric',
         ]);
 
         $reqAmount = $request->amount;
@@ -78,9 +78,12 @@ class PaymentController extends Controller
             ]);
             
             return back()->with('message', 'Request sent');
-        }else{
-            return back()->with('message', 'Check your request and balance and try again.');
+        }elseif($reqAmount<100){
+            return back()->with('message', 'You can not request less than $100.');
+        }elseif(Auth::user()->balanceFloat<100){
+            return back()->with('message', 'Your current balance is less than $100, your minimum withdrawal is $100.');
         }
+        
 
         
     }

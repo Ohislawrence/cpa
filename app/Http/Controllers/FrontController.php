@@ -34,7 +34,7 @@ class FrontController extends Controller
 
     public function blogs()
     {
-        $blogs = Blog::latest()->get();
+        $blogs = Blog::latest()->paginate(9);
         return view('frontpages.blogs.list' , compact('blogs'));
     }
 

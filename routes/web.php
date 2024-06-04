@@ -44,7 +44,7 @@ Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('affiliates', [FrontController::class, 'affiliates'])->name('affiliates');
 Route::get('advertisers', [FrontController::class, 'advertisers'])->name('advertisers');
 Route::get('about-us', [FrontController::class, 'aboutus'])->name('aboutus');
-Route::get('offers', [FrontController::class, 'offers'])->name('offers');
+//Route::get('offers', [FrontController::class, 'offers'])->name('offers');
 Route::get('blogs', [FrontController::class, 'blogs'])->name('blogs');
 Route::get('blog/{cat}/{slug}', [FrontController::class, 'blogsingle'])->name('blogsingle');
 Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');

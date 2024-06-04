@@ -38,8 +38,6 @@
 
 							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('advertisers') }}" class="h-link">Advertisers</a></li>
 
-							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('offers') }}" class="h-link">Offers</a></li>
-
 							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('aboutus') }}" class="h-link">About Us</a></li>
 
                                     <li class="nl-simple" aria-haspopup="true"><a href="{{ route('blogs') }}" class="h-link">Blogs</a></li>

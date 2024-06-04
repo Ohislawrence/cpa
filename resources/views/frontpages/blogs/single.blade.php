@@ -1,11 +1,10 @@
 @extends('layouts.guest')
 @section('title',  $blog->title )
 @section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
-@section('description',  '' )
-@section('imagealt',  '' )
-@section('card',  '' )
+@section('url',  Request::url() )
+@section('image',  asset('blogimages/'.$blog->banner) )
+@section('description',  Str::limit(strip_tags($blog->desc, 150)) )
+@section('imagealt',  $blog->slug )
 
 
 @section('header')

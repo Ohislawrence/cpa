@@ -40,7 +40,7 @@
 								<ul class="foo-links clearfix">
 									<li><p><a href="{{ route('affiliates') }}">Affiliates</a></p></li>
 									<li><p><a href="{{ route('advertisers') }}">Advertisers</a></p></li>	
-									<li><p><a href="{{ route('offers') }}">Offers</a></p></li>				
+									<li><p><a href="{{ route('support') }}">Support</a></p></li>			
 								</ul>
 
 							</div>	

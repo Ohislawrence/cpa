@@ -18,5 +18,5 @@
         <meta property="og:site_name" content="DealsIntel, Inc.">
         <meta name="twitter:image:alt" content="@yield('imagealt')">
 
-        <meta property="fb:app_id" content="your_app_id" />
+        <meta property="fb:app_id" content="" />
         <meta name="twitter:site" content="@dealsintel">

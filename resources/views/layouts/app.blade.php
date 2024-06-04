@@ -103,7 +103,6 @@
 									</div>
 								</div>
 							@endisset
-
 							@endrole
 
 							@include('layouts.mycomponents.footer')

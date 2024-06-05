@@ -23,6 +23,7 @@ use App\Http\Controllers\Agency\TransactionController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\SettingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -164,6 +165,9 @@ Route::middleware([
         //offer agency
         Route::get('user/{id}/agency/offers',[OfferController::class, 'agencyoffer'])->name('agencyoffer');
         Route::get('user/{id}/agency/get/offers',[OfferController::class, 'getagencyoffer'])->name('getagencyoffer');
+
+        //settings
+        Route::get('settings', [SettingController::class, 'index'])->name('settings');
     });
 
 //Affiliate

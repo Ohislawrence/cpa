@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Affiliate;
 
+use App\Charts\AffiliateStats;
 use App\Http\Controllers\Controller;
 use App\Models\Click;
 use Illuminate\Http\Request;
@@ -36,9 +37,9 @@ class DashboardController extends Controller
         return view('affiliate.dashboard', compact('earnedThisMonth','earnedYesterday','earnedToday'));
     }
 
-    public function dashboardtwo()
+    public function dashboardtwo(AffiliateStats $chart)
     {
-        return view('affiliate.dashboard2');
+        return view('affiliate.dashboard2', ['chart' => $chart->build()]);
     }
 
     public function getUserClicks(Request $request)

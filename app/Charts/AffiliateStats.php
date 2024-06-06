@@ -30,7 +30,6 @@ class AffiliateStats
         //dd($clicks->clickID);
         foreach($clicks as $click)
         {
-            
             $cl[] = $click->count();
         }
         

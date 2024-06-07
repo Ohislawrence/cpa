@@ -23,6 +23,15 @@ class UserController extends Controller
         return view('admin.users', compact('users','countries'));
     }
 
+    public function generateUniqueCode()
+    {
+        do {
+            $code = random_int(10000000, 99999999);
+        } while (Affiliatedetail::where("referral_id", "=", $code)->first());
+
+        return $code;
+    }
+
 
     public function store(Request $request) {
 
@@ -38,9 +47,26 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->assignRole($request->role);
+
+        if($request->role == 'affiliate')
+        {
+            Affiliatedetail::updateOrCreate([
+                'referral_id' => $this->generateUniqueCode(),
+                'status' => 'Pending',
+                'user_id' => $user->id,
+                'city'=> 1,
+                'country'=> 1,
+                'region'=> 1,
+                'phonenumber'=> 1,
+                'instantmessageid' => 1,
+            ]);
+        }
         
 
-        $user->assignRole($request->role);
+        
+
+        
 
         return back()->with('message','User Created');
     }

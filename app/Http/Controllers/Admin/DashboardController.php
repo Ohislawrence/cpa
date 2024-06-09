@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function dashboard1(DailyUsersChart $chart)
+    public function dashboard1(Request $request,DailyUsersChart $chart)
     {
-        return view('admin.dashboard1', ['chart' => $chart->build()]);
+        $timeframe = $request->input('timeframe', 7);
+
+        // Validate timeframe to be either 7, 30, or 90 days
+        if (!in_array($timeframe, [7, 30, 90])) {
+            $timeframe = 7;
+        }
+
+        $chart = $chart->build($timeframe);
+        return view('admin.dashboard1', compact('chart', 'timeframe'));
     }
 
     public function  dashboard2()

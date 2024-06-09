@@ -44,7 +44,7 @@
         @include('layouts.frontcomponents.meta')
 
     </head>
-    <body class="theme--dark">
+    <body>
         <!-- PAGE CONTENT
 		============================================= -->	
 		<div id="page" class="page font--jakarta">

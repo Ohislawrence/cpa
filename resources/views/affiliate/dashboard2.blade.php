@@ -36,6 +36,7 @@
 </script>
 
 <script src="{{ $chart->cdn() }}"></script>
+
 {{ $chart->script() }}
 @endsection
 
@@ -57,13 +58,21 @@
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label fw-bold fs-3 mb-1">Graph</span>
+					<span class="card-label fw-bold fs-3 mb-1">Clicks</span>
 
 					<span class="text-muted fw-semibold fs-7">See records</span>
 				</h3>
 				
 				<!--begin::Toolbar-->
 				<div class="card-toolbar" data-kt-buttons="true">
+					
+					<form method="GET" action="{{ route('affiliate.statistics') }}">
+						<select class="form-select form-select-solid" name="timeframe" id="timeframe" onchange="this.form.submit()">
+							<option value="7" {{ $timeframe == 7 ? 'selected' : '' }}>Last 7 Days</option>
+							<option value="30" {{ $timeframe == 30 ? 'selected' : '' }}>Last 30 Days</option>
+							<option value="90" {{ $timeframe == 90 ? 'selected' : '' }}>Last 90 Days</option>
+						</select>
+					</form>
 					<a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1" id="kt_charts_widget_3_year_btn">Year</a>
 
 					<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_3_month_btn">Month</a>

@@ -30,8 +30,8 @@
             {data: 'geos'},
             {data: 'targetting'},
             {data: 'payout'},
-			{data: 'epc'},
-            {data: 'payouttype'},
+			{data: 'payouttype'},
+            {data: 'epc'},
 			{
 				data: 'action',
 				name: 'action',

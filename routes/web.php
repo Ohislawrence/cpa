@@ -183,6 +183,7 @@ Route::middleware([
         Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
         Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
         Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
+        Route::post('dashboard/getclickchart', [DashboardController::class, 'showclickchart'])->name('showclickchart');
         Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
         Route::get('payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('payments/getpaymentdata', [PaymentController::class, 'getpaymentdata'])->name('getpaymentdata');

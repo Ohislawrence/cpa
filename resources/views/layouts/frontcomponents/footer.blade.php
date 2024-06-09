@@ -11,7 +11,7 @@
 						<!-- FOOTER LOGO -->
 						<div class="col-xl-3">
 							<div class="footer-info">
-								<img class="footer-logo" src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="footer-logo">
+								<img class="footer-logo" src="{{ asset('assets/media/logos/logo-dealsintel.png') }}" alt="footer-logo">
 								<img class="footer-logo-dark" src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="footer-logo">
 							</div>	
 						</div>	

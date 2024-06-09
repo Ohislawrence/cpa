@@ -37,10 +37,21 @@ class DashboardController extends Controller
         return view('affiliate.dashboard', compact('earnedThisMonth','earnedYesterday','earnedToday'));
     }
 
-    public function dashboardtwo(AffiliateStats $chart)
+    public function dashboardtwo(Request $request, AffiliateStats $chart)
     {
-        return view('affiliate.dashboard2', ['chart' => $chart->build()]);
+        // Default timeframe is last 7 days
+        $timeframe = $request->input('timeframe', 7);
+
+        // Validate timeframe to be either 7, 30, or 90 days
+        if (!in_array($timeframe, [7, 30, 90])) {
+            $timeframe = 7;
+        }
+
+        $chart = $chart->build($timeframe);
+        return view('affiliate.dashboard2', compact('chart', 'timeframe'));
     }
+
+    
 
     public function getUserClicks(Request $request)
     {

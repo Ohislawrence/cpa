@@ -19,7 +19,7 @@
 	    					<!-- HEADER BLACK LOGO -->
 	    					<div class="desktoplogo">
 	    						<a href="{{route('home')}}" class="logo-black">
-	    							<img class="light-theme-img" src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="logo">
+	    							<img class="light-theme-img" src="{{ asset('assets/media/logos/logo-dealsintel.png') }}" alt="logo">
 	    							<img class="dark-theme-img" src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="logo">
 	    						</a>
 	    					</div>

@@ -18,12 +18,12 @@ class AffiliateStats
         $this->chart = $chart;
     }
 
-    public function build(): \ArielMejiaDev\LarapexCharts\LineChart
+    public function build($num): \ArielMejiaDev\LarapexCharts\LineChart
     {
         $days = collect([]);
         $clickCounts = collect([]);
 
-        for ($i = 6; $i >= 0; $i--) {
+        for ($i = $num; $i >= 0; $i--) {
             $date = Carbon::now()->subDays($i)->toDateString();
             $days->push($date);
             $clickCounts->push(Click::where('user_id', Auth::user()->id)->whereDate('created_at', $date)->count());

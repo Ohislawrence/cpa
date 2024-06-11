@@ -24,6 +24,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\WebhookController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +62,8 @@ Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 
 
 //offer webhooks
-Route::webhooks('verify-action-taken', 'webhooktest1');
+//Route::webhooks('verify-action-taken', 'webhooktest1');
+Route::webhooks('verify-action-taken',[WebhookController::class, 'handle']);
 
 //Route::get('/assign', function () {
 //    $user = Auth()->user();

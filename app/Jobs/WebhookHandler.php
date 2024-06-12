@@ -11,21 +11,27 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob as SpatieProcessWebhookJob;
-use Spatie\WebhookClient\Models\WebhookCall;
+//use Spatie\WebhookClient\Models\WebhookCall;
 
-class WebhookHandler extends SpatieProcessWebhookJob implements ShouldQueue
+
+//extends SpatieProcessWebhookJob
+class WebhookHandler implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
      */
-    public WebhookCall $webhookCall;
+    //public WebhookCall $webhookCall;
 
-    public function __construct(WebhookCall $webhookCall)
+
+    protected $webhookCall;
+
+    public function __construct($webhookCall)
     {
-        $this->webhookCall = $webhookCall;
+        $this->webhookCall= $webhookCall;
     }
 
     /**
@@ -33,8 +39,9 @@ class WebhookHandler extends SpatieProcessWebhookJob implements ShouldQueue
      */
     public function handle(): void
     {
-        logger()->info($this->webhookCall->payload);
-
+        Log::info('Webhook data:', $this->webhookCall);
+        //logger()->info($this->webhookCall->payload);
+/** 
         $click = Click::where('clickID', $this->webhookCall->payload['clickID'])->first();
         $payouttype = $click->offer[0]->payout_id;
 
@@ -98,6 +105,6 @@ class WebhookHandler extends SpatieProcessWebhookJob implements ShouldQueue
             $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
         }
         
-
+**/
     }
 }

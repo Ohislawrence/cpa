@@ -63,7 +63,7 @@ Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 
 //offer webhooks
 //Route::webhooks('verify-action-taken', 'webhooktest1');
-Route::webhooks('verify-action-taken',[WebhookController::class, 'handle']);
+Route::post('verify-action-taken',[WebhookController::class, 'handle']);
 
 //Route::get('/assign', function () {
 //    $user = Auth()->user();

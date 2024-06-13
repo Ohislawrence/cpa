@@ -13,7 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob as SpatieProcessWebhookJob;
-//use Spatie\WebhookClient\Models\WebhookCall;
+use Spatie\WebhookClient\Models\WebhookCall;
 
 
 //extends SpatieProcessWebhookJob
@@ -39,8 +39,9 @@ class WebhookHandler implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info('Webhook data:', $this->webhookCall);
-        //logger()->info($this->webhookCall->payload);
+        $array = json_decode($this->webhookCall, true);
+        //Log::info( $array['cost']);
+        logger()->info($array['cost']);
 /** 
         $click = Click::where('clickID', $this->webhookCall->payload['clickID'])->first();
         $payouttype = $click->offer[0]->payout_id;

@@ -23,7 +23,7 @@ class WebhookController extends Controller
             // Dispatch the job
         WebhookHandler::dispatch($request->all());
 
-        return Response::json(['message' => 'Webhook received'], 200);
+        return Response::json(['message' => 'Received by dealsintel'], 200);
         }
 
         

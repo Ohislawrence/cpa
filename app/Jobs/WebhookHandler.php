@@ -39,21 +39,21 @@ class WebhookHandler implements ShouldQueue
      */
     public function handle(): void
     {
-        $array = json_decode($this->webhookCall, true);
+        $array = $this->webhookCall;
         //Log::info( $array['cost']);
-        logger()->info($array['cost']);
-/** 
-        $click = Click::where('clickID', $this->webhookCall->payload['clickID'])->first();
+        logger()->info($array['payload']['clickID']);
+
+        $click = Click::where('clickID', $this->webhookCall['payload']['clickID'])->first();
         $payouttype = $click->offer[0]->payout_id;
 
         if( $payouttype == '4')
         {
             if ($click->platform == 'Windows') {
-                $earned = $this->webhookCall->payload['cost'] * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
+                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
             }elseif($click->platform == 'Android'){
-                $earned = $this->webhookCall->payload['cost'] * ($click->offer[0]->targets->where('target','Android')->first()->payout / 100);
+                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Android')->first()->payout / 100);
             }elseif($click->platform == 'iOS'){
-                $earned = $this->webhookCall->payload['cost'] * ($click->offer[0]->targets->where('target','iOS')->first()->payout / 100);
+                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','iOS')->first()->payout / 100);
             }
 
         }else{
@@ -66,7 +66,7 @@ class WebhookHandler implements ShouldQueue
             }
         }
 
-        $status = $this->webhookCall->payload['status'] ;
+        $status = $this->webhookCall['payload']['status'] ;
         if($status == 'Approved')
         {
             $conversion = 1;
@@ -106,6 +106,18 @@ class WebhookHandler implements ShouldQueue
             $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
         }
         
-**/
+
     }
+
+    /**
+    {
+    "event": "user.signup",
+    "timestamp": "2024-06-11T12:34:56Z",
+    "payload": {
+        "clickID": "18812070",
+        "cost": "1500",
+        "status": "Approved"
+    }
+    }
+    **/
 }

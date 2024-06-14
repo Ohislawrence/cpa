@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-@section('title',  'Lists' )
+@section('title',  'Our Blogs' )
 @section('type',  '' )
 @section('url',  '' )
 @section('card',  '' )

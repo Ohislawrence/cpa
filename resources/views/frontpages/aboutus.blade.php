@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-@section('title',  'Offers' )
+@section('title',  'About Us' )
 @section('type',  '' )
 @section('url',  '' )
 @section('card',  '' )

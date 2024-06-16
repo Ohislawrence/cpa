@@ -57,6 +57,9 @@
 													<p class="create-account text-center">
 														Already have an account? <a href="{{ route('login') }}" class="color--theme">Log in</a>
 													</p>
+													<p class="create-account text-center">
+														Are you an Advertiser? <a href="{{ route('advertiserreg') }}" class="color--theme">Sign Up Here</a>
+													</p>
 												</div> 
 									</div>	<!-- END SIGN UP FORM -->
 

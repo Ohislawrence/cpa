@@ -1,11 +1,10 @@
 @extends('layouts.guest')
-@section('title',  'Affiliates' )
-@section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
-@section('description',  '' )
+@section('title',  'Become an Affiliates' )
+@section('type',  'website' )
+@section('url',  Request::url() )
+@section('image',  '' )
+@section('description',  'Access a diverse portfolio of exclusive offers across multiple verticals, including finance, health, e-commerce, and more. Our offers are carefully curated and optimized for maximum conversion, ensuring you get the best possible payouts.' )
 @section('imagealt',  '' )
-@section('card',  '' )
 
 
 @section('header')
@@ -37,28 +36,25 @@
 							<div class="txt-block left-column wow fadeInRight">
 
 								<!-- Section ID -->	
-						 		<span class="section-id">Productivity Focused</span>
+						 		<span class="section-id">Become an affiliate</span>
 
 								<!-- Title -->	
-								<h2 class="s-46 w-700">Achieve more with better workflows</h2>
+								<h2 class="s-46 w-700">Join the Leading Affiliate Network and Maximize Your Earnings</h2>
 
 								<!-- Text -->	
-								<p>Sodales tempor sapien quaerat ipsum undo congue laoreet turpis neque auctor turpis 
-								   vitae dolor luctus placerat magna and ligula cursus purus vitae purus an ipsum suscipit
+								<p>At DealsIntel, we are committed to helping affiliates achieve exceptional results. With a wide array of high-converting offers, top-notch tracking technology, and dedicated support, you can trust DealsIntel to elevate your affiliate marketing game.
 								</p>
 
 								<!-- List -->	
 								<ul class="simple-list">
 
 									<li class="list-item">
-										<p>Tempor sapien quaerat an ipsum laoreet purus and sapien dolor an ultrice 
-											ipsum aliquam undo congue dolor cursus 
+										<p>Access a variety of banners, landing pages, email templates, and more to enhance your promotional efforts.
 										</p>
 									</li>
 
 									<li class="list-item">
-										<p class="mb-0">Cursus purus suscipit vitae cubilia magnis volute egestas vitae 
-											sapien turpis ultrice auctor congue placerat
+										<p class="mb-0">Stay ahead of industry trends with our regular training sessions and webinars. Learn from experts and improve your strategies.
 										</p>
 									</li>
 
@@ -71,7 +67,7 @@
 						<!-- IMAGE BLOCK -->
 						<div class="col-md-6 order-first order-md-2">
 							<div class="img-block right-column wow fadeInLeft">
-								<img class="img-fluid" src="images/img-06.png" alt="content-image">
+								<img class="img-fluid" src="{{ asset('publicassets/images/img-06.png') }}" alt="content-image">
 							</div>
 						</div>
 
@@ -96,10 +92,10 @@
 							<div class="section-title mb-70">
 
 								<!-- Title -->	
-								<h2 class="s-50 w-700">We make your business gain more revenue at a glance</h2>	
+								<h2 class="s-50 w-700">Why Partner with DealsIntel?</h2>	
 
 								<!-- Text -->	
-								<p class="s-21 color--grey">Ligula risus auctor tempus magna feugiat lacinia.</p>
+								<p class="s-21 color--grey">See why affiliates wants to partner with us</p>
 									
 							</div>	
 						</div>
@@ -134,9 +130,8 @@
 
 									<!-- Text -->
 									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Market Research</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
+										<h6 class="s-22 w-700">High-Performing Offers</h6>
+										<p>Access a diverse portfolio of exclusive offers across multiple verticals, including finance, health, e-commerce, and more. Our offers are carefully curated and optimized for maximum conversion, ensuring you get the best possible payouts.
 										</p>
 									</div>
 
@@ -167,9 +162,8 @@
 
 									<!-- Text -->
 									<div class="fbox-txt">
-										<h6 class="s-22 w-700">User Experience</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
+										<h6 class="s-22 w-700">Competitive Commissions</h6>
+										<p>We offer some of the highest commission rates in the industry. Our competitive payouts mean you earn more for every action, helping you maximize your revenue with each campaign.
 										</p>
 									</div>
 
@@ -200,9 +194,8 @@
 
 									<!-- Text -->
 									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Digital Marketing</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
+										<h6 class="s-22 w-700">Advanced Tracking & Reporting</h6>
+										<p>Stay ahead of the competition with our cutting-edge tracking technology. Our platform provides real-time data and detailed analytics, allowing you to monitor performance, optimize campaigns, and make data-driven decisions.
 										</p>
 									</div>
 
@@ -233,9 +226,8 @@
 
 									<!-- Text -->
 									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Web Development</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
+										<h6 class="s-22 w-700">Timely Payments</h6>
+										<p>We understand the importance of cash flow in affiliate marketing. That’s why we offer reliable and timely payments, with multiple payment options to suit your needs. Get paid on time, every time, without any hassle.
 										</p>
 									</div>
 
@@ -266,9 +258,8 @@
 
 									<!-- Text -->
 									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Brand Design Identity</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
+										<h6 class="s-22 w-700">Dedicated Support</h6>
+										<p>Our experienced affiliate managers are here to support you at every step. From choosing the right offers to optimizing your campaigns, our team provides personalized guidance to help you succeed.
 										</p>
 									</div>
 
@@ -299,9 +290,8 @@
 
 									<!-- Text -->
 									<div class="fbox-txt">
-										<h6 class="s-22 w-700">SEO & SMM Services</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
+										<h6 class="s-22 w-700">Bonus</h6>
+										<p>Be recognized for being exceptional. We offer our best affiliates additional earnings through numerous performance-based rewards.
 										</p>
 									</div>
 
@@ -332,23 +322,19 @@
 								<div class="col-md-6 order-last order-md-2">
 									<div class="txt-block left-column wow fadeInRight">
 
-										<!-- Section ID -->	
-						 				<span class="section-id">Enhance Engagement</span>
-
 										<!-- Title -->	
 										<h2 class="s-46 w-700">Automate your way to success</h2>
 
 										<!-- Text -->	
-										<p>Sodales tempor sapien quaerat congue eget ipsum laoreet turpis neque auctor 
-											vitae eros dolor luctus placerat magna ligula cursus and purus pretium
+										<p>Stay updated with the latest industry trends through our regular training 
+											sessions and webinars. Learn from experts and improve your marketing strategies.
 										</p>
 
 										<!-- Small Title -->	
-										<h5 class="s-24 w-700 h5-title">The smarter way to work</h5>
+										<h5 class="s-24 w-700 h5-title">We grow together</h5>
 
 										<!-- Text -->	
-										<p class="mb-0">Sapien tempor sodales quaerat ipsum undo congue laoreet turpis neque 
-											auctor turpis vitae dolor luctus placerat magna and ligula cursus purus vitae
+										<p class="mb-0">Join our vibrant community of affiliates. Share tips, seek advice, and collaborate with like-minded professionals to achieve your goals.
 										</p>
 
 									</div>
@@ -358,7 +344,7 @@
 								<!-- IMAGE BLOCK -->
 								<div class="col-md-6 order-first order-md-2">
 									<div class="img-block right-column wow fadeInLeft">
-										<img class="img-fluid" src="images/img-05.png" alt="content-image">
+										<img class="img-fluid" src="{{ asset('publicassets/images/img-05.png') }}" alt="content-image">
 									</div>
 								</div>
 
@@ -370,181 +356,8 @@
 			</section>	<!-- END BOX CONTENT -->
 
 
-            <!-- FEATURES-12
-			============================================= -->
-			<section id="features-12" class="shape--bg shape--white-400 pt-100 features-section division">
-				<div class="container">
-					<div class="row d-flex align-items-center">
-
-
-						<!-- TEXT BLOCK -->	
-						<div class="col-md-5">
-							<div class="txt-block left-column wow fadeInRight">
-
-								<!-- Section ID -->	
-						 		<span class="section-id">One-Stop Solution</span>
-
-								<!-- Title -->	
-								<h2 class="s-46 w-700">Smart solutions, real-time results</h2>
-
-								<!-- Text -->	
-								<p>Sodales tempor sapien quaerat ipsum and congue undo laoreet turpis neque auctor turpis 
-									vitae dolor luctus placerat magna ligula and cursus vitae
-								</p>
-
-								<!-- List -->	
-								<ul class="simple-list">
-
-									<li class="list-item">
-										<p>Tempor sapien quaerat undo ipsum laoreet diam purus sapien a dolor ociis ultrice 
-											ipsum aliquam congue a dolor cursus congue varius magnis
-										</p>
-									</li>
-
-									<li class="list-item">
-										<p class="mb-0">Cursus purus suscipit  vitae cubilia magnis diam volute egestas
-											sapien ultrice auctor
-										</p>
-									</li>
-
-								</ul>
-								
-							</div>
-						</div>	<!-- END TEXT BLOCK -->	
-
-
-						<!-- FEATURES-12 WRAPPER -->
-						<div class="col-md-7">
-							<div class="fbox-12-wrapper wow fadeInLeft">	
-								<div class="row">
-
-
-				 					<div class="col-md-6">
-
-				 						<!-- FEATURE BOX #1 -->
-				 						<div id="fb-12-1" class="fbox-12 bg--white-100 block-shadow r-12 mb-30">
-
-											<!-- Icon -->
-											<div class="fbox-ico ico-50">
-												<div class="shape-ico color--theme">
-
-													<!-- Vector Icon -->
-													<span class="flaticon-layers-1"></span>
-
-													<!-- Shape -->
-													<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-													 <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-													</svg>
-
-												</div>
-											</div>	<!-- End Icon -->
-
-											<!-- Text -->
-											<div class="fbox-txt">
-												<h5 class="s-20 w-700">Integrated</h5>
-												<p>Porta semper lacus and cursus feugiat at primis ultrice a ligula auctor</p>
-											</div>
-
-				 						</div>
-
-				 						<!-- FEATURE BOX #2 -->
-				 						<div id="fb-12-2" class="fbox-12 bg--white-100 block-shadow r-12">
-
-											<!-- Icon -->
-											<div class="fbox-ico ico-50">
-												<div class="shape-ico color--theme">
-
-													<!-- Vector Icon -->
-													<span class="flaticon-click-1"></span>
-
-													<!-- Shape -->
-													<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-													  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-													</svg>
-
-												</div>
-											</div>	<!-- End Icon -->
-
-											<!-- Text -->
-											<div class="fbox-txt">
-												<h5 class="s-20 w-700">Intuitive</h5>
-												<p>Porta semper lacus and cursus feugiat at primis ultrice a ligula auctor</p>
-											</div>
-
-				 						</div>
-
-
-				 					</div>
-
-
-				 					<div class="col-md-6">
-
-
-				 						<!-- FEATURE BOX #3 -->
-				 						<div id="fb-12-3" class="fbox-12 bg--white-100 block-shadow r-12 mb-30">
-
-											<!-- Icon -->
-											<div class="fbox-ico ico-50">
-												<div class="shape-ico color--theme">
-
-													<!-- Vector Icon -->
-													<span class="flaticon-prioritize"></span>
-
-													<!-- Shape -->
-													<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-													  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-													</svg>
-
-												</div>
-											</div>	<!-- End Icon -->
-
-											<!-- Text -->
-											<div class="fbox-txt">
-												<h5 class="s-20 w-700">Flexible</h5>
-												<p>Porta semper lacus and cursus feugiat at primis ultrice a ligula auctor</p>
-											</div>
-
-				 						</div>
-
-				 						<!-- FEATURE BOX #4 -->
-				 						<div id="fb-12-4" class="fbox-12 bg--white-100 block-shadow r-12">
-
-											<!-- Icon -->
-											<div class="fbox-ico ico-50">
-												<div class="shape-ico color--theme">
-
-													<!-- Vector Icon -->
-													<span class="flaticon-analytics"></span>
-
-													<!-- Shape -->
-													<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-													  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-													</svg>
-
-												</div>
-											</div>	<!-- End Icon -->
-
-											<!-- Text -->
-											<div class="fbox-txt">
-												<h5 class="s-20 w-700">Efficient</h5>
-												<p>Porta semper lacus and cursus feugiat at primis ultrice a ligula auctor</p>
-											</div>
-
-				 						</div>
-
-
-				 					</div>
-
-
-				 				</div>
-							</div>	<!-- End row -->
-						</div>	<!-- END FEATURES-12 WRAPPER -->
-
-
-					</div>    <!-- End row -->
-				</div>     <!-- End container -->
-			</section>	<!-- END FEATURES-12 -->
-
+            
+@include('frontpages.components.faq-affiliate')
 @include('frontpages.components.cta')            
 @include('frontpages.components.blogsection')
 <hr class="divider">

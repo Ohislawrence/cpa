@@ -1,11 +1,10 @@
 @extends('layouts.guest')
 @section('title',  'About Us' )
-@section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
+@section('type',  'website' )
+@section('url',  Request::url() )
+@section('image',  '' )
 @section('description',  '' )
 @section('imagealt',  '' )
-@section('card',  '' )
 
 
 @section('header')
@@ -61,13 +60,13 @@
 
 								<!-- IMAGE-1 -->
 								<div class="about-2-img a-2-1 r-12">
-									<img class="img-fluid" src="images/a2-1.jpg" alt="about-image">
+									<img class="img-fluid" src="{{ asset('publicassets/images/a2-1.jpg') }}" alt="about-image">
 								</div>
 
 
 								<!-- IMAGE-2 -->
 								<div class="about-2-img a-2-2 r-12">
-									<img class="img-fluid" src="images/a2-2.jpg" alt="about-image">
+									<img class="img-fluid" src="{{ asset('publicassets/images/a2-2.jpg') }}" alt="about-image">
 								</div>
 
 
@@ -81,7 +80,7 @@
 
 							<!-- IMAGE-3 -->
 							<div class="about-2-img a-2-3 r-12">
-								<img class="img-fluid" src="images/a2-3.jpg" alt="about-image">
+								<img class="img-fluid" src="{{ asset('publicassets/images/a2-3.jpg') }}" alt="about-image">
 							</div>
 
 
@@ -111,7 +110,7 @@
 								<!-- IMAGE-4 -->
 								<div class="col-md-5 col-lg-6">
 									<div class="about-2-img a-2-4 r-12">
-										<img class="img-fluid" src="images/a2-4.jpg" alt="about-image">
+										<img class="img-fluid" src="{{ asset('publicassets/images/a2-4.jpg') }}" alt="about-image">
 									</div>
 								</div>
 
@@ -326,7 +325,7 @@
 								</a>
 
 								<!-- Preview Image --> 
-			 					<img class="img-fluid r-20" src="images/img-17.jpg" alt="video-preview">
+			 					<img class="img-fluid r-20" src="{{ asset('publicassets/images/img-17.jpg') }}" alt="video-preview">
 							</div>
 						</div>
 
@@ -612,7 +611,7 @@
 								<!-- IMAGE BLOCK -->
 								<div class="col-md-6 order-first order-md-2">
 									<div class="img-block right-column wow fadeInLeft">
-										<img class="img-fluid" src="images/img-08.png" alt="content-image">
+										<img class="img-fluid" src="{{ asset('publicassets/images/img-08.png') }}" alt="content-image">
 									</div>
 								</div>
 
@@ -638,7 +637,7 @@
 						<!-- IMAGE BLOCK -->
 						<div class="col-md-6">
 							<div class="img-block left-column wow fadeInRight">
-								<img class="img-fluid" src="images/img-07.png" alt="content-image">
+								<img class="img-fluid" src="{{ asset('publicassets/images/img-07.png') }}" alt="content-image">
 							</div>
 						</div>
 
@@ -717,7 +716,7 @@
 						<!-- IMAGE BLOCK -->
 						<div class="col-md-6 col-lg-7 order-first order-md-2">
 							<div class="img-block right-column wow fadeInLeft">
-								<img class="img-fluid" src="images/img-14.png" alt="content-image">
+								<img class="img-fluid" src="{{ asset('publicassets/images/img-14.png') }}" alt="content-image">
 							</div>
 						</div>
 

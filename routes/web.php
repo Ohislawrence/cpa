@@ -57,6 +57,14 @@ Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus
 //affiliate registration
 Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
 
+//affiliate registration
+Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
+
+//redirect to affiate
+Route::get('/register', function () {
+return redirect(route('affiliatereg'));   
+});
+
 //all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 

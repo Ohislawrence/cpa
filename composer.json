@@ -10,6 +10,7 @@
         "bavix/laravel-wallet": "^10.1",
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",
+        "hibit-dev/geodetect": "^2.10",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.3",
         "laravel/sanctum": "^3.3",

@@ -23,8 +23,8 @@
 
 								<!-- Links -->
 								<ul class="foo-links clearfix">
-									<li><p><a href="{{ route('aboutus') }}">About Us</a></p></li>
-									<li><p><a href="{{ route('support') }}">Support</a></p></li>						
+									<li><p><a href="{{ route('home') }}">Home</a></p></li>
+									<li><p><a href="{{ route('aboutus') }}">About Us</a></p></li>						
 									<li><p><a href="{{ route('contactus') }}">Contact Us</a></p></li>			
 								</ul>
 
@@ -40,7 +40,7 @@
 								<ul class="foo-links clearfix">
 									<li><p><a href="{{ route('affiliates') }}">Affiliates</a></p></li>
 									<li><p><a href="{{ route('advertisers') }}">Advertisers</a></p></li>	
-									<li><p><a href="{{ route('support') }}">Support</a></p></li>			
+									<li><p><a href="{{ route('login') }}">Login</a></p></li>			
 								</ul>
 
 							</div>	

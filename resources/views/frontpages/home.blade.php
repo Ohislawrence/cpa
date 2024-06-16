@@ -1,11 +1,10 @@
 @extends('layouts.guest')
-@section('title',  'Marketing in a new light' )
-@section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
-@section('description',  '' )
+@section('title',  'Maximize Your Earnings with DealsIntel' )
+@section('type',  'website' )
+@section('url',  Request::url() )
+@section('description',  'Join the Leading Affiliate Network for Performance-Based Marketing today and unlock endless opportunities for growth and prosperity' )
 @section('imagealt',  '' )
-@section('card',  '' )
+@section('image',  '' )
 
 
 @section('header')
@@ -35,92 +34,22 @@
 							<div class="hero-19-txt">
 						
 								<!-- Title -->
-								<h2 class="s-56 w-700">DealsIntel is your ultimate partner for success in the world of affiliate marketing.</h2>	
+								<h2 class="s-56 w-700">Maximize Your Earnings with DealsIntel.</h2>	
 
 								<!-- Text -->
-								<p class="p-xl">Ready to take your affiliate marketing efforts to the next level? Sign up for DealsIntel today and unlock endless opportunities for growth and prosperity. 
+								<p class="p-xl">Ready to take your affiliate marketing efforts to the next level? Join the Leading Affiliate Network for Performance-Based Marketing today and unlock endless opportunities for growth and prosperity. 
 								</p>
 
 								<!-- Buttons -->	
 								<div class="btns-group">
 									<a href="{{ route('affiliatereg') }}" class="btn r-04 btn--theme hover--theme">I'm an Affiliate</a>
-									<a href="" class="video-popup1 btn r-04 btn--tra-black hover--theme ico-20 ico-right">I'm an Adverter</span>
+									<a href="{{ route('advertiserreg') }}" class="video-popup1 btn r-04 btn--tra-black hover--theme ico-20 ico-right">I'm an Advertiser</span>
 									</a> 
 								</div>	
 
 							</div>
 						</div>
 					</div>	<!-- END HERO TEXT -->	
-
-
-					<!-- BRANDS CAROUSEL -->
-					<div id="brands-1" class="py-90">			
-						<div class="row">
-							<div class="col text-center">	
-								<div class="owl-carousel brands-carousel-6">
-
-													
-									<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-1.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-1-white.png" alt="brand-logo"></a>
-								</div>
-
-													
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-2.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-3-white.png" alt="brand-logo"></a>
-								</div>
-
-													
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-4.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-4-white.png" alt="brand-logo"></a>
-								</div>
-
-													
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-5.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-5-white.png" alt="brand-logo"></a>
-								</div>
-
-													
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-6.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-6-white.png" alt="brand-logo"></a>
-								</div>
-
-													
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-7.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-7-white.png" alt="brand-logo"></a>
-								</div>
-
-
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-8.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-8-white.png" alt="brand-logo"></a>
-								</div>
-
-															
-								<!-- BRAND LOGO IMAGE -->
-								<div class="brand-logo">
-									<a href="#"><img class="img-fluid light-theme-img" src="images/brand-9.png" alt="brand-logo"></a>
-									<a href="#"><img class="img-fluid dark-theme-img" src="images/brand-9-white.png" alt="brand-logo"></a>
-								</div>
-
-
-								</div>
-							</div>
-						</div>  <!-- End row -->
-					</div>	<!-- END BRANDS CAROUSEL -->
-
 
 					<!-- HERO IMAGE -->
 					<div class="row">
@@ -135,8 +64,165 @@
 				</div>    <!-- End container --> 
 			</section>	<!-- END HERO-19 -->	
 
+		
+<!-- FEATURES-6
+			============================================= -->
+			<section id="features-6" class="py-100 features-section division">
+				<div class="container">
+
+
+					<!-- SECTION TITLE -->	
+					<div class="row justify-content-center">	
+						<div class="col-md-10 col-lg-9">
+							<div class="section-title mb-70">	
+
+								<!-- Title -->	
+								<h2 class="s-50 w-700">Why Choose DealsIntel?</h2>	
+
+								<!-- Text -->	
+								<p class="s-21 color--grey">At DealsIntel, we connect top-tier affiliates with high-converting offers from premium advertisers. Whether you're an affiliate looking to boost your revenue or an advertiser seeking quality traffic, DealsIntel has the tools and expertise to help you succeed.</p>
+									
+							</div>	
+						</div>
+					</div>
+
+
+					<!-- FEATURES-6 WRAPPER -->
+					<div class="fbox-wrapper text-center">
+						<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+
+
+							<!-- FEATURE BOX #1 -->
+		 					<div class="col">
+		 						<div class="fbox-6 fb-1 wow fadeInUp">
+
+		 							<!-- Icon -->
+									<div class="fbox-ico ico-55">
+										<div class="shape-ico color--theme">
+
+											<!-- Vector Icon -->
+											<span class="flaticon-graphics"></span>
+
+											<!-- Shape -->
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+											</svg>
+
+										</div>
+									</div>	<!-- End Icon -->
+
+									<!-- Text -->
+									<div class="fbox-txt">
+										<h6 class="s-20 w-700">Trusted by Industry Leaders</h6>
+										<p>Join a network trusted by some of the biggest names in the industry.</p>
+									</div>
+
+		 						</div>
+		 					</div>	<!-- END FEATURE BOX #1 -->	
+
+
+		 					<!-- FEATURE BOX #2 -->
+		 					<div class="col">
+		 						<div class="fbox-6 fb-2 wow fadeInUp">
+
+		 							<!-- Icon -->
+									<div class="fbox-ico ico-55">
+										<div class="shape-ico color--theme">
+
+											<!-- Vector Icon -->
+											<span class="flaticon-idea"></span>
+
+											<!-- Shape -->
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+											</svg>
+
+										</div>
+									</div>	<!-- End Icon -->
+
+									<!-- Text -->
+									<div class="fbox-txt">
+										<h6 class="s-20 w-700">High-Performing Offers</h6>
+										<p>Access a wide range of high-performing offers across various verticals. </p>
+									</div>
+
+		 						</div>
+		 					</div>	<!-- END FEATURE BOX #2 -->	
+
+
+		 					<!-- FEATURE BOX #3 -->
+		 					<div class="col">
+		 						<div class="fbox-6 fb-3 wow fadeInUp">
+
+		 							<!-- Icon -->
+									<div class="fbox-ico ico-55">
+										<div class="shape-ico color--theme">
+
+											<!-- Vector Icon -->
+											<span class="flaticon-graphic"></span>
+
+											<!-- Shape -->
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+											</svg>
+
+										</div>
+									</div>	<!-- End Icon -->
+
+									<!-- Text -->
+									<div class="fbox-txt">
+										<h6 class="s-20 w-700">Server-to-server Tracking</h6>
+										<p>We rely on first party data, which is the most reliable data </p>
+									</div>
+
+		 						</div>
+		 					</div>	<!-- END FEATURE BOX #3 -->	
+
+
+		 					<!-- FEATURE BOX #4 -->
+		 					<div class="col">
+		 						<div class="fbox-6 fb-4 wow fadeInUp">
+
+		 							<!-- Icon -->
+									<div class="fbox-ico ico-55">
+										<div class="shape-ico color--theme">
+
+											<!-- Vector Icon -->
+											<span class="flaticon-search-engine-1"></span>
+
+											<!-- Shape -->
+											<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+											  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+											</svg>
+
+										</div>
+									</div>	<!-- End Icon -->
+
+									<!-- Text -->
+									<div class="fbox-txt">
+										<h6 class="s-20 w-700">Advanced Reporting</h6>
+										<p>Stay on top of your performance with our state-of-the-art reporting tools.</p>
+									</div>
+
+		 						</div>
+		 					</div>	<!-- END FEATURE BOX #4 -->	
+
+
+						</div>  <!-- End row -->  
+					</div>	<!-- END FEATURES-6 WRAPPER -->
+
+
+				</div>     <!-- End container -->
+			</section>	<!-- END FEATURES-6 -->
+
+
+
+
 			<!-- DIVIDER LINE -->
 			<hr class="divider">
+
+
+
 
 			<!-- TEXT CONTENT
 			============================================= -->
@@ -151,7 +237,7 @@
 						<!-- IMAGE BLOCK -->
 						<div class="col-md-6">
 							<div class="img-block left-column wow fadeInRight">
-								<img class="img-fluid" src="images/img-07-dark.png" alt="content-image">
+								<img class="img-fluid" src="publicassets/images/img-10.png" alt="content-image">
 							</div>
 						</div>
 
@@ -161,60 +247,37 @@
 							<div class="txt-block right-column wow fadeInLeft">
 
 								<!-- Section ID -->	
-						 		<span class="section-id">Strategies That Work</span>
-	
+						 		<span class="section-id">For Affiliates</span>
+
 								<!-- Title -->	
-								<h2 class="s-46 w-700">Right strategies & implementations</h2>
+								<h2 class="s-46 w-700">Earn while you engage your viewers</h2>
 
 								<!-- Text -->	
-								<p>Sodales tempor sapien quaerat ipsum undo congue laoreet turpis neque auctor turpis 
-									vitae dolor luctus placerat magna and ligula cursus purus vitae purus an ipsum suscipit
+								<p>Do you have contents that your viewers love? Why not earn while they click and make sign up or purchase why you recommend?
 								</p>
 
 								<!-- Small Title -->	
-								<h5 class="s-24 w-700">Get more done in less time</h5>
+								<h5 class="s-24 w-700">Grow with Dealsintel</h5>
 
-								<!-- CONTENT BOX #1 -->
-								<div class="cbox-1 ico-15">
+								<!-- List -->	
+								<ul class="simple-list">
 
-		 							<div class="ico-wrap color--theme">
-		 								<div class="cbox-1-ico"><span class="flaticon-check"></span></div>
-		 							</div>
-
-									<div class="cbox-1-txt">
-										<p>Magna dolor luctus at egestas sapien</p>
-									</div>
-
-								</div>
-
-								<!-- CONTENT BOX #2 -->
-								<div class="cbox-1 ico-15">
-
-		 							<div class="ico-wrap color--theme">
-		 								<div class="cbox-1-ico"><span class="flaticon-check"></span></div>
-		 							</div>
-
-									<div class="cbox-1-txt">
-										<p>Cursus purus suscipit vitae cubilia magnis volute egestas vitae sapien 
-										   turpis ultrice auctor congue varius magnis
+									<li class="list-item">
+										<p>Partner with DealsIntel and gain access to high-paying offers that convert. Our dedicated affiliate managers are here to support you every step of the way.
 										</p>
-									</div>
+									</li>
 
-								</div>
+									<li class="list-item">
+										<p>Get paid on time, every time. We offer multiple payment options to ensure you receive your earnings in the most convenient way possible.
+										</p>
+									</li>
+									<li class="list-item">
+										<p class="mb-0">From marketing materials to one-on-one support, we provide all the resources you need to succeed. Our team of experts is always available to help you navigate and optimize your campaigns.
+										</p>
+									</li>
 
-								<!-- CONTENT BOX #3 -->
-								<div class="cbox-1 ico-15">
-
-		 							<div class="ico-wrap color--theme">
-		 								<div class="cbox-1-ico"><span class="flaticon-check"></span></div>
-		 							</div>
-
-									<div class="cbox-1-txt">
-										<p class="mb-0">Volute turpis dolores and sagittis congue</p>
-									</div>
-
-								</div>
-
+								</ul>
+								<a href="{{ route('affiliates') }}" class="color--theme"> >> See More</a>
 							</div>
 						</div>	<!-- END TEXT BLOCK -->	
 
@@ -224,303 +287,78 @@
 
 				</div>	   <!-- End container -->
 			</section>	<!-- END TEXT CONTENT -->
-<!-- DIVIDER LINE -->
-<hr class="divider">
 
-<!-- BOX CONTENT
+
+
+
+			<!-- TEXT CONTENT
 			============================================= -->
-			<section class="pt-100 ws-wrapper content-section">
-				<div class="container">
-					<div class="bc-1-wrapper bg--white-400 bg--fixed r-16">
-						<div class="section-overlay">
-							<div class="row d-flex align-items-center">
-
-
-								<!-- TEXT BLOCK -->	
-								<div class="col-md-6 order-last order-md-2">
-									<div class="txt-block left-column wow fadeInRight">
-
-										<!-- Section ID -->	
-						 				<span class="section-id">One-Stop Solution</span>
-
-										<!-- Title -->	
-										<h2 class="s-46 w-700">Smart solutions, real-time results</h2>
-
-										<!-- List -->	
-										<ul class="simple-list">
-
-											<li class="list-item">
-												<p>Cursus purus suscipit vitae cubilia magnis volute egestas vitae sapien 
-													turpis sodales magna
-												</p>
-											</li>
-
-											<li class="list-item">
-												<p class="mb-0">Tempor sapien quaerat an ipsum laoreet purus and sapien dolor 
-													an ultrice ipsum aliquam congue
-												</p>
-											</li>
-
-										</ul>
-
-										<!-- Button -->
-										<a href="#features-2" class="btn btn-sm r-04 btn--theme hover--tra-black">
-										   Best solutions
-										</a>
-
-									</div>
-								</div>	<!-- END TEXT BLOCK -->	
-
-
-								<!-- IMAGE BLOCK -->
-								<div class="col-md-6 order-first order-md-2">
-									<div class="img-block right-column wow fadeInLeft">
-										<img class="img-fluid" src="images/img-09.png" alt="content-image">
-									</div>
-								</div>
-
-
-							</div>   <!-- End row -->	
-						</div>    <!-- End section overlay -->	
-					</div>    <!-- End content wrapper -->
-				</div>     <!-- End container -->	
-			</section>	<!-- END BOX CONTENT -->
-
-
-			<!-- FEATURES-11
-			============================================= -->
-			<section id="features-11" class="py-100 features-section division">
+			<section class="pt-100 ct-01 content-section division">
 				<div class="container">
 
 
-					<!-- SECTION TITLE -->	
-					<div class="row justify-content-center">	
-						<div class="col-md-10 col-lg-9">
-							<div class="section-title mb-70">	
+					<!-- SECTION CONTENT (ROW) -->	
+					<div class="row d-flex align-items-center">
 
-								<!-- Section ID -->	
-						 		<span class="section-id">Endless Possibilities</span>
 
-								<!-- Title -->	
-								<h2 class="s-50 w-700">Digital marketing that drives results for your business</h2>	
+						<!-- TEXT BLOCK -->	
+						<div class="col-md-6 order-last order-md-2">
+							<div class="txt-block left-column wow fadeInRight">
+								<span class="section-id">For Advertisers</span>
 
-								<!-- Text -->	
-								<p class="s-21 color--grey">Ligula risus auctor tempus magna feugiat lacinia.</p>
-									
-							</div>	
+								<!-- TEXT BOX -->	
+								<div class="txt-box mb-0">
+
+									<!-- Title -->	
+									<h2 class="s-46 w-700">Data, Sales, Profit !</h2>
+
+									<!-- Text -->	
+									<p>By partnering with us, you gain access to a network of top-performing affiliates, cutting-edge technology, and unparalleled support. Whether you're looking to increase brand visibility, drive sales, or generate leads, DealsIntel is here to help you succeed.  
+									</p>
+
+									<!-- List -->	
+									<ul class="simple-list">
+
+										<li class="list-item">
+											<p>Reach your target audience with precision. Our network of vetted affiliates ensures that your offers are promoted to high-quality traffic that converts.
+											</p>
+										</li>
+
+										<li class="list-item">
+											<p>Scale your campaigns with confidence. Our platform supports large volumes of traffic and provides the tools you need to manage and optimize your campaigns effectively.
+											</p>
+										</li>
+
+										<li class="list-item">
+											<p class="mb-0">Track the performance of your campaigns with detailed reports and analytics. Make data-driven decisions to maximize your ROI and achieve your marketing goals.
+											</p>
+										</li>
+
+									</ul>
+									<a href="{{ route('advertisers') }}" class="color--theme"> >> See More</a>
+								</div>	<!-- END TEXT BOX -->	
+
+	
+							</div>
+						</div>	<!-- END TEXT BLOCK -->	
+
+
+						<!-- IMAGE BLOCK -->
+						<div class="col-md-6 order-first order-md-2">
+							<div class="img-block right-column wow fadeInLeft">
+								<img class="img-fluid" src="publicassets/images/img-06.png" alt="content-image">
+							</div>
 						</div>
-					</div>
 
 
-					<!-- FEATURES-11 WRAPPER -->
-					<div class="fbox-wrapper">
-						<div class="row row-cols-1 row-cols-md-2 rows-3">
+					</div>	<!-- END SECTION CONTENT (ROW) -->	
 
 
-							<!-- FEATURE BOX #1 -->
-		 					<div class="col">
-		 						<div class="fbox-11 fb-1 wow fadeInUp">
-
-		 							<!-- Icon -->
-		 							<div class="fbox-ico-wrap">
-		 								<div class="fbox-ico ico-50">
-		 									<div class="shape-ico color--theme">
-
-												<!-- Vector Icon -->
-												<span class="flaticon-graphics"></span>
-
-												<!-- Shape -->
-												<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-												  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-												</svg>
-
-											</div>
-		 								</div>
-									</div>	<!-- End Icon -->
-
-									<!-- Text -->
-									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Market Research</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
-										</p>
-									</div>
-
-		 						</div>
-		 					</div>	<!-- END FEATURE BOX #1 -->	
+				</div>	   <!-- End container -->
+			</section>	<!-- END TEXT CONTENT -->
 
 
-		 					<!-- FEATURE BOX #2 -->
-		 					<div class="col">
-		 						<div class="fbox-11 fb-2 wow fadeInUp">
 
-		 							<!-- Icon -->
-		 							<div class="fbox-ico-wrap">
-		 								<div class="fbox-ico ico-50">
-		 									<div class="shape-ico color--theme">
-
-												<!-- Vector Icon -->
-												<span class="flaticon-idea"></span>
-
-												<!-- Shape -->
-												<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-												  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-												</svg>
-
-											</div>
-		 								</div>
-									</div>	<!-- End Icon -->
-
-									<!-- Text -->
-									<div class="fbox-txt">
-										<h6 class="s-22 w-700">User Experience</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
-										</p>
-									</div>
-
-		 						</div>
-		 					</div>	<!-- END FEATURE BOX #2 -->	
-
-
-		 					<!-- FEATURE BOX #3 -->
-		 					<div class="col">
-		 						<div class="fbox-11 fb-3 wow fadeInUp">
-
-		 							<!-- Icon -->
-		 							<div class="fbox-ico-wrap">
-		 								<div class="fbox-ico ico-50">
-		 									<div class="shape-ico color--theme">
-
-												<!-- Vector Icon -->
-												<span class="flaticon-graphic"></span>
-
-												<!-- Shape -->
-												<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-												  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-												</svg>
-
-											</div>
-		 								</div>
-									</div>	<!-- End Icon -->
-
-									<!-- Text -->
-									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Digital Marketing</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
-										</p>
-									</div>
-
-		 						</div>
-		 					</div>	<!-- END FEATURE BOX #3 -->	
-
-
-		 					<!-- FEATURE BOX #4 -->
-		 					<div class="col">
-		 						<div class="fbox-11 fb-4 wow fadeInUp">
-
-		 							<!-- Icon -->
-		 							<div class="fbox-ico-wrap">
-		 								<div class="fbox-ico ico-50">
-		 									<div class="shape-ico color--theme">
-
-												<!-- Vector Icon -->
-												<span class="flaticon-wireframe"></span>
-
-												<!-- Shape -->
-												<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-												  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-												</svg>
-
-											</div>
-		 								</div>
-									</div>	<!-- End Icon -->
-
-									<!-- Text -->
-									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Web Development</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
-										</p>
-									</div>
-
-		 						</div>
-		 					</div>	<!-- END FEATURE BOX #4 -->	
-
-
-		 					<!-- FEATURE BOX #5 -->
-		 					<div class="col">
-		 						<div class="fbox-11 fb-5 wow fadeInUp">
-
-									<!-- Icon -->
-		 							<div class="fbox-ico-wrap">
-		 								<div class="fbox-ico ico-50">
-		 									<div class="shape-ico color--theme">
-
-												<!-- Vector Icon -->
-												<span class="flaticon-trophy"></span>
-
-												<!-- Shape -->
-												<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-												  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-												</svg>
-
-											</div>
-		 								</div>
-									</div>	<!-- End Icon -->
-
-									<!-- Text -->
-									<div class="fbox-txt">
-										<h6 class="s-22 w-700">Brand Design Identity</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
-										</p>
-									</div>
-
-		 						</div>
-		 					</div>	<!-- END FEATURE BOX #5 -->	
-
-
-		 					<!-- FEATURE BOX #6 -->
-		 					<div class="col">
-		 						<div class="fbox-11 fb-6 wow fadeInUp">
-
-		 							<!-- Icon -->
-		 							<div class="fbox-ico-wrap">
-		 								<div class="fbox-ico ico-50">
-		 									<div class="shape-ico color--theme">
-
-												<!-- Vector Icon -->
-												<span class="flaticon-search-engine-1"></span>
-
-												<!-- Shape -->
-												<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-												  <path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
-												</svg>
-
-											</div>
-		 								</div>
-									</div>	<!-- End Icon -->
-
-									<!-- Text -->
-									<div class="fbox-txt">
-										<h6 class="s-22 w-700">SEO & SMM Services</h6>
-										<p>Porta semper lacus cursus feugiat primis ultrice ligula risus ociis auctor and
-											tempus feugiat impedit felis cursus auctor augue mauris blandit ipsum
-										</p>
-									</div>
-
-		 						</div>
-		 					</div>	<!-- END FEATURE BOX #6 -->	
-
-
-						</div>  <!-- End row -->  
-					</div>	<!-- END FEATURES-11 WRAPPER -->
-
-
-				</div>     <!-- End container -->
-			</section>	<!-- END FEATURES-11 -->	
 
 
 
@@ -528,6 +366,7 @@
 			<!-- DIVIDER LINE -->
 			<hr class="divider">
 			@include('frontpages.components.blogsection')
+			@include('frontpages.components.cta2')
 
 
 

@@ -1,11 +1,10 @@
 @extends('layouts.guest')
 @section('title',  'Advertisers' )
-@section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
-@section('description',  '' )
+@section('type',  'website' )
+@section('url',  Request::url() )
+@section('image',  '' )
+@section('description',  'Whether you're a startup or a Fortune 500 company, our platform is designed to scale with your needs. Manage large volumes of traffic, expand your reach, and grow your business with confidence.' )
 @section('imagealt',  '' )
-@section('card',  '' )
 
 
 @section('header')

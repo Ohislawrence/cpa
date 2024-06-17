@@ -1,11 +1,10 @@
 @extends('layouts.guest')
 @section('title',  'Contact Us' )
-@section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
-@section('description',  '' )
+@section('type',  'website' )
+@section('url',  Request::url() )
+@section('image',  '' )
+@section('description',  'We value our partners and are committed to providing exceptional support and service. Whether you have a question, need assistance with your campaigns, or want to learn more about our network, our team is here to help.' )
 @section('imagealt',  '' )
-@section('card',  '' )
 
 
 @section('header')
@@ -37,7 +36,7 @@
 								<h2 class="s-52 w-700">Questions? Let's Talk</h2>	
 
 								<!-- Text -->	
-								<p class="p-lg">At DealsIntel, we value our partners and are committed to providing exceptional support and service. Whether you have a question, need assistance with your campaigns, or want to learn more about our network, our team is here to help.
+								<p class="p-lg">We value our partners and are committed to providing exceptional support and service. Whether you have a question, need assistance with your campaigns, or want to learn more about our network, our team is here to help.
 								</p>
 									
 							</div>	

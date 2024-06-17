@@ -20,3 +20,11 @@
 
         <meta property="fb:app_id" content="" />
         <meta name="twitter:site" content="@dealsintel">
+
+
+        <!-- Google / Search Engine Tags -->
+        <meta itemprop="name" content="@yield('title')">
+        <meta itemprop="description" content="@yield('description')">
+        <meta itemprop="image" content="@yield('image')">
+
+        

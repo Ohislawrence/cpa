@@ -9,21 +9,32 @@ use App\Models\Offer;
 use Illuminate\Http\Request;
 use Reefki\DeviceDetector\Device;
 use Hibit\GeoDetect;
+use Illuminate\Support\Facades\App;
 
 class ClickController extends Controller
 {
     public function toOffer(Request $request)
     {
-
         $device = $request->device();
         $geoDetect = new GeoDetect();
-        $getcountry = $geoDetect->getCountry('129.205.124.201');
-       
-        $country = Country::where('code', $getcountry->getIsoCode())->first();
         $offers = Offer::where('offerid', $request->offer_id )->first();
+        
+
+        if (App::environment(['production'])) {
+            $getcountry = $geoDetect->getCountry($request->ip());
+            $country = Country::where('code', $getcountry->getIsoCode())->first();
+            $countryID = $country->id;
+            $exists = $offers->geos->where('country_id',$country->id)->isNotEmpty();
+        }else{
+            $getcountry = $geoDetect->getCountry('129.205.124.201');
+            $exists = true;
+            $countryID = 1; 
+        }
+       
+        
+        
         //$geos = Geo::where('offer_id', $offers->id)->get();
 
-        $exists = $offers->geos->where('country_id',$country->id)->isNotEmpty();
 
         if ($exists) {
 
@@ -32,7 +43,7 @@ class ClickController extends Controller
             } else {
                 $click = Click::create([
                     'user_id' => $request->aff_id,
-                    'country_id'=> $country->id,
+                    'country_id'=> $countryID,
                     'device'=>$device->getBrandName(),
                     'platform' =>$device->getOs('name'),
                     'browser' =>$device->getClient('name'),

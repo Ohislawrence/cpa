@@ -144,6 +144,7 @@ Route::middleware([
         Route::get('transaction', [PaymentsController::class, 'transaction'])->name('transaction');
         Route::get('transaction/table', [PaymentsController::class, 'transactiontable'])->name('transactiontable');
         Route::get('sendpayments', [PaymentsController::class, 'sendpayments'])->name('sendpayments');
+        Route::post('makepayment/send', [PaymentsController::class, 'makePayment'])->name('makepayment');
         //email
         Route::get('send/emails', [EmailControler::class, 'index'])->name('emails');
 

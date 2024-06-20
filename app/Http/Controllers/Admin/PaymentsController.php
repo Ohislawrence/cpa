@@ -9,9 +9,18 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
+use App\Services\PayoneerService;
+
 
 class PaymentsController extends Controller
 {
+    protected $payoneerService;
+
+    public function __construct(PayoneerService $payoneerService)
+    {
+        $this->payoneerService = $payoneerService;
+    }
+
     public function transaction()
     {
         return view('admin.transactions');
@@ -49,4 +58,27 @@ class PaymentsController extends Controller
     {
         return view('admin.sendpayments');
     }
+
+
+    public function makePayment(Request $request)
+    {
+        $request->validate([
+            'payee_id' => 'required|string',
+            'amount' => 'required|numeric',
+            'currency' => 'required|string',
+        ]);
+
+        $payeeId = $request->input('payee_id');
+        $amount = $request->input('amount');
+        $currency = $request->input('currency');
+
+        try {
+            $response = $this->payoneerService->makePayment($payeeId, $amount, $currency);
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
 }

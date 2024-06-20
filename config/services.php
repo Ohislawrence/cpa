@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'payoneer' => [
+        'base_url' => env('PAYONEER_BASE_URL', 'https://api.payoneer.com'),
+        'partner_id' => env('PAYONEER_PARTNER_ID'),
+        'partner_secret' => env('PAYONEER_PARTNER_SECRET'),
+    ],
+
 ];

@@ -1,11 +1,10 @@
 @extends('layouts.guest')
 @section('title',  'Supports' )
-@section('type',  '' )
+@section('type',  'webiste' )
 @section('url',  '' )
-@section('card',  '' )
+@section('image',  '' )
 @section('description',  '' )
 @section('imagealt',  '' )
-@section('card',  '' )
 
 
 @section('header')

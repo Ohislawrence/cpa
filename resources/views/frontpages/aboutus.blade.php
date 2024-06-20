@@ -2,9 +2,9 @@
 @section('title',  'About Us' )
 @section('type',  'website' )
 @section('url',  Request::url() )
-@section('image',  '' )
+@section('image',  asset("publicassets/images/ogimg.jpg") )
 @section('description',  'Welcome to DealsIntel, your go-to platform for uncovering the best deals, discounts, and promotions across a wide range of products and services.' )
-@section('imagealt',  '' )
+@section('imagealt',  'Learn about what we do' )
 
 
 @section('header')

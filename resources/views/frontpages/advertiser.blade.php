@@ -2,9 +2,9 @@
 @section('title',  'Advertisers' )
 @section('type',  'website' )
 @section('url',  Request::url() )
-@section('image',  '' )
+@section('image',  asset("publicassets/images/ogimg.jpg") )
 @section('description',  'Whether you"re a startup or a Fortune 500 company, our platform is designed to scale with your needs. Manage large volumes of traffic, expand your reach, and grow your business with confidence.' )
-@section('imagealt',  '' )
+@section('imagealt',  'create offers on dealsintel' )
 
 
 @section('header')

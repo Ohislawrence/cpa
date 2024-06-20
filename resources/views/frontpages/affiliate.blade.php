@@ -2,9 +2,9 @@
 @section('title',  'Become an Affiliates' )
 @section('type',  'website' )
 @section('url',  Request::url() )
-@section('image',  '' )
+@section('image',  asset("publicassets/images/ogimg.jpg") )
 @section('description',  'Access a diverse portfolio of exclusive offers across multiple verticals, including finance, health, e-commerce, and more. Our offers are carefully curated and optimized for maximum conversion, ensuring you get the best possible payouts.' )
-@section('imagealt',  '' )
+@section('imagealt',  'become an affiliate' )
 
 
 @section('header')

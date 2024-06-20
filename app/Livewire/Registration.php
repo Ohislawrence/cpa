@@ -39,8 +39,9 @@ class Registration extends Component
 
         $this->currentSection = 3;
     }
-    public function step3()
+    public function step3(): void
     {
+        
         if(!empty($this->refid)){
             $refID= $this->refid;
         }else{

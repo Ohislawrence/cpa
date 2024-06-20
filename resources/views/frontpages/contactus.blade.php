@@ -2,9 +2,9 @@
 @section('title',  'Contact Us' )
 @section('type',  'website' )
 @section('url',  Request::url() )
-@section('image',  '' )
+@section('image',  asset("publicassets/images/ogimg.jpg") )
 @section('description',  'We value our partners and are committed to providing exceptional support and service. Whether you have a question, need assistance with your campaigns, or want to learn more about our network, our team is here to help.' )
-@section('imagealt',  '' )
+@section('imagealt',  'contact us image' )
 
 
 @section('header')

@@ -14,6 +14,7 @@
     <div class="row pt-3">
         {{-- Step 1 --}}
         <div id="step1" class="needs-validation" style="display: {{ $currentSection != 1 ? 'none' : '' }}">
+            
             <input type="hidden" wire:model = "refid" >
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
@@ -101,6 +102,7 @@
                     <p>Confirm that the data is correct, we will contact you via Telegram within 0 to 48 hours after you click the 'Join' button.</p>
                 </div>
             </div>
+            <x-honeypot livewire-model="extraFields" />
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Name</b>: {{$name}}</li>
                 <li class="list-group-item">Email: {{ $email }}</li>

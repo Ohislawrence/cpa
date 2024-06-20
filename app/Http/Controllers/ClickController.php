@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Click;
 use App\Models\Country;
-use App\Models\Geo;
+//use App\Models\Geo;
 use App\Models\Offer;
 use Illuminate\Http\Request;
-use Reefki\DeviceDetector\Device;
+//use Reefki\DeviceDetector\Device;
 use Hibit\GeoDetect;
 use Illuminate\Support\Facades\App;
 

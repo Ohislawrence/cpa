@@ -1,11 +1,10 @@
 @extends('layouts.guest')
 @section('title',  'Offers' )
-@section('type',  '' )
-@section('url',  '' )
-@section('card',  '' )
+@section('type',  'website' )
+@section('url',  Request::url() )
 @section('description',  '' )
-@section('imagealt',  '' )
-@section('card',  '' )
+@section('imagealt',  'offer image' )
+@section('image',  asset("publicassets/images/ogimg.jpg") )
 
 
 @section('header')

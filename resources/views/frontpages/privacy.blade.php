@@ -2,9 +2,9 @@
 @section('title',  'Privacy' )
 @section('type',  'website' )
 @section('url',  Request::url() )
-@section('image',  '' )
+@section('image',  asset("publicassets/images/ogimg.jpg") )
 @section('description',  'This policy is effective as of 11th November 2023' )
-@section('imagealt',  '' )
+@section('imagealt',  'privacy image' )
 
 
 @section('header')

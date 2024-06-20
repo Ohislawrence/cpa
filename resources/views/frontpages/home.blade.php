@@ -4,7 +4,7 @@
 @section('url',  Request::url() )
 @section('description',  'Join the Leading Affiliate Network for Performance-Based Marketing today and unlock endless opportunities for growth and prosperity' )
 @section('imagealt',  'homepage image' )
-@section('image',  asset("publicassets/images/ogimg.jpg") )
+@section('image',  url("public/publicassets/images/ogimg.jpg") )
 
 
 @section('header')

@@ -75,7 +75,7 @@ class Registration extends Component
     
             $this->clearForm();
     
-            //Mail::to($user->email)->queue(new WelcomeEmail($user));
+            Mail::to($user->email)->queue(new WelcomeEmail($user));
             $this->currentSection = 4;
             $this->successMessage = "Great Job! We have received your details and will contact you soon. Check your email for the validation mail.";
            

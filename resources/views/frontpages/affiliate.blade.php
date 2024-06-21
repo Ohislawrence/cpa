@@ -95,7 +95,7 @@
 								<h2 class="s-50 w-700">Why Partner with DealsIntel?</h2>	
 
 								<!-- Text -->	
-								<p class="s-21 color--grey">See why affiliates wants to partner with us</p>
+								<p class="s-21 color--grey">See why affiliates want to partner with us</p>
 									
 							</div>	
 						</div>

@@ -104,7 +104,7 @@
 										<h5 class="s-22 w-700"><span>5.</span> Do you use cookie for tracking?</h5>
 
 										<!-- Answer -->
-										<p class="color--grey">No, we use server-to-server tracking which is'nt affected by cookies laws and is from accurate than using cookies.
+										<p class="color--grey">No, we use server-to-server tracking which isn't affected by cookies laws and it is more accurate.
 										</p>
 
 									</div>

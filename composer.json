@@ -19,6 +19,7 @@
         "reefki/laravel-device-detector": "^1.0",
         "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-permission": "^6.4",
+        "spatie/laravel-sitemap": "^7.0",
         "spatie/laravel-webhook-client": "^3.3",
         "yajra/laravel-datatables": "10.0",
         "yajra/laravel-datatables-oracle": "^10.11"

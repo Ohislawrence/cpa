@@ -27,7 +27,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WebhookController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-
+use Spatie\Sitemap\SitemapGenerator;
 use function Laravel\Prompts\alert;
 
 /*
@@ -64,6 +64,11 @@ Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])-
 Route::get('/register', function () {
 return redirect(route('affiliatereg'));   
 });
+
+Route::get('/sitemap/generate', function () {
+    $path = url('public') ;
+    SitemapGenerator::create(url())->writeToFile($path);  
+    });
 
 //all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');

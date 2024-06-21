@@ -30,7 +30,7 @@ class WelcomeEmail extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: new Address('lawrence@dealsintel.com', 'Lawrence Ohis'),
-            subject: 'Application Review Confirmation for DealsIntel',
+            subject: 'Your application to DealsIntel is under review',
         );
     }
 

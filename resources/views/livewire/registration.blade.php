@@ -102,7 +102,7 @@
                     <p>Confirm that the data is correct, we will contact you via Telegram within 0 to 48 hours after you click the 'Join' button.</p>
                 </div>
             </div>
-            <x-honeypot livewire-model="extraFields" />
+           
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Name</b>: {{$name}}</li>
                 <li class="list-group-item">Email: {{ $email }}</li>

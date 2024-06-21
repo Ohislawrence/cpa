@@ -67,7 +67,7 @@ return redirect(route('affiliatereg'));
 
 Route::get('/sitemap/generate', function () {
     $path = url('public') ;
-    SitemapGenerator::create(url())->writeToFile($path);  
+    SitemapGenerator::create(url('/'))->writeToFile(public_path('sitemap.xml'));  
     });
 
 //all clicks comes thru here

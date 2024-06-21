@@ -11,11 +11,12 @@
                                 <!--begin:Logo-->
                                 <div style="margin-bottom:17px">
                                     <a href="https://dealsintel.com" rel="noopener" target="_blank">
-                                        <img alt="Logo" src="{{ asset('assets/media/logos/logo-dealsintel.png') }}"  style="height: 35px" />
+                                        <img alt="Logo" src="{{ url('public/assets/media/logos/logo-dealsintel.png') }}"  style="height: 35px" />
                                     </a>
                                 </div>
                                 <!--end:Logo-->
                                 
+
                                 <!--begin:Text-->
                                 <div style="text-align:start; font-size: 13px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;">
 

@@ -10,13 +10,13 @@
 <tr>
     <td align="center" valign="center" style="text-align:center; padding-bottom: 20px;">
         <a href="https://www.linkedin.com/company/dealsintel" style="margin-right:10px">
-            <img alt="Logo" src="{{ asset('assets/media/email/icon-linkedin.svg') }}" />
+            <img alt="Logo" src="{{ url('public/assets/media/email/icon-linkedin.svg') }}" />
         </a>
         <a href="#" style="margin-right:10px">
-            <img alt="Logo" src="{{ asset('assets/media/email/icon-facebook.svg') }}" />
+            <img alt="Logo" src="{{ url('public/assets/media/email/icon-facebook.svg') }}" />
         </a>
         <a href="https://twitter.com/dealsintel">
-            <img alt="Logo" src="{{ asset('assets/media/email/icon-twitter.svg') }}" />
+            <img alt="Logo" src="{{ url('public/assets/media/email/icon-twitter.svg') }}" />
         </a>
     </td>
 </tr>

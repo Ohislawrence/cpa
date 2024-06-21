@@ -75,6 +75,8 @@
 					<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
 					
 						<!--begin::Add user-->
+						<a href="{{ url('admin/sitemap/generate') }}" class="btn btn-primary" >
+							<i class="ki-duotone ki-plus fs-2"></i>Refresh Sitemap</a>
 						<a href="{{ route('admin.blogs.create') }}" class="btn btn-primary" >
 						<i class="ki-duotone ki-plus fs-2"></i>Create Blog</a>
 						<!--end::Add user-->

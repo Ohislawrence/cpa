@@ -6,6 +6,16 @@
         <priority>0.8</priority>
             </url>
     <url>
+        <loc>http://cpa.test/affiliates</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://cpa.test/advertisers</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
         <loc>http://cpa.test</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
@@ -16,17 +26,7 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://cpa.test/advertisers</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>http://cpa.test/affiliates</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>http://cpa.test/login</loc>
+        <loc>http://cpa.test/blogs</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -36,17 +36,17 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://cpa.test/blogs</loc>
-            <changefreq>daily</changefreq>
-        <priority>0.8</priority>
-            </url>
-    <url>
-        <loc>http://cpa.test/sign-up/affiliate</loc>
+        <loc>http://cpa.test/login</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
         <loc>http://cpa.test/blog/Offers%20&amp;%20Promotions/mobile-optimization-for-affiliate-marketers-an-essential-standard</loc>
+            <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://cpa.test/sign-up/affiliate</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
@@ -61,12 +61,12 @@
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://cpa.test/terms-of-service</loc>
+        <loc>http://cpa.test/privacy</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>
     <url>
-        <loc>http://cpa.test/privacy</loc>
+        <loc>http://cpa.test/terms-of-service</loc>
             <changefreq>daily</changefreq>
         <priority>0.8</priority>
             </url>

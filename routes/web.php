@@ -65,10 +65,7 @@ Route::get('/register', function () {
 return redirect(route('affiliatereg'));   
 });
 
-Route::get('/sitemap/generate', function () {
-    $path = url('public') ;
-    SitemapGenerator::create(url('/'))->writeToFile(public_path('sitemap.xml'));  
-    });
+
 
 //all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
@@ -184,6 +181,12 @@ Route::middleware([
 
         //settings
         Route::get('settings', [SettingController::class, 'index'])->name('settings');
+
+        //sitemap
+        Route::get('/sitemap/generate', function () {
+            SitemapGenerator::create(url('/'))->writeToFile(public_path('sitemap.xml')); 
+            //redirect()->back()->with('message', 'Sitemap updated');
+            });
     });
 
 //Affiliate

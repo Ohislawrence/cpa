@@ -39,8 +39,15 @@ class DashboardController extends Controller
 
     public function dashboardtwo(Request $request, AffiliateStats $chart)
     {
+        
         // Default timeframe is last 7 days
         $timeframe = $request->input('timeframe', 7);
+
+        $clicks = Click::where('user_id', Auth::user()->id)->where('created_at','>=', Carbon::now()->subDays($timeframe));
+        $clicksthisMonth= $clicks->get();
+        $leads = $clicks->where('conversion', 1)->get();
+        $earned = $clicks->where('earned','>', 0)->get();
+        $epc = round(($earned->sum('earned'))/($clicksthisMonth->count()) ,2,PHP_ROUND_HALF_DOWN);
 
         // Validate timeframe to be either 7, 30, or 90 days
         if (!in_array($timeframe, [7, 30, 90])) {
@@ -48,7 +55,7 @@ class DashboardController extends Controller
         }
 
         $chart = $chart->build($timeframe);
-        return view('affiliate.dashboard2', compact('chart', 'timeframe'));
+        return view('affiliate.dashboard2', compact('chart', 'timeframe', 'clicksthisMonth','leads','earned','epc'));
     }
 
     

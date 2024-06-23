@@ -52,6 +52,68 @@
 			<div class="container-xxl" id="kt_content_container1">
 			@include('admin.components.alert')
 
+			<form method="GET" action="{{ route('affiliate.statistics') }}">
+				<select class="form-select form-select-solid" name="timeframe" id="timeframe" onchange="this.form.submit()">
+					<option value="7" {{ $timeframe == 7 ? 'selected' : '' }}>Last 7 Days</option>
+					<option value="30" {{ $timeframe == 30 ? 'selected' : '' }}>Last 30 Days</option>
+					<option value="90" {{ $timeframe == 90 ? 'selected' : '' }}>Last 90 Days</option>
+				</select>
+			</form>
+
+
+		<!--begin::Row-->
+		<div class="row g-5 g-xl-8">
+			<div class="col-xl-3">
+				<!--begin::Statistics Widget 5-->
+				<a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">
+					<!--begin::Body-->
+					<div class="card-body">
+						<div class="text-gray-900 fw-bold fs-2 mb-2 mt-2">{{ $clicksthisMonth->count() }}</div>
+						<div class="fw-semibold text-gray-400">Clicks</div>
+					</div>
+					<!--end::Body-->
+				</a>
+				<!--end::Statistics Widget 5-->
+			</div>
+			<div class="col-xl-3">
+				<!--begin::Statistics Widget 5-->
+				<a href="#" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
+					<!--begin::Body-->
+					<div class="card-body">
+						<div class="text-gray-100 fw-bold fs-2 mb-2 mt-2">{{ $leads->count() }}</div>
+						<div class="fw-semibold text-gray-100">Leads</div>
+					</div>
+					<!--end::Body-->
+				</a>
+				<!--end::Statistics Widget 5-->
+			</div>
+			<div class="col-xl-3">
+				<!--begin::Statistics Widget 5-->
+				<a href="#" class="card bg-warning hoverable card-xl-stretch mb-xl-8">
+					<!--begin::Body-->
+					<div class="card-body">
+						<div class="text-white fw-bold fs-2 mb-2 mt-2">$ {{ $earned->sum('earned') }}</div>
+						<div class="fw-semibold text-white">Commissions</div>
+					</div>
+					<!--end::Body-->
+				</a>
+				<!--end::Statistics Widget 5-->
+			</div>
+			<div class="col-xl-3">
+				<!--begin::Statistics Widget 5-->
+				<a href="#" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
+					<!--begin::Body-->
+					<div class="card-body">
+						<div class="text-white fw-bold fs-2 mb-2 mt-2">$ {{ $epc }}</div>
+						<div class="fw-semibold text-white">EPC</div>
+					</div>
+					<!--end::Body-->
+				</a>
+				<!--end::Statistics Widget 5-->
+			</div>
+		</div>
+		<!--end::Row-->
+
 
 
 		<div class="card card-xl-stretch mb-xl-8">
@@ -66,18 +128,7 @@
 				<!--begin::Toolbar-->
 				<div class="card-toolbar" data-kt-buttons="true">
 					
-					<form method="GET" action="{{ route('affiliate.statistics') }}">
-						<select class="form-select form-select-solid" name="timeframe" id="timeframe" onchange="this.form.submit()">
-							<option value="7" {{ $timeframe == 7 ? 'selected' : '' }}>Last 7 Days</option>
-							<option value="30" {{ $timeframe == 30 ? 'selected' : '' }}>Last 30 Days</option>
-							<option value="90" {{ $timeframe == 90 ? 'selected' : '' }}>Last 90 Days</option>
-						</select>
-					</form>
-					<a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1" id="kt_charts_widget_3_year_btn">Year</a>
-
-					<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1" id="kt_charts_widget_3_month_btn">Month</a>
-
-					<a class="btn btn-sm btn-color-muted btn-active btn-active-primary px-4" id="kt_charts_widget_3_week_btn">Week</a>
+					
 				</div>
 				<!--end::Toolbar-->
 			</div>

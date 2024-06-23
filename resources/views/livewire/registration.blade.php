@@ -58,7 +58,7 @@
                 <select wire:model="country" aria-label="Select a Role" data-control="select" class="form-control">
                     <option value="all">All Locations</option>
                     @foreach ( \App\Models\Country::all()  as $location )
-                        <option value="{{ $location->name }}">{{ $location->name }}</option>
+                        <option value="{{ $location->id }}">{{ $location->name }}</option>
                     @endforeach
                 </select>
             </div>

@@ -91,87 +91,8 @@
             </div>
             <!--end:Menu item-->
 
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-black-right fs-2"></i>
-                    </span>
-                    <span class="menu-title">Promotional Tools</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('affiliate.marketingassets') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Marketing Assets</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('affiliate.apis') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">APIs</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                </div>
-            </div>
-            <!--end:Menu item-->
-
-            <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-black-right fs-2"></i>
-                    </span>
-                    <span class="menu-title">Supports</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="index.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Tickets</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="dashboards/ecommerce.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Documentation</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                </div>
-            </div>
-            <!--end:Menu item-->
+            
+            
 
         </div>
         <!--end::Menu-->

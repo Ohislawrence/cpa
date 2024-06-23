@@ -46,6 +46,9 @@
             
             <button class="btn btn--theme hover--theme submit" wire:click="step1"
                 type="button">Next</button>
+                <div wire:loading>
+                    <span> Working...</span>
+                </div>
         </div>
 
         {{-- Step 2 --}}
@@ -88,6 +91,9 @@
             </div>
             <button class="btn btn--theme hover--theme btn btn-danger" type="button" wire:click="back(1)">Back</button>
             <button class="btn btn--theme hover--theme btn btn-primary" type="button" wire:click="step2">Next</button>
+            <div wire:loading>
+                <span> Working...</span>
+            </div>
         </div>
 
         {{-- Step 3 --}}
@@ -122,6 +128,9 @@
             </div>
             <button class="btn btn--theme hover--theme" type="button" wire:click="back(2)">Back</button>
             <button class="btn btn--theme hover--theme" wire:click="step3" type="button">Join</button>
+            <div wire:loading>
+                <span> Working...</span>
+            </div>
         </div>
         {{-- Step 4 --}}
         <div id="step4" style="display: {{ $currentSection != 4 ? 'none' : '' }}">

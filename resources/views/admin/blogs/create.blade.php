@@ -67,7 +67,7 @@
                         <select name="category" class="form-select form-select-lg form-select-solid">
                             <option></option>
                             @foreach ($cat as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->category }}</option>
                             @endforeach
                         </select>
                         <!--end::Input-->

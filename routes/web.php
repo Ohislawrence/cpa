@@ -57,8 +57,9 @@ Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus
 //affiliate registration
 Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
 
-//affiliate registration
+//advertiser registration
 Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
+Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdvertiser'])->name('advertiserregpost');
 
 //redirect to affiate
 Route::get('/register', function () {

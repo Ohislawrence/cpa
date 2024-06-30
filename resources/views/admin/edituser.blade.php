@@ -493,7 +493,7 @@
                                     @isset($user->agencydetails->active)
                                     <option value="1" {{'1' == $user->agencydetails->active  ? 'selected' : ''  }}>Active</option>
                                     <option value="2" {{ '2' == $user->agencydetails->active  ? 'selected' : ''  }}>Rejected</option>
-                                    <option value="3" {{ '3' == $user->agencydetails->active  ? 'selected' : ''  }}>Pending</option>
+                                    <option value="0" {{ '0' == $user->agencydetails->active  ? 'selected' : ''  }}>Pending</option>
                                     @else
                                     <option value="1">Active</option>
                                         <option value="2">Rejected</option>
@@ -521,7 +521,7 @@
                                     <option value="Twitter" {{ 'Twitter' ==$user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>Twitter</option>
                                     <option value="WhatsApp" {{ 'WhatsApp' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>WhatsApp</option>
                                     <option value="InstaGram" {{ 'InstaGram' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>InstaGram</option>
-                                    <option value="Telegram" {{ 'Telegram' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>Telegram</option>
+                                    <option value="telegram" {{ 'telegram' ==  $user->agencydetails->brandinstantmessager  ? 'selected' : ''  }}>Telegram</option>
                                     @else
                                     <option value="Twitter">Twitter</option>
                                         <option value="WhatsApp">WhatsApp</option>

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmailAgency;
 use App\Models\Agencydetails;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationController extends Controller
 {
@@ -60,6 +62,8 @@ class RegistrationController extends Controller
         'brandtracking' => $request->brandtracking,
         'note' => $request->note,
     ]);
+
+        Mail::to($user->email)->queue(new WelcomeEmailAgency($user));
 
         return back()->with('message','Your request has been recieved, we will contact you shortly, Thank you.');
     }

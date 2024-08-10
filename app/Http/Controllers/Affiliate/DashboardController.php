@@ -47,7 +47,8 @@ class DashboardController extends Controller
         $clicksthisMonth= $clicks->get();
         $leads = $clicks->where('conversion', 1)->get();
         $earned = $clicks->where('earned','>', 0)->get();
-        $epc = round(($earned->sum('earned'))/($clicksthisMonth->count()) ,2,PHP_ROUND_HALF_DOWN);
+        $epc = ($clicksthisMonth->count() != 0) ? round(($earned->sum('earned'))/($clicksthisMonth->count()) ,2,PHP_ROUND_HALF_DOWN) : 0;
+        
 
         // Validate timeframe to be either 7, 30, or 90 days
         if (!in_array($timeframe, [7, 30, 90])) {

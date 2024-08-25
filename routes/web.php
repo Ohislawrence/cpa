@@ -100,8 +100,8 @@ Route::middleware([
         elseif(auth()->user()->hasRole('affiliate')){
             return redirect(route('affiliate.dashboard'));
         }
-        elseif(auth()->user()->hasRole('agency')){
-            return redirect(route('agency.dashboard'));
+        elseif(auth()->user()->hasRole('merchant')){
+            return redirect(route('merchant.dashboard'));
         }
         else{
             return redirect(route('home'));
@@ -130,10 +130,10 @@ Route::middleware([
         Route::get('user/refferals', [UserController::class, 'refferals'])->name('refferals');
         Route::get('user/edit/{id}', [UserController::class, 'edituser'])->name('edituser');
         Route::put('user/edit/{id}/update', [UserController::class, 'updateuser'])->name('updateuser');
-        Route::post('user/edit/{id}/update/agency', [UserController::class, 'updateuseragency'])->name('updateuseragency');
+        Route::post('user/edit/{id}/update/merchant', [UserController::class, 'updateuseragency'])->name('updateuseragency');
         //userTabs
         Route::get('user/view/{id}/overview', [UserController::class, 'overview'])->name('viewuser');
-        Route::get('user/view/{id}/agency/overview', [UserController::class, 'overviewagency'])->name('overviewagency');
+        Route::get('user/view/{id}/merchant/overview', [UserController::class, 'overviewagency'])->name('overviewagency');
         Route::get('user/{id}/trafficsource', [UserController::class, 'viewtrafficsource'])->name('viewtrafficsource');
         Route::post('user/update/{id}/traffic', [UserController::class, 'traffic'])->name('traffic');
         Route::get('user/{id}/traffic/source', [UserController::class, 'gettrafficsource'])->name('gettrafficsource');
@@ -172,13 +172,13 @@ Route::middleware([
         Route::get('user/{id}/transactons', [AdminTransactionController::class, 'transactionuser'])->name('transactionuser');
         Route::get('user/{id}/request', [AdminTransactionController::class, 'getpaymentrequest'])->name('getpaymentrequest');
         Route::get('user/{id}/transactions', [AdminTransactionController::class, 'getusertransaction'])->name('getusertransaction');
-        Route::get('user/{id}/transactions/agency', [AdminTransactionController::class, 'agencytransaction'])->name('agencytransaction');
+        Route::get('user/{id}/transactions/merchant', [AdminTransactionController::class, 'agencytransaction'])->name('agencytransaction');
         //clickstats
         Route::get('user/{id}/clickstats',[ClicksController::class, 'userclickstats'])->name('userclickstats');
         Route::get('user/{id}/clickstats/get',[ClicksController::class, 'getuserclickstats'])->name('getuserclickstats');
-        //offer agency
-        Route::get('user/{id}/agency/offers',[OfferController::class, 'agencyoffer'])->name('agencyoffer');
-        Route::get('user/{id}/agency/get/offers',[OfferController::class, 'getagencyoffer'])->name('getagencyoffer');
+        //offer merchant
+        Route::get('user/{id}/merchant/offers',[OfferController::class, 'agencyoffer'])->name('agencyoffer');
+        Route::get('user/{id}/merchant/get/offers',[OfferController::class, 'getagencyoffer'])->name('getagencyoffer');
 
         //settings
         Route::get('settings', [SettingController::class, 'index'])->name('settings');
@@ -215,16 +215,16 @@ Route::middleware([
       
     });
 
-//Agency
+//merchant
     Route::group([
         'namespace' => 'App\Http\Controllers\Agency',
-        'prefix' => 'agency',
-        'middleware' => 'role:agency',
-        'as' => 'agency.',
+        'prefix' => 'merchant',
+        'middleware' => 'role:merchant',
+        'as' => 'merchant.',
     ], function () {
         Route::get('profile', [AgencyProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyDashboardController::class, 'index'])->name('dashboard');
-        Route::get('offers', [AgencyOfferController::class, 'index'])->name('offers');
+        Route::get('campaigns', [AgencyOfferController::class, 'index'])->name('campaigns');
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 

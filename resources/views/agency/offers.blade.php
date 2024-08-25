@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  'Offers' )
+@section('headername',  'Campaigns' )
 @section('bread1',  'Analytics' )
-@section('bread2',  'Offers' )
+@section('bread2',  'Campaigns' )
 
 
 @section('header')

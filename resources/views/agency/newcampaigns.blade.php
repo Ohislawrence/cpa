@@ -17,18 +17,21 @@
 
 
 
-
 @section('slot')
 <!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="">
-	<!--begin::Container-->
-	<div class="container" id="kt_content_container">
-	@include('admin.components.alert')
-
-    <div class="card mb-5 mb-xl-10">
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card body-->
+            <div class="card-body">
+        @include('admin.components.alert')
+            <!--begin::Content-->
+            <div id="kt_account_settings_profile_details" class="collapse show">
 
         <!--begin::Form-->
-        <form class="form" action="{{ route('merchant.create.campaign.post') }}" method="POST" enctype="multipart/form-data">
+        <form class="form" action="{{ route('merchant.store.campaign.post') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!--begin::Card body-->
             <div class="card-body border-top p-9">
@@ -148,7 +151,7 @@
                     <!--end::Label-->
                     <!--begin::Input-->
 
-                    <select name="location[]" multiple="" aria-label="Select a Role" data-control="select2" data-dropdown-parent="" data-placeholder="location" class="form-select form-select-solid">
+                    <select name="location[]" multiple="" aria-label="Select a Role" data-control="select2" class="form-select form-select-solid">
                         <option value="0">All Locations</option>
                         @foreach ( $locations as $location )
                             <option value="{{ $location->id }}">{{ $location->name }}</option>

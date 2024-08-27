@@ -164,7 +164,7 @@
                     <!--end::Label-->
                     <!--begin::Input-->
 
-                    <select name="location[]" multiple="" aria-label="Select a Role" data-control="select2" data-dropdown-parent="" data-placeholder="location" class="form-select form-select-solid">
+                    <select name="location[]" multiple="" aria-label="Select a Role"  class="form-select form-select-solid">
                         <option value="all">All Locations</option>
                         @foreach ( $locations as $location )
                             <option value="{{ $location->id }}">{{ $location->name }}</option>

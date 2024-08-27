@@ -21,10 +21,9 @@
 		serverSide: true,
         responsive: true,
         stateSave: true,
-		ajax: "{{ route('admin.viewtable') }}",
+		ajax: "{{ route('merchant.viewcampaign.campaign') }}",
 		columns: [
             {data: 'offerid'},
-            {data: 'owner'},
 			{data: 'name'},
 			{data: 'category'},
             {data: 'geos'},
@@ -82,8 +81,8 @@
 					<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
 
 						<!--begin::Add offer-->
-						<a href="{{ route('admin.offers.create') }}" class="btn btn-primary">
-						<i class="ki-duotone ki-plus fs-2"></i>Add Offer</a>
+						<a href="{{ route('merchant.create.campaign') }}" class="btn btn-primary">
+						<i class="ki-duotone ki-plus fs-2"></i>Add Campaign</a>
 						<!--end::Add offer-->
 					</div>
 				</div>
@@ -94,9 +93,8 @@
 									<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="kt_datatable_responsive">
 										<thead>
 											<tr class="fw-semibold fs-6 text-gray-700">
-                                                <th>Offer ID</th>
-                                                <th>Owner</th>
-												<th>Name</th>
+                                                <th>ID</th>
+												<th>Campaign Name</th>
 												<th>Category</th>
                                                 <th>Geos</th>
                                                 <th>Targetting</th>

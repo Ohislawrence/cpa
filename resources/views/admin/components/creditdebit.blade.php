@@ -31,10 +31,10 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">Agency</label>
+                            <label class="required fw-semibold fs-6 mb-2">Merchant</label>
                             <select name="userID" aria-label="Select a user" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
                                 <option value="">Select User...</option>
-                                    @foreach ( App\Models\User::role('agency')->get() as $user)
+                                    @foreach ( App\Models\User::role('merchant')->get() as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
                                     @endforeach   
                                 </select>

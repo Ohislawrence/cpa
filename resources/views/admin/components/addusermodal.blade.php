@@ -37,7 +37,7 @@
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
-                        
+
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -68,15 +68,15 @@
                             <!--begin::Input-->
                             <select name="role" aria-label="Select a Role" data-control="select2" data-dropdown-parent="" data-placeholder="Role" class="form-select form-select-sm form-select-solid">
                                 <option value="affiliate">Affiliate</option>
-                                <option value="agency">Agency</option>
+                                <option value="merchant">Merchant</option>
                                 <option value="admin">Admin</option>
                             </select>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
 
-                        
-                        
+
+
                     </div>
                     <!--end::Scroll-->
                     <!--begin::Actions-->

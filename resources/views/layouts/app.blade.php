@@ -22,7 +22,7 @@
 
 
         <!-- Scripts -->
-        
+
 		@yield('header')
 		<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -80,12 +80,12 @@
 									</div>
 								@endif
 							@endisset
-                            
+
 							@endrole
 							@role('admin')
 								@yield('slot')
 							@endrole
-							@role('agency')
+							@role('merchant')
 							@isset(Auth::user()->agencydetails->active)
 								@if(Auth::user()->agencydetails->active == 1)
 									@yield('slot')
@@ -112,11 +112,11 @@
 				</div>
 			</div>
 		</div>
-		
+
                         </div>
-						
+
                     </div>
-					
+
 			</div>
 
         @livewireScripts

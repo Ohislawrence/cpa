@@ -27,13 +27,14 @@ class OfferController extends Controller
         return view('admin.offer', compact('offers'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         $categories = Category::latest()->get();
-        $users= User::role('agency')->get();
+        $users= User::role('merchant')->get();
         $agencies = $users;
         $locations = Country::all();
         $payouts = Payout::all();

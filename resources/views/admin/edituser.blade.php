@@ -39,7 +39,7 @@
                 <!--end::Card title-->
             </div>
             <!--begin::Card header-->
-        
+
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
@@ -48,14 +48,14 @@
                     @method('PUT')
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
-                        
-        
+
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Full Name</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -71,13 +71,13 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Email</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="email" class="form-control form-control-lg form-control-solid" value="{{ $user->email }}" />
@@ -85,18 +85,18 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                 <span class="required">Contact Phone</span>
-        
-                                
+
+
         <span class="ms-1"  data-bs-toggle="tooltip" title="Phone number must be active" >
             <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>                    </label>
                             <!--end::Label-->
-                            
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" value="{{ isset($user->affiliatedetails->phonenumber) ?  $user->affiliatedetails->phonenumber :'' }}" />
@@ -104,18 +104,18 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                 <span class="required">Country</span>
-        
-                                
+
+
         <span class="ms-1"  data-bs-toggle="tooltip" title="Country of origination" >
             <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>                    </label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <select name="country" aria-label="Select a Country" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
@@ -124,11 +124,11 @@
                                         @isset($user->affiliatedetails->country)
                                             <option value="{{ $countr->id }}" {{ ($countr->id == $user->affiliatedetails->country)  ? 'selected' : ''  }}>{{ $countr->name }}</option>
                                         @else
-                                            
+
                                             <option value="{{ $countr->id }}">{{ $countr->name }}</option>
-                                        @endisset 
-                                        @endforeach  
-                                    
+                                        @endisset
+                                        @endforeach
+
                                     </select>
                             </div>
                             <!--end::Col-->
@@ -140,7 +140,7 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">State/Region</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -156,13 +156,13 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Status</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <!--begin::Input-->
@@ -175,13 +175,13 @@
                                     @else
                                         <option value="Active" >Active</option>
                                         <option value="Rejected">Rejected</option>
-                                        <option value="Pending" >Pending</option>   
+                                        <option value="Pending" >Pending</option>
                                     @endisset
-                                        
+
 
                                     </select>
                                 <!--end::Input-->
-        
+
                                 <!--begin::Hint-->
                                 <div class="form-text">
                                     Active , Pending and Reject users
@@ -191,13 +191,13 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Telegram ID</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -213,11 +213,11 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
-                       
+
+
                     </div>
                     <!--end::Card body-->
-        
+
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
@@ -232,7 +232,7 @@
         <!--end::Basic info-->
         @endif
 
-        @if($user->getRoleNames()->first() == 'agency')
+        @if($user->getRoleNames()->first() == 'merchant')
         @include('admin.viewagency')
         <div class="card mb-5 mb-xl-10">
             <!--begin::Card header-->
@@ -244,7 +244,7 @@
                 <!--end::Card title-->
             </div>
             <!--begin::Card header-->
-        
+
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
@@ -252,14 +252,14 @@
                     @csrf
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
-                        
-        
+
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Full Name</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -275,13 +275,13 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Company Email</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <input type="text" name="email" class="form-control form-control-lg form-control-solid" value="{{ $user->email }}" />
@@ -295,7 +295,7 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Company Name</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -317,7 +317,7 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Perferred Alias</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -339,7 +339,7 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Company Website</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -355,18 +355,18 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                 <span class="required">Contact Phone</span>
-        
-                                
+
+
         <span class="ms-1"  data-bs-toggle="tooltip" title="Phone number must be active" >
             <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>                    </label>
                             <!--end::Label-->
-                            
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <input type="tel" name="phonenumber" class="form-control form-control-lg form-control-solid" value="{{ isset($user->agencydetails->phonenumber) ?  $user->agencydetails->phonenumber :'' }}" />
@@ -380,7 +380,7 @@
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Brand Description</label>
                         <!--end::Label-->
-    
+
                         <!--begin::Col-->
                         <div class="col-lg-8">
                             <!--begin::Row-->
@@ -403,7 +403,7 @@
                         <!--begin::Label-->
                         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Address</label>
                         <!--end::Label-->
-    
+
                         <!--begin::Col-->
                         <div class="col-lg-8">
                             <!--begin::Row-->
@@ -419,8 +419,8 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-                    
-        
+
+
                     <!--begin::Input group-->
                     <div class="row mb-6">
                         <!--begin::Label-->
@@ -429,7 +429,7 @@
                         <span class="ms-1"  data-bs-toggle="tooltip" title="Country of origination" >
                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>                    </label>
                             <!--end::Label-->
-        
+
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
                             <select name="country" aria-label="Select a Country" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
@@ -440,13 +440,13 @@
                                     @else
                                     <option value="{{ $countr->id }}" >{{ $countr->name }}</option>
                                     @endisset
-                                    @endforeach   
+                                    @endforeach
                                 </select>
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                    
+
 
                      <!--begin::Input group-->
                      <div class="row mb-6">
@@ -456,7 +456,7 @@
                         <span class="ms-1"  data-bs-toggle="tooltip" title="Country of origination" >
                             <i class="ki-duotone ki-information-5 text-gray-500 fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i></span>                    </label>
                             <!--end::Label-->
-        
+
                         <!--begin::Col-->
                         <div class="col-lg-8 fv-row">
                             <select name="category" aria-label="Select a Category" data-control="select2" class="form-select form-select-solid form-select-lg fw-semibold">
@@ -467,24 +467,24 @@
                                     @else
                                     <option value="{{ $category->id }} ">{{ $category->name }}</option>
                                     @endisset
-                                            
-                                            
-                                    @endforeach   
+
+
+                                    @endforeach
                                 </select>
                             </div>
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                        
 
-                        
-        
+
+
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Status</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <!--begin::Input-->
@@ -511,7 +511,7 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Instant Messager</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <!--begin::Input-->
@@ -527,7 +527,7 @@
                                         <option value="WhatsApp">WhatsApp</option>
                                         <option value="InstaGram">InstaGram</option>
                                         <option value="Telegram">Telegram</option>
-                                        
+
                                     @endisset
                                     </select>
                                 <!--end::Input-->
@@ -535,13 +535,13 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Instant Messager ID</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -563,7 +563,7 @@
                             <!--begin::Label-->
                             <label class="col-lg-4 col-form-label required fw-semibold fs-6">Monthly Budget ($)</label>
                             <!--end::Label-->
-        
+
                             <!--begin::Col-->
                             <div class="col-lg-8">
                                 <!--begin::Row-->
@@ -579,7 +579,7 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-        
+
                         <!--begin::Input group-->
                     <div class="row mb-6">
                         <!--begin::Label-->
@@ -601,11 +601,11 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-        
-                        
+
+
                     </div>
                     <!--end::Card body-->
-        
+
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>

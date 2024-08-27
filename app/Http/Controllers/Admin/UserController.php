@@ -62,11 +62,7 @@ class UserController extends Controller
                 'instantmessageid' => 1,
             ]);
         }
-        
 
-        
-
-        
 
         return back()->with('message','User Created');
     }
@@ -95,10 +91,10 @@ class UserController extends Controller
     public function viewuser(User $user)
     {
         //$user = User::find($id);
-        
+
         return view('admin.profiled.overview', compact('user'));
-        
-        
+
+
     }
 
     public function refferals()
@@ -142,7 +138,7 @@ class UserController extends Controller
             'instantmessageid' => $request->instantmessageid,
         ]);
 
-    
+
         return back()->with('message','Affiliate Account Updated');
     }
 
@@ -188,7 +184,7 @@ class UserController extends Controller
             'user_id' => $user->id
         ], [
             'active' => $request->status,
-            'companyname' => $request->companyname,	
+            'companyname' => $request->companyname,
             'brandaddress' => $request->brandaddress,
             'country' => $request->country,
             'phonenumber' => $request->phonenumber,
@@ -208,8 +204,8 @@ class UserController extends Controller
             'brandinterestedtraffic' => 'pending',
             'city' => 'pending',
             'region' => 'pending',
-            
-            
+
+
         ]);
 
 

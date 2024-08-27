@@ -63,7 +63,7 @@ Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdve
 
 //redirect to affiate
 Route::get('/register', function () {
-return redirect(route('affiliatereg'));   
+return redirect(route('affiliatereg'));
 });
 
 
@@ -76,10 +76,10 @@ Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 //Route::webhooks('verify-action-taken', 'webhooktest1');
 Route::post('verify-action-taken',[WebhookController::class, 'handle']);
 
-//Route::get('/assign', function () {
-//    $user = Auth()->user();
-//   $user->assignRole('admin');
-//});
+Route::get('/assign', function () {
+    $user = Auth()->user();
+   $user->assignRole('admin');
+});
 
 Route::get('/deposite', function () {
     $user = User::find(5);
@@ -185,7 +185,7 @@ Route::middleware([
 
         //sitemap
         Route::get('/sitemap/generate', function () {
-            SitemapGenerator::create(url('/'))->writeToFile(public_path('sitemap.xml')); 
+            SitemapGenerator::create(url('/'))->writeToFile(public_path('sitemap.xml'));
             //redirect()->back()->with('message', 'Sitemap updated');
             });
     });
@@ -212,7 +212,7 @@ Route::middleware([
         Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
         Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
         Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
-      
+
     });
 
 //merchant
@@ -224,7 +224,11 @@ Route::middleware([
     ], function () {
         Route::get('profile', [AgencyProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyDashboardController::class, 'index'])->name('dashboard');
+        //campaigns
         Route::get('campaigns', [AgencyOfferController::class, 'index'])->name('campaigns');
+        Route::get('campaign/create', [AgencyOfferController::class, 'create'])->name('create.campaign');
+        Route::post('campaign/create/post', [AgencyOfferController::class, 'create'])->name('create.campaign.post');
+
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 

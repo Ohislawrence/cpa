@@ -5,7 +5,7 @@
     <div class="w-100 hover-scroll-overlay-y d-flex pe-3" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu, #kt_aside_menu_wrapper" data-kt-scroll-offset="100">
         <!--begin::Menu-->
         <div class="menu menu-column menu-rounded menu-sub-indention menu-active-bg fw-semibold my-auto" id="#kt_aside_menu" data-kt-menu="true">
-            
+
 
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
@@ -62,7 +62,7 @@
             </div>
             <!--end:Menu item-->
 
-            
+
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
@@ -91,8 +91,8 @@
             </div>
             <!--end:Menu item-->
 
-            
-            
+
+
 
         </div>
         <!--end::Menu-->
@@ -150,7 +150,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="index.html">
+                        <a class="menu-link" href="{{ route('merchant.affiliates') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -162,7 +162,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="dashboards/ecommerce.html">
+                        <a class="menu-link" href="{{ route('merchant.affiliates.settings') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -219,7 +219,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="index.html">
+                        <a class="menu-link" href="{{ route('merchant.payout.request') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -231,7 +231,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="dashboards/ecommerce.html">
+                        <a class="menu-link" href="{{ route('merchant.payout.option') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -260,7 +260,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="index.html">
+                        <a class="menu-link" href="{{ route('merchant.email.send') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -272,7 +272,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="dashboards/ecommerce.html">
+                        <a class="menu-link" href="{{ route('merchant.email.systememail') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -284,7 +284,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="dashboards/ecommerce.html">
+                        <a class="menu-link" href="{{ route('merchant.email.settings') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -300,7 +300,7 @@
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <a class="" href="{{ route('merchant.reports') }}">
+                <a class="" href="{{ route('merchant.configuration') }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>

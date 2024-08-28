@@ -20,6 +20,10 @@ use App\Http\Controllers\Agency\OfferController as AgencyOfferController;
 use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
 use App\Http\Controllers\Agency\ReportController;
 use App\Http\Controllers\Agency\TransactionController;
+use App\Http\Controllers\Agency\AffiliateController;
+use App\Http\Controllers\Agency\ConfigurationController;
+use App\Http\Controllers\Agency\EmailController;
+use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
@@ -76,15 +80,15 @@ Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 //Route::webhooks('verify-action-taken', 'webhooktest1');
 Route::post('verify-action-taken',[WebhookController::class, 'handle']);
 
-Route::get('/assign', function () {
-    $user = Auth()->user();
-   $user->assignRole('admin');
-});
+//Route::get('/assign', function () {
+//    $user = Auth()->user();
+//   $user->assignRole('admin');
+//});
 
-Route::get('/deposite', function () {
-    $user = User::find(5);
-   $user->depositFloat(3.55);
-});
+//Route::get('/deposite', function () {
+//    $user = User::find(5);
+ //  $user->depositFloat(3.55);
+//});
 
 
 
@@ -232,6 +236,18 @@ Route::middleware([
 
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
+        Route::get('affiliates', [AffiliateController::class, 'index'])->name('affiliates');
+        Route::get('affiliate/settings', [AffiliateController::class, 'settings'])->name('affiliates.settings');
+        Route::get('affiliates/get/all', [AffiliateController::class, 'getusers'])->name('getusers');
+
+        Route::get('payouts/request', [AgencyPayoutController::class, 'index'])->name('payout.request');
+        Route::get('payouts/options', [AgencyPayoutController::class, 'options'])->name('payout.option');
+
+        Route::get('setting/configuration', [ConfigurationController::class, 'index'])->name('configuration');
+
+        Route::get('email/send', [EmailController::class, 'send'])->name('email.send');
+        Route::get('email/settings', [EmailController::class, 'settings'])->name('email.settings');
+        Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');
 
     });
 });

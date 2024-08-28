@@ -16,15 +16,16 @@ class DashboardController extends Controller
 {
     public function dashboardone()
     {
+
         $clicked = Click::where('user_id', Auth::user()->id);
-        $payThisMonth = $clicked->where('created_at','>=', Carbon::now()->startOfMonth())->get(); 
-        $payYesterday = $clicked->where('created_at','>=', Carbon::yesterday())->get(); 
+        $payThisMonth = $clicked->where('created_at','>=', Carbon::now()->startOfMonth())->get();
+        $payYesterday = $clicked->where('created_at','>=', Carbon::yesterday())->get();
         $payToday = $clicked->where('created_at','>=', Carbon::today())->get();
 
         $earnedThisMonth = 0;
         $earnedYesterday = 0;
         $earnedToday = 0;
-        
+
         foreach ($payThisMonth as $key => $value) {
             $earnedThisMonth += $value->earned;
         }
@@ -39,7 +40,7 @@ class DashboardController extends Controller
 
     public function dashboardtwo(Request $request, AffiliateStats $chart)
     {
-        
+
         // Default timeframe is last 7 days
         $timeframe = $request->input('timeframe', 7);
 
@@ -48,7 +49,7 @@ class DashboardController extends Controller
         $leads = $clicks->where('conversion', 1)->get();
         $earned = $clicks->where('earned','>', 0)->get();
         $epc = ($clicksthisMonth->count() != 0) ? round(($earned->sum('earned'))/($clicksthisMonth->count()) ,2,PHP_ROUND_HALF_DOWN) : 0;
-        
+
 
         // Validate timeframe to be either 7, 30, or 90 days
         if (!in_array($timeframe, [7, 30, 90])) {
@@ -59,7 +60,7 @@ class DashboardController extends Controller
         return view('affiliate.dashboard2', compact('chart', 'timeframe', 'clicksthisMonth','leads','earned','epc'));
     }
 
-    
+
 
     public function getUserClicks(Request $request)
     {
@@ -83,7 +84,7 @@ class DashboardController extends Controller
                         $epc = $row->payout/$row->total_clicks;
                         return round($epc,2,PHP_ROUND_HALF_DOWN);
                         }
-                    
+
                     })
                     ->addColumn('cpa', function($row){
                         if($row->conversions == 0)
@@ -93,7 +94,7 @@ class DashboardController extends Controller
                             $cpa = $row->payout/$row->conversions;
                             return round($cpa,2,PHP_ROUND_HALF_DOWN);
                         }
-                        
+
                     })
                     ->rawColumns(['cpa','epc'])
                 ->make(true);

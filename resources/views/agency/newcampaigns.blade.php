@@ -112,7 +112,7 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Desktop $/%:</label>
-                            <input name="desktop" type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Leave blank to exclude" />
+                            <input name="desktop" type="number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Leave blank to exclude" />
                         </div>
 
                     </div>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">iOS $/%:</label>
-                            <input name="ios" type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Leave blank to exclude" />
+                            <input name="ios" type="number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Leave blank to exclude" />
                         </div>
                     </div>
 
@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Android $/%:</label>
-                            <input name="andriod" type="text" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Leave blank to exclude" />
+                            <input name="andriod" type="number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Leave blank to exclude" />
                         </div>
                     </div>
 

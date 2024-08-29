@@ -125,10 +125,10 @@
 						<!--begin::Heading-->
 						<div class="card-px text-center pt-15 pb-15">
 							<!--begin::Title-->
-							<h2 class="fs-2x fw-bold mb-0">Create Offer</h2>
+							<h2 class="fs-2x fw-bold mb-0">Create Campaign</h2>
 							<!--end::Title-->
 							<!--begin::Description-->
-							<p class="text-gray-500 fs-4 fw-semibold py-7">Click on the below buttons to
+							<p class="text-gray-500 fs-4 fw-semibold py-7">Click on the below button to
 							<br /> create a new campaign.</p>
 							<!--end::Description-->
 							<!--begin::Action-->

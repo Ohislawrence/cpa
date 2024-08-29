@@ -233,6 +233,8 @@ Route::middleware([
         Route::get('campaign/create', [AgencyOfferController::class, 'create'])->name('create.campaign');
         Route::post('campaign/create/post', [AgencyOfferController::class, 'store'])->name('store.campaign.post');
         Route::get('campaign/view', [AgencyOfferController::class, 'viewcampaign'])->name('viewcampaign.campaign');
+        Route::get('campaign/details/{id}/view', [AgencyOfferController::class, 'campaigndetails'])->name('details.campaign');
+        Route::get('campaign/details/{id}/stats', [AgencyOfferController::class, 'campaignstats'])->name('details.campaigndestats');
 
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');

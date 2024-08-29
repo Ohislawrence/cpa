@@ -65,7 +65,7 @@ class OfferController extends Controller
                 })
                 ->addColumn('epc', function($row){
                         $epc = '$'. round($row->click->where('offer_id', $row->offerid)->sum('earned')/$row->click->where('offer_id', $row->offerid)->count(),2);
-                    
+
                    return $epc;
                })
                 ->rawColumns(['action','category','targetting', 'payout', 'payouttype', 'geos','epc'])

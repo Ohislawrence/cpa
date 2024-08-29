@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('headername',  $offer->name )
-@section('bread1',  'Agency' )
+@section('bread1',  'Merchant' )
 @section('bread2',  $offer->name )
 
 
@@ -38,10 +38,10 @@
                     {{ $offer->desc }}
                 </p>
 
-                <h3 class="text-dark-800 mb-3 mt-6">Clicks</h3>
+                <h3 class="text-dark-800 mb-3 mt-6">Statistics</h3>
 
-                <a href="{{ route('admin.offerclicks', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
-                    <i class="ki-duotone ki-view fs-2"></i>View clicks</a>
+                <a href="{{ route('merchant.details.campaigndestats', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
+                    <i class="ki-duotone ki-view fs-2"></i>View Statistics</a>
             </div>
             <!--end::Col-->
             <!--begin::Col-->
@@ -142,7 +142,7 @@
                                 <!--begin::Row-->
                                 <tr>
                                     <td class="text-gray-500">Network EPC:</td>
-                                    <td class="text-gray-800">$149.99 / Year</td>
+                                    <td class="text-gray-800">Total earning/total clicks</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->

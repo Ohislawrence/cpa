@@ -39,8 +39,7 @@ class OfferController extends Controller
             return Datatables::of($data)
 
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="offers/'.$row->id.'" class="edit btn btn-primary btn-sm">View</a>
-                                    <a href="offer/'.$row->id.'/clicks/" class="edit btn btn-primary btn-sm">Stats</a>';
+                    $actionBtn = '<a href="campaign/details/'.$row->id.'/view" class="edit btn btn-primary btn-sm">View</a>';
                     return $actionBtn;
                 })
                 ->addColumn('category', function($row){
@@ -139,6 +138,18 @@ class OfferController extends Controller
 
 
         return back()->with('message','Campaigns Created');
+    }
+
+    public function campaigndetails(string $id)
+    {
+        $offer = Offer::find($id);
+        return view('agency.campaignview', compact('offer'));
+    }
+
+    public function campaignstats(string $id)
+    {
+        $offer = Offer::find($id);
+        return view('agency.campaignstat', compact('offer'));
     }
 
 }

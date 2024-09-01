@@ -63,19 +63,11 @@ class OfferController extends Controller
                     }
                     return '$'.round(array_sum($payys)/count($payys),2);
                 })
-                ->addColumn('geos', function($row){
-                    foreach($row->geos as $tar)
-                    {
-                        $geoss = $tar->country->code;
-                        $ge[] = $geoss;
-                    }
-                    return $ge;
-                })
                 ->addColumn('payouttype', function($row){
                      $payouttype = $row->payouttype->name;
                     return $payouttype;
                 })
-                ->rawColumns(['action','category','targetting', 'payout', 'payouttype', 'geos'])
+                ->rawColumns(['action','category', 'payout', 'payouttype'])
                 ->make(true);
         }
     }

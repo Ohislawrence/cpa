@@ -94,6 +94,7 @@ class OfferController extends Controller
 
         return back()->with('message','Offer Created');
     }
+    
 
     /**
      * Display the specified resource.

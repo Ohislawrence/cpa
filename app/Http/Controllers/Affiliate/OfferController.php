@@ -12,6 +12,7 @@ use App\Models\Offer;
 use App\Models\Payout;
 use App\Models\Target;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Contracts\DataTable;
 
 class OfferController extends Controller
 {
@@ -64,9 +65,12 @@ class OfferController extends Controller
                     return $payouttype;
                 })
                 ->addColumn('epc', function($row){
-                        $epc = '$'. round($row->click->where('offer_id', $row->offerid)->sum('earned')/$row->click->where('offer_id', $row->offerid)->count(),2);
+                    
 
-                   return $epc;
+                    // Avoid division by zero
+                    $averageEarnings =  0;
+
+                   return $averageEarnings;
                })
                 ->rawColumns(['action','category','targetting', 'payout', 'payouttype', 'geos','epc'])
                 ->make(true);

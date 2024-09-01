@@ -30,8 +30,8 @@ class AffiliateStats
         }
 
         return $this->chart->lineChart()
-            ->setTitle('Users Sign Up Per Day')
-            ->addData('Sign Ups', $clickCounts->toArray())
+            ->setTitle('Clicks')
+            ->addData('Clicks', $clickCounts->toArray())
             ->setXAxis($days->toArray());
     }
 }

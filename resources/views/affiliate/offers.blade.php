@@ -17,7 +17,7 @@
 <script type="text/javascript">
 	$(function () {
 
-	var dt = $('#kt_datatable_responsive1').DataTable({
+	var dt = $('#datatable_responsive1').DataTable({
 		processing: true,
 		serverSide: true,
         responsive: true,
@@ -50,6 +50,7 @@
 
 
 
+
 @section('slot')
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -70,7 +71,7 @@
 					<div class="card-body py-4">
 						<!--begin::Table-->
 						<div class="table-responsive">
-						<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="kt_datatable_responsive1">
+						<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="datatable_responsive1">
 							<thead>
 								<tr class="fw-semibold fs-6 text-gray-800">
 									<th>Offer ID</th>

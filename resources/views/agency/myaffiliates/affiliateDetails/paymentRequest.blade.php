@@ -71,7 +71,8 @@
 				<div class="card-toolbar">
 
 					<!--end::Toolbar-->
-                </div></div>
+                </div>
+            </div>
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->

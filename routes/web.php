@@ -235,18 +235,23 @@ Route::middleware([
         Route::get('campaign/view', [AgencyOfferController::class, 'viewcampaign'])->name('viewcampaign.campaign');
         Route::get('campaign/details/{id}/view', [AgencyOfferController::class, 'campaigndetails'])->name('details.campaign');
         Route::get('campaign/details/{id}/stats', [AgencyOfferController::class, 'campaignstats'])->name('details.campaigndestats');
-
+        //affiliates
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
         Route::get('affiliates', [AffiliateController::class, 'index'])->name('affiliates');
         Route::get('affiliate/settings', [AffiliateController::class, 'settings'])->name('affiliates.settings');
         Route::get('affiliates/get/all', [AffiliateController::class, 'getusers'])->name('getusers');
-
+        Route::get('affiliates/{id}/get', [AffiliateController::class, 'getuserclickstats'])->name('getuserclickstats');
+        Route::get('affiliates/{id}/request', [AffiliateController::class, 'getpaymentrequest'])->name('getpaymentrequest');
+        Route::get('affiliate/{id}/overview', [AffiliateController::class, 'overview'])->name('affiliate.overview');
+        Route::get('affiliate/{id}/clicks/stats', [AffiliateController::class, 'clickstats'])->name('affiliate.clickstats');
+        Route::get('affiliate/{id}/clicks/request', [AffiliateController::class, 'paymentrequest'])->name('affiliate.paymentrequest');
+        //payouts
         Route::get('payouts/request', [AgencyPayoutController::class, 'index'])->name('payout.request');
         Route::get('payouts/options', [AgencyPayoutController::class, 'options'])->name('payout.option');
-
+        //settings
         Route::get('setting/configuration', [ConfigurationController::class, 'index'])->name('configuration');
-
+        //emails
         Route::get('email/send', [EmailController::class, 'send'])->name('email.send');
         Route::get('email/settings', [EmailController::class, 'settings'])->name('email.settings');
         Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');

@@ -147,22 +147,22 @@
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/transactons') ? 'active' : ''}}" href="{{ route('admin.transactionuser', $user->id) }}">Transaction</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/all/transactions') ? 'active' : ''}}" href="{{ route('merchant.affiliate.transactions', $user->id) }}">Transaction</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/referrals.html">Referrals</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/referrals') ? 'active' : ''}}" href="{{ route('merchant.affiliate.referrals', $user->id) }}">Referrals</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/edit/*') ? 'active' : ''}}" href="{{ route('admin.edituser', $user->id) }}">Update User info</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/updateuserdetails') ? 'active' : ''}}" href="{{ route('merchant.affiliate.updateuserdetails', $user->id) }}">Update User info</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('admin/user/*/trafficsource') ? 'active' : ''}}" href="{{ route('admin.viewtrafficsource', $user->id) }}">Traffic Source</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/trafficsource') ? 'active' : ''}}" href="{{ route('merchant.affiliate.trafficsource', $user->id) }}">Traffic Source</a>
             </li>
         </ul>
         <!--begin::Navs-->

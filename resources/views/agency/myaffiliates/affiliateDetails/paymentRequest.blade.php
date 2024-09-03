@@ -62,7 +62,7 @@
 				<div class="card-title">
 					<!--begin::Search-->
 					<div class="d-flex align-items-center position-relative my-1">
-						<h3>Requests for {{ $user->name }}</h3>
+						<h3>payment Request for {{ $user->name }}</h3>
 					</div>
 					<!--end::Search-->
 				</div>

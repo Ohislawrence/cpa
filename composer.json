@@ -21,6 +21,7 @@
         "spatie/laravel-permission": "^6.4",
         "spatie/laravel-sitemap": "^7.0",
         "spatie/laravel-webhook-client": "^3.3",
+        "tuytoosh/active": "^1.8",
         "yajra/laravel-datatables": "10.0",
         "yajra/laravel-datatables-oracle": "^10.11"
     },

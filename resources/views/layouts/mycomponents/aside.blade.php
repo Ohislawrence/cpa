@@ -137,7 +137,7 @@
             <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <span class="menu-link">
+                <span class="menu-link @active(['merchant.affiliates', 'merchant.affiliates.settings' ])">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
@@ -150,7 +150,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('merchant.affiliates') }}">
+                        <a class="menu-link @active('merchant.affiliates')" href="{{ route('merchant.affiliates') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -206,7 +206,7 @@
             <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <span class="menu-link">
+                <span class="menu-link @active(['merchant.payout.request','merchant.payout.option'])">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
@@ -219,7 +219,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('merchant.payout.request') }}">
+                        <a class="menu-link @active('merchant.payout.request')" href="{{ route('merchant.payout.request') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
@@ -231,7 +231,7 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('merchant.payout.option') }}">
+                        <a class="menu-link @active('merchant.payout.option')" href="{{ route('merchant.payout.option') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

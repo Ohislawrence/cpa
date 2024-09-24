@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "faace73d4208e9d8aa435a5df7f8b949",
+    "content-hash": "cda686f47c978f2dd9eedb2137601f58",
     "packages": [
         {
             "name": "arielmejiadev/larapex-charts",
@@ -8143,6 +8143,63 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.2.7"
             },
             "time": "2023-12-08T13:03:43+00:00"
+        },
+        {
+            "name": "tuytoosh/active",
+            "version": "1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tuytoosh/active.git",
+                "reference": "3f9a74e582239f8227326160c19a3b7c9a74476d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tuytoosh/active/zipball/3f9a74e582239f8227326160c19a3b7c9a74476d",
+                "reference": "3f9a74e582239f8227326160c19a3b7c9a74476d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "php": "*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "8.0.x-dev"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Active\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Active": "Active\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "./src/helper.php"
+                ],
+                "psr-4": {
+                    "Active\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hamid Haghdoost",
+                    "email": "tuytoosh@yahoo.com"
+                }
+            ],
+            "description": "Active class in blade templates",
+            "support": {
+                "issues": "https://github.com/tuytoosh/active/issues",
+                "source": "https://github.com/tuytoosh/active/tree/1.8.2"
+            },
+            "time": "2022-12-05T19:58:31+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

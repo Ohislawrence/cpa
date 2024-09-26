@@ -90,6 +90,29 @@ class AffiliateController extends Controller
         }
     }
 
+
+    public function getpaymentrequestforall(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = Requestpayment::latest()->get();
+            return Datatables::of($data)
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>
+                    <a href="" class="edit btn btn-primary btn-sm">Pay</a>';
+                    return $actionBtn;
+                })
+                ->addColumn('date', function($row){
+                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
+                    return $date;
+                })
+                ->rawColumns(['action','date'])
+                ->make(true);
+        }
+    }
+
+
+
+
     public function getusertransaction(Request $request, $id)
     {
         if ($request->ajax()) {
@@ -242,5 +265,45 @@ class AffiliateController extends Controller
             // Redirect back with an error message if the item doesn't exist
             return redirect()->back()->with('error', 'Item not found.');
         }
+    }
+
+    public function createaffiliate(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:Users,email',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->assignRole('affiliate');
+
+        Affiliatedetail::updateOrCreate([
+                'referral_id' => $this->generateUniqueCode(),
+                'status' => 'Pending',
+                'user_id' => $user->id,
+                'city'=> 1,
+                'country'=> 1,
+                'region'=> 1,
+                'phonenumber'=> 1,
+                'instantmessageid' => 1,
+            ]);
+
+
+        return back()->with('message','Affiliate Created');
+    }
+
+    public function generateUniqueCode()
+    {
+        do {
+            $code = random_int(10000000, 99999999);
+        } while (Affiliatedetail::where("referral_id", "=", $code)->first());
+
+        return $code;
     }
 }

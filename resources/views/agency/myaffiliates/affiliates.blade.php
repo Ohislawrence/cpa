@@ -133,12 +133,12 @@
 						</i>Export</button>
 						<!--end::Export-->
 						<!--begin::Add user-->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_user">
-						<i class="ki-duotone ki-plus fs-2"></i>Add User</button>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addafiliate">
+						<i class="ki-duotone ki-plus fs-2"></i>Create Affiliate</button>
 						<!--end::Add user-->
 					</div>
 					<!--end::Toolbar-->
-					@include('admin.components.addusermodal')
+                    @include('agency.myaffiliates.addaffliate')
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->

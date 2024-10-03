@@ -91,7 +91,7 @@ class AffiliateController extends Controller
     }
 
 
-    public function getpaymentrequestforall(Request $request, $id)
+    public function getpaymentrequestforall(Request $request)
     {
         if ($request->ajax()) {
             $data = Requestpayment::latest()->get();

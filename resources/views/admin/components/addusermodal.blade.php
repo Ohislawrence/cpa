@@ -67,7 +67,9 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <select name="role" aria-label="Select a Role" data-control="select2" data-dropdown-parent="" data-placeholder="Role" class="form-select form-select-sm form-select-solid">
+                                <option value="merchant">Merchant</option>
                                 <option value="affiliate">Affiliate</option>
+                                <option value="admin">Admin</option>
                             </select>
                             <!--end::Input-->
                         </div>

@@ -68,9 +68,12 @@
 				<!--begin::Card title-->
 				<!--begin::Card toolbar-->
 				<div class="card-toolbar">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addafiliate">
-						<i class="ki-duotone ki-plus fs-2"></i>Mass Process Payout</button>
+					<form action="{{ route('merchant.payout.option.processMassPayment') }}" method="POST">
+						@csrf
+                    <button type="submit" class="btn btn-primary">
+						Mass Process Payout</button>
 					<!--end::Toolbar-->
+					</form>
                 </div>
             </div>
                     <!--begin::Card body-->

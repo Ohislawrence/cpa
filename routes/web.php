@@ -23,6 +23,7 @@ use App\Http\Controllers\Agency\TransactionController;
 use App\Http\Controllers\Agency\AffiliateController;
 use App\Http\Controllers\Agency\ConfigurationController;
 use App\Http\Controllers\Agency\EmailController;
+use App\Http\Controllers\Agency\MassPaymentController;
 use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
@@ -262,6 +263,8 @@ Route::middleware([
         //payouts
         Route::get('payouts/request', [AgencyPayoutController::class, 'index'])->name('payout.request');
         Route::get('payouts/options', [AgencyPayoutController::class, 'options'])->name('payout.option');
+        Route::post('payouts/paypal/details', [AgencyPayoutController::class, 'storePaypalDetails'])->name('payout.option.storePaypalDetails');
+        Route::post('mass/payouts/paypal/all', [MassPaymentController::class, 'processMassPayment'])->name('payout.option.processMassPayment');
         //settings
         Route::get('setting/configuration', [ConfigurationController::class, 'index'])->name('configuration');
         //emails

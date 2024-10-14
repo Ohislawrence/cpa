@@ -24,6 +24,7 @@ class PayoutController extends Controller
         $request->validate([
             'client_id' => 'required|string',
             'secret' => 'required|string',
+            'email' => 'required|email'
         ]);
 
         $user = Auth::user();
@@ -31,7 +32,7 @@ class PayoutController extends Controller
         // Check if user already has PayPal credentials
         $credential = Agencydetails::updateOrCreate(
             ['user_id' => $user->id],
-            ['client_id' => $request->client_id, 'secret' => $request->secret]
+            ['client_id' => $request->client_id, 'secret' => $request->secret, 'paypal_email' => $request->paypalemail]
         );
 
         return back()->with('success', 'PayPal credentials saved successfully.');

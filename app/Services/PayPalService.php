@@ -15,11 +15,14 @@ class PayPalService
 
     public function __construct()
     {
-        // Fetch the merchant's PayPal credentials from the database
-        $user = Auth::user();
-        dd($user);
+        // Leave constructor empty or setup general settings if needed
+    }
 
-        $paypalCredentials = Agencydetails::where('user_id', $user->id)->first();
+    // Move the authentication logic to the method level
+    public function makeMassPayment($merchant, $payments)
+    {
+        // Fetch PayPal credentials dynamically when needed
+        $paypalCredentials = Agencydetails::where('user_id', $merchant->id)->first();
 
         if (!$paypalCredentials) {
             throw new \Exception('PayPal credentials are missing.');
@@ -32,17 +35,13 @@ class PayPalService
                 $paypalCredentials->secret
             )
         );
-
         $this->apiContext->setConfig(config('paypal.settings'));
-    }
 
-    public function makeMassPayment($merchantEmail, $payments)
-    {
         $payouts = new Payout();
 
         $batchHeader = new PayoutSenderBatchHeader();
         $batchHeader->setSenderBatchId(uniqid())
-                    ->setEmailSubject("Your payment request has been processed");
+                    ->setEmailSubject("You have a payment");
 
         $payouts->setSenderBatchHeader($batchHeader);
 

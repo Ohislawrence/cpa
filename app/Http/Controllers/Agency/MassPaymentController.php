@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentRequest;
 use App\Models\Requestpayment;
-use Illuminate\Http\Request;
 use App\Services\PayPalService;
+use Illuminate\Http\Request;
 
 class MassPaymentController extends Controller
 {
@@ -18,7 +19,7 @@ class MassPaymentController extends Controller
 
     public function processMassPayment(Request $request)
     {
-        $merchant = auth()->user();
+        $merchant = auth()->user();  // Authenticated user can be accessed here
 
         if (!$merchant->paypal_email) {
             return back()->withErrors('Please set up your PayPal email first.');
@@ -38,7 +39,8 @@ class MassPaymentController extends Controller
         })->toArray();
 
         try {
-            $response = $this->paypalService->makeMassPayment($merchant->paypal_email, $payments);
+            // Pass the merchant to the service method
+            $response = $this->paypalService->makeMassPayment($merchant, $payments);
 
             // Update payment request status
             Requestpayment::whereIn('id', $paymentRequests->pluck('id'))->update(['status' => 'paid']);

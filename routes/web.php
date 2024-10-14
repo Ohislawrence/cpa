@@ -244,6 +244,7 @@ Route::middleware([
         Route::get('affiliate/settings', [AffiliateController::class, 'settings'])->name('affiliates.settings');
         Route::get('affiliates/get/all', [AffiliateController::class, 'getusers'])->name('getusers');
         Route::get('affiliates/{id}/get', [AffiliateController::class, 'getuserclickstats'])->name('getuserclickstats');
+        Route::get('transaction/all/transaction', [TransactionController::class, 'getusertransaction'])->name('all.getusertransaction');
         Route::get('affiliates/{id}/getusertransaction', [AffiliateController::class, 'getusertransaction'])->name('getusertransaction');
         Route::get('affiliates/{id}/gettrafficsource', [AffiliateController::class, 'gettrafficsource'])->name('gettrafficsource');
         Route::get('affiliates/{id}/request', [AffiliateController::class, 'getpaymentrequest'])->name('getpaymentrequest');

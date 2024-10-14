@@ -56,6 +56,20 @@
     <!--begin::Col-->
     <div class="col-md-12 fv-row">
         <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">PayPal Email</label>
+        <!--end::Label-->
+
+        <!--begin::Input-->
+        <input type="text" class="form-control form-control-solid" value="{{ old('email') }}" name="email"/>
+        <!--end::Input-->
+    </div>
+    <!--end::Col-->
+</div>
+<div class="row mb-5">
+
+    <!--begin::Col-->
+    <div class="col-md-12 fv-row">
+        <!--begin::Label-->
         <label class="required fs-5 fw-semibold mb-2">PayPal Client ID</label>
         <!--end::Label-->
 

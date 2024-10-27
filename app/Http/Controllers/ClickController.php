@@ -76,7 +76,7 @@ class ClickController extends Controller
 
                     return redirect()->away($offerURL->url.'?id='.$click->clickID.'&from=dealsintel');
                 }else{
-                    return redirect()->away('https://google.com');
+                    return redirect()->away('https://dealsintel.com');
                 }
         }else{
 

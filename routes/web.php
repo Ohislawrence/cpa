@@ -270,7 +270,11 @@ Route::middleware([
         Route::get('setting/configuration', [ConfigurationController::class, 'index'])->name('configuration');
         //emails
         Route::get('email/send', [EmailController::class, 'send'])->name('email.send');
+        Route::get('email/sent/all', [EmailController::class, 'showSentMessages'])->name('email.showSentMessages');
+        Route::get('email/sent/get/sent', [EmailController::class, 'getsentMessages'])->name('email.getsentMessages');
         Route::get('email/settings', [EmailController::class, 'settings'])->name('email.settings');
+        Route::post('email/settings/save', [EmailController::class, 'updateEmailSettings'])->name('email.updateEmailSettings');
+        Route::post('email/send/all', [EmailController::class, 'sendEmail'])->name('email.sendEmail');
         Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');
 
     });

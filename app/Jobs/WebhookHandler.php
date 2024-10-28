@@ -81,35 +81,32 @@ class WebhookHandler implements ShouldQueue
             'conversion' => $conversion,
         ]);
 
-        //logger()->info($this->webhookCall->payload);
-        //$click->offer->user->withdrawFloat(2.74);
-        //$click->user->depositFloat(1.37);
-        //\App\Models\User::where('id', '1')->first()->depositFloat(1.37);
-
-        $period = $click->user->created_at->subMonths(6);
+            //logic for referral
+        $period = $click->user->created_at->subMonths(6); //months in which the reffered has stayed on the platform
         $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
         $referral = $referralget->user;
 
         if($click->user->created_at > $period )
         {
-            $fees = $earned * 0.25;
+            //$fees = $earned * 0.25;
             $refCommision = $earned * 0.05;
 
-            $click->offer[0]->user->transferFloat($click->user, $earned);
-            $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
-            $click->offer[0]->user->transferFloat($referral, $refCommision);
+            $click->offer[0]->user->transferFloat($click->user, $earned); //credit main
+            //$click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
+            $click->offer[0]->user->transferFloat($referral, $refCommision); //credit commission
             
         }else{
-            $fees = $earned * 0.3;
+            //$fees = $earned * 0.3;
 
-            $click->offer[0]->user->transferFloat($click->user, $earned);
-            $click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
+            $click->offer[0]->user->transferFloat($click->user, $earned); //credit main 
+            //$click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
         }
         
 
     }
 
     /**
+     the payload will look like this
     {
     "event": "user.signup",
     "timestamp": "2024-06-11T12:34:56Z",

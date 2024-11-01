@@ -39,8 +39,8 @@
 
             <span class="text-muted fw-semibold fs-7">See records</span>
         </h3>
-        
-        
+
+
         <!--begin::Toolbar-->
         <div class="card-toolbar" data-kt-buttons="true">
             <form method="GET" action="{{ route('admin.dashboard') }}">
@@ -49,7 +49,7 @@
                     <option value="30" {{ $timeframe == 30 ? 'selected' : '' }}>Last 30 Days</option>
                     <option value="90" {{ $timeframe == 90 ? 'selected' : '' }}>Last 90 Days</option>
                 </select>
-                
+
             </form>
             <a class="btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1" id="kt_charts_widget_3_year_btn">Year</a>
 

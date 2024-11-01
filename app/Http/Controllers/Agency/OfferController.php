@@ -21,7 +21,29 @@ class OfferController extends Controller
     public function index()
     {
         $offers = Offer::latest()->get();
+        //$timeframe = 7;
         return view('agency.offers',compact('offers'));
+    }
+
+    public function offertele(Request $request, $id)
+    {
+        //$id = $request->d;
+        // Validate timeframe to be either 7, 30, or 90 days
+        if (!in_array($id, [7, 30, 90])) {
+            $id= 0;
+        }
+
+
+
+        $data = [
+            'ActiveCampaigns' => $id,
+            'clicks' => $id,
+            'Conversions' => $id,
+            'RevenueGenerated' => $id,
+        ];
+        return response()->json($data);
+
+
     }
 
     public function create()

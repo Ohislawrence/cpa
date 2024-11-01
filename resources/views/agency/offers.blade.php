@@ -40,11 +40,41 @@
 
 	});
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dropdown = document.getElementById('dropdown');
 
+        dropdown.addEventListener('change', function () {
+            const selectedId = this.value;
+            const baseUrl = "{{ url("merchant/campaigns/data") }}";
+
+            if (selectedId) {
+                fetch('{{ url("merchant/campaigns/data") }}/${selectedId}'), {
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'  // Optional, for added security
+                }
+            })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('ActiveCampaigns').textContent = data.ActiveCampaigns;
+                        document.getElementById('clicks').textContent = data.clicks;
+                        document.getElementById('Conversions').textContent = data.Conversions;
+                        document.getElementById('RevenueGenerated').textContent = data.RevenueGenerated;
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            } else {
+                // Clear display if no option is selected
+                document.getElementById('ActiveCampaigns').textContent = '-';
+                document.getElementById('clicks').textContent = '-';
+                document.getElementById('Conversions').textContent = '-';
+                document.getElementById('RevenueGenerated').textContent = '-';
+            }
+        });
+    });
+</script>
 
 @endsection
-
-
 
 
 
@@ -57,7 +87,16 @@
 	@include('admin.components.alert')
 	@if(!empty($offers->count()))
     <!--begin::Col-->
-    <div class="row g-5 g-xl-8">
+
+
+
+
+    <div id="click-display" class="row g-5 g-xl-8">
+        <select class="form-select form-select-solid" aria-label="Select Last Days" id="dropdown" name="dropdown">
+            <option value="7" >Last 7 Days</option>
+            <option value="30" >Last 30 Days</option>
+            <option value="90" >Last 90 Days</option>
+        </select>
         <div class="col-xl-3">
 
     <!--begin::Statistics Widget 5-->
@@ -65,11 +104,11 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">
-                $ 34343
+                <span id="ActiveCampaigns">-</span>
             </div>
 
             <div class="fw-semibold text-gray-400">
-               Balance       </div>
+               Active Campaigns      </div>
         </div>
         <!--end::Body-->
     </a>
@@ -82,11 +121,11 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">
-                $ 34343
+                <span id="clicks">-</span>
             </div>
 
             <div class="fw-semibold text-gray-100">
-              Today       </div>
+              Clicks    </div>
         </div>
         <!--end::Body-->
     </a>
@@ -100,11 +139,11 @@
         <div class="card-body">
 
             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                $ 45445
+                <span id="Conversions">-</span>
             </div>
 
             <div class="fw-semibold text-white">
-               Yesterday        </div>
+                Conversions  </div>
         </div>
         <!--end::Body-->
     </a>
@@ -117,11 +156,11 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                $ 4454
+                <span id="RevenueGenerated">-</span>
             </div>
 
             <div class="fw-semibold text-white">
-            Month To Date     </div>
+                Revenue Generated </div>
         </div>
         <!--end::Body-->
     </a>

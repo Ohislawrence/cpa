@@ -231,7 +231,7 @@ Route::middleware([
         Route::get('dashboard', [AgencyDashboardController::class, 'index'])->name('dashboard');
         //campaigns
         Route::get('campaigns', [AgencyOfferController::class, 'index'])->name('campaigns');
-        Route::get('campaigns/data/{id}', [AgencyOfferController::class, 'offertele'])->name('offertele');
+        Route::get('campaigns/data', [AgencyOfferController::class, 'getStats'])->name('getStats');
         Route::get('campaign/create', [AgencyOfferController::class, 'create'])->name('create.campaign');
         Route::post('campaign/create/post', [AgencyOfferController::class, 'store'])->name('store.campaign.post');
         Route::get('campaign/view', [AgencyOfferController::class, 'viewcampaign'])->name('viewcampaign.campaign');

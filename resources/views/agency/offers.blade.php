@@ -40,36 +40,37 @@
 
 	});
 </script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const dropdown = document.getElementById('dropdown');
-
-        dropdown.addEventListener('change', function () {
-            const selectedId = this.value;
-            const baseUrl = "{{ url("merchant/campaigns/data") }}";
-
-            if (selectedId) {
-                fetch('{{ url("merchant/campaigns/data") }}/${selectedId}'), {
-                method: 'GET',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'  // Optional, for added security
+    $(document).ready(function() {
+        // Function to fetch data based on date range
+        function fetchData(dateRange) {
+            $.ajax({
+                url: "{{ route('merchant.getStats') }}",
+                type: "GET",
+                data: { dateRange: dateRange },
+                success: function(response) {
+                    $('#ActiveCampaigns').text(response.ActiveCampaigns);
+                    $('#clicks').text(response.clicks);
+                    $('#Conversions').text(response.Conversions);
+                },
+                error: function(xhr) {
+                    console.log("Error:", xhr.responseText);
                 }
-            })
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('ActiveCampaigns').textContent = data.ActiveCampaigns;
-                        document.getElementById('clicks').textContent = data.clicks;
-                        document.getElementById('Conversions').textContent = data.Conversions;
-                        document.getElementById('RevenueGenerated').textContent = data.RevenueGenerated;
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            } else {
-                // Clear display if no option is selected
-                document.getElementById('ActiveCampaigns').textContent = '-';
-                document.getElementById('clicks').textContent = '-';
-                document.getElementById('Conversions').textContent = '-';
-                document.getElementById('RevenueGenerated').textContent = '-';
-            }
+            });
+        }
+
+        // Fetch "7 Days Ago" data on page load
+        fetchData('7_days_ago');
+
+        // Fetch data based on dropdown change
+        $('#dateRange').on('change', function() {
+            const dateRange = $(this).val();
+            fetchData(dateRange);
         });
     });
 </script>
@@ -92,10 +93,12 @@
 
 
     <div id="click-display" class="row g-5 g-xl-8">
-        <select class="form-select form-select-solid" aria-label="Select Last Days" id="dropdown" name="dropdown">
-            <option value="7" >Last 7 Days</option>
-            <option value="30" >Last 30 Days</option>
-            <option value="90" >Last 90 Days</option>
+        <select id="dateRange" class="form-control form-control-solid" name="dateRange">
+            <option value="today">Today</option>
+            <option value="7_days_ago" selected>7 Days Ago</option>
+            <option value="30_days_ago">30 Days Ago</option>
+            <option value="this_month">This Month</option>
+            <option value="all_time">All Time</option>
         </select>
         <div class="col-xl-3">
 

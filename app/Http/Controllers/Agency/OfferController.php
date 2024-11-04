@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTable;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OfferController extends Controller
 {
@@ -25,26 +27,40 @@ class OfferController extends Controller
         return view('agency.offers',compact('offers'));
     }
 
-    public function offertele(Request $request, $id)
-    {
-        //$id = $request->d;
-        // Validate timeframe to be either 7, 30, or 90 days
-        if (!in_array($id, [7, 30, 90])) {
-            $id= 0;
-        }
+    public function getStats(Request $request)
+{
+    $dateRange = $request->input('dateRange');
+    $query =  DB::table('offers')
+                ->join('clicks', 'offers.offerid', '=', 'clicks.offer_id')
+                ->where('offers.status', 'Active'); //Offer::with('click');
+    
 
-
-
-        $data = [
-            'ActiveCampaigns' => $id,
-            'clicks' => $id,
-            'Conversions' => $id,
-            'RevenueGenerated' => $id,
-        ];
-        return response()->json($data);
-
-
+    if ($dateRange === 'today') {
+        $query->whereDate('created_at', Carbon::today());
+    } elseif ($dateRange === '7_days_ago') {
+        $query->where('created_at', '>=', Carbon::now()->subDays(7));
+    } elseif ($dateRange === '30_days_ago') {
+        $query->where('created_at', '>=', Carbon::now()->subDays(30));
+    } elseif ($dateRange === 'this_month') {
+        $query->where('created_at', '>=', Carbon::now()->startOfMonth());
     }
+    // No date filter for "all_time"
+
+    /**$data = $query->first()->map(function ($offer) {
+        return [
+            'ActiveCampaigns' => $offer->count(),
+            'clicks' => $offer->click->id ?? 0, // Total number of clicks for this order
+            'clicks' => $offer->click->id ?? 0, // Total number of clicks for this order
+            'Conversions' => $offer->click->id ?? 0,
+        ];
+    });
+    **/
+    
+    $data = $query->selectRaw('COUNT(distinct offers.id) as ActiveCampaigns, COUNT(clicks.offer_id) as clicks, SUM(clicks.conversion) as Conversions')
+       ->first();
+
+    return response()->json($data);
+}
 
     public function create()
     {

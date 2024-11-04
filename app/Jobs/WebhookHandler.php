@@ -54,6 +54,8 @@ class WebhookHandler implements ShouldQueue
                 $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Android')->first()->payout / 100);
             }elseif($click->platform == 'iOS'){
                 $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','iOS')->first()->payout / 100);
+            }else{
+                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
             }
 
         }else{
@@ -63,6 +65,8 @@ class WebhookHandler implements ShouldQueue
                 $earned = $click->offer[0]->targets->where('target','Android')->first()->payout;
             }elseif($click->platform == 'iOS'){
                 $earned = $click->offer[0]->targets->where('target','iOS')->first()->payout;
+            }else{
+                $earned = $click->offer[0]->targets->where('target','Windows')->first()->payout;
             }
         }
 

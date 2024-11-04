@@ -16,7 +16,7 @@
     ClassicEditor
         .create( document.querySelector( '#body' ),{
             ckfinder: {
-                uploadUrl: '{{route('admin.ckeditor.upload').'?_token='.csrf_token() }}',
+                uploadUrl: '{{route("admin.ckeditor.upload")."?_token=".csrf_token() }}',
             }
         });
 </script>

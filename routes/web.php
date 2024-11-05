@@ -269,6 +269,7 @@ Route::middleware([
         Route::post('mass/payouts/paypal/all', [MassPaymentController::class, 'processMassPayment'])->name('payout.option.processMassPayment');
         //settings
         Route::get('setting/configuration', [ConfigurationController::class, 'index'])->name('configuration');
+        Route::post('setting/configuration/post', [ConfigurationController::class, 'update'])->name('configuration.update');
         //emails
         Route::get('email/send', [EmailController::class, 'send'])->name('email.send');
         Route::get('email/sent/all', [EmailController::class, 'showSentMessages'])->name('email.showSentMessages');

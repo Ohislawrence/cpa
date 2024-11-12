@@ -55,13 +55,13 @@
             <!--end::Col-->
         </div>
         <!--end::Overview-->
-        
-        
+
+
     </div>
     <!--end::Body-->
 </div>
 
-        
+
         <div class="card mb-5 mb-xl-10">
             <!--begin::Card header-->
             <div class="card-header">
@@ -70,7 +70,7 @@
                     <h2 class="fw-bold">Details</h2>
                 </div>
                 <!--begin::Card title-->
-                
+
             </div>
             <!--end::Card header-->
             <!--begin::Card body-->
@@ -145,7 +145,7 @@
                                 <!--begin::Row-->
                                 <tr>
                                     <td class="text-gray-500">Network EPC:</td>
-                                    <td class="text-gray-800">$ {{ round($offer->click->where('offer_id', $offer->offerid)->sum('earned')/$offer->click->where('offer_id', $offer->offerid)->count(),2) }}</td>
+                                    <td class="text-gray-800">$ {{ number_format(round($EPC,2) ) ?? 0 }}</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->
@@ -172,7 +172,7 @@
             <!--end::Card body-->
         </div>
         <!--end::Card-->
-          
+
 
 
 

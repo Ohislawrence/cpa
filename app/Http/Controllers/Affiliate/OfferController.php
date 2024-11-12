@@ -65,7 +65,7 @@ class OfferController extends Controller
                     return $payouttype;
                 })
                 ->addColumn('epc', function($row){
-                    
+
 
                     // Avoid division by zero
                     $averageEarnings =  0;
@@ -80,7 +80,12 @@ class OfferController extends Controller
     public function thisoffer($id, Request $request)
     {
         $offer = Offer::where('offerid', $id)->first();
-        return view('affiliate.viewoffer', compact('offer'));
+        if($offer && $offer->click){
+            $EPC = $offer->click->where('offer_id', $offer->offerid)->sum('earned')/$offer->click->where('offer_id', $offer->offerid)->count();
+        }else{
+            $EPC = 0;
+        }
+        return view('affiliate.viewoffer', compact('offer', 'EPC'));
     }
 
 

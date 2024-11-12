@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('requestpayments', function (Blueprint $table) {
             $table->integer('number');
-            //$table->string('method');
+            $table->string('method');
         });
     }
 

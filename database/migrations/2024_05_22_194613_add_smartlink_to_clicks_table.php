@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('clicks', function (Blueprint $table) {
-            //
+            $table->integer('smartlink')->nullable();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('clicks', function (Blueprint $table) {
-            $table->enum('smartlink', ['yes', 'no']);
+            $table->integer('smartlink');
         });
     }
 };

@@ -44,11 +44,21 @@ class DashboardController extends Controller
         // Default timeframe is last 7 days
         $timeframe = $request->input('timeframe', 7);
 
+
         $clicks = Click::where('user_id', Auth::user()->id)->where('created_at','>=', Carbon::now()->subDays($timeframe));
-        $clicksthisMonth= $clicks->get();
-        $leads = $clicks->where('conversion', 1)->get();
-        $earned = $clicks->where('earned','>', 0)->get();
-        $epc = ($clicksthisMonth->count() != 0) ? round(($earned->sum('earned'))/($clicksthisMonth->count()) ,2,PHP_ROUND_HALF_DOWN) : 0;
+        //dd($clicks);
+        if( is_null($clicks)){
+            $clicksthisMonth= 0;
+            $leads = 0;
+            $earned = 0;
+            $epc = 0;
+        }else{
+            $clicksthisMonth= $clicks->get();
+            $leads = $clicks->where('conversion', 1)->get();
+            $earned = $clicks->where('earned','>', 0)->get();
+            $epc = ($clicksthisMonth->count() != 0) ? round(($earned->sum('earned'))/($clicksthisMonth->count()) ,2,PHP_ROUND_HALF_DOWN) : 0;
+        }
+
 
 
         // Validate timeframe to be either 7, 30, or 90 days

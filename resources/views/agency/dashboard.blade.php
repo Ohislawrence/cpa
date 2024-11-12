@@ -144,7 +144,7 @@
                                     <div class="fs-5 fw-bold text-gray-600 me-5">Today:</div>
                                     <!--end::Label-->
                                     <!--begin::Stats-->
-                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$currency->value}} {{ $earnedToday }}</div>
+                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$real_currency->symbol}} {{ $earnedToday }}</div>
                                     <!--end::Stats-->
                                 </div>
                                 <!--end::Label-->
@@ -157,7 +157,7 @@
                                     <div class="fs-5 fw-bold text-gray-600 me-5">Yesterday:</div>
                                     <!--end::Label-->
                                     <!--begin::Stats-->
-                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$currency->value}} {{ $earnedYesterday }}</div>
+                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$real_currency->symbol}} {{ $earnedYesterday }}</div>
                                     <!--end::Stats-->
                                 </div>
                                 <!--end::Label-->
@@ -170,7 +170,7 @@
                                     <div class="fs-5 fw-bold text-gray-600 me-5">This Month:</div>
                                     <!--end::Label-->
                                     <!--begin::Stats-->
-                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$currency->value}} {{ $earnedThisMonth }}</div>
+                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$real_currency->symbol}} {{ $earnedThisMonth }}</div>
                                     <!--end::Stats-->
                                 </div>
                                 <!--end::Label-->
@@ -202,7 +202,7 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">
-                {{$currency->value}} 34343
+                {{$real_currency->symbol}} 34343
             </div>
 
             <div class="fw-semibold text-gray-400">
@@ -219,7 +219,7 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">
-                {{$currency->value}} 34343
+                {{$real_currency->symbol}} 34343
             </div>
 
             <div class="fw-semibold text-gray-100">
@@ -237,7 +237,7 @@
         <div class="card-body">
 
             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                {{$currency->value}} 45445
+                {{$real_currency->symbol}} 45445
             </div>
 
             <div class="fw-semibold text-white">
@@ -254,7 +254,7 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                {{$currency->value}} 4454
+                {{$real_currency->symbol}} 4454
             </div>
 
             <div class="fw-semibold text-white">

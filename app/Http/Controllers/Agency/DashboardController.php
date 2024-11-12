@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Click;
 use App\Models\Configuration;
+use App\Models\Currency;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -21,6 +22,7 @@ class DashboardController extends Controller
         $payYesterday = $clicked->where('created_at','>=', Carbon::yesterday())->get();
         $payToday = $clicked->where('created_at','>=', Carbon::today())->get();
         $currency = Configuration::where('key', 'default_currency')->first();
+        $real_currency = Currency::where('id', $currency->value)->first();
 
         $earnedThisMonth = 0;
         $earnedYesterday = 0;
@@ -36,7 +38,7 @@ class DashboardController extends Controller
             $earnedToday += $value->earned;
         }
 
-        return view('agency.dashboard', compact('earnedThisMonth','earnedYesterday','earnedToday', 'currency'));
+        return view('agency.dashboard', compact('earnedThisMonth','earnedYesterday','earnedToday', 'real_currency'));
 
     }
 }

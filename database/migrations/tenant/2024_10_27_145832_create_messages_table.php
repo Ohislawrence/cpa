@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('targets', function (Blueprint $table) {
-            $table->string('url')->nullable();
+        Schema::create('messages', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('targets', function (Blueprint $table) {
-            $table->string('url');
-        });
+        Schema::dropIfExists('messages');
     }
 };

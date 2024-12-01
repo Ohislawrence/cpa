@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->string('ip');
-            $table->string('clickID');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->timestamps();
         });
     }
 
@@ -22,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->string('ip');
-            $table->string('clickID');
-        });
+        Schema::dropIfExists('categories');
     }
 };

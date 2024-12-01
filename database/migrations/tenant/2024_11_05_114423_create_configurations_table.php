@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->string('referrerurl')->nullable();
+        Schema::create('configurations', function (Blueprint $table) {
+            $table->id();
+            $table->string('key')->unique(); // e.g., 'site_name', 'pagination_limit'
+            $table->text('value')->nullable(); // Stores the value as a string or JSON
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->string('referrerurl');
-        });
+        Schema::dropIfExists('configurations');
     }
 };

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->integer('smartlink')->nullable();
+        Schema::create('message_user', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('message_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->integer('smartlink');
-        });
+        Schema::dropIfExists('message_user');
     }
 };

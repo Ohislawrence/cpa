@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Bavix\Wallet\Traits\HasWalletFloat;
 use Bavix\Wallet\Interfaces\WalletFloat;
@@ -16,7 +15,7 @@ use Bavix\Wallet\Interfaces\Wallet;
 
 class User extends Authenticatable implements Wallet, WalletFloat
 {
-    use HasApiTokens;
+    
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
@@ -90,6 +89,11 @@ class User extends Authenticatable implements Wallet, WalletFloat
     public function messages()
     {
     return $this->belongsToMany(Message::class, 'message_user');
+    }
+
+    public function tenants()
+    {
+        return $this->belongsToMany(Tenant::class);
     }
 
 

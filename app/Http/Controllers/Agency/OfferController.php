@@ -36,13 +36,13 @@ class OfferController extends Controller
     
 
     if ($dateRange === 'today') {
-        $query->whereDate('created_at', Carbon::today());
+        $query->whereDate('offers.created_at', Carbon::today());
     } elseif ($dateRange === '7_days_ago') {
-        $query->where('created_at', '>=', Carbon::now()->subDays(7));
+        $query->where('offers.created_at', '>=', Carbon::now()->subDays(7));
     } elseif ($dateRange === '30_days_ago') {
-        $query->where('created_at', '>=', Carbon::now()->subDays(30));
+        $query->where('offers.created_at', '>=', Carbon::now()->subDays(30));
     } elseif ($dateRange === 'this_month') {
-        $query->where('created_at', '>=', Carbon::now()->startOfMonth());
+        $query->where('offers.created_at', '>=', Carbon::now()->startOfMonth());
     }
     // No date filter for "all_time"
 

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->string('earned')->nullable();
+        Schema::table('agencydetails', function (Blueprint $table) {
+            $table->string('paypal_email')->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            //
+        Schema::table('agencydetails', function (Blueprint $table) {
+            $table->dropColumn('paypal_email');
         });
     }
 };

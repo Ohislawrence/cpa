@@ -49,7 +49,7 @@
 							    	</li>
 								    <!-- SIGN UP BUTTON -->
 								    <li class="nl-simple" aria-haspopup="true">
-								    	<a href="{{route('affiliatereg')}}" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
+								    	<a href="{{route('start')}}" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
 								    </li> 
 									@else
 									<!-- SIGN UP BUTTON -->

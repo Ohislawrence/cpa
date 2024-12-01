@@ -10,11 +10,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 //use Reefki\DeviceDetector\Device;
 use Hibit\GeoDetect;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\App;
 
 class ClickController extends Controller
 {
-    public function toOffer(Request $request)
+    public function toOffer(Request $request): RedirectResponse
     {
         if(User::where('id', $request->aff_id)->exists() && Offer::where('offerid', $request->offer_id)->exists()){
             $device = $request->device();
@@ -56,7 +57,7 @@ class ClickController extends Controller
                         'referrerurl' => request()->headers->get('referer'),
                         'earned'=> 0,
                         'conversion' => 0,
-                        'smartlink' => 'no',
+                        'smartlink' => 0,
                     ]);
 
 

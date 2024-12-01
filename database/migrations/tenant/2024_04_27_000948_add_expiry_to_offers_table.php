@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('requestpayments', function (Blueprint $table) {
-            $table->integer('number');
-            $table->string('method');
+        Schema::table('offers', function (Blueprint $table) {
+            $table->string('secretkey')->nullable();
+            $table->date('expiry')->nullable();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('requestpayments', function (Blueprint $table) {
+        Schema::table('offers', function (Blueprint $table) {
             //
         });
     }

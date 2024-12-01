@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ClicksController;
+use App\Http\Controllers\Admin\CreatetenantController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmailControler;
 use App\Http\Controllers\Admin\OfferController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\WebhookController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +48,9 @@ use function Laravel\Prompts\alert;
 |
 */
 
+foreach (config('tenancy.central_domains') as $domain) {
+    Route::domain(env('APP_URL', $domain))->group(function () {
+
 //front pages
 Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('affiliates', [FrontController::class, 'affiliates'])->name('affiliates');
@@ -58,20 +63,27 @@ Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
 Route::get('terms-of-service', [FrontController::class, 'tos'])->name('tos');
 Route::get('support', [FrontController::class, 'support'])->name('support');
 Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
+Route::get('error', [FrontController::class, 'error'])->name('error');
+
+//Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
 //affiliate registration
 Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
-
 //advertiser registration
 Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
 Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdvertiser'])->name('advertiserregpost');
+//tenant creation
+Route::get('start', [CreatetenantController::class,'create'])->name('start');
+Route::post('start/create', [CreatetenantController::class,'createTenant'])->name('start.post');
+Route::get('congratulations/created', [CreatetenantController::class,'tenantCreated'])->name('tenantCreated');
+
 
 //redirect to affiate
 Route::get('/register', function () {
-return redirect(route('affiliatereg'));
+return redirect(route('start'));
 });
 
-
+Route::get('login/test', [FrontController::class, 'logintest'])->name('login.test');
 
 //all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
@@ -91,14 +103,19 @@ Route::post('verify-action-taken',[WebhookController::class, 'handle']);
  //  $user->depositFloat(3.55);
 //});
 
-
+});
+}
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
+    'web',
+    'auth',
+    ])->group(function () {
+
+    foreach (config('tenancy.central_domains') as $domain) {
+        Route::domain(env('APP_URL', $domain))->group(function () {
+
     Route::get('/dashboard', function () {
+        
         if (auth()->user()->hasRole('admin')){
             return redirect(route('admin.dashboard'));
         }
@@ -127,6 +144,10 @@ Route::middleware([
         'as' => 'admin.',
     ], function () {
 
+        //tenants
+        Route::get('tenants/all', [TenantController::class, 'allTenants'])->name('alltenants');
+        Route::get('tenant/create/new', [TenantController::class, 'create'])->name('tenant.create');
+        Route::post('tenant/create/post', [TenantController::class, 'createTenant'])->name('createTenant.post');
         //users
         Route::get('user', [UserController::class, 'index'])->name('viewusers');
         Route::get('getuser', [UserController::class, 'getusers'])->name('getusers');
@@ -195,32 +216,10 @@ Route::middleware([
             });
     });
 
-//Affiliate
-    Route::group([
-        'namespace' => 'App\Http\Controllers\Affiliate',
-        'prefix' => 'affiliate',
-        'middleware' => 'role:affiliate',
-        'as' => 'affiliate.',
-    ], function () {
-        Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
-        Route::get('offers', [AffiliateOfferController::class, 'index'])->name('offer');
-        Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
-        Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
-        Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
-        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
-        Route::post('dashboard/getclickchart', [DashboardController::class, 'showclickchart'])->name('showclickchart');
-        Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
-        Route::get('payments', [PaymentController::class, 'index'])->name('payments');
-        Route::get('payments/getpaymentdata', [PaymentController::class, 'getpaymentdata'])->name('getpaymentdata');
-        Route::post('payments/post/requestpayment', [PaymentController::class, 'requestpayment'])->name('requestpayment');
-        Route::get('referral', [ReferralController::class, 'index'])->name('referral');
-        Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
-        Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
-        Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
 
-    });
 
-//merchant
+
+    //merchant
     Route::group([
         'namespace' => 'App\Http\Controllers\Agency',
         'prefix' => 'merchant',
@@ -279,5 +278,44 @@ Route::middleware([
         Route::post('email/send/all', [EmailController::class, 'sendEmail'])->name('email.sendEmail');
         Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');
 
+
+        Route::get('logout/here', [FrontController::class, 'logout'])->name('logout');
+
     });
+
+
+
+
+    });
+    }
+
+//Affiliate
+    Route::group([
+        'namespace' => 'App\Http\Controllers\Affiliate',
+        'prefix' => 'affiliate',
+        'middleware' => 'role:affiliate',
+        'as' => 'affiliate.',
+    ], function () {
+        Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
+        Route::get('offers', [AffiliateOfferController::class, 'index'])->name('offer');
+        Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
+        Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
+        Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
+        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
+        Route::post('dashboard/getclickchart', [DashboardController::class, 'showclickchart'])->name('showclickchart');
+        Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
+        Route::get('payments', [PaymentController::class, 'index'])->name('payments');
+        Route::get('payments/getpaymentdata', [PaymentController::class, 'getpaymentdata'])->name('getpaymentdata');
+        Route::post('payments/post/requestpayment', [PaymentController::class, 'requestpayment'])->name('requestpayment');
+        Route::get('referral', [ReferralController::class, 'index'])->name('referral');
+        Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
+        Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
+        Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
+
+    });
+
+
+    
+
+    
 });

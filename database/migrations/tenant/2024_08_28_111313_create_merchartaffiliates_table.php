@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('affiliatedetails', function (Blueprint $table) {
-           $table->integer('referral_id')->nullable();
-           $table->integer('referred_by')->nullable();
+        Schema::create('merchartaffiliates', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -22,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('affiliatedetails', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('merchartaffiliates');
     }
 };

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            $table->float('earned')->change();
+        Schema::create('merchartconfigurations', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clicks', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('merchartconfigurations');
     }
 };

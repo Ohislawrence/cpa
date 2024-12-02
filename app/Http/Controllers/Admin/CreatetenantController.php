@@ -55,7 +55,7 @@ class CreatetenantController extends Controller
     public function createTenant(Request $request)
     {
 
-        try {
+        //try {
             //Code that may throw an Exception
         
         $this->validate($request, [
@@ -122,7 +122,7 @@ class CreatetenantController extends Controller
             'currency' => 'USD',
         ]);
 
-        Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
+        //Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
 
         Tenancy::initialize($tenant);
         // Register the user on the tenant's database
@@ -140,9 +140,11 @@ class CreatetenantController extends Controller
 
         return redirect()->route('tenantCreated');
 
-    } catch (Exception $e) {
+   /* } catch (Exception $e) {
         FacadesLog::debug($e->getMessage());
         return redirect()->route('error');
     }
+        */
     }
+    
 }

@@ -61,7 +61,7 @@ class CreatetenantController extends Controller
         $this->validate($request, [
             'business_email' => 'required|unique:users,email',
             'business_name' => 'required',
-            'subdomain' => 'required|unique:domains,domain',
+            'subdomain' => 'required|unique:domains,domain|unique:tenants,domain',
         ]);
 
 

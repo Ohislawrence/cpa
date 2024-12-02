@@ -83,7 +83,7 @@ Route::get('/register', function () {
 return redirect(route('start'));
 });
 
-Route::get('login/test', [FrontController::class, 'logintest'])->name('login.test');
+//Route::get('login/test', [FrontController::class, 'logintest'])->name('login.test');
 
 //all clicks comes thru here
 Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');

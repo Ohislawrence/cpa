@@ -43,6 +43,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Sitemap\SitemapGenerator;
 use Stancl\Tenancy\Middleware\IdentificationMiddleware;
+use Stancl\Tenancy\Middleware\ScopeSessions;
 
 use function Laravel\Prompts\alert;
 
@@ -68,37 +69,24 @@ use function Laravel\Prompts\alert;
 | Feel free to customize them however you want. Good luck!
 |
 */
-
-Route::middleware([
-    'web',
-    InitializeTenancyByDomainOrSubdomain::class,
-    PreventAccessFromCentralDomains::class,
-])->group(function () {
-
-Route::get('/', [FrontController::class, 'home'])->name('home');
+//Route::get('/', [FrontController::class, 'home'])->name('home');
 
 //Route::get('login/test', [FrontController::class, 'logintest'])->name('login.test');
 
 //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
-
-
-
-    
+ 
 Route::middleware([
     'web',
     'auth',
-    'verified'
-    ])->group(function () {  
-    
-        
+    InitializeTenancyBySubdomain::class,
+    PreventAccessFromCentralDomains::class,
+    ScopeSessions::class,
+])->group(function () {
 
-/* 
-    Route::get('/', function () {
-            return redirect(route('dashboard'));
-    })->name('home');
-*/
+
+    
    
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
        if(Auth::user()->hasRole('affiliate')){
             return redirect(route('affiliate.dashboard'));
         }
@@ -205,6 +193,5 @@ Route::middleware([
 
     });
     
-});
 });
 

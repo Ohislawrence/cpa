@@ -315,6 +315,24 @@ Route::middleware([
     });
 
 
+
+    //Tenant
+    Route::group([
+        'namespace' => 'App\Http\Controllers\Tenant',
+        'prefix' => 'tenant',
+        'middleware' => 'role:tenant',
+        'as' => 'tenant.',
+    ], function () {
+        Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
+        Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
+        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
+        Route::post('dashboard/getclickchart', [DashboardController::class, 'showclickchart'])->name('showclickchart');
+        Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
+
+    });
+
+
+
     
 
     

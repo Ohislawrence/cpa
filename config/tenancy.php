@@ -21,7 +21,6 @@ return [
         'tracklia.com',
         'cpa.test',
         'localhost',
-        'env("APP_URL")',
         
         
     ],

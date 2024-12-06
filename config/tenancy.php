@@ -20,7 +20,7 @@ return [
     'central_domains' => [
         'tracklia.com',
         'cpa.test',
-        'localhost',
+        'localhost/cpa',
         
         
     ],

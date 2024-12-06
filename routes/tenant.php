@@ -87,18 +87,7 @@ Route::middleware([
         return redirect(route('dashboard'));
         });
  
-    Route::get('dashboard', function () {
-        if(Auth::user()->hasRole('affiliate')){
-             return redirect(route('affiliate.dashboard'));
-         }
-         elseif(Auth::user()->hasRole('merchant')){
-             return redirect(route('merchant.dashboard'));
-         }
-         else{
-             return redirect(route('home'));
-         }
-            
-     })->name('dashboard');
+    
 
 
 
@@ -107,7 +96,18 @@ Route::middleware([
         'auth',
     ])->group(function () {
 
-   
+        Route::get('dashboard', function () {
+            if(Auth::user()->hasRole('affiliate')){
+                 return redirect(route('affiliate.dashboard'));
+             }
+             elseif(Auth::user()->hasRole('merchant')){
+                 return redirect(route('merchant.dashboard'));
+             }
+             else{
+                 return redirect(route('home'));
+             }
+                
+         })->name('dashboard');
     
 
 

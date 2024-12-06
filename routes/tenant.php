@@ -74,30 +74,40 @@ use function Laravel\Prompts\alert;
 //Route::get('login/test', [FrontController::class, 'logintest'])->name('login.test');
 
 //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
- 
+
 Route::middleware([
-    'web',
-    'auth',
     InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
     ScopeSessions::class,
 ])->group(function () {
 
-
-    
-   
+//redirect to affiate
+    Route::get('/', function () {
+        return redirect(route('dashboard'));
+        });
+ 
     Route::get('dashboard', function () {
-       if(Auth::user()->hasRole('affiliate')){
-            return redirect(route('affiliate.dashboard'));
-        }
-        elseif(Auth::user()->hasRole('merchant')){
-            return redirect(route('merchant.dashboard'));
-        }
-        else{
-            return redirect(route('home'));
-        }
-           
-    })->name('dashboard');
+        if(Auth::user()->hasRole('affiliate')){
+             return redirect(route('affiliate.dashboard'));
+         }
+         elseif(Auth::user()->hasRole('merchant')){
+             return redirect(route('merchant.dashboard'));
+         }
+         else{
+             return redirect(route('home'));
+         }
+            
+     })->name('dashboard');
+
+
+
+    Route::middleware([
+        'web',
+        'auth',
+    ])->group(function () {
+
+   
+    
 
 
     //general profile
@@ -193,5 +203,6 @@ Route::middleware([
 
     });
     
+});
 });
 

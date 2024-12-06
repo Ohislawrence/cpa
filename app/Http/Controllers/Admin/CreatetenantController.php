@@ -55,7 +55,7 @@ class CreatetenantController extends Controller
     public function createTenant(Request $request)
     {
 
-        try {
+        //try {
             //Code that may throw an Exception
         
         $this->validate($request, [
@@ -140,10 +140,10 @@ class CreatetenantController extends Controller
 
         return redirect()->route('tenantCreated');
 
-   } catch (Exception $e) {
-        FacadesLog::debug($e->getMessage());
-        return redirect()->route('error');
-    }
+   //} catch (Exception $e) {
+   //     FacadesLog::debug($e->getMessage());
+    //    return redirect()->route('error');
+   // }
         
     }
     

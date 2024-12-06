@@ -76,6 +76,7 @@ use function Laravel\Prompts\alert;
 //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
 Route::middleware([
+    'web',
     InitializeTenancyBySubdomain::class,
     PreventAccessFromCentralDomains::class,
     ScopeSessions::class,
@@ -102,7 +103,7 @@ Route::middleware([
 
 
     Route::middleware([
-        'web',
+        
         'auth',
     ])->group(function () {
 

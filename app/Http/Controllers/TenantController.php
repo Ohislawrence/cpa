@@ -79,6 +79,53 @@ class TenantController extends Controller
         return redirect()->route('admin.alltenants')->with('message','Tenant Created');
     }
 
+    public function subdomainapi(){
+        $user = 'tracklia';
+        $pass = 'Victor@358@1616';
+        $host = 'tracklia.com';
+        
+        $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=domainadd'; 
+
+        $post = array('add' => '1',
+                'domain_type' => 'subdomain',
+                'domain' => 'tracklia.com',
+                'domainpath' => 'public_html',
+                'wildcard' => 0,
+                'issue_lecert' => 1,
+                'subdomain' => 'lawrenceohis',
+        );
+
+        // Set the curl parameters 
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+
+        if(!empty($post)){
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+        }
+
+        // Get response from the server. 
+        $resp = curl_exec($ch);
+        if(!empty(curl_error($ch))){
+            echo curl_error($ch); die();
+        }
+
+        // The response will hold a string as per the API response method. 
+        $res = json_decode($resp, true);
+        // Done ?
+        if(!empty($res['done'])){
+            echo "<pre>";
+            print_r($res['done']['msg']);
+            echo "</pre>";
+        }else{
+            print_r($res['error']);
+        }
+    }
+
     public function viewcampaign(Request $request)
     {
         if ($request->ajax()) {

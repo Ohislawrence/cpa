@@ -68,42 +68,9 @@
 							</div>
 							<!--end::Page title=-->
                             @include('layouts.mycomponents.rightoptions')
-							@role('affiliate')
-							@isset(Auth::user()->affiliatedetails->status)
-								@if(Auth::user()->affiliatedetails->status == 'Active')
-									@yield('slot')
-								@else
-									<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-										<div class="container-xxl" id="kt_content_container">
-											<p>You account is not active, reach out to us via our social media handle or email hello@dealsintel.com</p>
-										</div>
-									</div>
-								@endif
-							@endisset
-
-							@endrole
-							@role('admin')
+							
 								@yield('slot')
-							@endrole
-							@role('merchant')
-							@isset(Auth::user()->agencydetails->active)
-								@if(Auth::user()->agencydetails->active == 1)
-									@yield('slot')
-								@elseif(Auth::user()->agencydetails->active != 1)
-								<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-									<div class="container-xxl" id="kt_content_container">
-										<p>You account is not active yet, reach out to us on social media or via email hello@dealsintel.com</p>
-									</div>
-								</div>
-								@endif
-							@else
-								<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-									<div class="container-xxl" id="kt_content_container">
-										<h3>You account is not active yet, kindly reach out to us on social media or via email hello@dealsintel.com</h3>
-									</div>
-								</div>
-							@endisset
-							@endrole
+							
 
 							@include('layouts.mycomponents.footer')
 						</div>

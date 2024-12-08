@@ -18,9 +18,11 @@ return [
      * Only relevant if you're using the domain or subdomain identification middleware.
      */
     'central_domains' => [
+        'localhost/cpa',
         'tracklia.com',
         'cpa.test',
-        'localhost/cpa',
+        env('TENANT_ROOT_URL', 'localhost/cpa'),
+        
         
         
     ],
@@ -55,7 +57,7 @@ return [
          * Tenant database names are created like this:
          * prefix + tenant_id + suffix.
          */
-        'prefix' => 'merchant_',
+        'prefix' => 'tracklia_',
         'suffix' => '',
 
         /**

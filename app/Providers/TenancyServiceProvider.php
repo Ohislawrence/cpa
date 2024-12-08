@@ -14,6 +14,7 @@ use Stancl\Tenancy\Events;
 use Stancl\Tenancy\Jobs;
 use Stancl\Tenancy\Listeners;
 use Stancl\Tenancy\Middleware;
+use Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 
 class TenancyServiceProvider extends ServiceProvider
@@ -112,7 +113,7 @@ class TenancyServiceProvider extends ServiceProvider
                 ->middleware(
                     'web',
                     'universal',
-                    InitializeTenancyBySubdomain::class, // or whatever tenancy middleware you use
+                    InitializeTenancyByDomainOrSubdomain::class, // or whatever tenancy middleware you use
                 );
         });
     }
@@ -158,6 +159,6 @@ class TenancyServiceProvider extends ServiceProvider
         }
 
         // specify the right identification middleware
-    FilePreviewController::$middleware = ['web', 'universal', InitializeTenancyByDomain::class];
+    FilePreviewController::$middleware = ['web', 'universal', InitializeTenancyByDomainOrSubdomain::class];
     }
 }

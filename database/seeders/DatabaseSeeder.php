@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         DB::table('configurations')->insert([
             ['key' => 'contact_email', 'value' => 'NULL'],
             ['key' => 'support_email', 'value' => 'NULL'],
-            ['key' => 'default_currency', 'value' => 'NULL'],
+            ['key' => 'default_currency', 'value' => '2'],
             ['key' => 'timezone', 'value' => 'NULL'],
             ['key' => 'commission_rate', 'value' => 'NULL'],
             ['key' => 'cookie_lifetime_days', 'value' => 'NULL'],

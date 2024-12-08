@@ -1,18 +1,6 @@
-<!doctype html>
+@extends('layouts.app')
 
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    @include('layouts.frontcomponents.meta')
-            
-    <!-- SITE TITLE -->
-    <title>Login | {{ config('app.name') }}</title>
-                        
-    @include('layouts.auth.header')
-
+@section('header')
     @section('title',  'Login' )
     @section('type',  '' )
     @section('url',  '' )
@@ -20,16 +8,20 @@
     @section('description',  '' )
     @section('imagealt',  '' )
     @section('card',  '' )
+@endsection
+    
+
+
+@section('footer')
+
+@endsection
 
 
 
-</head>
 
 
 
-
-<body> 
-
+@section('slot')
 
 
 
@@ -81,14 +73,7 @@
 									<div class="col-md-6">
 										<div class="register-page-form">
 
-        <x-validation-errors class="mb-4" />
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
+      
         <form method="POST" action="{{ route('login.check.post') }}" class="row sign-in-form">
             
             @csrf
@@ -162,8 +147,8 @@
 
 
 
-		</div>	<!-- END PAGE CONTENT -->	
-        @include('layouts.auth.footer')
 
 	</body>
 </html>
+
+@endsection

@@ -86,8 +86,8 @@
                     <a href="{{ route('affiliate.payments') }}" class="menu-link px-5">Payments</a>
                     @endrole
 
-                    @role('agency')
-                    <a href="account/statements.html" class="menu-link px-5">Payments</a>
+                    @role('merchart')
+                    <a href="{{ route('merchant.configuration') }}" class="menu-link px-5">Configuration</a>
                     @endrole
                 </div>
                 <!--end::Menu item-->
@@ -101,10 +101,10 @@
                 </div>
                 <!--end::Menu item-->
                 <!--begin::Menu item-->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout.post') }}">
                     @csrf
                 <div class="menu-item px-5">
-                    <a href="{{ route('merchant.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="menu-link px-5">Sign Out</a>
+                    <a href="" onclick="event.preventDefault(); this.closest('form').submit();" class="menu-link px-5">Sign Out</a>
                 </div>
                 <!--end::Menu item-->
                 </form>

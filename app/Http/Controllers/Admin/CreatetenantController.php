@@ -122,8 +122,6 @@ class CreatetenantController extends Controller
             'currency' => 'USD',
         ]);
 
-        //Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
-
         Tenancy::initialize($tenant);
         // Register the user on the tenant's database
         $tenantUser = User::create([
@@ -136,6 +134,8 @@ class CreatetenantController extends Controller
         $tenantUser->assignRole($role);
         Tenancy::end();
 
+        $subdomainCreatedOnServer = $this->subdomainapi($subdomain);
+
         Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
 
         return redirect()->route('tenantCreated');
@@ -147,4 +147,49 @@ class CreatetenantController extends Controller
         
     }
     
+
+    public function subdomainapi($subdomain){
+        $user = 'tracklia';
+        $pass = 'Victor@358@1616';
+        $host = 'tracklia.com';
+        
+        $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=domainadd'; 
+
+        $post = array('add' => '1',
+                'domain_type' => 'subdomain',
+                'domain' => 'tracklia.com',
+                'domainpath' => 'public_html',
+                'wildcard' => 0,
+                'issue_lecert' => 1,
+                'subdomain' => $subdomain,
+        );
+
+        // Set the curl parameters 
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+
+        if(!empty($post)){
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+        }
+
+        // Get response from the server. 
+        $resp = curl_exec($ch);
+        if(!empty(curl_error($ch))){
+            echo curl_error($ch); die();
+        }
+
+        // The response will hold a string as per the API response method. 
+        $res = json_decode($resp, true);
+        // Done ?
+        if(!empty($res['done'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

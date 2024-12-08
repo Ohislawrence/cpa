@@ -44,7 +44,6 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Sitemap\SitemapGenerator;
 use Stancl\Tenancy\Middleware\IdentificationMiddleware;
 use Stancl\Tenancy\Middleware\ScopeSessions;
-
 use function Laravel\Prompts\alert;
 
 /*
@@ -69,30 +68,41 @@ use function Laravel\Prompts\alert;
 | Feel free to customize them however you want. Good luck!
 |
 */
-//Route::get('/', [FrontController::class, 'home'])->name('home');
 
-//Route::get('login/test', [FrontController::class, 'logintest'])->name('login.test');
-
-//Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
 Route::middleware([
     'web',
-    InitializeTenancyBySubdomain::class,
+    InitializeTenancyByDomainOrSubdomain::class,
     PreventAccessFromCentralDomains::class,
     ScopeSessions::class,
 ])->group(function () {
 
-//redirect to affiate
+    //all offer clicks comes thru here
+    Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
+
+    //offer webhooks
+    //Route::webhooks('verify-action-taken', 'webhooktest1');
+    Route::post('verify-action-taken',[WebhookController::class, 'handle']);
+
+
+    Route::get('login', function () {
+        return redirect(route('login.test'));
+        })->name('login');
+    
+    //login custom
+    Route::get('app/login', [FrontController::class, 'logintest'])->name('login.test');
+    Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
+
+    //affiliate registration
+    Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
+
+//redirect to affliate
     Route::get('/', function () {
         return redirect(route('dashboard'));
         });
  
-    
-
-
 
     Route::middleware([
-        
         'auth',
     ])->group(function () {
 
@@ -110,6 +120,8 @@ Route::middleware([
          })->name('dashboard');
     
 
+    //logout
+    Route::post('logingout/logout', [FrontController::class, 'logout'])->name('logout.post');
 
     //general profile
     Route::get('/profile', function () {
@@ -201,6 +213,8 @@ Route::middleware([
         Route::post('email/settings/save', [EmailController::class, 'updateEmailSettings'])->name('email.updateEmailSettings');
         Route::post('email/send/all', [EmailController::class, 'sendEmail'])->name('email.sendEmail');
         Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');
+
+        
 
     });
     

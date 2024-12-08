@@ -106,6 +106,14 @@ foreach (config('tenancy.central_domains') as $domain) {
             //  $user->depositFloat(3.55);
             //});
 
+            Route::get('login', function () {
+                return redirect(route('login.test'));
+                })->name('login');
+            
+            //login custom
+            Route::get('app/login', [FrontController::class, 'logintest'])->name('login.test');
+            Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
+
         });
     });
 }

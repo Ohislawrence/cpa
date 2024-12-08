@@ -1,6 +1,18 @@
-@extends('layouts.app')
+<!doctype html>
 
-@section('header')
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    @include('layouts.frontcomponents.meta')
+            
+    <!-- SITE TITLE -->
+    <title>Login | {{ config('app.name') }}</title>
+                        
+    @include('layouts.auth.header')
+
     @section('title',  'Login' )
     @section('type',  '' )
     @section('url',  '' )
@@ -8,20 +20,16 @@
     @section('description',  '' )
     @section('imagealt',  '' )
     @section('card',  '' )
-@endsection
-    
 
 
-@section('footer')
 
-@endsection
+</head>
 
 
 
 
+<body> 
 
-
-@section('slot')
 
 
 
@@ -147,8 +155,8 @@
 
 
 
+		</div>	<!-- END PAGE CONTENT -->	
+        @include('layouts.auth.footer')
 
 	</body>
 </html>
-
-@endsection

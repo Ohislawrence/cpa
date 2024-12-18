@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         'tenantAuth' => \App\Http\Middleware\tenantAuth::class,
+        'check.subscription' => \App\Http\Middleware\CheckSubscription::class,
+        'allowIPforWebhook' => \App\Http\Middleware\PaystackIPMiddleware::class,
     ];
 }

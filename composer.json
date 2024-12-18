@@ -23,6 +23,7 @@
         "spatie/laravel-permission": "^6.0",
         "spatie/laravel-sitemap": "^7.0",
         "spatie/laravel-webhook-client": "^3.3",
+        "srmklive/paypal": "~3.0",
         "stancl/tenancy": "^3.8",
         "tuytoosh/active": "^1.8",
         "yajra/laravel-datatables": "11.0",

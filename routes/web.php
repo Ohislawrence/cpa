@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmailControler;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentsController;
+use App\Http\Controllers\Admin\PaystackController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
@@ -54,6 +55,11 @@ foreach (config('tenancy.central_domains') as $domain) {
             'web',
             ])->group(function () {
             //front pages
+
+            Route::get('/login', function () {
+                return redirect(route('login.test'));
+                })->name('login');
+
             Route::get('/', [FrontController::class, 'home'])->name('home');
             Route::get('affiliates', [FrontController::class, 'affiliates'])->name('affiliates');
             Route::get('advertisers', [FrontController::class, 'advertisers'])->name('advertisers');
@@ -66,14 +72,15 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::get('support', [FrontController::class, 'support'])->name('support');
             Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
             Route::get('error', [FrontController::class, 'error'])->name('error');
+            Route::get('pricing', [FrontController::class, 'pricing'])->name('pricing');
 
             //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
             //affiliate registration
-            Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
+           // Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
             //advertiser registration
-            Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
-            Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdvertiser'])->name('advertiserregpost');
+            //Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
+            //Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdvertiser'])->name('advertiserregpost');
 
 
             //redirect to affiate
@@ -106,9 +113,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             //  $user->depositFloat(3.55);
             //});
 
-            Route::get('login', function () {
-                return redirect(route('login.test'));
-                })->name('login');
+            
             
             //login custom
             Route::get('app/login', [FrontController::class, 'logintest'])->name('login.test');
@@ -147,6 +152,10 @@ Route::middleware([
     Route::get('/profile', function () {
         return view('Profile');
     })->name('profile');
+    //subscription links
+   // Route::post('/subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
+   // Route::get('/subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
+    Route::post('/subscription/webhook', [PaystackController::class, 'handleWebhook'])->middleware('allowIPforWebhook');
 
 //Admin
     Route::group([

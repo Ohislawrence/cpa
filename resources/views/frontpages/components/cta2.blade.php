@@ -15,17 +15,17 @@
 						<div class="banner-3-txt color--white">
 
 							<!-- Title -->	
-							<h2 class="s-48 w-700">Join DealsIntel Today!</h2>
+							<h2 class="s-48 w-700">It starts with a click!</h2>
 
 							<!-- Text -->
-							<p class="p-xl">Ready to take your affiliate marketing to the next level? Join DealsIntel and start maximizing your earnings with high-converting offers and exceptional support.</p>
+							<p class="p-xl">Trusted by Growing Businesses around the globe, start your journey to profitability.</p>
 
 							<!-- Button -->
-							<a href="{{ route('affiliatereg') }}" class="btn r-04 btn--theme hover--tra-white">Join Now!</a>
+							<a href="{{ route('start') }}" class="btn r-04 btn--theme hover--tra-white">Join Tracklia today.</a>
 
 							<!-- Button Text -->
 							<p class="p-sm btn-txt ico-15">
-								<span class="flaticon-check"></span> We will contact you to verify some info.
+								<span class="flaticon-check"></span> No credit card needed.
 							</p>
 
 						</div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
@@ -34,9 +35,10 @@ class FrontController extends Controller
         return view('frontpages.advertiser');
     }
 
-    public function offers()
+    public function pricing()
     {
-        return view('frontpages.offers');
+        $plans = Plan::all();
+        return view('frontpages.pricing', compact('plans'));
     }
 
     public function blogs()

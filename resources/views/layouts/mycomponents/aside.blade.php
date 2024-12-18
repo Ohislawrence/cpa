@@ -314,6 +314,20 @@
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
+                <a class="" href="{{ route('merchant.plan.active') }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-black-right fs-2"></i>
+                    </span>
+                    <span class="menu-title">My Plan</span>
+                </span>
+                </a>
+            </div>
+            <!--end:Menu item-->
+
+            <!--begin:Menu item-->
+            <div class="menu-item menu-accordion">
+                <!--begin:Menu link-->
                 <a class="" href="{{ route('merchant.configuration') }}">
                 <span class="menu-link">
                     <span class="menu-icon">

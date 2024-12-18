@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
+    protected $connection = 'mysql';
+    protected $table = 'subscriptions';
+
     protected $fillable = [
         'user_id',
         'tenant_id',
@@ -21,4 +24,19 @@ class Subscription extends Model
         'price',
         'currency',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
 }

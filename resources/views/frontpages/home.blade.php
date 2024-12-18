@@ -1,8 +1,8 @@
 @extends('layouts.guest')
-@section('title',  'Maximize Your Earnings with DealsIntel' )
+@section('title',  'Transform Your Affiliate Program with Tracklia' )
 @section('type',  'website' )
 @section('url',  Request::url() )
-@section('description',  'Join the Leading Affiliate Network for Performance-Based Marketing today and unlock endless opportunities for growth and prosperity' )
+@section('description',  'Simplify affiliate management, boost performance, and grow your business with Tracklia all-in-one SaaS platform.' )
 @section('imagealt',  'homepage image' )
 @section('image',  url("public/publicassets/images/ogimg.jpg") )
 
@@ -22,47 +22,45 @@
 
 @section('slot')
 
-<!-- HERO-19
-			============================================= -->	
-			<section id="hero-19" class="blur--purple gr--ghost hero-section">
-				<div class="container text-center">
+<!-- HERO-1
+============================================= -->	
+<section id="hero-1" class="bg--scroll hero-section">
+	<div class="container">	
+		<div class="row d-flex align-items-center">
 
 
-					<!-- HERO TEXT -->
-					<div class="row justify-content-center">
-						<div class="col-md-10 col-lg-9">
-							<div class="hero-19-txt">
-						
-								<!-- Title -->
-								<h2 class="s-56 w-700">Maximize Your Earnings with DealsIntel.</h2>	
+			<!-- HERO TEXT -->
+			<div class="col-md-6">
+				<div class="hero-1-txt color--white wow fadeInRight">
 
-								<!-- Text -->
-								<p class="p-xl">Ready to take your affiliate marketing efforts to the next level? Join the Leading Affiliate Network for Performance-Based Marketing today and unlock endless opportunities for growth and prosperity. 
-								</p>
+					<!-- Title -->
+					<h2 class="s-58 w-700">Transform Your Affiliate Program with Tracklia</h2>
 
-								<!-- Buttons -->	
-								<div class="btns-group">
-									<a href="{{ route('affiliatereg') }}" class="btn r-04 btn--theme hover--theme">I'm an Affiliate</a>
-									<a href="{{ route('advertiserreg') }}" class="video-popup1 btn r-04 btn--tra-black hover--theme ico-20 ico-right">I'm an Advertiser</span>
-									</a> 
-								</div>	
+					<!-- Text -->
+					<p class="p-xl">Simplify affiliate management, boost performance, and grow your business with Tracklia's all-in-one SaaS platform.
+					</p>
 
-							</div>
-						</div>
-					</div>	<!-- END HERO TEXT -->	
+					<!-- Button -->	
+					<a href="{{ route('start') }}" class="btn r-04 btn--theme hover--tra-white">Get started for free</a>
+					<p class="p-sm btn-txt ico-15">
+						<span class="flaticon-check"></span> No credit card needed, free 7-day trial
+					</p>
 
-					<!-- HERO IMAGE -->
-					<div class="row">
-						<div class="col">
-							<div class="hero-19-img wow fadeInUp">
-								<img class="img-fluid" src="{{ asset('publicassets/images/dealsintel-dash.png') }}" alt="hero-image">	
-							</div>
-						</div>	
-					</div>	<!-- END HERO IMAGE --> 	
+				</div>
+			</div>	<!-- END HERO TEXT -->	
 
 
-				</div>    <!-- End container --> 
-			</section>	<!-- END HERO-19 -->	
+			<!-- HERO IMAGE -->
+			<div class="col-md-6">	
+				<div class="hero-1-img wow fadeInLeft">	
+					<img class="img-fluid" src="{{ url('publicassets/images/hero-1-img.png') }}" alt="hero-image">					
+				</div>
+			</div>	
+			
+
+		</div>    <!-- End row --> 	
+	</div>	   <!-- End container --> 	
+</section>	<!-- END HERO-1 -->	
 
 		
 <!-- FEATURES-6
@@ -77,10 +75,13 @@
 							<div class="section-title mb-70">	
 
 								<!-- Title -->	
-								<h2 class="s-50 w-700">Why Choose DealsIntel?</h2>	
+								<h2 class="s-50 w-700">Why Choose Tracklia?</h2>	
 
 								<!-- Text -->	
-								<p class="s-21 color--grey">At DealsIntel, we connect top-tier affiliates with high-converting offers from premium advertisers. Whether you're an affiliate looking to boost your revenue or an advertiser seeking quality traffic, DealsIntel has the tools and expertise to help you succeed.</p>
+								<p class="s-21 color--grey">
+									Tracklia empowers SaaS businesses, eCommerce stores, and platforms like WordPress and Shopify to seamlessly manage affiliate programs. With powerful customization tools, real-time analytics, and creator-friendly features,
+									 Tracklia is the ultimate solution for scaling your affiliate program.
+								</p>
 									
 							</div>	
 						</div>
@@ -226,7 +227,7 @@
 
 			<!-- TEXT CONTENT
 			============================================= -->
-			<section id="lnk-1" class="pt-100 ct-02 content-section division">
+			<section id="how_it_works" class="pt-100 ct-02 content-section division">
 				<div class="container">
 
 
@@ -247,125 +248,285 @@
 							<div class="txt-block right-column wow fadeInLeft">
 
 								<!-- Section ID -->	
-						 		<span class="section-id">For Affiliates</span>
+						 		<span class="section-id">For Mercharts</span>
 
 								<!-- Title -->	
-								<h2 class="s-46 w-700">Earn while you engage your viewers</h2>
+								<h2 class="s-46 w-700">Tracklia provide you with a All-in-one solution.</h2>
 
 								<!-- Text -->	
-								<p>Do you have contents that your viewers love? Why not earn while they click and make sign up or purchase why you recommend?
+								<p>
+									Manage affiliate from any platform or social media with ease, and it's easy to setup.
 								</p>
 
 								<!-- Small Title -->	
-								<h5 class="s-24 w-700">Grow with Dealsintel</h5>
+								<h5 class="s-24 w-700">How It Works:</h5>
 
 								<!-- List -->	
 								<ul class="simple-list">
 
 									<li class="list-item">
-										<p>Partner with DealsIntel and gain access to high-paying offers that convert. Our dedicated affiliate managers are here to support you every step of the way.
+										<p>
+											<b>Sign Up and Customize:</b> Create a tailored affiliate program in minutes.
 										</p>
 									</li>
 
 									<li class="list-item">
-										<p>Get paid on time, every time. We offer multiple payment options to ensure you receive your earnings in the most convenient way possible.
+										<p>
+											<b>Invite Affiliates:</b> Attract top creators and influencers
 										</p>
 									</li>
 									<li class="list-item">
-										<p class="mb-0">From marketing materials to one-on-one support, we provide all the resources you need to succeed. Our team of experts is always available to help you navigate and optimize your campaigns.
+										<p class="mb-5">
+											<b>Track Performance:</b> Monitor real-time metrics and optimize for success.
 										</p>
 									</li>
 
 								</ul>
-								<a href="{{ route('affiliates') }}" class="color--theme"> >> See More</a>
+								<a href="{{ route('start') }}" class="color--theme"> >> Start Free Trial</a>
 							</div>
 						</div>	<!-- END TEXT BLOCK -->	
 
 
 					</div>	<!-- END SECTION CONTENT (ROW) -->	
 
-
 				</div>	   <!-- End container -->
 			</section>	<!-- END TEXT CONTENT -->
 
+			@include('frontpages.components.blogsection')
+
+<!-- FEATURES-11
+============================================= -->
+<section id="tracklia_features" class="pt-100 features-section division">
+	<div class="container">
 
 
+		<!-- SECTION TITLE -->	
+		<div class="row justify-content-center">	
+			<div class="col-md-10 col-lg-9">
+				<div class="section-title mb-70">
 
-			<!-- TEXT CONTENT
-			============================================= -->
-			<section class="pt-100 ct-01 content-section division">
-				<div class="container">
+					<!-- Title -->	
+					<h2 class="s-50 w-700">Tracklia Features That Drive Success</h2>	
+					<!-- Text -->	
+					<p class="s-21 color--grey">Everything you need to create, manage, and scale a winning affiliate program.</p>
+						
+				</div>	
+			</div>
+		</div>
 
 
-					<!-- SECTION CONTENT (ROW) -->	
-					<div class="row d-flex align-items-center">
+		<!-- FEATURES-11 WRAPPER -->
+		<div class="fbox-wrapper">
+			<div class="row row-cols-1 row-cols-md-2 rows-3">
 
 
-						<!-- TEXT BLOCK -->	
-						<div class="col-md-6 order-last order-md-2">
-							<div class="txt-block left-column wow fadeInRight">
-								<span class="section-id">For Advertisers</span>
+				<!-- FEATURE BOX #1 -->
+				<div class="col">
+					<div class="fbox-11 fb-1 wow fadeInUp">
 
-								<!-- TEXT BOX -->	
-								<div class="txt-box mb-0">
+						<!-- Icon -->
+						<div class="fbox-ico-wrap">
+							<div class="fbox-ico ico-50">
+								<div class="shape-ico color--theme">
 
-									<!-- Title -->	
-									<h2 class="s-46 w-700">Data, Sales, Profit !</h2>
+									<!-- Vector Icon -->
+									<span class="flaticon-graphics"></span>
 
-									<!-- Text -->	
-									<p>By partnering with us, you gain access to a network of top-performing affiliates, cutting-edge technology, and unparalleled support. Whether you're looking to increase brand visibility, drive sales, or generate leads, DealsIntel is here to help you succeed.  
-									</p>
+									<!-- Shape -->
+									<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+										<path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+									</svg>
 
-									<!-- List -->	
-									<ul class="simple-list">
-
-										<li class="list-item">
-											<p>Reach your target audience with precision. Our network of vetted affiliates ensures that your offers are promoted to high-quality traffic that converts.
-											</p>
-										</li>
-
-										<li class="list-item">
-											<p>Scale your campaigns with confidence. Our platform supports large volumes of traffic and provides the tools you need to manage and optimize your campaigns effectively.
-											</p>
-										</li>
-
-										<li class="list-item">
-											<p class="mb-0">Track the performance of your campaigns with detailed reports and analytics. Make data-driven decisions to maximize your ROI and achieve your marketing goals.
-											</p>
-										</li>
-
-									</ul>
-									<a href="{{ route('advertisers') }}" class="color--theme"> >> See More</a>
-								</div>	<!-- END TEXT BOX -->	
-
-	
+								</div>
 							</div>
-						</div>	<!-- END TEXT BLOCK -->	
+						</div>	<!-- End Icon -->
 
-
-						<!-- IMAGE BLOCK -->
-						<div class="col-md-6 order-first order-md-2">
-							<div class="img-block right-column wow fadeInLeft">
-								<img class="img-fluid" src="publicassets/images/img-06.png" alt="content-image">
-							</div>
+						<!-- Text -->
+						<div class="fbox-txt">
+							<h6 class="s-22 w-700">Scalable Plans</h6>
+							<p>
+								From startups to enterprises, Tracklia grows with your business.
+							</p>
 						</div>
 
-
-					</div>	<!-- END SECTION CONTENT (ROW) -->	
-
-
-				</div>	   <!-- End container -->
-			</section>	<!-- END TEXT CONTENT -->
+					</div>
+				</div>	<!-- END FEATURE BOX #1 -->	
 
 
+				<!-- FEATURE BOX #2 -->
+				<div class="col">
+					<div class="fbox-11 fb-2 wow fadeInUp">
+
+						<!-- Icon -->
+						<div class="fbox-ico-wrap">
+							<div class="fbox-ico ico-50">
+								<div class="shape-ico color--theme">
+
+									<!-- Vector Icon -->
+									<span class="flaticon-idea"></span>
+
+									<!-- Shape -->
+									<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+										<path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+									</svg>
+
+								</div>
+							</div>
+						</div>	<!-- End Icon -->
+
+						<!-- Text -->
+						<div class="fbox-txt">
+							<h6 class="s-22 w-700">Payment Automation</h6>
+							<p>
+								Streamline payouts with secure and automated payment processing.
+							</p>
+						</div>
+
+					</div>
+				</div>	<!-- END FEATURE BOX #2 -->	
 
 
+				<!-- FEATURE BOX #3 -->
+				<div class="col">
+					<div class="fbox-11 fb-3 wow fadeInUp">
+
+						<!-- Icon -->
+						<div class="fbox-ico-wrap">
+							<div class="fbox-ico ico-50">
+								<div class="shape-ico color--theme">
+
+									<!-- Vector Icon -->
+									<span class="flaticon-graphic"></span>
+
+									<!-- Shape -->
+									<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+										<path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+									</svg>
+
+								</div>
+							</div>
+						</div>	<!-- End Icon -->
+
+						<!-- Text -->
+						<div class="fbox-txt">
+							<h6 class="s-22 w-700">Affiliate Recruitment Tools</h6>
+							<p>
+								Discover and onboard top affiliates, influencers, and creators to maximize reach and engagement.
+							</p>
+						</div>
+
+					</div>
+				</div>	<!-- END FEATURE BOX #3 -->	
 
 
+				<!-- FEATURE BOX #4 -->
+				<div class="col">
+					<div class="fbox-11 fb-4 wow fadeInUp">
 
-			<!-- DIVIDER LINE -->
-			<hr class="divider">
-			@include('frontpages.components.blogsection')
+						<!-- Icon -->
+						<div class="fbox-ico-wrap">
+							<div class="fbox-ico ico-50">
+								<div class="shape-ico color--theme">
+
+									<!-- Vector Icon -->
+									<span class="flaticon-wireframe"></span>
+
+									<!-- Shape -->
+									<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+										<path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+									</svg>
+
+								</div>
+							</div>
+						</div>	<!-- End Icon -->
+
+						<!-- Text -->
+						<div class="fbox-txt">
+							<h6 class="s-22 w-700">Customizable Affiliate Programs</h6>
+							<p>
+								Set commission structures, approval workflows, and program rules tailored to your business needs.
+							</p>
+						</div>
+
+					</div>
+				</div>	<!-- END FEATURE BOX #4 -->	
+
+
+				<!-- FEATURE BOX #5 -->
+				<div class="col">
+					<div class="fbox-11 fb-5 wow fadeInUp">
+
+						<!-- Icon -->
+						<div class="fbox-ico-wrap">
+							<div class="fbox-ico ico-50">
+								<div class="shape-ico color--theme">
+
+									<!-- Vector Icon -->
+									<span class="flaticon-trophy"></span>
+
+									<!-- Shape -->
+									<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+										<path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+									</svg>
+
+								</div>
+							</div>
+						</div>	<!-- End Icon -->
+
+						<!-- Text -->
+						<div class="fbox-txt">
+							<h6 class="s-22 w-700">Seamless Integration</h6>
+							<p>
+								Connect with SaaS platforms, eCommerce stores, and CMS like Shopify and WordPress effortlessly.
+							</p>
+						</div>
+
+					</div>
+				</div>	<!-- END FEATURE BOX #5 -->	
+
+
+				<!-- FEATURE BOX #6 -->
+				<div class="col">
+					<div class="fbox-11 fb-6 wow fadeInUp">
+
+						<!-- Icon -->
+						<div class="fbox-ico-wrap">
+							<div class="fbox-ico ico-50">
+								<div class="shape-ico color--theme">
+
+									<!-- Vector Icon -->
+									<span class="flaticon-search-engine-1"></span>
+
+									<!-- Shape -->
+									<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+										<path d="M69.8,-23C76.3,-2.7,57.6,25.4,32.9,42.8C8.1,60.3,-22.7,67,-39.1,54.8C-55.5,42.7,-57.5,11.7,-48.6,-11.9C-39.7,-35.5,-19.8,-51.7,5.9,-53.6C31.7,-55.6,63.3,-43.2,69.8,-23Z" transform="translate(100 100)" />
+									</svg>
+
+								</div>
+							</div>
+						</div>	<!-- End Icon -->
+
+						<!-- Text -->
+						<div class="fbox-txt">
+							<h6 class="s-22 w-700">Real-Time Analytics</h6>
+							<p>
+								Get detailed insights into affiliate performance, traffic, and conversions to make data-driven decisions.
+							</p>
+						</div>
+
+					</div>
+				</div>	<!-- END FEATURE BOX #6 -->	
+
+
+			</div>  <!-- End row -->  
+		</div>	<!-- END FEATURES-11 WRAPPER -->
+
+
+	</div>     <!-- End container -->
+</section>	<!-- END FEATURES-11 -->
+
+
+			
 			@include('frontpages.components.cta2')
 
 

@@ -11,4 +11,10 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 {
     use HasDatabase, HasDomains;
     public $timestamps = false;
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+    
 }

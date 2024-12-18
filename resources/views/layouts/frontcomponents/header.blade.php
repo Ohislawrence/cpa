@@ -6,7 +6,7 @@
 
 					<!-- MOBILE HEADER -->
 				    <div class="wsmobileheader clearfix">	  	
-				    	<span class="smllogo"><img src="{{ asset('assets/media/logos/logo-dealsintel.png') }}" alt="mobile-logo"></span>
+				    	<span class="smllogo"><img src="{{ asset('assets/media/logos/tracklia_black_logo.png') }}" alt="mobile-logo"></span>
 				    	<a id="wsnavtoggle" class="wsanimated-arrow"><span></span></a>	
 				 	</div>
 
@@ -19,14 +19,14 @@
 	    					<!-- HEADER BLACK LOGO -->
 	    					<div class="desktoplogo">
 	    						<a href="{{route('home')}}" class="logo-black">
-	    							<img class="light-theme-img" src="{{ asset('assets/media/logos/logo-dealsintel.png') }}" alt="logo">
-	    							<img class="dark-theme-img" src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="logo">
+	    							<img class="light-theme-img" src="{{ asset('assets/media/logos/tracklia_black_logo.png') }}" alt="logo">
+	    							<img class="dark-theme-img" src="{{ asset('assets/media/logos/tracklia_white_logo.png') }}" alt="logo">
 	    						</a>
 	    					</div>
 
 	    					<!-- HEADER WHITE LOGO -->
 	    					<div class="desktoplogo">
-	    						<a href="#hero-19" class="logo-white"><img src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="logo"></a>
+	    						<a href="{{route('home')}}" class="logo-white"><img src="{{ asset('assets/media/logos/tracklia_white_logo.png') }}" alt="logo"></a>
 	    					</div>
 
 
@@ -34,20 +34,15 @@
 	      					<nav class="wsmenu clearfix">
 	        					<ul class="wsmenu-list nav-theme">
 
-							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('affiliates') }}" class="h-link">Affiliates</a></li>
+							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('home') }}#how_it_works" class="h-link">How it works</a></li>
 
-							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('advertisers') }}" class="h-link">Advertisers</a></li>
+							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('home') }}#tracklia_features" class="h-link">Features</a></li>
 
-							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('aboutus') }}" class="h-link">About Us</a></li>
+							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('pricing') }}" class="h-link">Pricing</a></li>
 
                                     <li class="nl-simple" aria-haspopup="true"><a href="{{ route('blogs') }}" class="h-link">Blogs</a></li>
 
 									@guest()
-									<!-- SIGN IN LINK -->
-							    	<li class="nl-simple reg-fst-link mobile-last-link" aria-haspopup="true">
-							    		<a href="{{route('login')}}" class="h-link">Sign in</a>
-							    	</li>
-								    <!-- SIGN UP BUTTON -->
 								    <li class="nl-simple" aria-haspopup="true">
 								    	<a href="{{route('start')}}" class="btn r-04 btn--theme hover--theme last-link">Sign up</a>
 								    </li> 

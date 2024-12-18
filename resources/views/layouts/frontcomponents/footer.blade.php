@@ -11,8 +11,8 @@
 						<!-- FOOTER LOGO -->
 						<div class="col-xl-3">
 							<div class="footer-info">
-								<img class="footer-logo" src="{{ asset('assets/media/logos/logo-dealsintel.png') }}" alt="footer-logo">
-								<img class="footer-logo-dark" src="{{ asset('assets/media/logos/logo-dealsintel-light.png') }}" alt="footer-logo">
+								<img class="footer-logo" src="{{ asset('assets/media/logos/tracklia_black_logo.png') }}" alt="footer-logo">
+								<img class="footer-logo-dark" src="{{ asset('assets/media/logos/tracklia_white_logo.png') }}" alt="footer-logo">
 							</div>	
 						</div>	
 
@@ -38,9 +38,9 @@
 
 								<!-- Links -->
 								<ul class="foo-links clearfix">
-									<li><p><a href="{{ route('affiliates') }}">Affiliates</a></p></li>
-									<li><p><a href="{{ route('advertisers') }}">Advertisers</a></p></li>	
-									<li><p><a href="{{ route('login') }}">Login</a></p></li>			
+									<li><p><a href="{{ route('home') }}#how_it_works">How it works</a></p></li>
+									<li><p><a href="{{ route('pricing') }}">Pricing</a></p></li>	
+									<li><p><a href="{{ route('start') }}">Start Now!</a></p></li>			
 								</ul>
 
 							</div>	
@@ -71,15 +71,15 @@
 
 								<!-- Mail Link -->
 								<p class="footer-mail-link ico-25">
-									<a href="mailto:hello@dealsintel.com">hello@dealsintel.com</a>
+									<a href="mailto:hello@tracklia.com">hello@tracklia.com</a>
 								</p>
 
 								<!-- Social Links -->	
 								<ul class="footer-socials ico-25 text-center clearfix">		
-									<li><a href="https://facebook.com/dealsintel"><span class="flaticon-facebook"></span></a></li>
-									<li><a href="https://twitter.com/dealsintel"><span class="flaticon-twitter"></span></a></li>
-									<li><a href="https://linkedin.com/company/dealsintel"><span class="flaticon-linkedin-logo"></span></a></li>
-									<li><a href="#"><span class="flaticon-dribbble"></span></a></li>
+									<li><a href="https://facebook.com/tracklia"><span class="flaticon-facebook"></span></a></li>
+									<li><a href="https://twitter.com/tracklia"><span class="flaticon-twitter"></span></a></li>
+									<li><a href="https://linkedin.com/company/tracklia"><span class="flaticon-linkedin-logo"></span></a></li>
+									
 								</ul>
 
 							</div>	
@@ -99,7 +99,7 @@
 
 							<!-- FOOTER COPYRIGHT -->
 							<div class="col">
-								<div class="footer-copyright"><p class="p-sm">&copy; {{ date("Y") }} DealsIntel. <span>All Rights Reserved</span></p></div>
+								<div class="footer-copyright"><p class="p-sm">&copy; {{ date("Y") }} {{ env('APP_NAME') }}. <span>All Rights Reserved</span></p></div>
 							</div>
 
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmailControler;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentsController;
+use App\Http\Controllers\Admin\PaystackController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\Agency\ConfigurationController;
 use App\Http\Controllers\Agency\EmailController;
 use App\Http\Controllers\Agency\MassPaymentController;
 use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
+use App\Http\Controllers\Agency\SubscribeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
@@ -93,8 +95,12 @@ Route::middleware([
     Route::get('app/login', [FrontController::class, 'logintest'])->name('login.test');
     Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
+    Route::get('register', function () {
+        return redirect(route('affiliatereg'));
+        });
     //affiliate registration
-    Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
+    Route::get('reg/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
+    Route::post('reg/affiliate/post', [RegistrationController::class, 'postaffiliate'])->name('affiliateregPost');
 
 //redirect to affliate
     Route::get('/', function () {
@@ -104,6 +110,7 @@ Route::middleware([
 
     Route::middleware([
         'auth',
+        'check.subscription',
     ])->group(function () {
 
         Route::get('dashboard', function () {
@@ -213,6 +220,14 @@ Route::middleware([
         Route::post('email/settings/save', [EmailController::class, 'updateEmailSettings'])->name('email.updateEmailSettings');
         Route::post('email/send/all', [EmailController::class, 'sendEmail'])->name('email.sendEmail');
         Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');
+        //subscribe
+        Route::get('plans/active', [SubscribeController::class, 'subscribe'])->name('plan.active');
+
+        //subscription links
+        Route::post('subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
+        Route::get('subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
+        //Route::post('subscription/webhook', [PaystackController::class, 'handleWebhook']);
+
 
         
 

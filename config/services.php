@@ -37,4 +37,8 @@ return [
         'partner_secret' => env('PAYONEER_PARTNER_SECRET'),
     ],
 
+    'paystack' => [
+    'secret' => env('PAYSTACK_SECRET'),
+    ],
+
 ];

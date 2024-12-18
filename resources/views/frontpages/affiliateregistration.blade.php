@@ -1,5 +1,5 @@
 @extends('layouts.auth.layouts')
-@section('headername',  'Login')
+@section('headername',  'Register')
 
 
 @section('header')
@@ -48,12 +48,12 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
                     <!--begin::Form-->
-                    <form class="form w-100" method="POST" id="kt_sign_in_form"  action="{{ route('login.check.post') }}">
+                    <form class="form w-100" method="POST" id="kt_sign_in_form"  action="{{ route('affiliateregPost') }}">
                         @csrf
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
                             <!--begin::Title-->
-                            <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
+                            <h1 class="text-gray-900 fw-bolder mb-3">Sign Up</h1>
                             <!--end::Title-->
                             <!--begin::Subtitle-->
                             <div class="text-gray-500 fw-semibold fs-6">Enter your email and password to continue.</div>
@@ -61,6 +61,14 @@
                             @include('admin.components.alert')
                         </div>
                         <!--begin::Heading-->
+
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <input type="text" placeholder="Full Name" name="name" :value="old('name')" required autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::Email-->
+                        </div>
+                        <!--end::Input group=-->
                             
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
@@ -69,32 +77,54 @@
                             <!--end::Email-->
                         </div>
                         <!--end::Input group=-->
-                        <div class="fv-row mb-3">
+                        <div class="fv-row mb-8">
                             <!--begin::Password-->
                             <input type="password" placeholder="Password" name="password" required autocomplete="current-password" class="form-control bg-transparent" />
                             <!--end::Password-->
                         </div>
                         <!--end::Input group=-->
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                            <div></div>
-                            <!--begin::Link-->
-                            <a href="" class="link-primary">Forgot Password ?</a>
-                            <!--end::Link-->
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <select class="form-control bg-transparent" name="country">
+                                <option value="" disabled selected>Country</option>
+                                @foreach ( $countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endforeach
+                                
+                            </select>
+                            <!--end::Email-->
                         </div>
-                        <!--end::Wrapper-->
+                        <!--end::Input group=-->
+
+                        <!--begin::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::Email-->
+                            <input type="text" placeholder="Region" name="region" :value="old('region')" required autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::Email-->
+                        </div>
+                        <!--end::Input group=-->
+                        <!--begin::Accept-->
+								<div class="fv-row mb-8">
+									<label class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox" name="toc" value="1" />
+										<span class="form-check-label fw-semibold text-gray-700 fs-base ms-1">I Accept the 
+										<a href="#" class="ms-1 link-primary">Terms</a></span>
+									</label>
+								</div>
+								<!--end::Accept-->
                         <!--begin::Submit button-->
                         <div class="d-grid mb-10">
                             <button type="submit" class="btn btn-primary">
-                                <span class="indicator-label">Sign In</span>
+                                <span class="indicator-label">Sign Up Now</span>
                                 <span class="indicator-progress">Please wait... 
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                         </div>
                         <!--end::Submit button-->
                         <!--begin::Sign up-->
-                        <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet? 
-                        <a href="{{ route('affiliatereg') }}" class="link-primary">Sign up</a></div>
+                        <div class="text-gray-500 text-center fw-semibold fs-6">Already have an Account? 
+                        <a href="{{ route('login.test') }}" class="link-primary">Sign In</a></div>
                         <!--end::Sign up-->
                     </form>
                     <!--end::Form-->

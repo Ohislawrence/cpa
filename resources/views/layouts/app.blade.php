@@ -9,7 +9,7 @@
         <title>@yield('headername') | {{ config('app.name') }}</title>
 
         <!-- Fonts -->
-		<link rel="icon" href="{{ url('publicassets/images/logo-favicon-dealsintel.png') }}" type="image/x-icon">
+		<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
         <!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->

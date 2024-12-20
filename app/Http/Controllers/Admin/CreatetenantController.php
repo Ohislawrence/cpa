@@ -81,7 +81,7 @@ class CreatetenantController extends Controller
             'business_phone' => $request->business_email,
             'contact_phone' => $request->business_email,
             'status' => 'Active',
-            'current_plan' =>1,
+            'current_plan' =>$request->plan ?? 1,
             'country' => $request->country,
             'website' => $request->website,
             'about' => 'set this',
@@ -109,8 +109,8 @@ class CreatetenantController extends Controller
         $subscription = Subscription::create([
             'user_id' => $user->id,
             'tenant_id' => $subdomain,
-            'plan_id' => 1,
-            'status' => 'inactive',
+            'plan_id' => $request->plan ?? 1,
+            'status' => 'active',
             'start_date' => Carbon::today(),
             'end_date' => Carbon::now()->addDays($plan->free_days), //Carbon::now()->addMonth(),
             'trial_ends_at' => Carbon::now()->addDays($plan->free_days),
@@ -134,7 +134,11 @@ class CreatetenantController extends Controller
         $tenantUser->assignRole($role);
         Tenancy::end();
 
-        $subdomainCreatedOnServer = $this->subdomainapi($subdomain);
+        if(env('APP_ENV') == 'production') 
+        {
+            $subdomainCreatedOnServer = $this->subdomainapi($subdomain);
+        }
+        
 
         Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
 

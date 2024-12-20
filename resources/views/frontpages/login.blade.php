@@ -30,8 +30,8 @@
             <!--begin::Aside-->
             <div class="d-flex flex-center flex-lg-start flex-column">
                 <!--begin::Logo-->
-                <a href="index.html" class="mb-7">
-                    <img alt="Logo" src="{{ url('assets/media/logos/custom-3.svg') }}" />
+                <a href="#" class="mb-7">
+                    <h1 class="text-white s-52 w-1000">{{ ucfirst(tenant()->id) }}</h1>
                 </a>
                 <!--end::Logo-->
                 <!--begin::Title-->

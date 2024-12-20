@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Feature;
 use App\Models\Plan;
+use App\Models\Planfeature;
 use App\Models\User;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
@@ -38,7 +40,9 @@ class FrontController extends Controller
     public function pricing()
     {
         $plans = Plan::all();
-        return view('frontpages.pricing', compact('plans'));
+        $features = Feature::all();
+        $plafeatures = Planfeature::all();
+        return view('frontpages.pricing', compact('plans','plafeatures','features'));
     }
 
     public function blogs()

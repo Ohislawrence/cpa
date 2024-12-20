@@ -74,18 +74,6 @@
 
                         </div>	<!-- END TABLE HEADER -->
 
-
-                        <!-- PRICING FEATURES -->
-                        <ul class="pricing-features color--black ico-10 ico--green mt-25">
-                            <li><p><span class="flaticon-check"></span> 2 free projects</p></li>
-                            <li><p><span class="flaticon-check"></span> 1 GB of cloud storage</p></li>
-                            <li><p><span class="flaticon-check"></span> For personal use</p></li>
-                            <li class="disabled-option"><p><span class="flaticon-check"></span> Weekly data backup</p></li>
-                            <li class="disabled-option"><p><span class="flaticon-check"></span> No Ads. No trackers</p></li>	
-                            <li><p><span class="flaticon-check"></span> 12/5 email support</p></li>
-                        </ul>	
-
-
                     </div>
                 </div>	<!-- END STARTER PLAN -->
                     
@@ -140,98 +128,38 @@
                             <thead>
                                 <tr>
                                     <th style="width: 34%;"></th>
-                                    <th style="width: 22%;">Starter</th>
-                                    <th style="width: 22%;">Basic</th>
-                                    <th style="width: 22%;">Premium</th>
+                                    @forelse ($plans as $planer)
+                                        <th style="width: 22%;">{{ ucfirst($planer->name) }}</th>
+                                    @empty 
+                                    @endforelse
+                                    
                                 </tr>
                             </thead>
 
                             <tbody>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Available Projects</th>
-                                    <td class="color--black">Up to 2</td>
-                                    <td class="color--black">Up to 250</td>
-                                    <td class="color--black">Unlimited</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Available Storage</th>
-                                    <td class="color--black">2Gb</td>
-                                    <td class="color--black">50Gb</td>
-                                    <td class="color--black">350Gb</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Private Cloud Hosting</th>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">User Permissions</th>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Direct Integrations</th>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Reusable Components</th>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Data Backup</th>
-                                    <td class="color--black">Weekly</td>
-                                    <td class="color--black">Daily</td>
-                                    <td class="color--black">Daily</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">No Ads. No Trackers</th>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Advanced Security</th>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Shared Team Workspace</th>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row" class="text-start">Team Management</th>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-15 disabled-option"><span class="flaticon-cancel"></span></td>
-                                    <td class="ico-20 color--theme"><span class="flaticon-check"></span></td>
-                                </tr>
-
-                                <tr class="table-last-tr">
-                                    <th scope="row" class="text-start">Customer Support</th>
-                                    <td class="color--black">Limited</td>
-                                    <td class="color--black">Basic</td>
-                                    <td class="color--black">Priority</td>
-                                </tr>
-
+                                @foreach ( $features as $feature)
+                                    <tr>
+                                        <th scope="row" class="text-start">{{ $feature->name }}</th>
+                                        @foreach ( $plans as $planf)
+                                            <td class="ico-15 disabled-option">
+                                                @php
+                                                $get = $plafeatures
+                                                    ->where('plan_id', $planf->id)
+                                                    ->where('feature_id', $feature->id)
+                                                    ->first();
+                                                $is_included = $get->is_included;
+                                                    
+                                                @endphp
+                                                @if(!empty($get->option) && $is_included == true)
+                                                    {{ $get->option }}
+                                                @else
+                                                    {!! $is_included ? '<span class="flaticon-check"></span>' : '<span class="flaticon-cancel"></span>' !!}
+                                                @endif
+                                                
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                @endforeach
                             </tbody>
 
                         </table>

@@ -283,29 +283,7 @@
                 <!--begin::Table container-->
                 <div class="table-responsive">
                     <!--begin::Table-->
-                    <table class="table table-row-dashed align-middle gs-0 gy-3 my-0">
-                        <!--begin::Table body-->
-                        <tbody>
-                            @forelse ( \App\Models\Blog::latest()->take(5)->get() as $blog)
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="symbol symbol-50px me-3">
-                                            <img src="{{ asset('blogimages/'.$blog->banner) }}" alt="{{ $blog->slug }}" class="" alt="{{ $blog->title }}" />
-                                        </div>
-                                        <div class="d-flex justify-content-start flex-column">
-                                            <a href="{{ route('blogsingle', ['cat'=> $blog->cat->slug , 'slug'=>$blog->slug]) }}" target="_blank" class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6">{{ $blog->title }}</a>
-                                            <span class="text-gray-500 fw-semibold d-block fs-7">{{$blog->created_at->format("M d,Y")}} | {{ $blog->cat->category }}</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            @empty
-                                
-                            @endforelse
-                            
-                            
-                        </tbody>
+                    
                         <!--end::Table body-->
                     </table>
                 </div>

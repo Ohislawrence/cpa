@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetEmail;
 use App\Models\Blog;
 use App\Models\Feature;
 use App\Models\Plan;
 use App\Models\Planfeature;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Validation\Rules\Password;
 
 class FrontController extends Controller
 {
@@ -109,9 +114,95 @@ class FrontController extends Controller
         return view('frontpages.login');
     }
 
+    public function passwordreset()
+    {
+        return view('frontpages.passwordreset');
+    }
+
+    public function passwordresetpost(Request $request)
+    {
+        //dd(Carbon::now()->lt(Carbon::now()->addMinutes(10)));
+        // Validate the email input
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Check if the email exists in the users table
+        $exists = User::where('email', $request->email)->exists();
+
+        if ($exists) {
+            $randomString = $this->getRandomString();
+            $user = User::where('email', $request->email)->first();
+            $user->update->where([
+                'two_factor_secret' => $randomString,
+                'two_factor_confirmed_at' => Carbon::now()->addMinutes(10),
+            ]);
+
+            $resetURL = route('url.password.reset', ['codes' => $randomString]);
+
+            Mail::to($user->email)->queue(new ResetEmail($user));
+
+            return back()->with('message', 'check your email for your password reset link.');
+        }else{
+            return back()->with('message', 'The email you entered does not match any account, kindly check the email.');
+        }
+        
+    }
+
+
+    public function passwordreseturl(Request $request)
+    {
+        $codes = $request->codes;
+        $resetuser = User::where('two_factor_secret', $codes)->first();
+        $time = $resetuser->two_factor_confirmed_at;
+        
+        if ($resetuser)
+        {
+            if(Carbon::now()->lt($time)){
+                return view('frontpages.enternewpassword', compact('codes'));
+            }else{
+                return response()->json(['error' => 'This link is expired, request a new reset or contact us.'], Response::HTTP_FORBIDDEN);
+            }
+            
+        }
+        
+    }
+
+    public function passwordresetfinalpost(Request $request)
+    {
+        // Validate the email input
+        $request->validate([
+            'password' => ['required', 'confirmed', Password::min(8)],
+        ]);
+        $codes = $request->codeme;
+        $resetuser = User::where('two_factor_secret', $codes)->first();
+
+        $resetuser->update([
+            'password'=> Hash::make($request->password),
+        ]);
+
+        return view('login.test')->with('message', 'Password reset done, you can log in.');
+    }
+
     public function logout(Request $request)
     {
-        return redirect('login')->with(Auth::logout());
+        return redirect('login.test')->with(Auth::logout());
+    }
+
+    public function generateUniqueCode()
+    {
+        do {
+            $length = 50;
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            $randomString = '';
+            $maxIndex = strlen($characters) - 1;
+
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[random_int(0, $maxIndex)];
+            }
+        } while (User::where("two_factor_secret", "=", $randomString)->first());
+
+        return $randomString;
     }
 }
 

@@ -94,6 +94,11 @@ Route::middleware([
     //login custom
     Route::get('app/login', [FrontController::class, 'logintest'])->name('login.test');
     Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
+    //password reset
+    Route::get('password/reset', [FrontController::class, 'passwordreset'])->name('password.reset');
+    Route::post('post/password/reset', [FrontController::class, 'passwordresetpost'])->name('password.reset.post');
+    Route::get('reset/password/url', [FrontController::class, 'passwordreseturl'])->name('url.password.reset');
+    Route::post('reset/final/post', [FrontController::class, 'passwordresetfinalpost'])->name('final.password.reset');
 
     Route::get('register', function () {
         return redirect(route('affiliatereg'));

@@ -67,7 +67,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             //Route::get('offers', [FrontController::class, 'offers'])->name('offers');
             Route::get('blogs', [FrontController::class, 'blogs'])->name('blogs');
             Route::get('blog/{cat}/{slug}', [FrontController::class, 'blogsingle'])->name('blogsingle');
-            Route::get('privacy', [FrontController::class, 'privacy'])->name('privacy');
+            Route::get('privacy-policy', [FrontController::class, 'privacy'])->name('privacy');
             Route::get('terms-of-service', [FrontController::class, 'tos'])->name('tos');
             Route::get('support', [FrontController::class, 'support'])->name('support');
             Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
@@ -115,9 +115,13 @@ foreach (config('tenancy.central_domains') as $domain) {
 
             
             
-            //login custom
+            //auth
+            //login
             Route::get('app/login', [FrontController::class, 'logintest'])->name('login.test');
             Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
+            //password reset
+            Route::get('password/reset', [FrontController::class, 'passwordreset'])->name('password.reset');
+            Route::post('post/password/reset', [FrontController::class, 'passwordresetpost'])->name('password.reset.post');
 
         });
     });

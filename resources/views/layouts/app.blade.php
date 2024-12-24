@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.mycomponents.meta')
 
-        <title>@yield('headername') | {{ config('app.name') }}</title>
+        <title>@yield('headername') | {{ ucfirst(tenant()->id)  }}</title>
 
         <!-- Fonts -->
 		<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">

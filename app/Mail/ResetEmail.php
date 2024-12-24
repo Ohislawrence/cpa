@@ -9,19 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserEmail extends Mailable implements ShouldQueue
+class ResetEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
-    public $messageBody;
-    public $title;
-
-    public function __construct($user, string $messageBody, string $title)
+    /**
+     * Create a new message instance.
+     */
+    public function __construct()
     {
-        $this->user = $user;
-        $this->messageBody = $messageBody;
-        $this->title = $title;
+        //
     }
 
     /**
@@ -30,7 +27,7 @@ class UserEmail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->title,
+            subject: 'Password Reset',
         );
     }
 
@@ -40,12 +37,7 @@ class UserEmail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'view.email.emailtemplate1',
-            with: [
-                'name' => $this->user->name,
-                'messageBody' => $this->messageBody,
-                'title' => $this->title,
-            ],
+            view: 'email.passwordreset',
         );
     }
 

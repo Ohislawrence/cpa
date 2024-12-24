@@ -37,7 +37,7 @@
                 <!-- TEXT BLOCK -->	
                 <div class="txt-block legal-info">
 
-                     <p>Welcome to DealsIntel ("we," "us," or "our"). By accessing or using our website [www.dealsintel.com] (the "Site") or any of our services, you agree to comply with and be bound by the following Terms of Service ("Terms"). Please read these Terms carefully before using our Site or services.</p>
+                     <p>Welcome to Tracklia ("we," "us," or "our"). By accessing or using our website [www.tracklia.com] (the "Site") or any of our services, you agree to comply with and be bound by the following Terms of Service ("Terms"). Please read these Terms carefully before using our Site or services.</p>
                     <!-- Title -->
                     <h4 class="s-30 w-700"><span>1.</span> Acceptance of Terms</h4>
 
@@ -78,7 +78,7 @@
                     <h4 class="s-30 w-700"><span>4.</span> Intellectual Property</h4>
 
                     <!-- Text -->
-                    <p>All content and materials available on the Site, including but not limited to text, graphics, logos, images, and software, are the property of DealsIntel or its licensors and are protected by copyright, trademark, and other intellectual property laws.
+                    <p>All content and materials available on the Site, including but not limited to text, graphics, logos, images, and software, are the property of Tracklia or its licensors and are protected by copyright, trademark, and other intellectual property laws.
                     </p>
 
                     
@@ -98,14 +98,14 @@
                     <h4 class="s-30 w-700"><span>6.</span> Limitation of Liability</h4>
 
                     <!-- Text -->
-                    <p>In no event shall DealsIntel or its affiliates, partners, or licensors be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to lost profits, arising out of or in connection with your use of the Site or services.
+                    <p>In no event shall Tracklia or its affiliates, partners, or licensors be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to lost profits, arising out of or in connection with your use of the Site or services.
                     </p>
 
                     <!-- Title -->
                     <h4 class="s-30 w-700"><span>7.</span> Indemnification</h4>
 
                     <!-- Text -->
-                    <p>You agree to indemnify and hold harmless DealsIntel and its affiliates, partners, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses arising out of or in connection with your use of the Site or services.
+                    <p>You agree to indemnify and hold harmless Tracklia and its affiliates, partners, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses arising out of or in connection with your use of the Site or services.
                     </p>
 
                     <!-- Title -->
@@ -124,7 +124,7 @@
                     <h4 class="s-30 w-700"><span>10.</span> Contact Us</h4>	
                     
                     <!-- Text -->  
-                    <p>If you have any questions or concerns about these Terms, please contact us at  <a href="mailto:contact@dealsintel.com" class="color--theme">contact@dealsintel.com</a>
+                    <p>If you have any questions or concerns about these Terms, please contact us at  <a href="mailto:hello@tracklia.com" class="color--theme">hello@tracklia.com</a>
                     </p>
 
 

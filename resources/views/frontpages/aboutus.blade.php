@@ -3,7 +3,7 @@
 @section('type',  'website' )
 @section('url',  Request::url() )
 @section('image',  asset("publicassets/images/ogimg.jpg") )
-@section('description',  'Welcome to DealsIntel, your go-to platform for uncovering the best deals, discounts, and promotions across a wide range of products and services.' )
+@section('description',  'Welcome to Tracklia, Simplify Affiliate Management, Amplify Your Growth!' )
 @section('imagealt',  'Learn about what we do' )
 
 
@@ -227,7 +227,7 @@
 								</p>
 
 								<!-- Button -->
-								<a href="{{ route('advertiserreg') }}" class="btn r-04 btn--theme hover--tra-white">Start Now</a>
+								<a href="{{ route('start') }}" class="btn r-04 btn--theme hover--tra-white">Start Now</a>
 
 							</div>
 						</div>	<!-- END BANNER-13 TEXT -->

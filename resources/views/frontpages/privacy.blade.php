@@ -32,7 +32,7 @@
 							<!-- INNER PAGE TITLE -->
 							<div class="inner-page-title">
 								<h2 class="s-52 w-700">Privacy Policy</h2>
-								<p class="p-lg">This policy is effective as of 11th November 2023</p>
+								<p class="p-lg">This policy is effective as of 11th November 2024</p>
 							</div>
 
 
@@ -43,12 +43,7 @@
 								<h4 class="s-30 w-700"> Introduction</h4>
 
 								<!-- Text -->
-								<p>DealsIntel ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website [www.dealsintel.com] (the "Site") or use our services.
-								</p>
-
-								<!-- Text -->
-								<p>By accessing or using our Site or services, you agree to this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please do not access the Site or use our services.
-								</p>
+								<p>Tracklia ("we," "our," or "us") values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and share information about you when you use our website, platform, and services (collectively, the "Services"). By using the Services, you agree to the terms of this Privacy Policy.</p>
 
 								<!-- Title -->
 								<h4 class="s-30 w-700"> Information We Collect</h4>
@@ -117,7 +112,7 @@
 								<h5 class="s-24 w-700">Contact Us</h5>
 
 								<!-- Text -->
-								<p>If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:contact@dealsintel.com" class="color--theme">contact@dealsintel.com</a>.
+								<p>If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:contact@tracklia.com" class="color--theme">hello@tracklia.com</a>.
 								</p>
 
 

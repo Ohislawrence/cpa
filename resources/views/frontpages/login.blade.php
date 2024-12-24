@@ -30,12 +30,24 @@
             <!--begin::Aside-->
             <div class="d-flex flex-center flex-lg-start flex-column">
                 <!--begin::Logo-->
+                @if(tenant()->id)
                 <a href="#" class="mb-7">
                     <h1 class="text-white s-52 w-1000">{{ ucfirst(tenant()->id) }}</h1>
                 </a>
                 <!--end::Logo-->
                 <!--begin::Title-->
+                
                 <h2 class="text-white fw-normal m-0">Welcome to {{ ucfirst(tenant()->id) }}, All the details are on the other side.</h2>
+                @else
+                <a href="#" class="mb-7">
+                    <h1 class="text-white s-52 w-1000">Tracklia</h1>
+                </a>
+                <!--end::Logo-->
+                <!--begin::Title-->
+                
+                <h2 class="text-white fw-normal m-0">Welcome to Tracklia, All the details are on the other side.</h2>
+                @endif
+
                 <!--end::Title-->
             </div>
             <!--begin::Aside-->

@@ -6,7 +6,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.mycomponents.meta')
 
+        @if (isset(tenant()->id))
         <title>@yield('headername') | {{ ucfirst(tenant()->id) }}</title>
+        @else
+        <title>@yield('headername') | {{ env('APP_NAME') }}</title>
+        @endif
+        
 
         <!-- Fonts -->
 		<link rel="icon" href="{{ url('publicassets/images/logo-favicon-dealsintel.png') }}" type="image/x-icon">

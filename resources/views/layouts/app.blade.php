@@ -5,8 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.mycomponents.meta')
-
-        <title>@yield('headername') | {{ ucfirst(tenant()->id)  }}</title>
+		@if (isset(tenant()->id))
+		<title>@yield('headername') | {{ ucfirst(tenant()->id)  }}</title>
+		@else
+		<title>@yield('headername') | {{ env('APP_NAME') }}</title>
+		@endif
+        
 
         <!-- Fonts -->
 		<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">

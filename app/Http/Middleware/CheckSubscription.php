@@ -30,7 +30,7 @@ class CheckSubscription
 
         // Fetch the tenant's subscription
         $subscription = $tenant->subscription; 
-        //dd($subscription);
+        //dd($subscription->plan->id);
 
         if (!$subscription) {
             // No subscription exists

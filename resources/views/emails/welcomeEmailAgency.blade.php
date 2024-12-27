@@ -28,7 +28,7 @@
                                     
                                     
                                     <!--begin:Action-->
-                                    <a href="{{ route('agency.dashboard') }}" target="_blank" style="position: relative; left: 50%; transform: translateX(-50%);background-color:#50cd89; border-radius:6px; display:inline-block; margin-top:27px; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;font-family:Arial,Helvetica,sans-serif;">See Your Dashboard</a>
+                                    <a href="#" target="_blank" style="position: relative; left: 50%; transform: translateX(-50%);background-color:#50cd89; border-radius:6px; display:inline-block; margin-top:27px; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;font-family:Arial,Helvetica,sans-serif;">See Your Dashboard</a>
                                     <!--end:Action-->
                                     <!--end:Email content-->
                                     

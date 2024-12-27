@@ -92,6 +92,17 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::post('start/create', [CreatetenantController::class,'createTenant'])->name('start.post');
             Route::get('congratulations/created', [CreatetenantController::class,'tenantCreated'])->name('tenantCreated');
 
+            Route::get('get/features', function () {
+                $sub= \App\Models\Subscription::where('tenant_id','timeday')->first();
+                $planfeatures = \DB::table('planfeatures')->where('plan_id',$sub->plan->id)->pluck('feature_id')->unique();
+                $planfeatures =$planfeatures->toArray();
+                if (!in_array(333, $planfeatures)) {
+                    abort(403, 'This feature is not available on your current plan.');
+                }else{
+                    return 'done';
+                }
+                });
+
 
 
 

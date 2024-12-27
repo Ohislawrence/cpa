@@ -10,7 +10,7 @@
                             <div style="text-align:center; margin:0 60px 34px 60px">
                                 <!--begin:Logo-->
                                 <div style="margin-bottom:17px">
-                                    <a href="https://dealsintel.com" rel="noopener" target="_blank">
+                                    <a href="https://tracklia.com" rel="noopener" target="_blank">
                                         <img alt="Logo" src="{{ url('public/assets/media/logos/logo-dealsintel.png') }}"  style="height: 35px" />
                                     </a>
                                 </div>
@@ -29,7 +29,7 @@
                                     
                                     
                                     <!--begin:Action-->
-                                    <a href="{{ route('agency.dashboard') }}" target="_blank" style="position: relative; left: 50%; transform: translateX(-50%);background-color:#50cd89; border-radius:6px; display:inline-block; margin-top:27px; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;font-family:Arial,Helvetica,sans-serif;">See Your Dashboard</a>
+                                    <a href="#" target="_blank" style="position: relative; left: 50%; transform: translateX(-50%);background-color:#50cd89; border-radius:6px; display:inline-block; margin-top:27px; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;font-family:Arial,Helvetica,sans-serif;">See Your Dashboard</a>
                                     <!--end:Action-->
                                     <!--end:Email content-->
                                     

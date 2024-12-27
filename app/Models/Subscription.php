@@ -39,4 +39,13 @@ class Subscription extends Model
     {
         return $this->belongsTo(Tenant::class);
     }
+
+    public function canAccess($featureId): bool
+    {
+        return Planfeature:://\DB::table('planfeatures')
+            where('plan_id', $this->plan_id)
+            ->where('feature_id', $featureId)
+            ->where('is_included', 1)
+            ->exists();
+    }
 }

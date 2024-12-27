@@ -39,6 +39,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SmartlinkController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\WebhookController;
 use App\Models\User;
@@ -233,6 +234,15 @@ Route::middleware([
         Route::get('subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
         //Route::post('subscription/webhook', [PaystackController::class, 'handleWebhook']);
 
+        //plan access
+
+        //number represents the id on feature table
+        //smartlink(26)
+        Route::middleware([
+            'feature-access:26',
+        ])->group(function () {
+            Route::get('all/smartlinks', [SmartlinkController::class,'allsmartlinks'])->name('all.smartlink');
+        });
 
         
 

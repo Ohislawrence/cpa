@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'tenantAuth' => \App\Http\Middleware\tenantAuth::class,
         'check.subscription' => \App\Http\Middleware\CheckSubscription::class,
         'allowIPforWebhook' => \App\Http\Middleware\PaystackIPMiddleware::class,
+        'feature-access' => \App\Http\Middleware\CheckFeatureAccess::class,
     ];
 }

@@ -122,6 +122,22 @@
             </div>
             <!--end:Menu item-->
 
+            @if(tenant()->subscription->canAccess(26))
+                <!--begin:Menu item-->
+            <div class="menu-item menu-accordion">
+                <!--begin:Menu link-->
+                <a class="" href="{{ route('merchant.all.smartlink') }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-black-right fs-2"></i>
+                    </span>
+                    <span class="menu-title">Smartlinks</span>
+                </span>
+                </a>
+            </div>
+            <!--end:Menu item-->
+            @endif
+
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
@@ -295,6 +311,7 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
+                    
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->

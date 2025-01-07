@@ -44,8 +44,8 @@ class WebhookHandler implements ShouldQueue
         logger()->info($array['payload']['clickID']);
 
         $click = Click::where('clickID', $this->webhookCall['payload']['clickID'])->first();
+        //dd($click->offer[0]->payout_id);
         $payouttype = $click->offer[0]->payout_id;
-
         if( $payouttype == '4')
         {
             if ($click->platform == 'Windows') {
@@ -85,32 +85,38 @@ class WebhookHandler implements ShouldQueue
             'conversion' => $conversion,
         ]);
 
-            //logic for referral
-        $period = $click->user->created_at->subMonths(6); //months in which the reffered has stayed on the platform
-        $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
-        $referral = $referralget->user;
+        //credit affiliate
+        $click->user->deposit($earned * 100); //credit main
 
-        if($click->user->created_at > $period )
-        {
-            //$fees = $earned * 0.25;
-            $refCommision = $earned * 0.05;
+        //logic for referral
+        if($this->merchantConfig('allow_affiliate_referral') == 1){
+                    
+            $period = $click->user->created_at->subMonths($this->merchantConfig('allowed_affiliate_referral_duration_months')); //months in which the reffered has stayed on the platform
+            $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
+            $referral = $referralget->user;
 
-            $click->offer[0]->user->transferFloat($click->user, $earned); //credit main
-            //$click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
-            $click->offer[0]->user->transferFloat($referral, $refCommision); //credit commission
-            
-        }else{
-            //$fees = $earned * 0.3;
-
-            $click->offer[0]->user->transferFloat($click->user, $earned); //credit main 
-            //$click->offer[0]->user->transferFloat(\App\Models\User::find(1), $fees);
+            if($click->user->created_at > $period )
+            {
+                $refCommision = $earned * ($this->merchantConfig('allowed_affiliate_referral_payout_percentage')/100);
+                $referral->deposit($refCommision); //credit commission
+                
+            }
         }
+
+
+        
         
 
     }
 
+    function merchantConfig($key)
+    {
+        return \App\Models\Setting::where('key', $key)->value('value');
+    }
+
     /**
      the payload will look like this
+     header should have "secretKey"
     {
     "event": "user.signup",
     "timestamp": "2024-06-11T12:34:56Z",
@@ -120,5 +126,14 @@ class WebhookHandler implements ShouldQueue
         "status": "Approved"
     }
     }
+
+
+    {
+    "payload": {
+        "clickID": "56925031",
+        "cost": "1500",
+        "status": "Approved"
+    }
+}
     **/
 }

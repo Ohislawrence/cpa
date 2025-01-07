@@ -29,8 +29,8 @@ class WelcomeEmailAgency extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('lawrence@dealsintel.com', 'Lawrence Ohis'),
-            subject: 'You have reciieved your request',
+            from: new Address('business@tracklia.com', 'Tracklia'),
+            subject: 'You have receieved your request',
         );
     }
 

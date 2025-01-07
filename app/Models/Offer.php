@@ -20,7 +20,8 @@ class Offer extends Model
         'actionurl',
         'desc',
         'secretkey',
-        'expiry'
+        'expiry',
+        'start'
 
     ];
 

@@ -87,8 +87,8 @@ class CreatetenantController extends Controller
             'about' => 'set this',
         ]);
 
-        $password = 'victor@358';
-        //$password = Str::password(9, true, true, false, false);
+        //$password = 'victor@358';
+        $password = Str::password(9, true, true, false, false);
         $password_hash = Hash::make($password);
         $website = $subdomain . '.' . env('TENANT_ROOT_URL');
 

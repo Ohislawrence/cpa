@@ -29,7 +29,7 @@
 
 		@yield('header')
 		<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     </head>
     <body id="kt_body" class="header-fixed">
@@ -42,8 +42,8 @@
 					<div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
 						<!--begin::Logo-->
 						<a href="index.html">
-							<img alt="Logo" src="{{ url('assets/media/logos/logo-dealsintel.png') }}" class="h-20px logo theme-light-show" />
-							<img alt="Logo" src="{{ url('assets/media/logos/logo-dealsintel-light.png') }}" class="h-20px logo theme-dark-show" />
+							<img alt="Logo" src="{{ url('assets/media/logos/tracklia_black_logo.png') }}" class="h-20px logo theme-light-show" />
+							<img alt="Logo" src="{{ url('assets/media/logos/tracklia_black_logo.png') }}" class="h-20px logo theme-dark-show" />
 						</a>
 						<!--end::Logo-->
 					</div>

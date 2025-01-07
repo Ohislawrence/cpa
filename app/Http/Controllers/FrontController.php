@@ -131,18 +131,19 @@ class FrontController extends Controller
         $exists = User::where('email', $request->email)->exists();
 
         if ($exists) {
-            $randomString = $this->getRandomString();
+            $UniqueCode = $this->generateUniqueCode();
             $user = User::where('email', $request->email)->first();
-            $user->update->where([
-                'two_factor_secret' => $randomString,
-                'two_factor_confirmed_at' => Carbon::now()->addMinutes(10),
-            ]);
+            $user->two_factor_secret = $UniqueCode;
+            $user->two_factor_confirmed_at = Carbon::now()->addMinutes(30);
+            $user->save();
 
-            $resetURL = route('url.password.reset', ['codes' => $randomString]);
+            
 
-            Mail::to($user->email)->queue(new ResetEmail($user));
+            $resetURL = route('url.password.reset', ['codes' => $UniqueCode]);
 
-            return back()->with('message', 'check your email for your password reset link.');
+            Mail::to($user->email)->queue(new ResetEmail($user, $resetURL));
+
+            return back()->with('message', 'check your email for your password reset link, it expires in 30 minute.');
         }else{
             return back()->with('message', 'The email you entered does not match any account, kindly check the email.');
         }
@@ -161,7 +162,7 @@ class FrontController extends Controller
             if(Carbon::now()->lt($time)){
                 return view('frontpages.enternewpassword', compact('codes'));
             }else{
-                return response()->json(['error' => 'This link is expired, request a new reset or contact us.'], Response::HTTP_FORBIDDEN);
+                return response()->json(['error' => 'This link is expired, request a new reset link or contact us.'], Response::HTTP_FORBIDDEN);
             }
             
         }
@@ -171,9 +172,7 @@ class FrontController extends Controller
     public function passwordresetfinalpost(Request $request)
     {
         // Validate the email input
-        $request->validate([
-            'password' => ['required', 'confirmed', Password::min(8)],
-        ]);
+        
         $codes = $request->codeme;
         $resetuser = User::where('two_factor_secret', $codes)->first();
 
@@ -181,12 +180,12 @@ class FrontController extends Controller
             'password'=> Hash::make($request->password),
         ]);
 
-        return view('login.test')->with('message', 'Password reset done, you can log in.');
+        return redirect()->route('login.test')->with('message', 'Password reset done, you can log in.');
     }
 
     public function logout(Request $request)
     {
-        return redirect('login.test')->with(Auth::logout());
+        return redirect()->route('login.test')->with(Auth::logout());
     }
 
     public function generateUniqueCode()

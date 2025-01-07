@@ -14,18 +14,23 @@ class WebhookController extends Controller
     {
         // Validate the request
         $secret = $request->header('secretKey');
-        $allowedSecrets = Offer::where('status', 'Active')->pluck('secretkey')->toArray();
-
-        if (!in_array($secret, $allowedSecrets)) {
+        $allowedSecret = $this->merchantConfig('secret');
+        //dd($allowedSecret);
+        if ($secret != $allowedSecret) {
             Log::warning('Unauthorized webhook attempt detected.');
             return Response::json(['message' => 'Unauthorized'], 401);
         }else{
             // Dispatch the job
         WebhookHandler::dispatch($request->all());
 
-        return Response::json(['message' => 'Received by dealsintel'], 200);
+        return Response::json(['message' => 'Received'], 200);
         }
 
         
+    }
+
+    function merchantConfig($key)
+    {
+        return \App\Models\Setting::where('key', $key)->value('value');
     }
 }

@@ -22,4 +22,9 @@ class Affiliatedetail extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function thiscountry()
+    {
+        return $this->belongsTo(Country::class, 'country', 'id' );
+    }
 }

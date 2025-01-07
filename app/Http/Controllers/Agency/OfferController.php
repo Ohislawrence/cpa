@@ -17,50 +17,52 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Stancl\Tenancy\Facades\Tenancy;
+use Stancl\Tenancy\Tenancy as TenancyTenancy;
 
 class OfferController extends Controller
 {
     public function index()
     {
         $offers = Offer::latest()->get();
+        //dd($offers);
         //$timeframe = 7;
         return view('agency.offers',compact('offers'));
     }
 
     public function getStats(Request $request)
-{
-    $dateRange = $request->input('dateRange');
-    $query =  DB::table('offers')
-                ->join('clicks', 'offers.offerid', '=', 'clicks.offer_id')
-                ->where('offers.status', 'Active'); //Offer::with('click');
-    
+    {
+        $dateRange = $request->input('dateRange');
+        $query =  DB::table('offers')
+                    ->join('clicks', 'offers.offerid', '=', 'clicks.offer_id')
+                    ->where('offers.status', 'Active'); //Offer::with('click');
 
-    if ($dateRange === 'today') {
-        $query->whereDate('offers.created_at', Carbon::today());
-    } elseif ($dateRange === '7_days_ago') {
-        $query->where('offers.created_at', '>=', Carbon::now()->subDays(7));
-    } elseif ($dateRange === '30_days_ago') {
-        $query->where('offers.created_at', '>=', Carbon::now()->subDays(30));
-    } elseif ($dateRange === 'this_month') {
-        $query->where('offers.created_at', '>=', Carbon::now()->startOfMonth());
+        if ($dateRange === 'today') {
+            $query->whereDate('offers.created_at', Carbon::today());
+        } elseif ($dateRange === '7_days_ago') {
+            $query->where('offers.created_at', '>=', Carbon::now()->subDays(7));
+        } elseif ($dateRange === '30_days_ago') {
+            $query->where('offers.created_at', '>=', Carbon::now()->subDays(30));
+        } elseif ($dateRange === 'this_month') {
+            $query->where('offers.created_at', '>=', Carbon::now()->startOfMonth());
+        }
+        // No date filter for "all_time"
+
+        /**$data = $query->first()->map(function ($offer) {
+            return [
+                'ActiveCampaigns' => $offer->count(),
+                'clicks' => $offer->click->id ?? 0, // Total number of clicks for this order
+                'clicks' => $offer->click->id ?? 0, // Total number of clicks for this order
+                'Conversions' => $offer->click->id ?? 0,
+            ];
+        });
+        **/
+        
+        $data = $query->selectRaw('COUNT(distinct offers.id) as ActiveCampaigns, COUNT(clicks.offer_id) as clicks, SUM(clicks.conversion) as Conversions')
+        ->first();
+
+        return response()->json($data);
     }
-    // No date filter for "all_time"
-
-    /**$data = $query->first()->map(function ($offer) {
-        return [
-            'ActiveCampaigns' => $offer->count(),
-            'clicks' => $offer->click->id ?? 0, // Total number of clicks for this order
-            'clicks' => $offer->click->id ?? 0, // Total number of clicks for this order
-            'Conversions' => $offer->click->id ?? 0,
-        ];
-    });
-    **/
-    
-    $data = $query->selectRaw('COUNT(distinct offers.id) as ActiveCampaigns, COUNT(clicks.offer_id) as clicks, SUM(clicks.conversion) as Conversions')
-       ->first();
-
-    return response()->json($data);
-}
 
     public function create()
     {
@@ -125,13 +127,17 @@ class OfferController extends Controller
             'name' => 'required|string',
         ]);
 
-        $imageName = Str::slug($request->name).time().'.'.$request->image->extension();
+        $tenantId = tenant()->id; // Get the current tenant ID
+        $file = $request->image;
+        $filename = Str::slug($request->name).'-'.time().'.'.$file->extension();
 
-        $request->image->move(public_path('images/offer'), $imageName);
+        $path = 'tenant'.tenant()->id.'/'.$file->storeAs("campaigns/{$tenantId}", $filename, 'tenant');
 
         $offer = Offer::create([
+            'start' => $request->start,
+            'expiry' => $request->end ?? null,
             'user_id' => auth()->user()->id,
-            'image' => $imageName,
+            'image' => $path,
             'status' => $request->status,
             'offerid' => $this->generateUniqueCode(),
             'name' => $request->name,
@@ -141,6 +147,7 @@ class OfferController extends Controller
             'desc' => $request->desc,
         ]);
 
+        
         foreach($request->location as $key => $lo )
         {
             Geo::create([
@@ -148,8 +155,8 @@ class OfferController extends Controller
                 'country_id'=>$lo,
             ]);
         }
-
-
+        
+        
         Target::insert([
             ['offer_id' => $offer->id,
             'target' => 'Windows',

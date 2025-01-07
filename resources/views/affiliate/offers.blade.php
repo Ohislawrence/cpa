@@ -6,32 +6,29 @@
 
 
 @section('header')
-<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 
 
 
 @section('footer')
-<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 	$(function () {
 
 	var dt = $('#datatable_responsive1').DataTable({
+		searchDelay: 500,
 		processing: true,
 		serverSide: true,
-        responsive: true,
-        stateSave: true,
 		ajax: "{{ route('affiliate.viewoffers') }}",
 		columns: [
-            {data: 'offerid'},
-			{data: 'name'},
-			{data: 'category'},
-            {data: 'geos'},
-            {data: 'targetting'},
-            {data: 'payout'},
-			{data: 'payouttype'},
-            {data: 'epc'},
+			{data: 'name', name:'name'},
+			{data: 'category', name:'category'},
+            {data: 'geos', name:'geos'},
+            {data: 'targetting', name:'targetting'},
+            {data: 'payout', name:'payout'},
+			{data: 'payouttype', name:'payouttype'},
+            {data: 'epc', name:'epc'},
 			{
 				data: 'action',
 				name: 'action',
@@ -74,7 +71,6 @@
 						<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="datatable_responsive1">
 							<thead>
 								<tr class="fw-semibold fs-6 text-gray-800">
-									<th>Offer ID</th>
 									<th>Name</th>
 									<th>Category</th>
 									<th>Geos</th>

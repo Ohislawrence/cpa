@@ -30,12 +30,23 @@
             <!--begin::Aside-->
             <div class="d-flex flex-center flex-lg-start flex-column">
                 <!--begin::Logo-->
-                <a href="index.html" class="mb-7">
-                    <img alt="Logo" src="{{ url('assets/media/logos/custom-3.svg') }}" />
+                @if(isset(tenant()->id))
+                <a href="#" class="mb-7">
+                    <h1 class="text-white s-52 w-1000">{{ ucfirst(tenant()->id) }}</h1>
                 </a>
                 <!--end::Logo-->
                 <!--begin::Title-->
+                
                 <h2 class="text-white fw-normal m-0">Welcome to {{ ucfirst(tenant()->id) }}, All the details are on the other side.</h2>
+                @else
+                <a href="#" class="mb-7">
+                    <h1 class="text-white s-52 w-1000">Tracklia</h1>
+                </a>
+                <!--end::Logo-->
+                <!--begin::Title-->
+                
+                <h2 class="text-white fw-normal m-0">Welcome to Tracklia, All the details are on the other side.</h2>
+                @endif
                 <!--end::Title-->
             </div>
             <!--begin::Aside-->
@@ -75,12 +86,6 @@
                             <!--begin::Email-->
                             <input type="email" placeholder="Email" name="email" :value="old('email')" required autocomplete="off" class="form-control bg-transparent" />
                             <!--end::Email-->
-                        </div>
-                        <!--end::Input group=-->
-                        <div class="fv-row mb-8">
-                            <!--begin::Password-->
-                            <input type="password" placeholder="Password" name="password" required autocomplete="current-password" class="form-control bg-transparent" />
-                            <!--end::Password-->
                         </div>
                         <!--end::Input group=-->
                         <!--begin::Input group=-->

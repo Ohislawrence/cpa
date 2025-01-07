@@ -49,18 +49,15 @@
             <!--begin::Col-->
             <div class="col-xl-6">
                 <!--begin::Image-->
-					<div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px" style="background-image:url('{{ asset("images/offer/".$offer->image) }}')"></div>
+					<div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px" style="background-image:url(('http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url($offer->image) }}')"></div>
 				<!--end::Image-->
             </div>
             <!--end::Col-->
         </div>
         <!--end::Overview-->
-
-
     </div>
     <!--end::Body-->
 </div>
-
 
         <div class="card mb-5 mb-xl-10">
             <!--begin::Card header-->

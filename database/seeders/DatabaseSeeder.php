@@ -35,6 +35,10 @@ class DatabaseSeeder extends Seeder
             ['key' => 'allowed_countries', 'value' => 'NULL'],
             ['key' => 'gdpr_compliance', 'value' => 'NULL'],
             ['key' => 'logo', 'value' => 'NULL'],
+            ['key' => 'secret', 'value' => '0959959039094984959049949393'],
+            ['key' => 'allow_affiliate_referral', 'value' => '0'],
+            ['key' => 'allowed_affiliate_referral_payout_percentage', 'value' => '10'],
+            ['key' => 'allowed_affiliate_referral_duration_months', 'value' => '0'],
         ]);
 
 
@@ -54,6 +58,13 @@ class DatabaseSeeder extends Seeder
             ['name'=>'merchant', 'guard_name'=>'web'], 
             ['name'=>'affiliate', 'guard_name'=>'web'], 
             ['name'=>'staff', 'guard_name'=>'web'], 
+        ]);
+
+        DB::table('payouts')->insert([
+            ['name'=>'PPS', 'slug'=>'pay-per-sale'], 
+            ['name'=>'PPL', 'slug'=>'pay-per-lead'], 
+            ['name'=>'PPI', 'slug'=>'pay-per-install'],
+            ['name'=>'RevShare', 'slug'=>'rev-share'], 
         ]);
 
         DB::table('categories')->insert([

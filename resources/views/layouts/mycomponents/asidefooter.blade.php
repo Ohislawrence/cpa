@@ -42,8 +42,8 @@
                         <!--begin::Username-->
                         <div class="d-flex flex-column">
                             <div class="fw-bold d-flex align-items-center fs-5">{{ auth()->user()->name }}
-                            <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
-                            <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->getRoleNames()->first() }}</a>
+                            </div>
+                            <div class="fw-semibold text-muted fs-7">{{ ucfirst(auth()->user()->getRoleNames()->first()) }}</div>
                         </div>
                         <!--end::Username-->
                     </div>
@@ -95,11 +95,6 @@
                 <div class="separator my-2"></div>
                 <!--end::Menu separator-->
 
-                <!--begin::Menu item-->
-                <div class="menu-item px-5 my-1">
-                    <a href="{{ route('profile.show') }}" class="menu-link px-5">Account Settings</a>
-                </div>
-                <!--end::Menu item-->
                 <!--begin::Menu item-->
                 <form method="POST" action="{{ route('logout.post') }}">
                     @csrf

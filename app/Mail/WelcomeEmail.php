@@ -15,12 +15,18 @@ class WelcomeEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $password; 
+    public $activeSetting;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct($user,$password, $activeSetting)
     {
-        
+        $this->user = $user;
+        $this->password = $password;
+        $this->$activeSetting = $activeSetting;
     }
 
     /**
@@ -29,8 +35,8 @@ class WelcomeEmail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('lawrence@dealsintel.com', 'Lawrence Ohis'),
-            subject: 'Your application to DealsIntel is under review',
+            from: new Address(\App\Models\Configuration::where('key', 'contact_email')->value('value') ?? tenant()->kyc->business_email, ucfirst(tenant()->id)),
+            subject: 'Welcome to '.ucfirst(tenant()->id).' Affiliates – Your Journey Starts Here!',
         );
     }
 

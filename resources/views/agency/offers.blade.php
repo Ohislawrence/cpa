@@ -5,18 +5,17 @@
 
 
 @section('header')
-<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
 @endsection
 
 
 
 
 @section('footer')
-<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 	$(function () {
 
-	var dt = $('#kt_table_widget_4_table').DataTable({
+	var dt = $('#campaignsTable').DataTable({
 		processing: true,
 		serverSide: true,
         responsive: true,
@@ -198,7 +197,7 @@
 								<div class="card-body py-4">
 									<!--begin::Table-->
                                     <div class="table-responsive">
-									<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="kt_table_widget_4_table">
+									<table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="campaignsTable">
 										<thead>
 											<tr class="fw-semibold fs-6 text-gray-700">
                                                 <th>ID</th>

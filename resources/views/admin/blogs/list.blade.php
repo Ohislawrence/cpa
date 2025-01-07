@@ -38,6 +38,35 @@
 	}).ajax.reload();
 
 	});
+
+	function hapus(e) {
+    var url = '{{ route("admin.blogs.delete", ":id") }}';
+        url = url.replace(':id', e);
+    $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+      Swal.fire({
+          title             : "Delete this blogpost",
+          text              : "Do you realy want to delete this blogpost?",
+          icon              : "warning",
+          showCancelButton  : true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor : "#d33",
+          confirmButtonText : "Yes, Delete this blogpost!"
+      }).then((result) => {
+          if (result.value) {
+              $.ajax({
+                  url    : url,
+                  type   : "delete",
+                  success: function(data) {
+                    $('.yajra-datatable').DataTable().ajax.reload();
+                  }
+              })
+          }
+      })
+  }
 </script>
 @endsection
 

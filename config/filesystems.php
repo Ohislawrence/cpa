@@ -36,6 +36,13 @@ return [
             'throw' => false,
         ],
 
+        'tenant' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/tenants'),
+            'url' => env('TENANT_ROOT_URL') . '/storage/app/public/tenants',
+            'visibility' => 'private',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

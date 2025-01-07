@@ -1,29 +1,29 @@
 <tr>
     <td align="center" valign="center" style="font-size: 13px; text-align:center; padding: 0 10px 10px 10px; font-weight: 500; color: #A1A5B7; font-family:Arial,Helvetica,sans-serif">
         <p style="color:#181C32; font-size: 16px; font-weight: 600; margin-bottom:9px">It’s all about YOU!</p>
-        <p style="margin-bottom:2px">You can reach us via email: <a href="mailto:hello@dealsintel.com">hello@dealsintel.com</a></p>
-        <p style="margin-bottom:4px">Get on info on the
-        <a href="https://dealsintel.com/blogs" rel="noopener" target="_blank" style="font-weight: 600">Dealsintel Blog</a>.</p>
-        <p>We serve Mon-Fri, 9AM-18PM WAT</p>
+        <p style="margin-bottom:2px">You can reach us via email: <a href="mailto:business@tracklia.com">business@tracklia.com</a></p>
+        <p style="margin-bottom:4px">Get more info on the
+        <a href="https://tracklia.com/blogs" rel="noopener" target="_blank" style="font-weight: 600">Tracklia Blog</a>.</p>
+        
     </td>
 </tr>
 <tr>
     <td align="center" valign="center" style="text-align:center; padding-bottom: 20px;">
-        <a href="https://www.linkedin.com/company/dealsintel" style="margin-right:10px">
+        <a href="https://www.linkedin.com/company/tracklia" style="margin-right:10px">
             <img alt="Logo" src="{{ url('public/assets/media/email/icon-linkedin.svg') }}" />
         </a>
         <a href="#" style="margin-right:10px">
             <img alt="Logo" src="{{ url('public/assets/media/email/icon-facebook.svg') }}" />
         </a>
-        <a href="https://twitter.com/dealsintel">
+        <a href="https://twitter.com/tracklia">
             <img alt="Logo" src="{{ url('public/assets/media/email/icon-twitter.svg') }}" />
         </a>
     </td>
 </tr>
 <tr>
     <td align="center" valign="center" style="font-size: 13px; padding:0 15px; text-align:center; font-weight: 500; color: #A1A5B7;font-family:Arial,Helvetica,sans-serif">
-        <p>&copy; Copyright DealsIntel. 
-        <a href="https://dealsintel.com" rel="noopener" target="_blank" style="font-weight: 600;font-family:Arial,Helvetica,sans-serif"></p>
+        <p>&copy; Copyright  
+        <a href="https://tracklia.com" rel="noopener" target="_blank" style="font-weight: 600;font-family:Arial,Helvetica,sans-serif">Tracklia.</p>
     </td>
 </tr>
 <!--end::Email template-->

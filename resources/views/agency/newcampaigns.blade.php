@@ -162,6 +162,7 @@
                 </div>
                 <!--end::Input group-->
 
+                
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
@@ -187,6 +188,18 @@
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
+
+                <div class="form-group row mb-5">
+                    <div class="col-md-6">
+                        <label class="form-label">Start date:</label>
+                        <input name="start" type="date" class="form-control form-control-solid mb-3 mb-lg-0"  />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">End date:(Leave blank for if no end date)</label>
+                        <input name="end" type="date" class="form-control form-control-solid mb-3 mb-lg-0"  />
+                    </div>
+                </div>
+
             </div>
             <!--end::Scroll-->
 

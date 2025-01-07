@@ -75,15 +75,19 @@ class DashboardController extends Controller
     public function getUserClicks(Request $request)
     {
         if ($request->ajax()) {
-            $data = Click::where('user_id', Auth::user()->id)->select("id" ,
-            DB::raw("(count(clickID)) as total_clicks"),
-            DB::raw("(sum(earned)) as payout"),
-            DB::raw("(sum(conversion)) as conversions"),
-            DB::raw("(DATE_FORMAT(created_at, '%d-%m-%Y')) as my_date")
+            $data = Click::where('user_id', Auth::user()->id)
+            ->select(
+                DB::raw("null as id"), // Use null or aggregate this value meaningfully
+                DB::raw("count(clickID) as total_clicks"),
+                DB::raw("sum(earned) as payout"),
+                DB::raw("sum(conversion) as conversions"),
+                DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y') as my_date")
             )
-            ->orderBy('created_at')
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"))
+            ->orderBy(DB::raw("MIN(created_at)")) // Use MIN or MAX to order within grouped data
             ->get();
+
+
 
             return Datatables::of($data)
                     ->addColumn('epc', function($row){

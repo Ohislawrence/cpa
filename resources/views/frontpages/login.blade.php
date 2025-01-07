@@ -91,7 +91,7 @@
                         <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                             <div></div>
                             <!--begin::Link-->
-                            <a href="" class="link-primary">Forgot Password ?</a>
+                            <a href="{{ route('password.reset') }}" class="link-primary">Forgot Password ?</a>
                             <!--end::Link-->
                         </div>
                         <!--end::Wrapper-->

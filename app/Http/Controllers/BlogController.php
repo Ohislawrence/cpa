@@ -87,7 +87,8 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::find($id);
-        return view('admin.blogs.show', compact('blog'));
+        $cat = Blogcategory::all();
+        return view('admin.blogs.edit', compact('blog','cat'));
     }
 
     /**
@@ -105,38 +106,40 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'title' => 'required|unique:blogs',
-            'content' => 'required',
-            'category' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-
-
-        $imageName = time().'.'.$request->image->extension();
-
-        $request->image->move(public_path('blogimages'), $imageName);
-
+        $slug = Str::slug($request->title);
         $upblog = Blog::findorfail($id);
 
+
+        if(!empty($request->image)){
+            $imageName = $slug.'-'.time().'.'.$request->image->extension();
+            $request->image->move(public_path('blogimages'), $imageName);
+            $upblog->banner = $imageName;
+            $upblog->save();
+        }else{
+
+        }
+       
         $upblog->update([
             'title' => $request->input('title'),
-            'slug' => Str::slug($request->title),
+            'slug' => $slug,
             'desc' => $request->input('content'),
-            'banner' => $imageName,
             'user_id'=> auth()->user()->id,
             'category' => $request->input('category'),
         ]);
 
-        return redirect()->route('blogs.index')
+        return redirect()->back()
                         ->with('success','Blog updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
+        $blog = Blog::find($id);
         $blog->delete();
         return redirect()->back()
                         ->with('success','Deleted successfully');
@@ -150,9 +153,8 @@ class BlogController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="blog/'.$row->id.'/show" class="edit btn btn-primary btn-sm">View</a>
-                                    <a href="blog/'.$row->id.'/update" class="edit btn btn-success btn-sm">Edit</a>
-                                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="blog/'.$row->id.'/show" class="edit btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" title="Hapus User" onclick="hapus('.$row->id.')" ><i class="fa fa-trash "></i></a>';
                     return $actionBtn;
                 })
                 ->addColumn('date', function($row){

@@ -10,8 +10,8 @@
                             <div style="text-align:center; margin:0 60px 34px 60px">
                                 <!--begin:Logo-->
                                 <div style="margin-bottom:17px">
-                                    <a href="https://dealsintel.com" rel="noopener" target="_blank">
-                                        <img alt="Logo" src="{{ url('public/assets/media/logos/logo-dealsintel.png') }}"  style="height: 35px" />
+                                    <a href="https://tracklia.com" rel="noopener" target="_blank">
+                                        <img alt="Logo" src="{{ url('public/assets/media/logos/tracklia_black_logo.png') }}"  style="height: 35px" />
                                     </a>
                                 </div>
                                 <!--end:Logo-->
@@ -21,10 +21,10 @@
                                 <div style="text-align:start; font-size: 13px; font-weight: 500; margin-bottom: 27px; font-family:Arial,Helvetica,sans-serif;">
 
                                     <p style="margin-bottom:9px; color:#181C32; font-size: 18px; font-weight:600">Hello {{ $user->name }},</p>
-                                    <p style="margin-bottom:8px; color:#5E6278">I hope this email finds you well. I wanted to personally reach out to thank you for your recent interest to join the DealsIntel Network. We're thrilled to have you on board and eager to explore the potential of our partnership.</p>
+                                    <p style="margin-bottom:8px; color:#5E6278">I hope this email finds you well. I wanted to personally reach out to thank you for your recent interest to join the Tracklia. We're thrilled to have you on board and eager to explore the potential of our partnership.</p>
                                     <p style="margin-bottom:8px; color:#5E6278">I want to assure you that your application is receiving our full attention. Our team is currently reviewing it thoroughly to ensure that we can provide you with the best possible experience. We appreciate your patience during this process.</p>
                                     <p style="margin-bottom:8px; color:#5E6278">We will reach out to you promptly with an update via the Telegram username you provided. If you have any questions or concerns in the meantime, please don't hesitate to reach out to us.</p>
-                                    <p style="margin-bottom:8px; color:#5E6278; margin-bottom:13px">Thank you once again for your interest in partnering with DealsIntel. We're excited about the prospect of working together and are committed to providing you with the support and resources you need to succeed as a business.</p>
+                                    <p style="margin-bottom:8px; color:#5E6278; margin-bottom:13px">Thank you once again for your interest in partnering with Tracklia. We're excited about the prospect of working together and are committed to providing you with the support and resources you need to succeed as a business.</p>
                                     
                                     
                                     <!--begin:Action-->

@@ -14,7 +14,12 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 
     public function subscription()
     {
-        return $this->hasOne(Subscription::class);
+        return $this->hasOne(Subscription::class, "tenant_id","id");
+    }
+
+    public function kyc()
+    {
+        return $this->hasOne(Kyc::class, "tenant_id","id");
     }
     
 }

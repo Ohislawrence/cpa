@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RegistrationController extends Controller
 {
@@ -28,48 +29,7 @@ class RegistrationController extends Controller
 
     public function postagency(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string',
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $user->assignRole('affiliate');
         
-        Agencydetails::create([
-        'user_id' => $user->id,
-        'active' => 0,	
-        'companyname' => $request->companyname,	
-        'brandurl' => $request->brandurl,	
-        'brandaddress' => $request->brandaddress,	
-        'city' => $request->city,	
-        'country' => $request->country,
-        'region' => 'na',
-        'phonenumber' => $request->phonenumber,
-        'brandname' => $request->brandname,
-        'branddesc' => $request->branddesc,
-        'brandproductlandingurl' => $request->brandproductlandingurl,
-        'category_id' => $request->category_id,
-        'brandtargetgeos' => $request->brandtargetgeos,
-        'brandpreferredpayouttype' => 'na',
-        'brandpaymenyterm' => 'na',
-        'brandinstantmessager' => 'telegram',
-        'brandinstantmessageid' => $request->brandinstantmessageid,
-        'brandinterestedtraffic' => 'na',
-        'brandmonthlybudget' => $request->brandmonthlybudget,
-        'brandtracking' => $request->brandtracking,
-        'note' => $request->note,
-    ]);
-
-        Mail::to($user->email)->queue(new WelcomeEmailAgency($user));
-
-        return back()->with('message','Your request has been recieved, we will contact you shortly, Thank you.');
     }
 
 
@@ -78,7 +38,6 @@ class RegistrationController extends Controller
         $validated = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string',
             'country' => 'required',
             'region' => 'required',
         ]);
@@ -87,18 +46,28 @@ class RegistrationController extends Controller
             return back()->with('message','You did not accept the Terms and Conditions');
         }
 
+        $password = Str::password(9, true, true, false, false);
+        $password_hash = Hash::make($password);
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $password_hash,
         ]);
 
         $user->assignRole('affiliate');
+
         //active logic
+        $activeSetting = \App\Models\Setting::where('key','affiliate_auto_approval')->value('value');
+        if( $activeSetting  == 1){
+            $activate = 1;
+        }else{
+            $activate =0;
+        }
         
         Affiliatedetail::create([
         'user_id' => $user->id,
-        'active' => 0,	
+        'active' => $activate,	
         'city' => $request->region,	
         'country' => $request->country,	
         'region' => $request->region,
@@ -108,9 +77,9 @@ class RegistrationController extends Controller
         'referred_by' => $request->refID ?? null,
     ]);
 
-        Mail::to($user->email)->queue(new WelcomeEmail($user));
-
-        return view('frontpages.affiliateCreated');
+        
+        Mail::to($user->email)->queue(new WelcomeEmail($user,$password,$activeSetting));   
+        return back()->with('message','Your account has been created, check your email to sign in.');
     }
 
     public function generateUniqueCode()

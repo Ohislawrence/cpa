@@ -84,7 +84,7 @@ Route::middleware([
     Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
 
     //offer webhooks
-    //Route::webhooks('verify-action-taken', 'webhooktest1');
+    //Route::webhooks('webhook-verify-action');
     Route::post('verify-action-taken',[WebhookController::class, 'handle']);
 
 
@@ -105,8 +105,8 @@ Route::middleware([
         return redirect(route('affiliatereg'));
         });
     //affiliate registration
-    Route::get('reg/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
-    Route::post('reg/affiliate/post', [RegistrationController::class, 'postaffiliate'])->name('affiliateregPost');
+    Route::get('signup/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
+    Route::post('signup/affiliate/post', [RegistrationController::class, 'postaffiliate'])->name('affiliateregPost');
 
 //redirect to affliate
     Route::get('/', function () {
@@ -151,18 +151,29 @@ Route::middleware([
         
     ], function () {
         Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
+        Route::get('profile/edit' , [ProfileController::class, 'edit'])->name('edit');
+        Route::post('profile/edit' , [ProfileController::class, 'editPost'])->name('profile.edit');
+        Route::post('profile/edit/password' , [ProfileController::class, 'editpasswordPost'])->name('profile.edit.password');
+        Route::post('profile/traffic/source' , [ProfileController::class, 'trafficsource'])->name('trafficsource');
+        Route::get('my/profile/traffic/source' , [ProfileController::class, 'gettrafficsource'])->name('gettrafficsource');
+
         Route::get('offers', [AffiliateOfferController::class, 'index'])->name('offer');
         Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
         Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
+
         Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
         Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
         Route::post('dashboard/getclickchart', [DashboardController::class, 'showclickchart'])->name('showclickchart');
         Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
+
         Route::get('payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('payments/getpaymentdata', [PaymentController::class, 'getpaymentdata'])->name('getpaymentdata');
         Route::post('payments/post/requestpayment', [PaymentController::class, 'requestpayment'])->name('requestpayment');
+
         Route::get('referral', [ReferralController::class, 'index'])->name('referral');
+
         Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
+
         Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
         Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
 

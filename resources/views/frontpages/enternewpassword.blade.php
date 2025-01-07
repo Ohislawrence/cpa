@@ -91,7 +91,7 @@
                         </div>
                         <div class="fv-row mb-3">
                             <!--begin::Password-->
-                            <input type="password" placeholder="Confirm Password" id="confirmPassword" name="confirmPassword" required autocomplete="current-password" class="form-control bg-transparent" />
+                            <input type="password" placeholder="Confirm Password" id="confirmPassword" name="password_confirmation" required autocomplete="current-password" class="form-control bg-transparent" />
                             <!--end::Password-->
                             <span id="message"></span>
                         </div>

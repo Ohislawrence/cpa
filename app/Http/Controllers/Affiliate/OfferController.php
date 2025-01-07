@@ -67,8 +67,8 @@ class OfferController extends Controller
                 ->addColumn('epc', function($row){
 
 
-                    // Avoid division by zero
-                    $averageEarnings =  0;
+                // Avoid division by zero
+                $averageEarnings =  0;
 
                    return $averageEarnings;
                })

@@ -4,8 +4,8 @@ return [
     'configs' => [
         [
 
-            'name' => 'webhooktest1',
-            'signing_secret' => '65656585858558585853435',
+            'name' => 'default',
+            'signing_secret' => config('secret', '85885858858858'),
             'signature_header_name' => 'Signature',
             'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
@@ -17,5 +17,5 @@ return [
 
     ],
 
-    'delete_after_days' => 30,
+    'delete_after_days' => 180,
 ];

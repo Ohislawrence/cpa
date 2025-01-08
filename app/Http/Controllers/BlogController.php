@@ -131,7 +131,7 @@ class BlogController extends Controller
         ]);
 
         return redirect()->back()
-                        ->with('success','Blog updated successfully');
+                        ->with('message','Blog updated successfully');
     }
 
     /**

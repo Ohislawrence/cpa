@@ -49,12 +49,11 @@
         <div class="flex-lg-row-fluid me-0 me-lg-20">
 
 <!--begin::Form-->
-<form action="{{ route('merchant.configuration.update') }}" class="form mb-9" method="post">
+<form action="{{ route('merchant.configuration.update') }}" class="form mb-9" method="post" enctype="multipart/form-data">
     @csrf
 <!--begin::Input group-->
 
 <div class="row mb-5">
-    @foreach ($configs as $config)
     <!--begin::Col-->
     <div class="col-md-6 fv-row">
         <!--begin::Label-->
@@ -66,8 +65,6 @@
         <!--end::Input-->
     </div>
     <!--end::Col-->
-    @endforeach
-
 </div>
 <!--end::Input group-->
 

@@ -77,7 +77,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
             //affiliate registration
-           // Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
+           //Route::get('sign-up/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
             //advertiser registration
             //Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
             //Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdvertiser'])->name('advertiserregpost');
@@ -171,6 +171,18 @@ Route::middleware([
    // Route::post('/subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
    // Route::get('/subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
     Route::post('/subscription/webhook', [PaystackController::class, 'handleWebhook'])->middleware('allowIPforWebhook');
+
+
+    Route::group([
+        'namespace' => 'App\Http\Controllers\Affiliate',
+        'prefix' => 'merchant',
+        'middleware' => 'role:merchant',
+        'as' => 'affiliate.',
+        
+    ], function () {
+       // Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
+    });
+
 
 //Admin
     Route::group([

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Geo;
 use App\Models\Offer;
 use App\Models\Payout;
@@ -180,7 +181,8 @@ class OfferController extends Controller
     public function campaigndetails(string $id)
     {
         $offer = Offer::find($id);
-        return view('agency.campaignview', compact('offer'));
+        $currency = Currency::find(settings()->get('default_currency') ) ;
+        return view('agency.campaignview', compact('offer','currency'));
     }
 
     public function campaignstats(string $id)

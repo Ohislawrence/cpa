@@ -2,31 +2,30 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
+use App\Models\User;
 
-class WelcomeEmail extends Mailable implements ShouldQueue
+class AffiliateInvite extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $user;
-    public $password; 
-    public $activeSetting;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user,$password, $activeSetting)
+
+    public $name;
+    public $code;
+
+    public function __construct( $name, $code)
     {
-        $this->user = $user;
-        $this->password = $password;
-        $this->$activeSetting = $activeSetting;
+        $this->name = $name;
+        $this->code = $code;
     }
 
     /**
@@ -36,7 +35,7 @@ class WelcomeEmail extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: new Address(settings()->get('contact_email') ?? tenant()->kyc->business_email, ucfirst(tenant()->id)),
-            subject: 'Welcome to '.ucfirst(tenant()->id).' Affiliates – Your Journey Starts Here!',
+            subject: 'Invitation to join '.ucfirst(tenant()->id).' as an affiliate',
         );
     }
 
@@ -46,7 +45,7 @@ class WelcomeEmail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcomeEmail',
+            view: 'emails.affiliateinvitation',
         );
     }
 

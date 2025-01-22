@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CreateTenantJob;
 use App\Mail\WelcomeTenant;
 use App\Models\Currency;
 use App\Models\Kyc;
@@ -58,11 +59,13 @@ class CreatetenantController extends Controller
         //try {
             //Code that may throw an Exception
         
-        $this->validate($request, [
+        $data = $request->validate([
             'business_email' => 'required|unique:users,email',
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
         ]);
+
+        //CreateTenantJob::dispatch($data);
 
 
         $subdomain = $this->formatForSubdomain($request->subdomain);
@@ -123,15 +126,15 @@ class CreatetenantController extends Controller
         ]);
 
         Tenancy::initialize($tenant);
-        // Register the user on the tenant's database
-        $tenantUser = User::create([
-            'name' => $request->business_name,
-            'email' => $request->business_email,
-            'password' => $password_hash,
-        ]);
+            // Register the user on the tenant's database
+            $tenantUser = User::create([
+                'name' => $request->business_name,
+                'email' => $request->business_email,
+                'password' => $password_hash,
+            ]);
 
-        $role = Role::where('name', 'merchant')->first();
-        $tenantUser->assignRole($role);
+            $role = Role::where('name', 'merchant')->first();
+            $tenantUser->assignRole($role);
         Tenancy::end();
 
         if(env('APP_ENV') == 'production') 

@@ -1,5 +1,5 @@
 @extends('layouts.auth.layouts')
-@section('headername',  'Register')
+@section('headername',  'Welcome, you were invited')
 
 
 @section('header')
@@ -60,7 +60,6 @@
             <div class="bg-body d-flex flex-column align-items-stretch flex-center rounded-4 w-md-600px p-20">
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
-                    @if (settings()->get('allow_affiliate_registration') == '1')
                         <!--begin::Form-->
                         <form class="form w-100" method="POST" id="kt_sign_in_form"  action="{{ route('affiliateregPost') }}">
                             @csrf
@@ -70,7 +69,7 @@
                                 <h1 class="text-gray-900 fw-bolder mb-3">Sign Up</h1>
                                 <!--end::Title-->
                                 <!--begin::Subtitle-->
-                                <div class="text-gray-500 fw-semibold fs-6">Enter your email and password to continue.</div>
+                                <div class="text-gray-500 fw-semibold fs-6">Password and other details to continue.</div>
                                 <!--end::Subtitle=-->
                                 @include('admin.components.alert')
                             </div>
@@ -79,7 +78,7 @@
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="Full Name" name="name" :value="old('name')" required autocomplete="off" class="form-control bg-transparent" />
+                                <input type="text" placeholder="Full Name" name="name" value="{{ $name }}" required autocomplete="off" class="form-control bg-transparent" />
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
@@ -87,7 +86,7 @@
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="email" placeholder="Email" name="email" :value="old('email')" required autocomplete="off" class="form-control bg-transparent" />
+                                <input type="email" placeholder="Email" name="email" value="{{ $email }}" required autocomplete="off" class="form-control bg-transparent" readonly/>
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
@@ -108,7 +107,7 @@
                             <!--begin::Input group=-->
                             <div class="fv-row mb-8">
                                 <!--begin::Email-->
-                                <input type="text" placeholder="Region" name="region" :value="old('region')" required autocomplete="off" class="form-control bg-transparent" />
+                                <input type="text" placeholder="Region" name="region" :value="old('region')" required autocomplete="off" class="form-control bg-transparent"/>
                                 <!--end::Email-->
                             </div>
                             <!--end::Input group=-->
@@ -136,10 +135,6 @@
                             <!--end::Sign up-->
                         </form>
                     <!--end::Form-->
-                    @else
-                        <h2 class="text-black fw-normal m-0">Registrations are closed for now!</h2>
-                    @endif
-                    
                 </div>
                 <!--end::Wrapper-->
                 <!--begin::Footer-->

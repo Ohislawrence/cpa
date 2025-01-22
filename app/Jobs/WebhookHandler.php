@@ -71,6 +71,10 @@ class WebhookHandler implements ShouldQueue
         }
 
         $status = $this->webhookCall['payload']['status'] ;
+
+        $cost = $this->webhookCall['payload']['cost'] ;
+
+
         if($status == 'Approved')
         {
             $conversion = 1;
@@ -83,21 +87,22 @@ class WebhookHandler implements ShouldQueue
             'status' => $status,
             'earned' => $earned,
             'conversion' => $conversion,
+            'cost' => $cost,
         ]);
 
         //credit affiliate
         $click->user->deposit($earned * 100); //credit main
 
         //logic for referral
-        if($this->merchantConfig('allow_affiliate_referral') == 1){
+        if(settings()->get('allow_affiliate_referral') == 1){
                     
-            $period = $click->user->created_at->subMonths($this->merchantConfig('allowed_affiliate_referral_duration_months')); //months in which the reffered has stayed on the platform
+            $period = $click->user->created_at->subMonths(settings()->get('allowed_affiliate_referral_duration_months')); //months in which the reffered has stayed on the platform
             $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
             $referral = $referralget->user;
 
             if($click->user->created_at > $period )
             {
-                $refCommision = $earned * ($this->merchantConfig('allowed_affiliate_referral_payout_percentage')/100);
+                $refCommision = $earned * (settings()->get('allowed_affiliate_referral_payout_percentage')/100);
                 $referral->deposit($refCommision); //credit commission
                 
             }
@@ -111,7 +116,7 @@ class WebhookHandler implements ShouldQueue
 
     function merchantConfig($key)
     {
-        return \App\Models\Setting::where('key', $key)->value('value');
+        return \App\Models\Setting::where('name', $key)->value('val');
     }
 
     /**

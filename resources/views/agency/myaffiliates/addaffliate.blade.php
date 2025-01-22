@@ -7,7 +7,7 @@
             <!--begin::Modal header-->
             <div class="modal-header" id="kt_modal_add_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">Add User</h2>
+                <h2 class="fw-bold">Invite an Affiliate</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
 						<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
@@ -48,25 +48,13 @@
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">Password</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="password" name="password" class="form-control form-control-solid mb-3 mb-lg-0" />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-
                     </div>
                     <!--end::Scroll-->
                     <!--begin::Actions-->
                     <div class="text-center pt-10">
                         <button type="reset" class="btn btn-light me-3" data-kt-users-modal-action="cancel">Discard</button>
                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
-                            Submit
+                            Send Invitation
                         </button>
                     </div>
                     <!--end::Actions-->

@@ -8,6 +8,7 @@ use App\Mail\WelcomeEmailAgency;
 use App\Models\Affiliatedetail;
 use App\Models\Agencydetails;
 use App\Models\Country;
+use App\Models\Emailinvite;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,22 @@ class RegistrationController extends Controller
     {
         $countries = Country::all();
         return view('frontpages.affiliateregistration', compact('countries'));
+    }
+
+    public function invite(Request $request)
+    {
+        $code = $request->code;
+        $checkcode = Emailinvite::where('code', $code)->first();
+        $countries = Country::all();
+        if($checkcode){
+            $email = $checkcode->email;
+            $name = $checkcode->name;
+            return view('frontpages.affiliateregistrationinvite', compact('countries','email','name'));
+        }else{
+            
+        }
+        
+        
     }
 
     public function advertiser()
@@ -58,16 +75,17 @@ class RegistrationController extends Controller
         $user->assignRole('affiliate');
 
         //active logic
-        $activeSetting = \App\Models\Setting::where('key','affiliate_auto_approval')->value('value');
-        if( $activeSetting  == 1){
-            $activate = 1;
+        $activeSetting = settings()->get('affiliate_auto_approval');
+        $affiliateregistration = settings()->get('allow_affiliate_registration');
+        if( $activeSetting  == 'yes' || $affiliateregistration == 2){
+            $activate = 'Active';
         }else{
-            $activate =0;
+            $activate ='Pending';
         }
         
         Affiliatedetail::create([
         'user_id' => $user->id,
-        'active' => $activate,	
+        'status' => $activate,	
         'city' => $request->region,	
         'country' => $request->country,	
         'region' => $request->region,

@@ -14,45 +14,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('configurations')->insert([
-            ['key' => 'contact_email', 'value' => 'NULL'],
-            ['key' => 'support_email', 'value' => 'NULL'],
-            ['key' => 'default_currency', 'value' => '2'],
-            ['key' => 'timezone', 'value' => 'NULL'],
-            ['key' => 'commission_rate', 'value' => 'NULL'],
-            ['key' => 'cookie_lifetime_days', 'value' => 'NULL'],
-            ['key' => 'minimum_payout_amount', 'value' => 'NULL'],
-            ['key' => 'payout_frequency', 'value' => 'NULL'],
-            ['key' => 'payout_methods', 'value' => 'NULL'],
-            ['key' => 'affiliate_auto_approval', 'value' => 'NULL'],
-            ['key' => 'signup_bonus', 'value' => 'NULL'],
-            ['key' => 'terms_and_conditions', 'value' => 'NULL'],
-            ['key' => 'require_tax_info', 'value' => 'NULL'],
-            ['key' => 'new_affiliate_notification', 'value' => 'NULL'],
-            ['key' => 'new_conversion_notification', 'value' => 'NULL'],
-            ['key' => 'payout_notification', 'value' => 'NULL'],
-            ['key' => 'admin_notification_email', 'value' => 'NULL'],
-            ['key' => 'allowed_countries', 'value' => 'NULL'],
-            ['key' => 'gdpr_compliance', 'value' => 'NULL'],
-            ['key' => 'logo', 'value' => 'NULL'],
-            ['key' => 'secret', 'value' => '0959959039094984959049949393'],
-            ['key' => 'allow_affiliate_referral', 'value' => '0'],
-            ['key' => 'allowed_affiliate_referral_payout_percentage', 'value' => '10'],
-            ['key' => 'allowed_affiliate_referral_duration_months', 'value' => '0'],
+        DB::table('settings')->insert([
+            ['name' => 'site_name', 'val' => NULL],
+            ['name' => 'favicon', 'val' => NULL],
+            ['name' => 'contact_email', 'val' => NULL],
+            ['name' => 'support_email', 'val' => NULL],
+            ['name' => 'default_currency', 'val' => '2'],
+            ['name' => 'timezone', 'val' => NULL],
+            ['name' => 'commission_rate', 'val' => NULL],
+            ['name' => 'cookie_lifetime_days', 'val' => NULL],
+            ['name' => 'minimum_payout_amount', 'val' => NULL],
+            ['name' => 'payout_frequency', 'val' => NULL],
+            ['name' => 'payout_methods', 'val' => NULL],
+            ['name' => 'affiliate_auto_approval', 'val' => NULL],
+            ['name' => 'signup_bonus', 'val' => NULL],
+            ['name' => 'terms_and_conditions', 'val' => NULL],
+            ['name' => 'require_tax_info', 'val' => NULL],
+            ['name' => 'new_affiliate_notification', 'val' => NULL],
+            ['name' => 'new_conversion_notification', 'val' => NULL],
+            ['name' => 'payout_notification', 'val' => NULL],
+            ['name' => 'admin_notification_email', 'val' => NULL],
+            ['name' => 'allowed_countries', 'val' => NULL],
+            ['name' => 'gdpr_compliance', 'val' => NULL],
+            ['name' => 'logo', 'val' => NULL],
+            ['name' => 'secret', 'val' => ''],
+            ['name' => 'allow_affiliate_referral', 'val' => '0'],
+            ['name' => 'allowed_affiliate_referral_payout_percentage', 'val' => '10'],
+            ['name' => 'allowed_affiliate_referral_duration_months', 'val' => '0'],
+            ['name' => 'allow_affiliate_registration', 'val' => '1']
         ]);
 
 
-        DB::table('currencies')->insert([
-            ['country'=>'Albania', 'currency'=>'Leke', 'code'=>'ALL', 'symbol'=>'Lek'], 
-            ['country'=>'America', 'currency'=>'Dollars', 'code'=>'USD', 'symbol'=>'$'], 
-            ['country'=>'Afghanistan', 'currency'=>'Afghanis', 'code'=>'AFN', 'symbol'=>'؋'],
-            ['country'=>'Argentina', 'currency'=>'Pesos', 'code'=>'ARS', 'symbol'=>'$'],
-            ['country'=>'Aruba', 'currency'=>'Guilders', 'code'=>'AWG', 'symbol'=>'ƒ'], 
-            ['country'=>'Australia', 'currency'=>'Dollars', 'code'=>'AUD', 'symbol'=>'$'], 
-            ['country'=>'Azerbaijan', 'currency'=>'New Manats', 'code'=>'AZN', 'symbol'=>'ман'],
-            ['country'=>'Bahamas', 'currency'=>'Dollars', 'code'=>'BSD', 'symbol'=>'$'], 
-         
-        ]);
+        
+
 
         DB::table('roles')->insert([
             ['name'=>'merchant', 'guard_name'=>'web'], 
@@ -60,12 +54,7 @@ class DatabaseSeeder extends Seeder
             ['name'=>'staff', 'guard_name'=>'web'], 
         ]);
 
-        DB::table('payouts')->insert([
-            ['name'=>'PPS', 'slug'=>'pay-per-sale'], 
-            ['name'=>'PPL', 'slug'=>'pay-per-lead'], 
-            ['name'=>'PPI', 'slug'=>'pay-per-install'],
-            ['name'=>'RevShare', 'slug'=>'rev-share'], 
-        ]);
+        
 
         DB::table('categories')->insert([
             ['id' => 1, 'name' => 'App', 'slug' => 'app', 'created_at' => null, 'updated_at' => null],

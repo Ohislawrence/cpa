@@ -25,7 +25,7 @@ class CheckSubscription
 
         if (!$tenant) {
             // If no tenant is identified, deny access.
-            return response()->json(['error' => 'Tenant not found.'], Response::HTTP_FORBIDDEN);
+            return response()->json(['error' => 'Account not found. Kindly Reach out to us'], Response::HTTP_FORBIDDEN);
         }
 
         // Fetch the tenant's subscription
@@ -34,7 +34,7 @@ class CheckSubscription
 
         if (!$subscription) {
             // No subscription exists
-            return response()->json(['error' => 'Subscription not found.'], Response::HTTP_FORBIDDEN);
+            return response()->json(['error' => 'Subscription not found. Kindly Reach out to us.'], Response::HTTP_FORBIDDEN);
         }
         $currentDate = now();
         // Check subscription status
@@ -44,8 +44,17 @@ class CheckSubscription
 
         // Check if subscription is within valid dates
         
-        if ($currentDate->lt($subscription->start_date) || $currentDate->gt($subscription->end_date) && $subscription->status !== 'active') {
-            return response()->json(['error' => 'Subscription has expired or is not yet active.'], Response::HTTP_PAYMENT_REQUIRED);
+        if ($currentDate->lt($subscription->start_date) || $currentDate->gt($subscription->end_date)) {
+            if (auth()->user()->hasRole('network')){
+                return redirect(route('admin.plan.active'));
+            }
+            elseif(auth()->user()->hasRole('affiliate')){
+                return redirect(route('affiliate.account.pending'));
+            }
+            elseif(auth()->user()->hasRole('merchant')){
+                return redirect(route('merchant.plan.active'));
+            }
+            //return redirect()->route("merchant.plan.active"); ; //response()->json(['error' => 'Subscription has expired or is not yet active.'], Response::HTTP_PAYMENT_REQUIRED);
         }
         return $next($request);
     }

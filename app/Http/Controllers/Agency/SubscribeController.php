@@ -22,4 +22,8 @@ class SubscribeController extends Controller
         //dd($currentDate->lt($subscription->end_date));
         return view("agency.pricing.plan", compact("plans", "subscription", "currentDate"));
     }
+
+    public function nosubaffiliate(){
+        return view('affiliate.pending');
+    }
 }

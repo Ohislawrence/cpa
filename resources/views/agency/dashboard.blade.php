@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('headername',  'Dashboard' )
-@section('bread1',  'Dashboard' )
+@section('bread1',  'Quick View' )
 @section('bread2',  'Dashboard' )
 
 
@@ -206,7 +206,7 @@
             </div>
 
             <div class="fw-semibold text-gray-400">
-               Balance       </div>
+               Generated revenue       </div>
         </div>
         <!--end::Body-->
     </a>
@@ -219,11 +219,11 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">
-                {{$real_currency->symbol}} 34343
+                34343
             </div>
 
             <div class="fw-semibold text-gray-100">
-              Today       </div>
+              Clicks      </div>
         </div>
         <!--end::Body-->
     </a>
@@ -237,11 +237,11 @@
         <div class="card-body">
 
             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                {{$real_currency->symbol}} 45445
+                45445
             </div>
 
             <div class="fw-semibold text-white">
-               Yesterday        </div>
+               Convertions       </div>
         </div>
         <!--end::Body-->
     </a>
@@ -258,7 +258,7 @@
             </div>
 
             <div class="fw-semibold text-white">
-            Month To Date     </div>
+            Affiliates    </div>
         </div>
         <!--end::Body-->
     </a>

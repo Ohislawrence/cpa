@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('layouts.mycomponents.meta')
 		@if (isset(tenant()->id))
-		<title>@yield('headername') | {{ ucfirst(tenant()->id)  }}</title>
+		<title>@yield('headername') | {{ (settings()->get('site_name')) ? settings()->get('site_name') : ucfirst(tenant()->id) }}</title>
 		@else
 		<title>@yield('headername') | {{ env('APP_NAME') }}</title>
 		@endif
@@ -41,10 +41,14 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="index.html">
-							<img alt="Logo" src="{{ url('assets/media/logos/tracklia_black_logo.png') }}" class="h-20px logo theme-light-show" />
-							<img alt="Logo" src="{{ url('assets/media/logos/tracklia_black_logo.png') }}" class="h-20px logo theme-dark-show" />
+						@if (isset(tenant()->id))
+						<a href="{{ route('dashboard') }}">
+						<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-light-show" />
+						<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-dark-show" />
 						</a>
+						@endif
+						
+							
 						<!--end::Logo-->
 					</div>
 					<!--end::Brand-->
@@ -63,7 +67,7 @@
 								<!--begin::Breadcrumb-->
 								<ul class="breadcrumb breadcrumb-dot fw-semibold fs-base my-1">
 									<li class="breadcrumb-item text-muted">
-										<a href="index.html" class="text-muted text-hover-primary">@yield('bread1')</a>
+										<a href="" class="text-muted text-hover-primary">@yield('bread1')</a>
 									</li>
 									<li class="breadcrumb-item text-gray-900">@yield('bread2')</li>
 
@@ -73,8 +77,7 @@
 							<!--end::Page title=-->
                             @include('layouts.mycomponents.rightoptions')
 							
-								@yield('slot')
-							
+							@yield('slot')
 
 							@include('layouts.mycomponents.footer')
 						</div>

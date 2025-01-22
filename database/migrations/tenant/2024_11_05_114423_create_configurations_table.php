@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('key')->unique(); // e.g., 'site_name', 'pagination_limit'
             $table->text('value')->nullable(); // Stores the value as a string or JSON
+            $table->enum('type', ['dropdown', 'image', 'text'])->nullable();
+            $table->text('model')->nullable();
             $table->timestamps();
         });
     }

@@ -153,43 +153,16 @@
             <!--end:Menu item-->
 
             <!--begin:Menu item-->
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <span class="menu-link @active(['merchant.affiliates', 'merchant.affiliates.settings' ])">
+                <a class="@active('merchant.affiliates')" href="{{ route('merchant.affiliates') }}">
+                <span class="menu-link">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
-                    <span class="menu-title">Affiliates</span>
-                    <span class="menu-arrow"></span>
+                    <span class="menu-title">All Affiliates</span>
                 </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link @active('merchant.affiliates')" href="{{ route('merchant.affiliates') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">All Affiliates</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('merchant.affiliates.settings') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Affiliate setting</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                </div>
+                </a>
             </div>
             <!--end:Menu item-->
 
@@ -312,18 +285,6 @@
                     </div>
                     <!--end:Menu item-->
                     
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route('merchant.email.settings') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Email Settings</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
                 </div>
             </div>
             <!--end:Menu item-->

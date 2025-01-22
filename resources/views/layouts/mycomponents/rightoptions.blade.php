@@ -30,53 +30,8 @@
 										</div>
 									</div>
 									<!--end::Tablet and mobile search toggle-->
-									<!--begin::Form(use d-none d-lg-block classes for responsive search)-->
-									<form data-kt-search-element="form" class="d-none d-lg-block w-100 position-relative mb-2 mb-lg-0" autocomplete="off">
-										<!--begin::Hidden input(Added to disable form autocomplete)-->
-										<input type="hidden" />
-										<!--end::Hidden input-->
-										<!--begin::Icon-->
-										<i class="ki-duotone ki-magnifier fs-2 text-gray-700 position-absolute top-50 translate-middle-y ms-4">
-											<span class="path1"></span>
-											<span class="path2"></span>
-										</i>
-										<!--end::Icon-->
-										<!--begin::Input-->
-										<input type="text" class="form-control bg-transparent ps-13 fs-7 h-40px" name="search" value="" placeholder="Quick Search" data-kt-search-element="input" />
-										<!--end::Input-->
-										<!--begin::Spinner-->
-										<span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
-											<span class="spinner-border h-15px w-15px align-middle text-gray-500"></span>
-										</span>
-										<!--end::Spinner-->
-										<!--begin::Reset-->
-										<span class="btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-4" data-kt-search-element="clear">
-											<i class="ki-duotone ki-cross fs-2 fs-lg-1 me-0">
-												<span class="path1"></span>
-												<span class="path2"></span>
-											</i>
-										</span>
-										<!--end::Reset-->
-									</form>
-									<!--end::Form-->
-									
 								</div>
-								<!--end::Search-->
-								<!--begin::Activities-->
-								<div class="d-flex align-items-center ms-3 ms-lg-4">
-									<!--begin::Drawer toggle-->
-									<div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline w-40px h-40px" id="kt_activities_toggle">
-										<i class="ki-duotone ki-notification-bing fs-1">
-											<span class="path1"></span>
-											<span class="path2"></span>
-											<span class="path3"></span>
-										</i>
-									</div>
-									<!--end::Drawer toggle-->
-								</div>
-								<!--end::Activities-->
 								
-								<!--end::Chat-->
 								<!--begin::Theme mode-->
 								<div class="d-flex align-items-center ms-3 ms-lg-4">
 									<!--begin::Menu toggle-->

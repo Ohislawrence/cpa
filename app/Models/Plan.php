@@ -21,4 +21,7 @@ class Plan extends Model
         'plan_code',
     ];
 
+    public function planfeatures(){
+        return $this->hasMany(Planfeature::class);
+    }
 }

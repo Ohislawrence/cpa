@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AffiliateInvite;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Affiliatedetail;
@@ -10,6 +11,7 @@ use App\Models\Agencydetails;
 use App\Models\Category;
 use App\Models\Click;
 use App\Models\Country;
+use App\Models\Emailinvite;
 use App\Models\Requestpayment;
 use App\Models\Trafficsource;
 use Bavix\Wallet\Models\Transaction;
@@ -17,6 +19,7 @@ use Carbon\Carbon;
 use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AffiliateController extends Controller
 {
@@ -298,11 +301,42 @@ class AffiliateController extends Controller
         return back()->with('message','Affiliate Created');
     }
 
+    public function inviteaffiliate(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:Users,email',
+        ]);
+
+        $name = $request->name;
+        $email = $request->email;
+        $code = $this->generateUniqueInviteCode();
+
+        Emailinvite::create([
+            'name' => $name,
+            'email' => $email,
+            'code' => $code,
+        ]);
+
+        Mail::to($email)->queue(new AffiliateInvite($name,$code));
+
+        return back()->with('message','Affiliate invited via email');
+    }
+
     public function generateUniqueCode()
     {
         do {
             $code = random_int(10000000, 99999999);
         } while (Affiliatedetail::where("referral_id", "=", $code)->first());
+
+        return $code;
+    }
+
+    public function generateUniqueInviteCode()
+    {
+        do {
+            $code = random_int(10000000, 99999999);
+        } while (Emailinvite::where("code", "=", $code)->first());
 
         return $code;
     }

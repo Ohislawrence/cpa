@@ -141,8 +141,22 @@
                                 <!--end::Row-->
                                 <!--begin::Row-->
                                 <tr>
+                                    @php
+                                    if (is_null($offer->click)) {
+                                        $totalclicks = 0;
+                                        $totalearnings = 0;
+                                    }else {
+                                        foreach ($offer->click as $click) {
+                                            $clicks = $click;
+                                            $clickk[] = $clicks ;
+                                        }
+                                        $totalearnings = (round(array_sum($payys)/count($payys),2)) * $offer->click::where('status', 'Approved')->count() ;
+                                        $totalclicks = count($clickk) ? count($clickk) : 0;
+                                    }
+                                        
+                                    @endphp
                                     <td class="text-gray-500">Network EPC:</td>
-                                    <td class="text-gray-800">Total earning/total clicks</td>
+                                    <td class="text-gray-800">{{ ($totalclicks > 0) ? (round($totalearnings/$totalclicks,2)) : 0 }}</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->
@@ -154,7 +168,7 @@
                                 <!--begin::Row-->
                                 <tr>
                                     <td class="text-gray-500">Currency:</td>
-                                    <td class="text-gray-800">USD - US Dollar</td>
+                                    <td class="text-gray-800">{{ $currency->currency}} ( {{ $currency->country}} )</td>
                                 </tr>
                                 <!--end::Row-->
                             </table>

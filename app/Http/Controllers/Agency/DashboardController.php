@@ -21,8 +21,7 @@ class DashboardController extends Controller
         $payThisMonth = $clicked->where('created_at','>=', Carbon::now()->startOfMonth())->get();
         $payYesterday = $clicked->where('created_at','>=', Carbon::yesterday())->get();
         $payToday = $clicked->where('created_at','>=', Carbon::today())->get();
-        $currency = Configuration::where('key', 'default_currency')->first();
-        $real_currency = Currency::where('id', $currency->value)->first();
+        $real_currency = Currency::where('id', settings()->get('default_currency'))->first();
 
         $earnedThisMonth = 0;
         $earnedYesterday = 0;

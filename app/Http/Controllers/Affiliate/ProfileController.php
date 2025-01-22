@@ -111,4 +111,9 @@ class ProfileController extends Controller
         }
     }
     }
+
+    public function thankyouapproval()
+    {
+        return view('affiliate.thankyouallowaffiliate');
+    }
 }

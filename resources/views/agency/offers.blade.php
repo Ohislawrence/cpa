@@ -5,6 +5,7 @@
 
 
 @section('header')
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 @endsection
 
 
@@ -12,6 +13,12 @@
 
 @section('footer')
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
 <script type="text/javascript">
 	$(function () {
 
@@ -34,7 +41,12 @@
 				orderable: true,
 				searchable: false,
 			},
-		]
+		],
+        dom: 'Bfrtip',
+        buttons: [
+            { extend: 'csv', text: 'Export CSV', className: 'btn btn-primary' },
+            { extend: 'excel', text: 'Export Excel', className: 'btn btn-success' },
+        ]
 	});
 
 	});
@@ -171,15 +183,7 @@
 			<div class="card-header border-0 pt-6">
 				<!--begin::Card title-->
 				<div class="card-title">
-					<!--begin::Search-->
-					<div class="d-flex align-items-center position-relative my-1">
-						<i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-							<span class="path1"></span>
-							<span class="path2"></span>
-						</i>
-						<input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Search user" />
-					</div>
-					<!--end::Search-->
+					<h3>All Campaign</h3>
 				</div>
 				<!--begin::Card title-->
 				<!--begin::Card toolbar-->

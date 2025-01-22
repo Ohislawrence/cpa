@@ -14,7 +14,7 @@ class WebhookController extends Controller
     {
         // Validate the request
         $secret = $request->header('secretKey');
-        $allowedSecret = $this->merchantConfig('secret');
+        $allowedSecret = settings()->get('secret');
         //dd($allowedSecret);
         if ($secret != $allowedSecret) {
             Log::warning('Unauthorized webhook attempt detected.');

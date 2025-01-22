@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('ip');
             $table->string('clickID');
             $table->float('earned')->nullable();
+            $table->float('cost')->nullable();
             $table->integer('conversion')->nullable();
             $table->string('referrerurl')->nullable();
             $table->timestamps();

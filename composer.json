@@ -15,9 +15,11 @@
         "laravel/framework": "^11.0",
         "laravel/jetstream": "^5.0",
         "laravel/sanctum": "^4.0",
+        "laravel/telescope": "^5.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "paypal/rest-api-sdk-php": "^1.6",
+        "qcod/laravel-settings": "^1.2",
         "reefki/laravel-device-detector": "^1.0",
         "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-permission": "^6.0",
@@ -27,7 +29,7 @@
         "stancl/tenancy": "^3.8",
         "tuytoosh/active": "^1.8",
         "yajra/laravel-datatables": "11.0",
-        "yajra/laravel-datatables-buttons": "11.0",
+        "yajra/laravel-datatables-buttons": "^11.2",
         "yajra/laravel-datatables-oracle": "11.0"
     },
     "require-dev": {

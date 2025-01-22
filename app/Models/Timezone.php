@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Timezone extends Model
 {
+    protected $connection = 'mysql';
+    protected $table = 'timezones';
     protected $fillable = [
         'zone_name',
         'country_code',

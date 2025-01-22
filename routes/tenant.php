@@ -108,6 +108,9 @@ Route::middleware([
     Route::get('signup/affiliate', [RegistrationController::class, 'index'])->name('affiliatereg');
     Route::post('signup/affiliate/post', [RegistrationController::class, 'postaffiliate'])->name('affiliateregPost');
 
+    Route::get('signup/affiliate/invite/{code}', [RegistrationController::class, 'invite'])->name('affiliatereginvite');
+    //Route::post('signup/affiliate/post/invite', [RegistrationController::class, 'postaffiliateinvite'])->name('affiliateregPostinvite');
+
 //redirect to affliate
     Route::get('/', function () {
         return redirect(route('dashboard'));
@@ -156,6 +159,7 @@ Route::middleware([
         Route::post('profile/edit/password' , [ProfileController::class, 'editpasswordPost'])->name('profile.edit.password');
         Route::post('profile/traffic/source' , [ProfileController::class, 'trafficsource'])->name('trafficsource');
         Route::get('my/profile/traffic/source' , [ProfileController::class, 'gettrafficsource'])->name('gettrafficsource');
+        Route::get('signup-check' , [ProfileController::class, 'thankyouapproval'])->name('thankyouapproval');
 
         Route::get('offers', [AffiliateOfferController::class, 'index'])->name('offer');
         Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
@@ -201,7 +205,7 @@ Route::middleware([
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
         Route::get('affiliates', [AffiliateController::class, 'index'])->name('affiliates');
         //affiliate profile
-        Route::get('affiliate/settings', [AffiliateController::class, 'settings'])->name('affiliates.settings');
+        //Route::get('affiliate/settings', [AffiliateController::class, 'settings'])->name('affiliates.settings');
         Route::get('affiliates/get/all', [AffiliateController::class, 'getusers'])->name('getusers');
         Route::get('affiliates/{id}/get', [AffiliateController::class, 'getuserclickstats'])->name('getuserclickstats');
         Route::get('transaction/all/transaction', [TransactionController::class, 'getusertransaction'])->name('all.getusertransaction');
@@ -219,7 +223,7 @@ Route::middleware([
         Route::get('affiliate/{id}/transactions', [AffiliateController::class, 'transactions'])->name('affiliate.transactions');
         Route::get('affiliate/{id}/trafficsource', [AffiliateController::class, 'trafficsource'])->name('affiliate.trafficsource');
         Route::post('affiliate/{id}/trafficsource/post', [AffiliateController::class, 'traffic'])->name('affiliate.traffic');
-        Route::post('affiliate/create/new/post', [AffiliateController::class, 'createaffiliate'])->name('affiliate.createaffiliate');
+        Route::post('affiliate/create/new/post', [AffiliateController::class, 'inviteaffiliate'])->name('affiliate.createaffiliate');
         Route::delete('affiliate/{id}/trafficsource/delete', [AffiliateController::class, 'trafficsourcedestroy'])->name('affiliate.trafficsourcedestroy');
         //payouts
         Route::get('payouts/request', [AgencyPayoutController::class, 'index'])->name('payout.request');
@@ -233,16 +237,14 @@ Route::middleware([
         Route::get('email/send', [EmailController::class, 'send'])->name('email.send');
         Route::get('email/sent/all', [EmailController::class, 'showSentMessages'])->name('email.showSentMessages');
         Route::get('email/sent/get/sent', [EmailController::class, 'getsentMessages'])->name('email.getsentMessages');
-        Route::get('email/settings', [EmailController::class, 'settings'])->name('email.settings');
+        //Route::get('email/settings', [EmailController::class, 'settings'])->name('email.settings');
         Route::post('email/settings/save', [EmailController::class, 'updateEmailSettings'])->name('email.updateEmailSettings');
         Route::post('email/send/all', [EmailController::class, 'sendEmail'])->name('email.sendEmail');
         Route::get('email/systememail', [EmailController::class, 'systememail'])->name('email.systememail');
         //subscribe
-        Route::get('plans/active', [SubscribeController::class, 'subscribe'])->name('plan.active');
+        //Route::get('plans/active', [SubscribeController::class, 'subscribe'])->name('plan.active');
 
-        //subscription links
-        Route::post('subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
-        Route::get('subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
+        
         //Route::post('subscription/webhook', [PaystackController::class, 'handleWebhook']);
 
         //plan access
@@ -258,7 +260,36 @@ Route::middleware([
         
 
     });
+
+
+    
     
 });
+
+    //no check sub route
+    Route::middleware([
+        'auth',
+    ])->group(function () {
+        Route::group([
+            'namespace' => 'App\Http\Controllers\Agency',
+            'prefix' => 'merchant',
+            'middleware' => 'role:merchant',
+            'as' => 'merchant.',
+        ], function () {
+            Route::get('plans/active', [SubscribeController::class, 'subscribe'])->name('plan.active');
+            //subscription links
+            Route::post('subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
+            Route::get('subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
+        });
+        Route::group([
+            'namespace' => 'App\Http\Controllers\Affiliate',
+            'prefix' => 'affiliate',
+            'middleware' => 'role:affiliate',
+            'as' => 'affiliate.',
+        ], function () {
+            Route::get('account/pending', [SubscribeController::class, 'nosubaffiliate'])->name('account.pending');
+        });
+
+    });
 });
 

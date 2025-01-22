@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
+    protected $table = 'countries';
 }

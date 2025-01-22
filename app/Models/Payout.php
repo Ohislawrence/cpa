@@ -9,6 +9,9 @@ class Payout extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+    protected $table = 'payouts';
+
     protected $fillable = [
         'name',
         'slug',

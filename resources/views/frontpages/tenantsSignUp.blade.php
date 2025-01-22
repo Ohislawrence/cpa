@@ -34,7 +34,7 @@
 									
 
 								<!-- Title -->	
-								<h2 class="s-52 w-700">Try Our 7-days Free Trial</h2>	
+								<h2 class="s-52 w-700">Try Our {{ \App\Models\plan::where('name','pro')->first()->free_days }}-days Free Trial</h2>	
 								<!-- Text -->	
 								<p class="p-lg">You're moments away from your shiny new affiliate program!
 								</p>

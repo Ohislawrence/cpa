@@ -137,17 +137,7 @@ INSERT INTO `blogcategories` (`id`, `category`, `slug`, `created_at`, `updated_a
 -- Table structure for table `blogs`
 --
 
-CREATE TABLE `blogs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` int NOT NULL,
-  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 --
 -- Dumping data for table `blogs`
@@ -198,27 +188,7 @@ INSERT INTO `categories` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALU
 -- Table structure for table `clicks`
 --
 
-CREATE TABLE `clicks` (
-  `id` bigint UNSIGNED NOT NULL,
-  `offer_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `country_id` int NOT NULL,
-  `device` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `platform` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `browser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('Pending','Wait','Approved') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `clickID` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `referrerurl` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `earned` double DEFAULT NULL,
-  `conversion` int NOT NULL,
-  `smartlink` enum('yes','no') COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `clicks`
 --
 
 INSERT INTO `clicks` (`id`, `offer_id`, `user_id`, `country_id`, `device`, `platform`, `browser`, `status`, `created_at`, `updated_at`, `ip`, `clickID`, `referrerurl`, `earned`, `conversion`, `smartlink`) VALUES
@@ -247,16 +217,6 @@ INSERT INTO `clicks` (`id`, `offer_id`, `user_id`, `country_id`, `device`, `plat
 -- Table structure for table `configurations`
 --
 
-CREATE TABLE `configurations` (
-  `id` bigint UNSIGNED NOT NULL,
-  `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `configurations`
 --
 
 INSERT INTO `configurations` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
@@ -289,16 +249,7 @@ INSERT INTO `configurations` (`id`, `key`, `value`, `created_at`, `updated_at`) 
 -- Table structure for table `countries`
 --
 
-CREATE TABLE `countries` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `countries`
 --
 
 INSERT INTO `countries` (`id`, `name`, `code`, `created_at`, `updated_at`) VALUES

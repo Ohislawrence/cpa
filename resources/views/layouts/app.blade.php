@@ -7,13 +7,19 @@
         @include('layouts.mycomponents.meta')
 		@if (isset(tenant()->id))
 		<title>@yield('headername') | {{ (settings()->get('site_name')) ? settings()->get('site_name') : ucfirst(tenant()->id) }}</title>
+			@if (settings()->get('favicon') !== null)
+				<link rel="icon" href="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('favicon')) }}" type="image/x-icon">
+			@else
+				<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
+			@endif
 		@else
 		<title>@yield('headername') | {{ env('APP_NAME') }}</title>
+		<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
 		@endif
         
 
         <!-- Fonts -->
-		<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
+		
         <!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->
@@ -41,13 +47,14 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
 						<!--begin::Logo-->
-						@if (isset(tenant()->id))
+						@if (settings()->get('logo') !== null)
 						<a href="{{ route('dashboard') }}">
 						<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-light-show" />
 						<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-dark-show" />
 						</a>
+						@else
+						<h1>{{ settings()->get('site_name') ? settings()->get('site_name') : ucfirst(tenant()->id) }}</h1>
 						@endif
-						
 							
 						<!--end::Logo-->
 					</div>

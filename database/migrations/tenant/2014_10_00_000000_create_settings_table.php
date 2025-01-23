@@ -4,26 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->id();
-            $table->float('commission');
-            $table->string('currency');
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->text('val')->nullable();
+            $table->string('group')->default('default');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('settings');
     }
-};
+}

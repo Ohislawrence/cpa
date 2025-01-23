@@ -12,6 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Bavix\Wallet\Traits\HasWalletFloat;
 use Bavix\Wallet\Interfaces\WalletFloat;
 use Bavix\Wallet\Interfaces\Wallet;
+use Illuminate\Auth\Access\Gate;
 
 class User extends Authenticatable implements Wallet, WalletFloat
 {
@@ -95,6 +96,8 @@ class User extends Authenticatable implements Wallet, WalletFloat
     {
         return $this->belongsToMany(Tenant::class);
     }
+
+   
 
 
 }

@@ -31,7 +31,7 @@
             <div class="d-flex flex-center flex-lg-start flex-column">
                 <!--begin::Logo-->
                 @if(isset(tenant()->id))
-                    @if (settings()->has('logo'))
+                    @if (settings()->get('logo') !== null)
                     <img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-80px logo theme-light-show mb-7" />
                     @else
                     <h1 class="text-white s-52 w-1000 mb-7">{{ (settings()->get('site_name')) ? settings()->get('site_name') : ucfirst(tenant()->id) }}</h1>
@@ -41,7 +41,7 @@
                 <!--end::Logo-->
                 <!--begin::Title-->
                 
-                <h2 class="text-white fw-normal m-0">Welcome to {{ (settings()->get('site_name')) ? settings()->get('site_name') : ucfirst(tenant()->id) }}, All the details are on the other side.</h2>
+                <h2 class="text-white fw-normal m-0">Welcome to {{ (settings()->get('site_name')) ? settings()->get('site_name') : ucfirst(tenant()->id) }}, All details are on the other side.</h2>
                 @else
                 <a href="#" class="mb-7">
                     <h1 class="text-white s-52 w-1000">Tracklia</h1>
@@ -49,7 +49,7 @@
                 <!--end::Logo-->
                 <!--begin::Title-->
                 
-                <h2 class="text-white fw-normal m-0">Welcome to Tracklia, All the details are on the other side.</h2>
+                <h2 class="text-white fw-normal m-0">Welcome to Tracklia, All details are on the other side.</h2>
                 @endif
 
                 <!--end::Title-->

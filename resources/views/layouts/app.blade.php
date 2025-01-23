@@ -47,14 +47,17 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
 						<!--begin::Logo-->
-						@if (settings()->get('logo') !== null)
-						<a href="{{ route('dashboard') }}">
-						<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-light-show" />
-						<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-dark-show" />
-						</a>
-						@else
-						<h1>{{ settings()->get('site_name') ? settings()->get('site_name') : ucfirst(tenant()->id) }}</h1>
+						@if(isset(tenant()->id))
+							@if (settings()->get('logo') !== null)
+							<a href="{{ route('dashboard') }}">
+							<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-light-show" />
+							<img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-dark-show" />
+							</a>
+							@else
+							<h1>{{ settings()->get('site_name') ? settings()->get('site_name') : ucfirst(tenant()->id) }}</h1>
+							@endif
 						@endif
+							
 							
 						<!--end::Logo-->
 					</div>

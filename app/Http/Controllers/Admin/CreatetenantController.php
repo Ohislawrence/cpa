@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Stancl\Tenancy\Facades\Tenancy;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
+use App\Rules\Recaptcha;
 
 class CreatetenantController extends Controller
 {
@@ -63,9 +65,22 @@ class CreatetenantController extends Controller
             'business_email' => 'required|unique:users,email',
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
+            'g-recaptcha-response' => ['required', new Recaptcha()]
         ]);
 
         //CreateTenantJob::dispatch($data);
+
+        // Verify reCAPTCHA
+        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response'),
+        ]);
+
+        $responseData = $response->json();
+
+        if (!$responseData['success'] || $responseData['score'] < 0.5) {
+            return back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+        }
 
 
         $subdomain = $this->formatForSubdomain($request->subdomain);

@@ -51,7 +51,6 @@
 
         @yield('header')
         @include('layouts.frontcomponents.meta')
-
     </head>
     <body>
         <!-- PAGE CONTENT

@@ -57,7 +57,7 @@ return [
          * Tenant database names are created like this:
          * prefix + tenant_id + suffix.
          */
-        'prefix' => 'tenants_',
+        'prefix' => 'tracklia_',
         'suffix' => '',
 
         /**

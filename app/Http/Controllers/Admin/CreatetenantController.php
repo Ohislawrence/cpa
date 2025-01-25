@@ -65,11 +65,12 @@ class CreatetenantController extends Controller
             'business_email' => 'required|unique:users,email',
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
-            'g-recaptcha-response' => ['required', new Recaptcha()]
+            'g-recaptcha-response' => [ new Recaptcha('submitContact')]
         ]);
 
         //CreateTenantJob::dispatch($data);
-
+        if(env('APP_ENV') == 'production') 
+        {
         // Verify reCAPTCHA
         $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => env('RECAPTCHA_SECRET_KEY'),
@@ -80,6 +81,7 @@ class CreatetenantController extends Controller
 
         if (!$responseData['success'] || $responseData['score'] < 0.5) {
             return back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
+        }
         }
 
 

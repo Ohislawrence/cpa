@@ -21,7 +21,7 @@
 
 @section('footer')
 
-</script>
+
 @endsection
 
 
@@ -114,7 +114,6 @@
 									<div class="col-md-12 mt-15 form-btn text-right">	
 										<button type="submit" class="btn btn--theme hover--theme submit"
 										data-sitekey="{{ config('services.recaptcha_v3.siteKey') }}"
-                                    	data-callback="onSubmit" data-action="submitContact">
 										Sign Up</button>	
 									</div>
 

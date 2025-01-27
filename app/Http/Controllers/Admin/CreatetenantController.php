@@ -65,7 +65,7 @@ class CreatetenantController extends Controller
             'business_email' => 'required|unique:users,email',
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
-            'g-recaptcha-response' => [ new Recaptcha('submitContact')]
+            'g-recaptcha-response' => [ new Recaptcha()]
         ]);
 
         //CreateTenantJob::dispatch($data);

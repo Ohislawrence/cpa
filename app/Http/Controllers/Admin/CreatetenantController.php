@@ -65,8 +65,12 @@ class CreatetenantController extends Controller
             'business_email' => 'required|unique:users,email',
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
-            'g-recaptcha-response' => [ new Recaptcha()]
         ]);
+
+        // Honeypot validation
+        if ($request->filled('username')) {
+            return redirect()->back()->withErrors(['error' => 'Bot detected!']);
+        }
 
         //CreateTenantJob::dispatch($data);
         if(env('APP_ENV') == 'production') 

@@ -8,12 +8,7 @@
 
 
 @section('header')
-<script src="https://www.google.com/recaptcha/api.js"></script>
-    <script>
-        function onSubmit(token) {
-            document.getElementById("signupForm").submit();
-        }
-    </script>
+
 @endsection
 
 
@@ -54,7 +49,8 @@
 				 		<div class="col-md-11 col-lg-10 col-xl-8">
 				 			<div class="form-holder">
 								<form name="contactform" id="signupForm" method="POST" action="{{ route('start.post') }}" class="row contact-form">
-										@csrf			
+										@csrf	
+										<input type="text" name="username" style="display:none;">		
 									<!-- Contact Form Input -->
 									<div class="col-md-12">
 										<p class="p-lg">Company Name:
@@ -112,8 +108,7 @@
 				
 									<!-- Contact Form Button -->
 									<div class="col-md-12 mt-15 form-btn text-right">	
-										<button type="submit" class="btn btn--theme hover--theme submit"
-										data-sitekey="{{ config('services.recaptcha_v3.siteKey') }}"
+										<button type="submit" class="btn btn--theme hover--theme submit">
 										Sign Up</button>	
 									</div>
 

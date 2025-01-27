@@ -126,7 +126,8 @@ class CreatetenantController extends Controller
         //createsubscription
 
         $plan = Plan::find(1)->first();
-        $subscription = Subscription::create([
+
+        Subscription::create([
             'user_id' => $user->id,
             'tenant_id' => $subdomain,
             'plan_id' => $request->plan ?? 1,

@@ -72,22 +72,6 @@ class CreatetenantController extends Controller
             return redirect()->back()->withErrors(['error' => 'Bot detected!']);
         }
 
-        //CreateTenantJob::dispatch($data);
-        if(env('APP_ENV') == 'production') 
-        {
-        // Verify reCAPTCHA
-        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response'),
-        ]);
-
-        $responseData = $response->json();
-
-        if (!$responseData['success'] || $responseData['score'] < 0.5) {
-            return back()->withErrors(['captcha' => 'reCAPTCHA verification failed. Please try again.']);
-        }
-        }
-
 
         $subdomain = $this->formatForSubdomain($request->subdomain);
         $tenant = Tenant::create([

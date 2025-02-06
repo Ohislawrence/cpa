@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'webhook-verify-action',
         'verify-action-taken',
+        '/get/sub/details/flutterwave',
     ];
 }

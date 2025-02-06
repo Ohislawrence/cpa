@@ -40,6 +40,7 @@ use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SmartlinkController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\WebhookController;
 use App\Models\User;
@@ -176,10 +177,16 @@ Route::middleware([
 
         Route::get('referral', [ReferralController::class, 'index'])->name('referral');
 
-        Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
-
         Route::get('promotions/assets', [PromotionalController::class, 'marketingassets'])->name('marketingassets');
         Route::get('promotions/apis', [PromotionalController::class, 'apis'])->name('apis');
+
+        //number represents the id on feature table
+        //smartlink(26)
+        Route::middleware([
+            'feature-access:26',
+        ])->group(function () {
+            Route::get('offers/smartlink', [AffiliateOfferController::class, 'ailink'])->name('ailink');
+        });
 
     });
 
@@ -192,6 +199,7 @@ Route::middleware([
     ], function () {
         Route::get('profile', [AgencyProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyDashboardController::class, 'index'])->name('dashboard');
+        Route::get('topcampaignsDash/view/table', [AgencyDashboardController::class, 'topcampaignsDash'])->name('topcampaignsDash');
         //campaigns
         Route::get('campaigns', [AgencyOfferController::class, 'index'])->name('campaigns');
         Route::get('campaigns/data', [AgencyOfferController::class, 'getStats'])->name('getStats');
@@ -277,9 +285,12 @@ Route::middleware([
             'as' => 'merchant.',
         ], function () {
             Route::get('plans/active', [SubscribeController::class, 'subscribe'])->name('plan.active');
+            //flutterwave
+            Route::post('subscription/create/new', [SubscriptionController::class, 'subscribe'])->name('subscription.create');
+            Route::get('subscription/callback', [SubscriptionController::class, 'callback'])->name('subscription.callback');
             //subscription links
-            Route::post('subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
-            Route::get('subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
+            //Route::post('subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
+            //Route::get('subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
         });
         Route::group([
             'namespace' => 'App\Http\Controllers\Affiliate',

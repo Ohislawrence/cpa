@@ -31,6 +31,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\WebhookController;
 use App\Models\User;
@@ -134,6 +135,8 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::get('password/reset', [FrontController::class, 'passwordreset'])->name('password.reset');
             Route::post('post/password/reset', [FrontController::class, 'passwordresetpost'])->name('password.reset.post');
 
+            Route::post('get/sub/details/flutterwave', [SubscriptionController::class, 'webhook']);
+
         });
     });
 }
@@ -170,7 +173,9 @@ Route::middleware([
     //subscription links
    // Route::post('/subscription/create', [PaystackController::class, 'createSubscription'])->name('subscription.create');
    // Route::get('/subscription/callback', [PaystackController::class, 'subscriptionCallback'])->name('subscription.callback');
-    Route::post('/subscription/webhook', [PaystackController::class, 'handleWebhook'])->middleware('allowIPforWebhook');
+    //Route::post('/subscription/webhook', [PaystackController::class, 'handleWebhook'])->middleware('allowIPforWebhook');
+
+    
 
 
     Route::group([

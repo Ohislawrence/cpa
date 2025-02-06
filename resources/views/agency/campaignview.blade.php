@@ -116,9 +116,17 @@
                                 <!--begin::Row-->
                                 <tr>
                                     <td class="text-gray-500">Countries Allowed:</td>
-                                    <td class="text-gray-800">@foreach ($offer->geos as $loc )
+                                    <td class="text-gray-800">
+                                    @foreach ($offer->geos as $loc )
+                                        @if ($loc->country_id == 0)
+                                        All Countries
+                                        @else
                                         {{ $loc->country->name }} |
-                                    @endforeach</td>
+                                        @endif
+                                    @endforeach
+                                    
+                                        
+                                    </td>
                                 </tr>
                                 <!--end::Row-->
                             </table>

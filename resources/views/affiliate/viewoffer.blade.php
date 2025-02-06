@@ -49,7 +49,7 @@
             <!--begin::Col-->
             <div class="col-xl-6">
                 <!--begin::Image-->
-					<div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px" style="background-image:url(('http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url($offer->image) }}')"></div>
+					<div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px" style="background-image:url('http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url($offer->image) }}')"></div>
 				<!--end::Image-->
             </div>
             <!--end::Col-->
@@ -117,7 +117,11 @@
                                 <tr>
                                     <td class="text-gray-500">Countries Allowed:</td>
                                     <td class="text-gray-800">@foreach ($offer->geos as $loc )
+                                        @if ($loc->country_id == 0)
+                                        All Countries
+                                        @else
                                         {{ $loc->country->name }} |
+                                        @endif
                                     @endforeach</td>
                                 </tr>
                                 <!--end::Row-->

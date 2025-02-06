@@ -195,7 +195,7 @@
                         <input name="start" type="date" class="form-control form-control-solid mb-3 mb-lg-0"  />
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">End date:(Leave blank for if no end date)</label>
+                        <label class="form-label">End date:(Leave blank if no end date)</label>
                         <input name="end" type="date" class="form-control form-control-solid mb-3 mb-lg-0"  />
                     </div>
                 </div>

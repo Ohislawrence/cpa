@@ -11,7 +11,7 @@ class ReferralController extends Controller
 {
     public function index()
     {
-        $refURL = url('reg/affiliate').'?refid='.Auth()->user()->affiliatedetails->referral_id;
+        $refURL = url('signup/affiliate').'?refid='.Auth()->user()->affiliatedetails->referral_id;
         return view('affiliate.referral', compact('refURL'));
     }
 }

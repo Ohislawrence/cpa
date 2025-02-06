@@ -43,7 +43,7 @@
 					<!-- Button -->	
 					<a href="{{ route('start') }}" class="btn r-04 btn--theme hover--tra-white">Get started for free</a>
 					<p class="p-sm btn-txt ico-15">
-						<span class="flaticon-check"></span> No credit card needed, free 7-day trial
+						<span class="flaticon-check"></span> No credit card needed, free {{ \App\Models\Plan::where('name', 'pro')->first()->free_days }}-day trial
 					</p>
 
 				</div>

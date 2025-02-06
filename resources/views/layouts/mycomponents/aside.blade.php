@@ -22,6 +22,8 @@
                 </a>
             </div>
             <!--end:Menu item-->
+
+            
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
@@ -50,6 +52,7 @@
             </div>
             <!--end:Menu item-->
 
+            @if(tenant()->subscription->canAccess(26))
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
@@ -63,7 +66,7 @@
                 </a>
             </div>
             <!--end:Menu item-->
-
+            @endif
 
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">

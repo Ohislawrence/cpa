@@ -55,8 +55,15 @@ class OfferController extends Controller
                 ->addColumn('geos', function($row){
                     foreach($row->geos as $tar)
                     {
-                        $geoss = $tar->country->code;
-                        $ge[] = $geoss;
+                        if($tar->country_id == 0){
+                            $ge = 'All Countries';
+                        }
+
+                        else{
+                            $geoss = $tar->country->code;
+                            $ge[] = $geoss;
+                        }
+                        
                     }
                     return $ge;
                 })

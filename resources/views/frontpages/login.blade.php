@@ -31,7 +31,7 @@
             <div class="d-flex flex-center flex-lg-start flex-column">
                 <!--begin::Logo-->
                 @if(isset(tenant()->id))
-                    @if (settings()->get('logo') !== null)
+                    @if (settings()->get('logo') != null)
                     <img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-80px logo theme-light-show mb-7" />
                     @else
                     <h1 class="text-white s-52 w-1000 mb-7">{{ (settings()->get('site_name')) ? settings()->get('site_name') : ucfirst(tenant()->id) }}</h1>

@@ -23,6 +23,10 @@ class Subscription extends Model
         'renewal',
         'price',
         'currency',
+        'webhook_id',
+        'flw_ref',
+        'flw_trans_id',
+        'webhook_status',
     ];
 
     public function user()

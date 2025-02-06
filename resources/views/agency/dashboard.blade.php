@@ -12,7 +12,34 @@
 
 
 @section('footer')
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
+
+<script type="text/javascript">
+	$(function () {
+
+	var dt = $('#Topcampaigns').DataTable({
+		processing: true,
+		serverSide: true,
+        responsive: true,
+        stateSave: true,
+		ajax: "{{ route('merchant.topcampaignsDash') }}",
+		columns: [
+            {data: 'offer_id'},
+			{data: 'offerName'},
+			{data: 'clickNumber'},
+			{
+				data: 'action',
+				name: 'action',
+				orderable: true,
+				searchable: false,
+			},
+		],
+        
+	});
+
+	});
+</script>
 @endsection
 
 
@@ -144,7 +171,7 @@
                                     <div class="fs-5 fw-bold text-gray-600 me-5">Today:</div>
                                     <!--end::Label-->
                                     <!--begin::Stats-->
-                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$real_currency->symbol}} {{ $earnedToday }}</div>
+                                    <div class="ms-auto fw-bolder text-gray-700 text-end">232</div>
                                     <!--end::Stats-->
                                 </div>
                                 <!--end::Label-->
@@ -157,7 +184,7 @@
                                     <div class="fs-5 fw-bold text-gray-600 me-5">Yesterday:</div>
                                     <!--end::Label-->
                                     <!--begin::Stats-->
-                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$real_currency->symbol}} {{ $earnedYesterday }}</div>
+                                    <div class="ms-auto fw-bolder text-gray-700 text-end">22</div>
                                     <!--end::Stats-->
                                 </div>
                                 <!--end::Label-->
@@ -170,7 +197,7 @@
                                     <div class="fs-5 fw-bold text-gray-600 me-5">This Month:</div>
                                     <!--end::Label-->
                                     <!--begin::Stats-->
-                                    <div class="ms-auto fw-bolder text-gray-700 text-end">{{$real_currency->symbol}} {{ $earnedThisMonth }}</div>
+                                    <div class="ms-auto fw-bolder text-gray-700 text-end">222</div>
                                     <!--end::Stats-->
                                 </div>
                                 <!--end::Label-->
@@ -191,81 +218,240 @@
     </div>
     <!--end::Row-->
 
-
+<!--begin::Row-->
+<div class="row g-5 g-xl-8">
+    <!--begin::Col-->
+    <div class="col-xl-4">
+        <!--begin::Mixed Widget 3-->
+        <div class="card card-xl-stretch mb-xl-8">
+            <!--begin::Beader-->
+            <div class="card-header border-0 py-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold fs-3 mb-1">Clicks</span>
+                    <span class="text-muted fw-semibold fs-7">The total number of clicks</span>
+                </h3>
+                
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body p-0 d-flex flex-column">
+                <!--begin::Stats-->
+                <div class="card-p pt-5 bg-body flex-grow-1">
+                    <!--begin::Row-->
+                    <div class="row g-0">
+                        <!--begin::Col-->
+                        <div class="col mr-8">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">Today</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bold">{{ $clicksToday }}</div>
+                            </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">Yesterday</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="fs-4 fw-bold">{{ $clicksYesterday }}</div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row g-0 mt-8">
+                        <!--begin::Col-->
+                        <div class="col mr-8">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">WTD</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="fs-4 fw-bold">{{ $clicksweek_to_date }}</div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">MTD</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bold">{{ $clicksmonth_to_date }}</div>
+                            </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Stats-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Mixed Widget 3-->
+    </div>
+    <!--end::Col-->
 
     <!--begin::Col-->
-    <div class="row g-5 g-xl-8">
-        <div class="col-xl-3">
-
-    <!--begin::Statistics Widget 5-->
-    <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">
-        <!--begin::Body-->
-        <div class="card-body">
-            <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">
-                {{$real_currency->symbol}} 34343
+    <div class="col-xl-4">
+        <!--begin::Mixed Widget 3-->
+        <div class="card card-xl-stretch mb-xl-8">
+            <!--begin::Beader-->
+            <div class="card-header border-0 py-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold fs-3 mb-1">EPC</span>
+                    <span class="text-muted fw-semibold fs-7">Earnings per Click</span>
+                </h3>
             </div>
-
-            <div class="fw-semibold text-gray-400">
-               Generated revenue       </div>
-        </div>
-        <!--end::Body-->
-    </a>
-    <!--end::Statistics Widget 5-->    </div>
-
-        <div class="col-xl-3">
-
-    <!--begin::Statistics Widget 5-->
-    <a href="#" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
-        <!--begin::Body-->
-        <div class="card-body">
-            <div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">
-                34343
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body p-0 d-flex flex-column">
+                <!--begin::Stats-->
+                <div class="card-p pt-5 bg-body flex-grow-1">
+                    <!--begin::Row-->
+                    <div class="row g-0">
+                        <!--begin::Col-->
+                        <div class="col mr-8">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">Today</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bold">{{ $currency }} {{ $todayEPC }}</div>
+                            </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">Yesterday</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="fs-4 fw-bold">{{ $currency }} {{ $yesterdayEPC }}</div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row g-0 mt-8">
+                        <!--begin::Col-->
+                        <div class="col mr-8">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">WTD</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="fs-4 fw-bold">{{ $currency }} {{ $weekToDateEPC }}</div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">MTD</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bold">{{ $currency }} {{ $monthToDateEPC }}</div>
+                            </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Stats-->
             </div>
-
-            <div class="fw-semibold text-gray-100">
-              Clicks      </div>
+            <!--end::Body-->
         </div>
-        <!--end::Body-->
-    </a>
-    <!--end::Statistics Widget 5-->    </div>
-
-        <div class="col-xl-3">
-
-    <!--begin::Statistics Widget 5-->
-    <a href="#" class="card bg-warning hoverable card-xl-stretch mb-xl-8">
-        <!--begin::Body-->
-        <div class="card-body">
-
-            <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                45445
-            </div>
-
-            <div class="fw-semibold text-white">
-               Convertions       </div>
-        </div>
-        <!--end::Body-->
-    </a>
-    <!--end::Statistics Widget 5-->    </div>
-
-        <div class="col-xl-3">
-
-    <!--begin::Statistics Widget 5-->
-    <a href="#" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
-        <!--begin::Body-->
-        <div class="card-body">
-            <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                {{$real_currency->symbol}} 4454
-            </div>
-
-            <div class="fw-semibold text-white">
-            Affiliates    </div>
-        </div>
-        <!--end::Body-->
-    </a>
-    <!--end::Statistics Widget 5-->    </div>
+        <!--end::Mixed Widget 3-->
     </div>
-    <!--end::Row-->
-
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-xl-4">
+        <!--begin::Mixed Widget 3-->
+        <div class="card card-xl-stretch mb-5 mb-xl-8">
+            <!--begin::Beader-->
+            <div class="card-header border-0 py-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold fs-3 mb-1">Revenue</span>
+                    <span class="text-muted fw-semibold fs-7">How much you have made</span>
+                </h3>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body p-0 d-flex flex-column">
+                <!--begin::Stats-->
+                <div class="card-p pt-5 bg-body flex-grow-1">
+                    <!--begin::Row-->
+                    <div class="row g-0">
+                        <!--begin::Col-->
+                        <div class="col mr-8">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">Today</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bold">{{ $earnedtoday }}</div>
+                            </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">Yesterday</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="fs-4 fw-bold">{{ $earnedyesterday }} </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row g-0 mt-8">
+                        <!--begin::Col-->
+                        <div class="col mr-8">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">WTD</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="fs-4 fw-bold">{{ $earnedweek_to_date }}</div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col">
+                            <!--begin::Label-->
+                            <div class="fs-7 text-muted fw-bold">MTD</div>
+                            <!--end::Label-->
+                            <!--begin::Stat-->
+                            <div class="d-flex align-items-center">
+                                <div class="fs-4 fw-bold">{{ $earnedmonth_to_date }}</div>
+                            </div>
+                            <!--end::Stat-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Stats-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Mixed Widget 3-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->
 
 
     <!--begin::Col-->
@@ -276,269 +462,29 @@
             <div class="card-header pt-7">
                 <!--begin::Title-->
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="card-label fw-bold text-gray-800">My Sales in Details</span>
-                    <span class="text-gray-500 mt-1 fw-semibold fs-6">Avg. 57 orders per day</span>
+                    <span class="card-label fw-bold text-gray-800">Top performing offers</span>
+                    <span class="text-gray-500 mt-1 fw-semibold fs-8">By clicks this month {{ now()->format('M, Y') }}</span>
                 </h3>
                 <!--end::Title-->
-                <!--begin::Actions-->
-                <div class="card-toolbar">
-                    <!--begin::Filters-->
-                    <div class="d-flex flex-stack flex-wrap gap-4">
-                        <!--begin::Destination-->
-                        <div class="d-flex align-items-center fw-bold">
-                            <!--begin::Label-->
-                            <div class="text-gray-500 fs-7 me-2">Cateogry</div>
-                            <!--end::Label-->
-                            <!--begin::Select-->
-                            <select class="form-select form-select-transparent text-graY-800 fs-base lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option">
-                                <option></option>
-                                <option value="Show All" selected="selected">Show All</option>
-                                <option value="a">Category A</option>
-                                <option value="b">Category A</option>
-                            </select>
-                            <!--end::Select-->
-                        </div>
-                        <!--end::Destination-->
-                        <!--begin::Status-->
-                        <div class="d-flex align-items-center fw-bold">
-                            <!--begin::Label-->
-                            <div class="text-gray-500 fs-7 me-2">Status</div>
-                            <!--end::Label-->
-                            <!--begin::Select-->
-                            <select class="form-select form-select-transparent text-gray-900 fs-7 lh-1 fw-bold py-0 ps-3 w-auto" data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px" data-placeholder="Select an option" data-kt-table-widget-4="filter_status">
-                                <option></option>
-                                <option value="Show All" selected="selected">Show All</option>
-                                <option value="Shipped">Shipped</option>
-                                <option value="Confirmed">Confirmed</option>
-                                <option value="Rejected">Rejected</option>
-                                <option value="Pending">Pending</option>
-                            </select>
-                            <!--end::Select-->
-                        </div>
-                        <!--end::Status-->
-                        <!--begin::Search-->
-                        <div class="position-relative my-1">
-                            <i class="ki-duotone ki-magnifier fs-2 position-absolute top-50 translate-middle-y ms-4">
-                                <span class="path1"></span>
-                                <span class="path2"></span>
-                            </i>
-                            <input type="text" data-kt-table-widget-4="search" class="form-control w-150px fs-7 ps-12" placeholder="Search" />
-                        </div>
-                        <!--end::Search-->
-                    </div>
-                    <!--begin::Filters-->
-                </div>
-                <!--end::Actions-->
             </div>
             <!--end::Card header-->
-            <!--begin::Card body-->
-            <div class="card-body pt-2">
+            <div class="card-body py-4">
                 <!--begin::Table-->
-                <table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_widget_4_table">
-                    <!--begin::Table head-->
+                <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 responsive" id="Topcampaigns">
                     <thead>
-                        <!--begin::Table row-->
-                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                            <th class="min-w-100px">Order ID</th>
-                            <th class="text-end min-w-100px">Created</th>
-                            <th class="text-end min-w-125px">Customer</th>
-                            <th class="text-end min-w-100px">Total</th>
-                            <th class="text-end min-w-100px">Profit</th>
-                            <th class="text-end min-w-50px">Status</th>
-                            <th class="text-end"></th>
+                        <tr class="fw-semibold fs-6 text-gray-700">
+                            <th>ID</th>
+                            <th>Campaign Name</th>
+                            <th>Clicks</th>
+                            <th>Actions</th>
                         </tr>
-                        <!--end::Table row-->
                     </thead>
-                    <!--end::Table head-->
-                    <!--begin::Table body-->
-                    <tbody class="fw-bold text-gray-600">
-                        <tr data-kt-table-widget-4="subtable_template" class="d-none">
-                            <td colspan="2">
-                                <div class="d-flex align-items-center gap-3">
-                                    <a href="#" class="symbol symbol-50px bg-secondary bg-opacity-25 rounded">
-                                        <img src="" data-kt-src-path="assets/media/stock/ecommerce/" alt="" data-kt-table-widget-4="template_image" />
-                                    </a>
-                                    <div class="d-flex flex-column text-muted">
-                                        <a href="#" class="text-gray-800 text-hover-primary fw-bold" data-kt-table-widget-4="template_name">Product name</a>
-                                        <div class="fs-7" data-kt-table-widget-4="template_description">Product description</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-end">
-                                <div class="text-gray-800 fs-7">Cost</div>
-                                <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_cost">1</div>
-                            </td>
-                            <td class="text-end">
-                                <div class="text-gray-800 fs-7">Qty</div>
-                                <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_qty">1</div>
-                            </td>
-                            <td class="text-end">
-                                <div class="text-gray-800 fs-7">Total</div>
-                                <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_total">name</div>
-                            </td>
-                            <td class="text-end">
-                                <div class="text-gray-800 fs-7 me-3">On hand</div>
-                                <div class="text-muted fs-7 fw-bold" data-kt-table-widget-4="template_stock">32</div>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#XGY-346</a>
-                            </td>
-                            <td class="text-end">7 min ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Albert Flores</a>
-                            </td>
-                            <td class="text-end">$630.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$86.70</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-warning">Pending</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#YHD-047</a>
-                            </td>
-                            <td class="text-end">52 min ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Jenny Wilson</a>
-                            </td>
-                            <td class="text-end">$25.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$4.20</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-primary">Confirmed</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SRR-678</a>
-                            </td>
-                            <td class="text-end">1 hour ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Robert Fox</a>
-                            </td>
-                            <td class="text-end">$1,630.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$203.90</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-warning">Pending</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#PXF-534</a>
-                            </td>
-                            <td class="text-end">3 hour ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Cody Fisher</a>
-                            </td>
-                            <td class="text-end">$119.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$12.00</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#XGD-249</a>
-                            </td>
-                            <td class="text-end">2 day ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Arlene McCoy</a>
-                            </td>
-                            <td class="text-end">$660.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$52.26</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SKP-035</a>
-                            </td>
-                            <td class="text-end">2 day ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Eleanor Pena</a>
-                            </td>
-                            <td class="text-end">$290.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$29.00</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-danger">Rejected</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary">#SKP-567</a>
-                            </td>
-                            <td class="text-end">7 min ago</td>
-                            <td class="text-end">
-                                <a href="#" class="text-gray-600 text-hover-primary">Dan Wilson</a>
-                            </td>
-                            <td class="text-end">$590.00</td>
-                            <td class="text-end">
-                                <span class="text-gray-800 fw-bolder">$50.00</span>
-                            </td>
-                            <td class="text-end">
-                                <span class="badge py-3 px-4 fs-7 badge-light-success">Shipped</span>
-                            </td>
-                            <td class="text-end">
-                                <button type="button" class="btn btn-sm btn-icon btn-light btn-active-light-primary toggle h-25px w-25px" data-kt-table-widget-4="expand_row">
-                                    <i class="ki-duotone ki-plus fs-4 m-0 toggle-off"></i>
-                                    <i class="ki-duotone ki-minus fs-4 m-0 toggle-on"></i>
-                                </button>
-                            </td>
-                        </tr>
+                    <tbody class="text-gray-600 fw-semibold">
+
                     </tbody>
-                    <!--end::Table body-->
                 </table>
+                </div>
                 <!--end::Table-->
             </div>
             <!--end::Card body-->

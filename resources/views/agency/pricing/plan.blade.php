@@ -22,10 +22,12 @@
 @section('slot')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Container-->
+
     <div class="container-xxl" id="kt_content_container">
         <div class="card" id="kt_pricing">
             <!--begin::Card body-->
             <div class="card-body p-lg-17">
+                @include('admin.components.alert')
                 <!--begin::Plans-->
                 <div class="d-flex flex-column">
         

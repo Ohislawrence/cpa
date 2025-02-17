@@ -193,7 +193,7 @@
 
 						<!--begin::Add offer-->
 						<a href="{{ route('merchant.create.campaign') }}" class="btn btn-primary">
-						<i class="ki-duotone ki-plus fs-2"></i>Add Campaign</a>
+						<i class="ki-duotone ki-plus fs-2"></i>Create Campaign</a>
 						<!--end::Add offer-->
 					</div>
 				</div>

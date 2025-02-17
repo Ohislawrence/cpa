@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Mail\ResetEmail;
 use App\Models\Blog;
 use App\Models\Feature;
+use App\Models\Integration;
 use App\Models\Plan;
 use App\Models\Planfeature;
+use App\Models\Support;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Container\Attributes\DB;
@@ -72,11 +74,7 @@ class FrontController extends Controller
         return view('frontpages.tos');
     }
 
-    public function support()
-    {
-        return view('frontpages.support');
-    }
-
+    
     public function contactus()
     {
         return view('frontpages.contactus');
@@ -202,6 +200,37 @@ class FrontController extends Controller
         } while (User::where("two_factor_secret", "=", $randomString)->first());
 
         return $randomString;
+    }
+
+
+    public function showSupport($support)
+    {
+        $support = Support::where('slug', $support)->first();
+
+        if (!$support) {
+            abort(404); // Return a 404 page if support is not found
+        }
+
+        $supportareas = Integration::where('support_id', $support->id)->get();
+
+        return view('frontpages.integrations.integrations', compact('supportareas'));
+    }
+
+    public function showContent($support, $slug)
+    {
+        $support = Support::where('slug', $support)->first();
+
+        if (!$support) {
+            abort(404); // Return a 404 page if support is not found
+        }
+        $integration = Integration::where('slug', $slug)->where('support_id', $support->id)->first();
+        return view('frontpages.integrations.contents', compact('integration'));
+    }
+
+    public function Support()
+    {
+        $supports = Support::all();
+        return view('frontpages.support.support', compact('supports'));
     }
 }
 

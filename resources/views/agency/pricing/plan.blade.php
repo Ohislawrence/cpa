@@ -74,13 +74,17 @@
                                                 <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3"><a href="https://tracklia.com/pricing" target="_blank">See plan features</a></span>
                                             </div>
                                     <!--end::Features-->
-                                    <!--begin::Select-->
-                                    <form action="{{ route('merchant.subscription.create') }}" method="POST">
-                                        @csrf
-                                        <input type="text" name="plan" value="{{ $plan->name }}" hidden>
-                                        <button class="btn btn-sm btn-primary" type="submit">Select {{ ucfirst($plan->name) }}</button>
-                                    </form>
-                                    <!--end::Select-->
+                                    @if($plan->id == 1)
+                                        <!--begin::Select-->
+                                        <form action="{{ route('merchant.subscription.create') }}" method="POST">
+                                            @csrf
+                                            <input type="text" name="plan" value="{{ $plan->name }}" hidden>
+                                            <button class="btn btn-sm btn-primary" type="submit">Select {{ ucfirst($plan->name) }}</button>
+                                        </form>
+                                        <!--end::Select-->
+                                    @else
+                                    <button class="btn btn-sm btn-primary" type="">Coming Soon</button>
+                                    @endif
                                 </div>
                                 <!--end::Option-->
                             </div>
@@ -133,13 +137,18 @@
                                                 <span class="fw-semibold fs-6 text-gray-800 flex-grow-1 pe-3"><a href="https://tracklia.com/pricing" target="_blank">See plan features</a></span>
                                             </div>
                                     <!--end::Features-->
-                                    <!--begin::Select-->
-                                    <form action="{{ route('merchant.subscription.create') }}" method="POST">
-                                        @csrf
-                                        <input type="text" name="plan" value="{{ $plan->name }}" hidden>
-                                        <button class="btn btn-sm btn-primary" type="submit">Select {{ ucfirst($plan->name) }}</button>
-                                    </form>
-                                    <!--end::Select-->
+                                    @if($plan->id == 1)
+                                        <!--begin::Select-->
+                                        <form action="{{ route('merchant.subscription.create') }}" method="POST">
+                                            @csrf
+                                            <input type="text" name="plan" value="{{ $plan->name }}" hidden>
+                                            <button class="btn btn-sm btn-primary" type="submit">Select {{ ucfirst($plan->name) }}</button>
+                                        </form>
+                                        <!--end::Select-->
+                                    @else
+                                    <button class="btn btn-sm btn-primary" type="">Coming Soon</button>
+                                    @endif
+                                    
                                 </div>
                                 <!--end::Option-->
                             </div>

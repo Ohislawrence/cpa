@@ -4,7 +4,7 @@
 @section('url',  Request::url() )
 @section('description',  '' )
 @section('imagealt',  'offer image' )
-@section('image',  asset("publicassets/images/ogimg.jpg") )
+@section('image',  asset("images/tracklia-page.jpg") )
 
 
 @section('header')

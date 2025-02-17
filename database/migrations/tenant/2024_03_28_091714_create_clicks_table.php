@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('device');
             $table->string('platform');
             $table->string('browser');
-            $table->enum('status', ['Pending', 'Wait', 'Approved']);
+            $table->enum('status', ['Pending', 'Refunded', 'Approved', 'Chargeback']);
             $table->string('smartlink')->nullable();
+            $table->string('cost')->nullable();
             $table->string('ip');
             $table->string('clickID');
             $table->float('earned')->nullable();

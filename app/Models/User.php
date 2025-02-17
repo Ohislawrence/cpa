@@ -87,6 +87,11 @@ class User extends Authenticatable implements Wallet, WalletFloat
         return $this->hasMany(Offer::class);
     }
 
+    public function subscription()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
     public function messages()
     {
     return $this->belongsToMany(Message::class, 'message_user');

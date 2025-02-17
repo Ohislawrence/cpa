@@ -7,16 +7,7 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
-use App\Http\Controllers\Admin\ClicksController;
-use App\Http\Controllers\Admin\CreatetenantController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\EmailControler;
-use App\Http\Controllers\Admin\OfferController;
-use App\Http\Controllers\Admin\PaymentsController;
-use App\Http\Controllers\Admin\PaystackController;
-use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
-use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
-use App\Http\Controllers\Admin\UserController;
+
 use App\Http\Controllers\Affiliate\DashboardController;
 use App\Http\Controllers\Affiliate\OfferController as AffiliateOfferController;
 use App\Http\Controllers\Affiliate\PaymentController;
@@ -82,7 +73,7 @@ Route::middleware([
 ])->group(function () {
 
     //all offer clicks comes thru here
-    Route::get('deals/offer', [ClickController::class, 'toOffer'])->name('offer');
+    Route::get('offer', [ClickController::class, 'toOffer'])->name('offer');
 
     //offer webhooks
     //Route::webhooks('webhook-verify-action');

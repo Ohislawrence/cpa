@@ -4,7 +4,7 @@
 @section('url',  Request::url() )
 @section('description',  '' )
 @section('imagealt',  'offer image' )
-@section('image',  asset("publicassets/images/ogimg.jpg") )
+@section('image',  asset("images/tracklia-page.jpg") )
 
 
 @section('header')
@@ -69,7 +69,11 @@
                             </div>
 
                             <!-- Button -->
+                            @if($plan->id == 1)
                             <a href="{{ route('start',['plan'=>$plan->id]) }}" class="pt-btn btn r-04 btn--theme hover--theme">Get srarted - it's free</a>
+                            @else
+                            <a href="#" class="pt-btn btn r-04 btn--theme hover--theme">Coming Soon</a>
+                            @endif
                             <p class="p-sm btn-txt text-center color--grey">No credit card required</p>
 
                         </div>	<!-- END TABLE HEADER -->

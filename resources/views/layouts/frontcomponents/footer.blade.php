@@ -25,7 +25,8 @@
 								<ul class="foo-links clearfix">
 									<li><p><a href="{{ route('home') }}">Home</a></p></li>
 									<li><p><a href="{{ route('aboutus') }}">About Us</a></p></li>						
-									<li><p><a href="{{ route('contactus') }}">Contact Us</a></p></li>			
+									<li><p><a href="{{ route('contactus') }}">Contact Us</a></p></li>
+									<li><p><a href="{{ route('support') }}">Support</a></p></li>			
 								</ul>
 
 							</div>
@@ -38,7 +39,7 @@
 
 								<!-- Links -->
 								<ul class="foo-links clearfix">
-									<li><p><a href="{{ route('home') }}#how_it_works">How it works</a></p></li>
+									<li><p><a href="{{ route('app.support', ['integration'])  }}">Integrations</a></p></li>
 									<li><p><a href="{{ route('pricing') }}">Pricing</a></p></li>	
 									<li><p><a href="{{ route('start') }}">Start Now!</a></p></li>			
 								</ul>
@@ -71,7 +72,7 @@
 
 								<!-- Mail Link -->
 								<p class="footer-mail-link ico-25">
-									<a href="mailto:hello@tracklia.com">hello@tracklia.com</a>
+									<a href="mailto:hello@tracklia.com">business@tracklia.com</a>
 								</p>
 
 								<!-- Social Links -->	

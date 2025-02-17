@@ -38,6 +38,8 @@
 
 							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('home') }}#tracklia_features" class="h-link">Features</a></li>
 
+									<li class="nl-simple" aria-haspopup="true"><a href="{{ route('app.support', ['integrations']) }}" class="h-link">Integrations</a></li>
+
 							    	<li class="nl-simple" aria-haspopup="true"><a href="{{ route('pricing') }}" class="h-link">Pricing</a></li>
 
                                     <li class="nl-simple" aria-haspopup="true"><a href="{{ route('blogs') }}" class="h-link">Blogs</a></li>

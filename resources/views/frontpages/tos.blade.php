@@ -30,7 +30,7 @@
                 <!-- INNER PAGE TITLE -->
                 <div class="inner-page-title">
                     <h2 class="s-52 w-700">Terms of Service</h2>
-                    <p class="p-lg">This Terms of service is effective as of 23th October 2023</p>
+                    <p class="p-lg">This Terms of service is effective as of 23th October 2024</p>
                 </div>
 
 

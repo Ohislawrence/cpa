@@ -1,6 +1,11 @@
 @extends('layouts.auth.layouts')
 @section('headername',  'Login')
 
+@section('type',  'website' )
+@section('url',  Request::url() )
+@section('description',  'Simplify affiliate management, boost performance, and grow your business with Tracklia all-in-one SaaS platform.' )
+@section('imagealt',  'homepage image' )
+@section('image',  asset("images/tracklia-page.jpg") )
 
 @section('header')
 

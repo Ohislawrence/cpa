@@ -15,7 +15,8 @@
                 <a href="#" class="text-gray-800 text-hover-primary fs-6 fw-bold lh-1">{{ auth()->user()->name }}</a>
                 <!--end::Name-->
                 <!--begin::Major-->
-                <span class="text-muted fw-semibold d-block fs-7 lh-1">{{ ucfirst(auth()->user()->getRoleNames()->first()) }}</span>
+                <span class="text-muted fw-semibold d-block fs-7 lh-1">{{ ucfirst(auth()->user()->getRoleNames()->first()) }} (  )</span>
+                
                 <!--end::Major-->
             </div>
             <!--end::User info-->

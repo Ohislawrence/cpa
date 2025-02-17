@@ -18,34 +18,38 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $clicks = DB::table('clicks');
+        
+        $now = now();
+        $today = $now->toDateString();
+        $yesterday = $now->copy()->subDay()->toDateString();
+        $startOfWeek = $now->copy()->startOfWeek();
+        $startOfMonth = $now->copy()->startOfMonth();
 
-        //clicks count
-        $clicksToday = $clicks->whereDate('created_at', now()->toDateString())->count();
-        $clicksYesterday = $clicks->whereDate('created_at', now()->subDay()->toDateString())->count();
-        $clicksweek_to_date = $clicks->whereBetween('created_at', [now()->startOfWeek(), now()])->count();
-        $clicksmonth_to_date = $clicks->whereBetween('created_at', [now()->startOfMonth(), now()])->count();
+        // Click counts
+        $clicks = Click::selectRaw("
+            COUNT(CASE WHEN DATE(created_at) = ? THEN 1 END) as clicks_today,
+            COUNT(CASE WHEN DATE(created_at) = ? THEN 1 END) as clicks_yesterday,
+            COUNT(CASE WHEN created_at BETWEEN ? AND ? THEN 1 END) as clicks_week_to_date,
+            COUNT(CASE WHEN created_at BETWEEN ? AND ? THEN 1 END) as clicks_month_to_date
+        ", [$today, $yesterday, $startOfWeek, $now, $startOfMonth, $now])->first();
 
-        //earned
-        $earnedtoday = $clicks
-        ->whereDate('created_at', now()->toDateString())
-        ->where('status', 'Approved')
-        ->sum('earned');
+        // Earned amounts
+        $earned = Click::selectRaw("
+            SUM(CASE WHEN DATE(created_at) = ? AND status = 'Approved' THEN cost END) as earned_today,
+            SUM(CASE WHEN DATE(created_at) = ? AND status = 'Approved' THEN cost END) as earned_yesterday,
+            SUM(CASE WHEN created_at BETWEEN ? AND ? AND status = 'Approved' THEN cost END) as earned_week_to_date,
+            SUM(CASE WHEN created_at BETWEEN ? AND ? AND status = 'Approved' THEN cost END) as earned_month_to_date
+        ", [$today, $yesterday, $startOfWeek, $now, $startOfMonth, $now])->first();
 
-        $earnedyesterday = $clicks
-            ->whereDate('created_at', now()->subDay()->toDateString())
-            ->where('status', 'Approved')
-            ->sum('earned');
+        $clicksToday = $clicks->clicks_today;
+        $clicksYesterday = $clicks->clicks_yesterday;
+        $clicksweek_to_date = $clicks->clicks_week_to_date;
+        $clicksmonth_to_date = $clicks->clicks_month_to_date;
 
-        $earnedweek_to_date = $clicks
-            ->whereBetween('created_at', [now()->startOfWeek(), now()])
-            ->where('status', 'Approved')
-            ->sum('earned');
-
-        $earnedmonth_to_date = $clicks
-            ->whereBetween('created_at', [now()->startOfMonth(), now()])
-            ->where('status', 'Approved')
-            ->sum('earned');
+        $earnedtoday = $earned->earned_today;
+        $earnedyesterday = $earned->earned_yesterday;
+        $earnedweek_to_date = $earned->earned_week_to_date;
+        $earnedmonth_to_date = $earned->earned_month_to_date;
 
 
         //EPC

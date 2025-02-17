@@ -4,29 +4,30 @@ use App\Http\Controllers\Admin\ClicksController;
 use App\Http\Controllers\Admin\CreatetenantController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmailControler;
+use App\Http\Controllers\Admin\IntegrationController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\Admin\PaystackController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Affiliate\DashboardController;
-use App\Http\Controllers\Affiliate\OfferController as AffiliateOfferController;
-use App\Http\Controllers\Affiliate\PaymentController;
-use App\Http\Controllers\Affiliate\ProfileController;
-use App\Http\Controllers\Affiliate\PromotionalController;
-use App\Http\Controllers\Affiliate\ReferralController;
-use App\Http\Controllers\Affiliate\RegistrationController;
-use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
-use App\Http\Controllers\Agency\OfferController as AgencyOfferController;
-use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
-use App\Http\Controllers\Agency\ReportController;
-use App\Http\Controllers\Agency\TransactionController;
-use App\Http\Controllers\Agency\AffiliateController;
-use App\Http\Controllers\Agency\ConfigurationController;
-use App\Http\Controllers\Agency\EmailController;
-use App\Http\Controllers\Agency\MassPaymentController;
-use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
+//use App\Http\Controllers\Affiliate\DashboardController;
+//use App\Http\Controllers\Affiliate\OfferController as AffiliateOfferController;
+//use App\Http\Controllers\Affiliate\PaymentController;
+//use App\Http\Controllers\Affiliate\ProfileController;
+//use App\Http\Controllers\Affiliate\PromotionalController;
+//use App\Http\Controllers\Affiliate\ReferralController;
+//use App\Http\Controllers\Affiliate\RegistrationController;
+//use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
+//use App\Http\Controllers\Agency\OfferController as AgencyOfferController;
+//use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
+//use App\Http\Controllers\Agency\ReportController;
+//use App\Http\Controllers\Agency\TransactionController;
+//use App\Http\Controllers\Agency\AffiliateController;
+//use App\Http\Controllers\Agency\ConfigurationController;
+//use App\Http\Controllers\Agency\EmailController;
+//use App\Http\Controllers\Agency\MassPaymentController;
+//use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
@@ -70,10 +71,14 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::get('blog/{cat}/{slug}', [FrontController::class, 'blogsingle'])->name('blogsingle');
             Route::get('privacy-policy', [FrontController::class, 'privacy'])->name('privacy');
             Route::get('terms-of-service', [FrontController::class, 'tos'])->name('tos');
-            Route::get('support', [FrontController::class, 'support'])->name('support');
+            //Route::get('support', [FrontController::class, 'support'])->name('support');
             Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');
             Route::get('error', [FrontController::class, 'error'])->name('error');
             Route::get('pricing', [FrontController::class, 'pricing'])->name('pricing');
+            //support
+            Route::get('support', [FrontController::class, 'Support'])->name('support');
+            Route::get('support/{support}', [FrontController::class, 'showSupport'])->name('app.support');
+            Route::get('support/{support}/{slug}', [FrontController::class, 'showContent'])->name('support.content');
 
             //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 
@@ -103,8 +108,6 @@ foreach (config('tenancy.central_domains') as $domain) {
                     return 'done';
                 }
                 });
-
-
 
 
             //all clicks comes thru here
@@ -256,12 +259,23 @@ Route::middleware([
         //clickstats
         Route::get('user/{id}/clickstats',[ClicksController::class, 'userclickstats'])->name('userclickstats');
         Route::get('user/{id}/clickstats/get',[ClicksController::class, 'getuserclickstats'])->name('getuserclickstats');
+
         //offer merchant
         Route::get('user/{id}/merchant/offers',[OfferController::class, 'agencyoffer'])->name('agencyoffer');
         Route::get('user/{id}/merchant/get/offers',[OfferController::class, 'getagencyoffer'])->name('getagencyoffer');
 
         //settings
         Route::get('settings', [SettingController::class, 'index'])->name('settings');
+
+        //integration
+        Route::get('app/supports/show/all', [IntegrationController::class, 'showAll'])->name('show.supports');
+        Route::get('app/integration/create', [IntegrationController::class, 'create'])->name('create.integrations');
+        Route::get('app/integration/edit/{id}', [IntegrationController::class, 'edit'])->name('edit.integrations');
+        Route::post('app/integration/create/post', [IntegrationController::class, 'postdb'])->name('postdb.integrations');
+        Route::post('app/integration/update/{id}/put', [IntegrationController::class, 'update'])->name('update.integrations');
+        Route::get('get/app/integration/data', [IntegrationController::class, 'getIntegration'])->name('get.getIntegration');
+        Route::delete('app/integration/detete/{id}', [IntegrationController::class, 'destroy'])->name('destroy.integration');
+        Route::post('app/integration/desc/upload', [IntegrationController::class, 'upload'])->name('ckedit.upload.integration');
 
         //sitemap
         Route::get('/sitemap/generate', function () {

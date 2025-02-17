@@ -42,103 +42,133 @@ class WebhookHandler implements ShouldQueue
         $array = $this->webhookCall;
         //Log::info( $array['cost']);
         logger()->info($array['payload']['clickID']);
+        logger()->info($array['cost']);
 
-        $click = Click::where('clickID', $this->webhookCall['payload']['clickID'])->first();
-        //dd($click->offer[0]->payout_id);
-        $payouttype = $click->offer[0]->payout_id;
-        if( $payouttype == '4')
-        {
-            if ($click->platform == 'Windows') {
-                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
-            }elseif($click->platform == 'Android'){
-                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Android')->first()->payout / 100);
-            }elseif($click->platform == 'iOS'){
-                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','iOS')->first()->payout / 100);
+        $click = Click::where('clickID', $array['payload']['clickID'])->first();
+        $cost = $array['cost'] ;
+        $status = $array['payload']['status'] ;
+        
+        try {
+
+            if(!$click){
+                logger()->error("Click not found for ID: " . $this->webhookCall['payload']['clickID']);
             }else{
-                $earned = $this->webhookCall['payload']['cost'] * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
-            }
 
-        }else{
-            if ($click->platform == 'Windows') {
-                $earned = $click->offer[0]->targets->where('target','Windows')->first()->payout;
-            }elseif($click->platform == 'Android'){
-                $earned = $click->offer[0]->targets->where('target','Android')->first()->payout;
-            }elseif($click->platform == 'iOS'){
-                $earned = $click->offer[0]->targets->where('target','iOS')->first()->payout;
+            if ($click->status === $status) {
+                logger()->info("Status is the same. Skipping update for Click ID: " . $array['payload']['clickID']);
+                
             }else{
-                $earned = $click->offer[0]->targets->where('target','Windows')->first()->payout;
-            }
-        }
 
-        $status = $this->webhookCall['payload']['status'] ;
+                $payouttype = $click->offer[0]->payout_id;
+                if( $payouttype == '4')
+                {
+                    if ($click->platform == 'Windows') {
+                        $earned = $cost * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
+                    }elseif($click->platform == 'Android'){
+                        $earned = $cost * ($click->offer[0]->targets->where('target','Android')->first()->payout / 100);
+                    }elseif($click->platform == 'iOS'){
+                        $earned = $cost * ($click->offer[0]->targets->where('target','iOS')->first()->payout / 100);
+                    }else{
+                        $earned = $cost * ($click->offer[0]->targets->where('target','Windows')->first()->payout / 100);
+                    }
+        
+                }else{
+                    if ($click->platform == 'Windows') {
+                        $earned = $click->offer[0]->targets->where('target','Windows')->first()->payout;
+                    }elseif($click->platform == 'Android'){
+                        $earned = $click->offer[0]->targets->where('target','Android')->first()->payout;
+                    }elseif($click->platform == 'iOS'){
+                        $earned = $click->offer[0]->targets->where('target','iOS')->first()->payout;
+                    }else{
+                        $earned = $click->offer[0]->targets->where('target','Windows')->first()->payout;
+                    }
+                }
+        
+                //prevent duplicates
+                if($click->status != $status ){
 
-        $cost = $this->webhookCall['payload']['cost'] ;
+                    if($status == 'Approved')
+                    {
+                        $conversion = 1;
+                        // Credit affiliate
+                        $click->user->deposit($earned * 100);
+
+                        //logic for referral
+                        if(settings()->get('allow_affiliate_referral') == 1){
+                                    
+                            $period = $click->user->created_at->subMonths(settings()->get('allowed_affiliate_referral_duration_months')); //months in which the reffered has stayed on the platform
+                            $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
+                            $referral = $referralget->user;
+                
+                            if($click->user->created_at > $period )
+                            {
+                                $refCommision = $earned * (settings()->get('allowed_affiliate_referral_payout_percentage')/100);
+                                $referral->deposit($refCommision); //credit commission
+                                
+                            }
+                        }
 
 
-        if($status == 'Approved')
-        {
-            $conversion = 1;
-        }else{
-            $conversion = 0;
-        }
 
-
-        $click->update([
-            'status' => $status,
-            'earned' => $earned,
-            'conversion' => $conversion,
-            'cost' => $cost,
-        ]);
-
-        //credit affiliate
-        $click->user->deposit($earned * 100); //credit main
-
-        //logic for referral
-        if(settings()->get('allow_affiliate_referral') == 1){
+                    }elseif ($status == 'Refunded' || $status == 'Chargeback') {
+                        $conversion = 0;
+                        // Reverse the affiliate's earnings
+                        $click->user->withdraw($earned * 100);
+                        // Handle referral commission reversal
+                        if (settings()->get('allow_affiliate_referral') == 1) {
+                            if ($click->user->affiliatedetails && $click->user->affiliatedetails->referral_id) {
+                                $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
+                                
+                                if ($referralget) {
+                                    $referral = $referralget->user;
+                                    $refCommision = $earned * (settings()->get('allowed_affiliate_referral_payout_percentage') / 100);
+                                    
+                                    if ($referral->balance >= $refCommision) { // Ensure no negative balance
+                                        $referral->withdraw($refCommision);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        $conversion = 0;
+                    }
                     
-            $period = $click->user->created_at->subMonths(settings()->get('allowed_affiliate_referral_duration_months')); //months in which the reffered has stayed on the platform
-            $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
-            $referral = $referralget->user;
-
-            if($click->user->created_at > $period )
-            {
-                $refCommision = $earned * (settings()->get('allowed_affiliate_referral_payout_percentage')/100);
-                $referral->deposit($refCommision); //credit commission
+            
+                    $click->update([
+                        'conversion' => $conversion,
+                        'cost' => $array['cost'],
+                        'status' => $status,
+                        'earned' => ($status == 'Refunded' || $status == 'Chargeback') ? 0 : $earned,
+                        
+                    ]);
+                }
                 
             }
+                        
+            }
+                
+        } catch (\Exception $e) {
+            logger()->error("Webhook processing failed: " . $e->getMessage()); 
+            
         }
-
-
-        
-        
-
     }
+    
+}
 
-    function merchantConfig($key)
-    {
-        return \App\Models\Setting::where('name', $key)->value('val');
-    }
 
-    /**
+
+/**
      the payload will look like this
      header should have "secretKey"
     {
-    "event": "user.signup",
+    "event": "action.done",//action.refund
     "timestamp": "2024-06-11T12:34:56Z",
     "payload": {
         "clickID": "18812070",
         "cost": "1500",
-        "status": "Approved"
+        "status": "Approved" or "Refunded" or "Chargeback"
     }
-    }
+    
 
 
-    {
-    "payload": {
-        "clickID": "56925031",
-        "cost": "1500",
-        "status": "Approved"
-    }
-}
     **/
-}

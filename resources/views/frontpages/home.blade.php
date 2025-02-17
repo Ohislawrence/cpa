@@ -4,7 +4,7 @@
 @section('url',  Request::url() )
 @section('description',  'Simplify affiliate management, boost performance, and grow your business with Tracklia all-in-one SaaS platform.' )
 @section('imagealt',  'homepage image' )
-@section('image',  url("public/publicassets/images/ogimg.jpg") )
+@section('image',  asset("images/tracklia-page.jpg") )
 
 
 @section('header')

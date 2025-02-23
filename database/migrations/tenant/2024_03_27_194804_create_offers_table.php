@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['Pending', 'Wait', 'Active']);
             $table->integer('offerid');
             $table->string('name');
+            $table->string('product_id');
             $table->integer('category_id');
             $table->integer('targeting_id');
             $table->integer('geo_id');

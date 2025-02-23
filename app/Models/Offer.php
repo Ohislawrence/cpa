@@ -21,7 +21,8 @@ class Offer extends Model
         'desc',
         'secretkey',
         'expiry',
-        'start'
+        'start',
+        'product_id'
 
     ];
 

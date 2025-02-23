@@ -26,9 +26,8 @@ class OfferController extends Controller
     public function index()
     {
         $offers = Offer::latest()->get();
-        //dd($offers);
-        //$timeframe = 7;
-        return view('agency.offers',compact('offers'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.offers',compact('offers','currency'));
     }
 
     public function getStats(Request $request)
@@ -59,7 +58,7 @@ class OfferController extends Controller
         });
         **/
         
-        $data = $query->selectRaw('COUNT(distinct offers.id) as ActiveCampaigns, COUNT(clicks.offer_id) as clicks, SUM(clicks.conversion) as Conversions')
+        $data = $query->selectRaw('COUNT(distinct offers.id) as ActiveCampaigns, COUNT(clicks.offer_id) as clicks, SUM(clicks.conversion) as Conversions, SUM(clicks.cost) as Revenue')
         ->first();
 
         return response()->json($data);
@@ -68,9 +67,21 @@ class OfferController extends Controller
     public function create()
     {
         $categories = Category::latest()->get();
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        $firstLocation = Country::find(247);
+        $locations = Country::where('id', '!=', $firstLocation->id)->get();
+        $payouts = Payout::all();
+        return view('agency.newcampaigns', compact( 'categories', 'locations', 'payouts','currency','firstLocation'));
+    }
+
+    public function edit($id)
+    {
+        $offer = Offer::findorfail($id);
+        $categories = Category::latest()->get();
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
         $locations = Country::all();
         $payouts = Payout::all();
-        return view('agency.newcampaigns', compact( 'categories', 'locations', 'payouts'));
+        return view('agency.editcampaigns', compact( 'categories', 'locations', 'payouts','offer','currency'));
     }
 
     public function viewcampaign(Request $request)
@@ -144,6 +155,7 @@ class OfferController extends Controller
             'name' => $request->name,
             'category_id' => $request->category,
             'payout_id' => $request->payout,
+            'product_id' => $request->product_id,
             'actionurl' => $request->actionurl,
             'desc' => $request->desc,
         ]);
@@ -176,6 +188,66 @@ class OfferController extends Controller
 
 
         return back()->with('message','Campaigns Created');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $offer = Offer::findorfail($id);
+        
+
+        if($request->hasFile('image')){
+            $tenantId = tenant()->id; // Get the current tenant ID
+            $file = $request->image;
+            $filename = Str::slug($request->name).'-'.time().'.'.$file->extension();
+            $path = 'tenant'.tenant()->id.'/'.$file->storeAs("campaigns/{$tenantId}", $filename, 'tenant');
+            $offer->image = $path ;
+            $offer->save;
+        }
+        
+
+
+        $offer->update([
+            'start' => $request->start,
+            'expiry' => $request->end ?? null,
+            'user_id' => auth()->user()->id,
+            'status' => $request->status,
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'payout_id' => $request->payout,
+            'product_id' => $request->product_id,
+            'actionurl' => $request->actionurl,
+            'desc' => $request->desc,
+        ]);
+
+        
+        foreach($request->location as $key => $lo )
+        {
+            Geo::where('offer_id', $offer->id)
+            ->update([
+                'country_id'=>$lo,
+            ]);
+        }
+        
+        
+        Target::where('offer_id', $offer->id)
+            ->where('target', 'Windows')
+            ->update(['payout' => $request->desktop, 'url' => $request->desktopurl]);
+
+        Target::where('offer_id', $offer->id)
+            ->where('target', 'iOS')
+            ->update(['payout' => $request->ios, 'url' => $request->iosurl]);
+
+        Target::where('offer_id', $offer->id)
+            ->where('target', 'Android')
+            ->update(['payout' => $request->android, 'url' => $request->androidurl]);
+
+
+
+        return back()->with('message','Campaigns Edited');
     }
 
     public function campaigndetails(string $id)

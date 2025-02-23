@@ -7,20 +7,26 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
-use App\Models\User;
+use Illuminate\Mail\Mailables\Address;
 
-class WelcomeEmailAgency extends Mailable
+class StatusChangeEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+
+    public $user; 
+    public $status;
+    public $theMessage;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct($user, $status, $theMessage)
     {
-        //
+        $this->user = $user;
+        $this->status = $status;
+        $this->theMessage = $theMessage;
+        
     }
 
     /**
@@ -29,8 +35,8 @@ class WelcomeEmailAgency extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('business@tracklia.com', 'Tracklia'),
-            subject: 'We have receieved your request',
+            from: new Address(settings()->get('contact_email') ?? tenant()->kyc->business_email, ucfirst(tenant()->id)),
+            subject: 'Hi from '.ucfirst(tenant()->id).', your account is '.$this->status ,
         );
     }
 
@@ -40,7 +46,7 @@ class WelcomeEmailAgency extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcomeEmailAgency',
+            view: 'emails.statusEmail',
         );
     }
 

@@ -75,7 +75,7 @@ class ClickController extends Controller
                         }
                     }
 
-                    return redirect()->away($offerURL->url.'?clickID='.$click->clickID.'&OS='.$device->getOs('name'));
+                    return redirect()->away($offerURL->url.'?clickID='.$click->clickID.'&OS='.$device->getOs('name').'&product_id=70');
                 }else{
                     return redirect()->away('https://tracklia.com');
                 }

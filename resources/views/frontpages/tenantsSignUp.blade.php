@@ -93,7 +93,7 @@ to help your business grow and see how our platform simplifies affiliate managem
 							
 							<div class="fv-row mb-8">
 								<!--begin::Email-->
-								<input type="text" placeholder="Business Email" name="business_email" class="form-control bg-transparent name" value="{{ old('business_email') }}" autocomplete="off"> 
+								<input type="email" placeholder="Business Email" name="business_email" class="form-control bg-transparent name" value="{{ old('business_email') }}" autocomplete="off"> 
 								<!--end::Email-->
 							</div>
 

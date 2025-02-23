@@ -60,9 +60,17 @@ class CreatetenantController extends Controller
 
         //try {
             //Code that may throw an Exception
-        
-        $data = $request->validate([
-            'business_email' => 'required|unique:users,email',
+        $disallowedDomains = [
+            'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 
+            'aol.com', 'icloud.com', 'protonmail.com'
+        ];
+        $request->validate([
+            'business_email' => ['required','unique:users,email',function ($attribute, $value, $fail) use ($disallowedDomains) {
+                $domain = substr(strrchr($value, "@"), 1);
+                if (in_array($domain, $disallowedDomains)) {
+                    $fail('Registration using public email addresses is not allowed.');
+                }
+            }],
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
         ]);

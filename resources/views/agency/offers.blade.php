@@ -64,6 +64,7 @@
                     $('#ActiveCampaigns').text(response.ActiveCampaigns);
                     $('#clicks').text(response.clicks);
                     $('#Conversions').text(response.Conversions);
+                    $('#Revenue').text(response.Revenue);
                 },
                 error: function(xhr) {
                     console.log("Error:", xhr.responseText);
@@ -100,6 +101,7 @@
 
 
     <div id="click-display" class="row g-5 g-xl-8">
+        <label>Period</label>
         <select id="dateRange" class="form-control form-control-solid" name="dateRange">
             <option value="today">Today</option>
             <option value="7_days_ago" selected>7 Days Ago</option>
@@ -166,7 +168,7 @@
         <!--begin::Body-->
         <div class="card-body">
             <div class="text-white fw-bold fs-2 mb-2 mt-5">
-                <span id="RevenueGenerated">-</span>
+                {{ $currency->symbol }}    <span id="Revenue">-</span>
             </div>
 
             <div class="fw-semibold text-white">

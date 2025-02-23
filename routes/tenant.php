@@ -141,7 +141,7 @@ Route::middleware([
     Route::group([
         'namespace' => 'App\Http\Controllers\Affiliate',
         'prefix' => 'affiliate',
-        'middleware' => 'role:affiliate',
+        'middleware' => ['role:affiliate', 'checkAffiliateStatus'],
         'as' => 'affiliate.',
         
     ], function () {
@@ -196,6 +196,8 @@ Route::middleware([
         Route::get('campaigns/data', [AgencyOfferController::class, 'getStats'])->name('getStats');
         Route::get('campaign/create', [AgencyOfferController::class, 'create'])->name('create.campaign');
         Route::post('campaign/create/post', [AgencyOfferController::class, 'store'])->name('store.campaign.post');
+        Route::get('campaign/edit/{id}', [AgencyOfferController::class, 'edit'])->name('edit.campaign');
+        Route::post('campaign/edit/post/{id}', [AgencyOfferController::class, 'update'])->name('update.campaign.post');
         Route::get('campaign/view', [AgencyOfferController::class, 'viewcampaign'])->name('viewcampaign.campaign');
         Route::get('campaign/details/{id}/view', [AgencyOfferController::class, 'campaigndetails'])->name('details.campaign');
         Route::get('campaign/details/{id}/stats', [AgencyOfferController::class, 'campaignstats'])->name('details.campaigndestats');

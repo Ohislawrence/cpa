@@ -38,10 +38,10 @@
                     {{ $offer->desc }}
                 </p>
 
-                <h3 class="text-dark-800 mb-3 mt-6">Statistics</h3>
-
                 <a href="{{ route('merchant.details.campaigndestats', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
                     <i class="ki-duotone ki-view fs-2"></i>View Statistics</a>
+                <a href="{{ route('merchant.edit.campaign', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
+                    <i class="ki-duotone ki-view fs-2"></i>Edit Campaign</a>
             </div>
             <!--end::Col-->
             <!--begin::Col-->
@@ -110,7 +110,7 @@
                                             $payys[] = $payout;
                                         }
                                     @endphp
-                                   ${{ round(array_sum($payys)/count($payys),2)}}</td>
+                                   {{ $currency->symbol }}{{ round(array_sum($payys)/count($payys),2)}}</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->
@@ -164,7 +164,7 @@
                                         
                                     @endphp
                                     <td class="text-gray-500">Network EPC:</td>
-                                    <td class="text-gray-800">{{ ($totalclicks > 0) ? (round($totalearnings/$totalclicks,2)) : 0 }}</td>
+                                    <td class="text-gray-800">{{ $currency->symbol}}{{ ($totalclicks > 0) ? (round($totalearnings/$totalclicks,2)) : 0 }}</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->
@@ -177,6 +177,11 @@
                                 <tr>
                                     <td class="text-gray-500">Currency:</td>
                                     <td class="text-gray-800">{{ $currency->currency}} ( {{ $currency->country}} )</td>
+                                </tr>
+                                <!--end::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Campaign ID</td>
+                                    <td class="text-gray-800">{{ $offer->offerid}}</td>
                                 </tr>
                                 <!--end::Row-->
                             </table>

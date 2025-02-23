@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use App\Mail\AffiliateInvite;
+use App\Mail\StatusChangeEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Affiliatedetail;
@@ -20,6 +21,7 @@ use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+
 
 class AffiliateController extends Controller
 {
@@ -151,19 +153,46 @@ class AffiliateController extends Controller
             'name' => $request->name,
             'email' => $request->email,
         ]);
-
-        $user->assignRole($request->role);
+        //$user->assignRole($request->role);
 
         Affiliatedetail::updateOrCreate([
             'user_id' => $user->id
         ], [
-            'status' => $request->status,
+            
             'city' => 'pending',
             'country' => $request->country,
             'region' => $request->region,
             'phonenumber' => $request->phone,
             'instantmessageid' => $request->instantmessageid,
         ]);
+
+        $affDetails = Affiliatedetail::where('user_id', $user->id)->first();
+        if($affDetails->status != $request->status)
+        {
+            $affDetails->update(['status' => $request->status,]);
+
+            //send an email
+            if($request->status == 'Active')
+            {
+                $status = 'Approved';
+                $theMessage = "We are excited to inform you that your affiliate account has been approved! You are now officially part of our affiliate program, and we can't wait to see you succeed.
+                ";
+                Mail::to($user->email)->queue(new StatusChangeEmail($user, $status,$theMessage));
+            }
+            if($request->status == 'Pending')
+            {
+                $status = 'Pending';
+                $theMessage = "Your account status is now Pending as we review your application. We will notify you once the review is complete.";
+                Mail::to($user->email)->queue(new StatusChangeEmail($user, $status,$theMessage));
+            }
+            if($request->status == 'Rejected')
+            {
+                $status = 'Rejected';
+                $theMessage = "Thank you for your interest in joining our affiliate program. After reviewing your application, we regret to inform you that your account has not been approved at this time.<br/>
+                                We encourage you to review our guidelines and reapply in the future. If you have any questions or need further clarification, feel free to reach out to us.";
+                Mail::to($user->email)->queue(new StatusChangeEmail($user, $status,$theMessage));
+            }
+        }
 
 
         return back()->with('message','Affiliate Account Updated');

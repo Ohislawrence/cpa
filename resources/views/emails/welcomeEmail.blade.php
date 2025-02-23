@@ -11,7 +11,7 @@
                     <!--begin:Logo-->
                     <div style="margin-bottom:17px">
                         <a href="{{ tenant()->kyc->website }}" rel="noopener" target="_blank">
-                            <img alt="Logo" src="{{ url('public/assets/media/logos/tracklia_black_logo.png') }}"  style="height: 35px" />
+                            <img alt="Logo" src="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('logo')) }}" class="h-20px logo theme-dark-show" style="height: 35px"/>
                         </a>
                     </div>
                     <!--end:Logo-->

@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'minimum_payout_amount', 'val' => NULL],
             ['name' => 'payout_frequency', 'val' => NULL],
             ['name' => 'payout_methods', 'val' => NULL],
-            ['name' => 'affiliate_auto_approval', 'val' => NULL],
+            ['name' => 'affiliate_auto_approval', 'val' => 'yes'],
             ['name' => 'signup_bonus', 'val' => NULL],
             ['name' => 'terms_and_conditions', 'val' => NULL],
             ['name' => 'require_tax_info', 'val' => NULL],

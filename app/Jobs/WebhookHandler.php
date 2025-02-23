@@ -42,10 +42,10 @@ class WebhookHandler implements ShouldQueue
         $array = $this->webhookCall;
         //Log::info( $array['cost']);
         logger()->info($array['payload']['clickID']);
-        logger()->info($array['cost']);
+        logger()->info($array['payload']['cost']);
 
         $click = Click::where('clickID', $array['payload']['clickID'])->first();
-        $cost = $array['cost'] ;
+        $cost = $array['payload']['cost'] ;
         $status = $array['payload']['status'] ;
         
         try {
@@ -136,7 +136,7 @@ class WebhookHandler implements ShouldQueue
             
                     $click->update([
                         'conversion' => $conversion,
-                        'cost' => $array['cost'],
+                        'cost' => $cost,
                         'status' => $status,
                         'earned' => ($status == 'Refunded' || $status == 'Chargeback') ? 0 : $earned,
                         

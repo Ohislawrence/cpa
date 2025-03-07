@@ -35,4 +35,9 @@ class Click extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }

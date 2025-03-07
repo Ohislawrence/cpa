@@ -38,9 +38,9 @@
                     {{ $offer->desc }}
                 </p>
 
-                <a href="{{ route('merchant.details.campaigndestats', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
+                <a href="{{ route('merchant.reports', ['start_date'=> \Carbon\Carbon::now()->subDays(7)->format('Y-m-d') , 'end_date'=>\Carbon\Carbon::today()->format('Y-m-d') , 'campaign_id'=>$offer->offerid]) }}" class="btn btn-primary">
                     <i class="ki-duotone ki-view fs-2"></i>View Statistics</a>
-                <a href="{{ route('merchant.edit.campaign', ['id' =>  $offer->id ]) }}" class="btn btn-primary">
+                <a href="{{ route('merchant.edit.campaign', [ $offer->id ]) }}" class="btn btn-primary">
                     <i class="ki-duotone ki-view fs-2"></i>Edit Campaign</a>
             </div>
             <!--end::Col-->

@@ -12,6 +12,7 @@ use App\Models\Agencydetails;
 use App\Models\Category;
 use App\Models\Click;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Emailinvite;
 use App\Models\Requestpayment;
 use App\Models\Trafficsource;
@@ -21,6 +22,7 @@ use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 
 class AffiliateController extends Controller
@@ -30,6 +32,17 @@ class AffiliateController extends Controller
         $users = User::role('affiliate')->latest()->get();
         $countries = Country::all();
         return view('agency.myaffiliates.affiliates', compact('users','countries'));
+    }
+    public function deleteUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        
+        if ($user) {
+            $user->delete(); // Soft delete
+            return response()->json(['success' => 'User deleted successfully']);
+        }
+
+        return response()->json(['error' => 'User not found'], 404);
     }
 
     public function settings()
@@ -45,7 +58,7 @@ class AffiliateController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="affiliate/'.$row->id.'/overview" class="edit btn btn-primary btn-sm">View</a>
-                                    <a href="user/edit/'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a>
+                                    <a href="affiliate/'.$row->id.'/updateuserdetails" class="edit btn btn-success btn-sm">Edit</a>
                                     <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
@@ -63,17 +76,63 @@ class AffiliateController extends Controller
         if ($request->ajax()) {
             $data = Click::where('user_id', $id)->latest()->get();
             return Datatables::of($data)
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
-                    return $actionBtn;
+                ->addColumn('Status', function($row){
+                    $statusOptions = ['Pending', 'Approved', 'Chargeback'];
+                    $dropdown = '<select class="status-dropdown" data-id="'.$row->id.'">';
+                    foreach ($statusOptions as $option) {
+                        $selected = ($row->status == $option) ? 'selected' : '';
+                        $disabled = ($option == 'Approved') ? 'disabled' : '';
+                        $dropdown .= '<option value="'.$option.'" '.$selected.' '.$disabled.'>'.$option.'</option>';
+                    }
+                    $dropdown .= '</select>';
+                    return $dropdown;
                 })
                 ->addColumn('date', function($row){
                     $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
                     return $date;
                 })
-                ->rawColumns(['action','date'])
+                ->addColumn('offerid', function($row){
+                    $offerid = $row->offer_id;
+                    return $offerid;
+                })
+                ->addColumn('country', function($row){
+                    $countryCode = $row->country->code;
+                    return $countryCode;
+                })
+                ->rawColumns(['Status','date','country'])
                 ->make(true);
         }
+    }
+
+    public function updateClickStatus(Request $request)
+    {
+        $click = Click::find($request->id);
+        
+        if (!$click) {
+            return response()->json(['success' => false, 'message' => 'Click not found!'], 404);
+        }
+
+        if($request->status == 'Pending' || $request->status == 'Chargeback' && $click->status != 'Pending' || $click->status != 'Chargeback')
+        {
+            $earned = $click->earned;
+            $click->status = $request->status;
+            $click->conversion = 0;
+            $click->earned = 0;
+            $click->save();
+
+            $click->user->withdraw($earned * 100);
+        }
+        if($request->status == 'Approved' && $click->status != 'Approved')
+        {
+            $click->status = $request->status;
+            $click->conversion = 1;
+            $click->save();
+
+            //$click->user->deposit($earned * 100);
+        }
+        
+
+        return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
     }
 
     public function getpaymentrequest(Request $request, $id)
@@ -123,10 +182,6 @@ class AffiliateController extends Controller
         if ($request->ajax()) {
             $data = Transaction::where('payable_id', $id)->latest()->get();
             return Datatables::of($data)
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>';
-                    return $actionBtn;
-                })
                 ->addColumn('date', function($row){
                     $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
                     return $date;
@@ -240,31 +295,41 @@ class AffiliateController extends Controller
     public function clickstats($id)
     {
         $user = User::find($id);
-        return view('agency.myaffiliates.affiliateDetails.clickstats', compact('user'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.clickstats', compact('user','currency'));
     }
 
     public function overview($id)
     {
         $user = User::find($id);
-        return view('agency.myaffiliates.affiliateDetails.overview', compact('user'));
+        $netEarning = $user->transactions()
+        ->where('type', 'deposit')
+        ->sum('amount');
+        $numberOfReferral = Affiliatedetail::where('referred_by','=',$user->affiliatedetails->referral_id)->count();
+        $conversion = $user->clicks->sum('conversion');
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.overview', compact('user','currency','netEarning','numberOfReferral','conversion'));
     }
 
     public function paymentrequest($id)
     {
         $user = User::find($id);
-        return view('agency.myaffiliates.affiliateDetails.paymentRequest', compact('user'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.paymentRequest', compact('user','currency'));
     }
 
     public function referrals($id)
     {
         $user = User::find($id);
-        return view('agency.myaffiliates.affiliateDetails.referrals', compact('user'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.referrals', compact('user','currency'));
     }
 
     public function trafficsource($id)
     {
         $user = User::find($id);
-        return view('agency.myaffiliates.affiliateDetails.trafficsource', compact('user'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.trafficsource', compact('user','currency'));
     }
 
     public function updateuserdetails($id)
@@ -272,13 +337,15 @@ class AffiliateController extends Controller
         $user = User::find($id);
         $country = Country::all();
         $categories = Category::all();
-        return view('agency.myaffiliates.affiliateDetails.updateuserDetails', compact('user','country','categories'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.updateuserDetails', compact('user','country','categories','currency'));
     }
 
     public function transactions($id)
     {
         $user = User::find($id);
-        return view('agency.myaffiliates.affiliateDetails.transactions', compact('user'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.myaffiliates.affiliateDetails.transactions', compact('user','currency'));
     }
 
     public function trafficsourcedestroy($id)
@@ -369,4 +436,43 @@ class AffiliateController extends Controller
 
         return $code;
     }
+
+    public function viewuserTopClicks(Request $request, $id)
+{
+    if ($request->ajax()) {
+        $data = Click::select(
+            'offers.name as offer_name',
+            'clicks.offer_id',
+            DB::raw('COUNT(clicks.id) as total_clicks'),
+            DB::raw('SUM(clicks.conversion) as total_conversions'),
+            DB::raw('SUM(clicks.cost) as total_earnings')
+        )
+        ->join('offers', 'clicks.offer_id', '=', 'offers.offerid') // Ensure 'offerid' is the correct column name
+        ->where('clicks.user_id', $id)
+        ->groupBy('clicks.offer_id', 'offers.name') // Group by offer_id and offer name
+        ->orderByDesc('total_clicks') // Show highest clicks first
+        ->limit(5) // Limit results to 5
+        ->get();
+
+        return Datatables::of($data)
+            ->addColumn('offer', function($row) {
+                return $row->offer_name; // Show offer name instead of ID
+            })
+            ->addColumn('clicks', function($row) {
+                return $row->total_clicks;
+            })
+            ->addColumn('conversions', function($row) {
+                return number_format($row->total_conversions, 0);
+            })
+            ->addColumn('epc', function($row) {
+                $epc = ($row->total_clicks > 0) 
+                    ? $row->total_earnings / $row->total_clicks 
+                    : 0;
+                return number_format($epc, 2);
+            })
+            ->rawColumns(['offer', 'clicks', 'conversions', 'epc'])
+            ->make(true);
+    }
+}
+
 }

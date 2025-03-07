@@ -22,7 +22,9 @@ class Offer extends Model
         'secretkey',
         'expiry',
         'start',
-        'product_id'
+        'product_id',
+        'basecost'
+
 
     ];
 

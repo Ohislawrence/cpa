@@ -109,7 +109,7 @@
             <option value="this_month">This Month</option>
             <option value="all_time">All Time</option>
         </select>
-        <div class="col-xl-3">
+    <div class="col-xl-3">
 
     <!--begin::Statistics Widget 5-->
     <a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">

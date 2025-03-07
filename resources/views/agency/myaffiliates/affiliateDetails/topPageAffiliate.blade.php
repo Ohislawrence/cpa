@@ -21,7 +21,7 @@
                     <div class="d-flex flex-column">
                         <!--begin::Name-->
                         <div class="d-flex align-items-center mb-2">
-                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $user->name }}</a>
+                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ ucfirst($user->name) }}</a>
                             <a href="#">
                                 <i class="ki-duotone ki-verify fs-1 text-primary">
                                     <span class="path1"></span>
@@ -37,7 +37,7 @@
                                 <span class="path1"></span>
                                 <span class="path2"></span>
                                 <span class="path3"></span>
-                            </i>{{ $user->getRoleNames()->first() }}</a>
+                            </i>{{ucfirst($user->getRoleNames()->first())  }}</a>
                             <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                             <i class="ki-duotone ki-geolocation fs-4 me-1">
                                 <span class="path1"></span>
@@ -70,7 +70,7 @@
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <div class="fs-2 fw-bold" data-kt-countup="" >$ {{ number_format($user->balanceFloat,2) }}</div>
+                                    <div class="fs-2 fw-bold" data-kt-countup="" >{{ $currency->symbol }} {{ number_format($user->balanceFloat,2) }}</div>
                                 </div>
                                 <!--end::Number-->
                                 <!--begin::Label-->
@@ -80,11 +80,23 @@
                             <!--end::Stat-->
                             <!--begin::Stat-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                @php
+                                    $totalEarnings = $user->transactions()
+                                        ->where('amount', '>', 0) // Sum only deposits
+                                        ->sum('amount');
+
+                                    // Get total clicks
+                                    $totalClicks = $user->clicks->count();
+
+                                    // Calculate EPC
+                                    $epc = $totalClicks > 0 ? $totalEarnings / $totalClicks : 0;
+                                @endphp
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="80">0</div>
+                                    <div class="fs-2 fw-bold">{{ $currency->symbol }}{{ number_format($epc,2) }}</div>
                                 </div>
                                 <!--end::Number-->
+                                
                                 <!--begin::Label-->
                                 <div class="fw-semibold fs-6 text-gray-500">EPC</div>
                                 <!--end::Label-->
@@ -93,16 +105,24 @@
                             <!--begin::Stat-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
+                                @php
+                                    // Get total conversions (successful actions)
+                                    $totalConversions =  $user->clicks->sum('conversion'); // Assuming 'conversion' is a numeric field
+
+                                    // Get total clicks
+                                    $totalClicks = $user->clicks->count();
+
+                                    // Calculate Conversion Rate
+                                    $conversionRate = $totalClicks > 0 ? ($totalConversions / $totalClicks) * 100 : 0;
+                                @endphp 
                                 <div class="d-flex align-items-center">
-                                    <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">0</div>
+                                    
+                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ $conversionRate }}" data-kt-countup-prefix="%">0</div>
                                 </div>
                                 <!--end::Number-->
+                                
                                 <!--begin::Label-->
-                                <div class="fw-semibold fs-6 text-gray-500">Success Rate</div>
+                                <div class="fw-semibold fs-6 text-gray-500">Conversion Rate</div>
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
@@ -110,17 +130,7 @@
                         <!--end::Stats-->
                     </div>
                     <!--end::Wrapper-->
-                    <!--begin::Progress-->
-                    <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-                        <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                            <span class="fw-semibold fs-6 text-gray-500">Profile Compleation</span>
-                            <span class="fw-bold fs-6">90%</span>
-                        </div>
-                        <div class="h-5px mx-3 w-100 bg-light mb-3">
-                            <div class="bg-success rounded h-5px" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <!--end::Progress-->
+                    
                 </div>
                 <!--end::Stats-->
             </div>
@@ -147,7 +157,7 @@
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/all/transactions') ? 'active' : ''}}" href="{{ route('merchant.affiliate.transactions', $user->id) }}">Transaction</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/transactions') ? 'active' : ''}}" href="{{ route('merchant.affiliate.transactions', $user->id) }}">Transaction</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->

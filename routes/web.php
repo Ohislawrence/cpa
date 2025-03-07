@@ -70,6 +70,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::get('blogs', [FrontController::class, 'blogs'])->name('blogs');
             Route::get('blog/{cat}/{slug}', [FrontController::class, 'blogsingle'])->name('blogsingle');
             Route::get('privacy-policy', [FrontController::class, 'privacy'])->name('privacy');
+            Route::get('refund-policy', [FrontController::class, 'refund'])->name('refund');
             Route::get('terms-of-service', [FrontController::class, 'tos'])->name('tos');
             //Route::get('support', [FrontController::class, 'support'])->name('support');
             Route::get('contact-us', [FrontController::class, 'contactus'])->name('contactus');

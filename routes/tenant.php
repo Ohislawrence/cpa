@@ -200,11 +200,19 @@ Route::middleware([
         Route::post('campaign/edit/post/{id}', [AgencyOfferController::class, 'update'])->name('update.campaign.post');
         Route::get('campaign/view', [AgencyOfferController::class, 'viewcampaign'])->name('viewcampaign.campaign');
         Route::get('campaign/details/{id}/view', [AgencyOfferController::class, 'campaigndetails'])->name('details.campaign');
-        Route::get('campaign/details/{id}/stats', [AgencyOfferController::class, 'campaignstats'])->name('details.campaigndestats');
-        //affiliates
+        //Route::get('campaign/details/{id}/stats', [AgencyOfferController::class, 'campaignstats'])->name('details.campaigndestats');
+        //Route::get('campaign/details/single/{id}/stats', [AgencyOfferController::class, 'singleGetStat'])->name('singleGetStat');
+        Route::get('campaign/chart/single/charts/{offerId}', [AgencyOfferController::class, 'clicksChart'])->name('clicksChart');
+        Route::get('campaign/details/single/{offerid}/clicks', [AgencyOfferController::class, 'viewClicksTable'])->name('viewClicksTable');
+        
+        //reports
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
+        Route::get('report/data', [ReportController::class, 'getReportData'])->name('report.data');
+        Route::get('report-datatable', [ReportController::class, 'getDatatableData'])->name('report.datatable');
+        //affiliates
         Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
         Route::get('affiliates', [AffiliateController::class, 'index'])->name('affiliates');
+        Route::post('campaign/single/update/status', [AffiliateController::class, 'updateClickStatus'])->name('clicks.updateStatus');
         //affiliate profile
         //Route::get('affiliate/settings', [AffiliateController::class, 'settings'])->name('affiliates.settings');
         Route::get('affiliates/get/all', [AffiliateController::class, 'getusers'])->name('getusers');
@@ -215,6 +223,7 @@ Route::middleware([
         Route::get('affiliates/{id}/request', [AffiliateController::class, 'getpaymentrequest'])->name('getpaymentrequest');
         Route::get('affiliates/request/forall', [AffiliateController::class, 'getpaymentrequestforall'])->name('getpaymentrequestforall');
         Route::get('affiliate/{id}/overview', [AffiliateController::class, 'overview'])->name('affiliate.overview');
+        Route::get('affiliate/{id}/clicks/overview/user', [AffiliateController::class, 'viewuserTopClicks'])->name('viewuserTopClicks');
         Route::get('affiliate/{id}/clicks/stats', [AffiliateController::class, 'clickstats'])->name('affiliate.clickstats');
         Route::get('affiliate/{id}/clicks/request', [AffiliateController::class, 'paymentrequest'])->name('affiliate.paymentrequest');
         Route::get('affiliate/{id}/all/transactions', [AffiliateController::class, 'transactions'])->name('affiliate.transactions');
@@ -226,6 +235,7 @@ Route::middleware([
         Route::post('affiliate/{id}/trafficsource/post', [AffiliateController::class, 'traffic'])->name('affiliate.traffic');
         Route::post('affiliate/create/new/post', [AffiliateController::class, 'inviteaffiliate'])->name('affiliate.createaffiliate');
         Route::delete('affiliate/{id}/trafficsource/delete', [AffiliateController::class, 'trafficsourcedestroy'])->name('affiliate.trafficsourcedestroy');
+        //Route::delete('/users/delete/{id}', [AffiliateController::class, 'deleteUser'])->name('users.delete');
         //payouts
         Route::get('payouts/request', [AgencyPayoutController::class, 'index'])->name('payout.request');
         Route::get('payouts/options', [AgencyPayoutController::class, 'options'])->name('payout.option');

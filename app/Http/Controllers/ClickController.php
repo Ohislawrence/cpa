@@ -88,7 +88,7 @@ class ClickController extends Controller
     public function generateUniqueCode()
     {
         do {
-            $code = random_int(10000000, 99999999);
+            $code = random_int(999999, 1000000000);
         } while (Click::where("clickID", "=", $code)->first());
 
         return $code;

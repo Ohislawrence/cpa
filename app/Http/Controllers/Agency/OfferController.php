@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Agency;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Click;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Geo;
@@ -17,9 +18,11 @@ use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTable;
 use Carbon\Carbon;
+use ConsoleTVs\Charts\Classes\C3\Chart;
 use Illuminate\Support\Facades\DB;
 use Stancl\Tenancy\Facades\Tenancy;
 use Stancl\Tenancy\Tenancy as TenancyTenancy;
+use LaraChart\LaraChart;
 
 class OfferController extends Controller
 {
@@ -38,13 +41,13 @@ class OfferController extends Controller
                     ->where('offers.status', 'Active'); //Offer::with('click');
 
         if ($dateRange === 'today') {
-            $query->whereDate('offers.created_at', Carbon::today());
+            $query->whereDate('clicks.updated_at', Carbon::today());
         } elseif ($dateRange === '7_days_ago') {
-            $query->where('offers.created_at', '>=', Carbon::now()->subDays(7));
+            $query->where('clicks.updated_at', '>=', Carbon::now()->subDays(7));
         } elseif ($dateRange === '30_days_ago') {
-            $query->where('offers.created_at', '>=', Carbon::now()->subDays(30));
+            $query->where('clicks.updated_at', '>=', Carbon::now()->subDays(30));
         } elseif ($dateRange === 'this_month') {
-            $query->where('offers.created_at', '>=', Carbon::now()->startOfMonth());
+            $query->where('clicks.updated_at', '>=', Carbon::now()->startOfMonth());
         }
         // No date filter for "all_time"
 
@@ -158,6 +161,7 @@ class OfferController extends Controller
             'product_id' => $request->product_id,
             'actionurl' => $request->actionurl,
             'desc' => $request->desc,
+            'basecost' => $request->basecost,
         ]);
 
         
@@ -221,6 +225,7 @@ class OfferController extends Controller
             'product_id' => $request->product_id,
             'actionurl' => $request->actionurl,
             'desc' => $request->desc,
+            'basecost' => $request->basecost,
         ]);
 
         
@@ -260,7 +265,110 @@ class OfferController extends Controller
     public function campaignstats(string $id)
     {
         $offer = Offer::find($id);
-        return view('agency.campaignstat', compact('offer'));
+        $currency = Currency::find(settings()->get('default_currency') ) ;
+        return view('agency.campaignstat', compact('offer','currency'));
     }
+
+    public function singleGetStat(Request $request,string $id)
+    {
+        $dateRange = $request->input('dateRange');
+        $query =  DB::table('offers')
+                    ->where('offers.id', $id)
+                    ->join('clicks', 'offers.offerid', '=', 'clicks.offer_id')
+                    ->where('offers.status', 'Active'); //Offer::with('click');
+
+        if ($dateRange === 'today') {
+            $query->whereDate('clicks.updated_at', Carbon::today());
+        } elseif ($dateRange === '7_days_ago') {
+            $query->where('clicks.updated_at', '>=', Carbon::now()->subDays(7));
+        } elseif ($dateRange === '30_days_ago') {
+            $query->where('clicks.updated_at', '>=', Carbon::now()->subDays(30));
+        } elseif ($dateRange === 'this_month') {
+            $query->where('clicks.updated_at', '>=', Carbon::now()->startOfMonth());
+        }
+        // No date filter for "all_time"
+        
+        $data = $query->selectRaw('COUNT(distinct clicks.user_id) as ActiveCampaigns, COUNT(clicks.offer_id) as clicks, SUM(clicks.conversion) as Conversions, SUM(clicks.cost) as Revenue')
+        ->first();
+
+        return response()->json($data);
+    }
+
+    public function clicksChart(Request $request, $offerId)
+    {
+        //$offerId = $offerid;
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        // Validate inputs
+        if (empty($offerId) || empty($startDate) || empty($endDate)) {
+            return response()->json(['error' => 'Invalid parameters'], 400);
+        }
+
+        // Fetch data from the database
+        $data = DB::table('clicks')
+            ->where('offer_id', $offerId)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->select(
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('SUM(conversion) as total_conversions'),
+                DB::raw('COUNT(*) as total_clicks')
+            )
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        return response()->json($data);
+    }
+
+
+    public function viewClicksTable(Request $request, $offerid)
+    {
+        if ($request->ajax()) {
+        $data = Click::select(
+                DB::raw('DATE(created_at) as date'),
+                DB::raw('COUNT(*) as total_clicks'),
+                DB::raw('SUM(cost) as total_earnings')
+            )
+            ->where('offer_id', $offerid)
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+    
+        return Datatables::of($data)
+            ->addColumn('date', function($row) {
+                return $row->date;
+            })
+            ->addColumn('clicks', function($row) {
+                $clicks = $row->total_clicks;
+                return $clicks;
+            })
+            ->addColumn('epc', function($row) {
+                $epc = $row->total_clicks > 0 
+                ? $row->total_earnings / $row->total_clicks 
+                : 0;
+            return number_format($epc, 2);
+            })
+            ->addColumn('conversions', function($row) use ($offerid) {
+                // Example: Get conversions for the date and offer
+                $conversions = Click::where('offer_id', $offerid)
+                    ->whereDate('created_at', $row->date)
+                    ->sum('conversion'); 
+                return number_format($conversions, 0);
+            })
+            ->addColumn('affiliates', function($row) use ($offerid) {
+                // Example: Count unique affiliates for the date and offer
+                $affiliates = Click::where('offer_id', $offerid)
+                    ->whereDate('created_at', $row->date)
+                    ->distinct('user_id')
+                    ->count('user_id');
+                return number_format($affiliates, 0);
+            })
+            ->rawColumns(['date', 'clicks', 'conversions','epc', 'affiliates'])
+            ->make(true);
+        }
+    }
+    
+
 
 }

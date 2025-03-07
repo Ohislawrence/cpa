@@ -39,6 +39,7 @@
 				searchable: false,
 			},
 		],
+		
         dom: 'Bfrtip',
         buttons: [
             { extend: 'csv', text: 'Export CSV', className: 'btn btn-primary' },

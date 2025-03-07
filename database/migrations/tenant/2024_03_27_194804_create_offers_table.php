@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('image');
             $table->enum('status', ['Pending', 'Wait', 'Active']);
             $table->integer('offerid');
+            $table->float('basecost');
             $table->string('name');
             $table->string('product_id');
             $table->integer('category_id');

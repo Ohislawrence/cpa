@@ -56,6 +56,7 @@
 								<ul class="foo-links clearfix">
 									<li><p><a href="{{ route('tos') }}">Terms of Use</a></p></li>										
 									<li><p><a href="{{ route('privacy') }}">Privacy Policy</a></p></li>	
+									<li><p><a href="{{ route('refund') }}">Refund Policy</a></p></li>	
 									<li><p><a href="{{ route('blogs') }}">Our Blog</a></p></li>	
 								</ul>
 

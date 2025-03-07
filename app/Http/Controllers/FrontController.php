@@ -68,6 +68,10 @@ class FrontController extends Controller
     {
         return view('frontpages.privacy');
     }
+    public function refund()
+    {
+        return view('frontpages.refundpolicy');
+    }
 
     public function tos()
     {

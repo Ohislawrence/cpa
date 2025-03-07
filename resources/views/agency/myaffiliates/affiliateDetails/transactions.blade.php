@@ -23,16 +23,10 @@
 		serverSide: true,
 		ajax: "{{ route('merchant.getusertransaction', ['id'=> $user->id]) }}",
 		columns: [
-			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'amounts'},
 			{data: 'type'},
             {data: 'date'},
-			{
-				data: 'action',
-				name: 'action',
-				orderable: true,
-				searchable: false,
-			},
+			
 		]
 	}).ajax.reload();
 
@@ -76,11 +70,9 @@
 									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
 										<thead>
 											<tr class="fw-bold fs-6 text-gray-800 px-7">
-												<th></th>
 												<th>Amount</th>
                                                 <th>Type</th>
                                                 <th>Date</th>
-												<th>Actions</th>
 											</tr>
 										</thead>
 										<tbody class="text-gray-600 fw-semibold">

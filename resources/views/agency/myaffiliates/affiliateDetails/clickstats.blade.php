@@ -17,29 +17,52 @@
 <script type="text/javascript">
 	$(function () {
 
-	var table = $('.yajra-datatable').DataTable({
+	var table = $('.clicksTable').DataTable({
 		searchDelay: 500,
 		processing: true,
+        responsive: true,
 		serverSide: true,
 		ajax: "{{ route('merchant.getuserclickstats', ['id'=> $user->id]) }}",
 		columns: [
-			{data: 'DT_RowIndex'},
-			{data: 'offer'},
-            {data: 'device'},
+			{data: 'offerid'},
+            {data: 'clickID'},
 			{data: 'platform'},
             {data: 'browser'},
-            {data: 'status'},
+            {data: 'country'},
             {data: 'date', name: 'date'},
-			{
-				data: 'action',
-				name: 'action',
-				orderable: true,
-				searchable: false,
-			},
+            {data: 'Status'},
 		]
 	}).ajax.reload();
 
 	});
+</script>
+
+<script>
+    $(document).on('change', '.status-dropdown', function() {
+    let clickId = $(this).data('id');
+    let newStatus = $(this).val();
+
+    $.ajax({
+        url: "{{ route('merchant.clicks.updateStatus') }}",
+        type: "POST",
+        data: {
+            id: clickId,
+            status: newStatus,
+            _token: "{{ csrf_token() }}"
+        },
+        success: function(response) {
+            if (response.success) {
+                alert(response.message);
+                $('#clicksTable').DataTable().ajax.reload(); // Refresh DataTable
+            } else {
+                alert('Error updating status.');
+            }
+        },
+        error: function() {
+            alert('Something went wrong!');
+        }
+    });
+});
 </script>
 @endsection
 
@@ -80,17 +103,16 @@
             </div>
                     <div class="card-body py-4">
                         <!--begin::Table-->
-                        <table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5 clicksTable" id="kt_datatable_dom_positioning">
                             <thead>
                                 <tr class="fw-bold fs-6 text-gray-800 px-7">
-                                    <th></th>
-                                    <th>Offer</th>
-                                    <th>Device</th>
+                                    <th>Offer ID</th>
+                                    <th>Click ID</th>
                                     <th>Platform</th>
                                     <th>Browser</th>
+                                    <th>Country</th>
+                                    <th>Date</th>
                                     <th>Status</th>
-                                    <th>Request Date</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 fw-semibold">

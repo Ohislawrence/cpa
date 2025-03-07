@@ -14,7 +14,11 @@
         
 
         <!-- Fonts -->
-		<link rel="icon" href="{{ url('publicassets/images/logo-favicon-dealsintel.png') }}" type="image/x-icon">
+		@if (settings()->get('favicon') !== null)
+            <link rel="icon" href="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('favicon')) }}" type="image/x-icon">
+        @else
+            <link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
+        @endif
         <!--begin::Fonts(mandatory for all pages)-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->

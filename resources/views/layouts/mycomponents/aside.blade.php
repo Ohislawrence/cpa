@@ -172,7 +172,7 @@
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <a class="" href="{{ route('merchant.reports') }}">
+                <a class="" href="{{ route('merchant.reports', ['start_date'=> \Carbon\Carbon::now()->subDays(7)->format('Y-m-d') , 'end_date'=>\Carbon\Carbon::today()->format('Y-m-d') , 'campaign_id'=>'all']) }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>

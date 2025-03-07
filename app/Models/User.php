@@ -13,6 +13,7 @@ use Bavix\Wallet\Traits\HasWalletFloat;
 use Bavix\Wallet\Interfaces\WalletFloat;
 use Bavix\Wallet\Interfaces\Wallet;
 use Illuminate\Auth\Access\Gate;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements Wallet, WalletFloat
 {
@@ -23,6 +24,7 @@ class User extends Authenticatable implements Wallet, WalletFloat
     use TwoFactorAuthenticatable;
     use HasRoles;
     use HasWalletFloat;
+    //use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -100,6 +102,11 @@ class User extends Authenticatable implements Wallet, WalletFloat
     public function tenants()
     {
         return $this->belongsToMany(Tenant::class);
+    }
+
+    public function clicks()
+    {
+        return $this->hasMany(Click::class);
     }
 
    

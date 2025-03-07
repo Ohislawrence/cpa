@@ -82,6 +82,17 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
+                    <label class="required fw-semibold fs-6 mb-2">Base Cost in {{ $currency->currency }}({{ $currency->symbol }})-the cost of the service/product</label>
+                    <!--end::Label-->
+                    <!--begin::Input-->
+                    <input type="number" name="basecost" class="form-control form-control-solid mb-3 mb-lg-0" value="{{ $offer->basecost }}" />
+                    <!--end::Input-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-7">
+                    <!--begin::Label-->
                     <label class="required fw-semibold fs-6 mb-2">Product ID(an identifier from the product/service page)</label>
                     <!--end::Label-->
                     <!--begin::Input-->

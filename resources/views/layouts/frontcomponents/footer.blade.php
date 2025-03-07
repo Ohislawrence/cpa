@@ -39,7 +39,7 @@
 
 								<!-- Links -->
 								<ul class="foo-links clearfix">
-									<li><p><a href="{{ route('app.support', ['integration'])  }}">Integrations</a></p></li>
+									<li><p><a href="{{ route('app.support', ['support'=>'integrations'])  }}">Integrations</a></p></li>
 									<li><p><a href="{{ route('pricing') }}">Pricing</a></p></li>	
 									<li><p><a href="{{ route('start') }}">Start Now!</a></p></li>			
 								</ul>

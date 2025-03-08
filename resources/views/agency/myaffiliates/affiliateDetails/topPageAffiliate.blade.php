@@ -102,12 +102,34 @@
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
+                             <!--begin::Stat-->
+                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                @php
+                                    $totalRevenue = $user->clicks->sum('cost');
+
+                                    // Get total earned
+                                    $totalCommission = $user->clicks->sum('earned');
+
+                                    // Calculate returnOnAdSpend
+                                    $returnOnAdSpend = $totalRevenue > 0 ? ($totalRevenue / $totalCommission)*100 : 0;
+                                @endphp
+                                <!--begin::Number-->
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-2 fw-bold">{{ number_format($returnOnAdSpend,2) }}%</div>
+                                </div>
+                                <!--end::Number-->
+                                
+                                <!--begin::Label-->
+                                <div class="fw-semibold fs-6 text-gray-500">ROAS</div>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Stat-->
                             <!--begin::Stat-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 @php
                                     // Get total conversions (successful actions)
-                                    $totalConversions =  $user->clicks->sum('conversion'); // Assuming 'conversion' is a numeric field
+                                    $totalConversions =  $user->clicks->sum('conversion'); //'conversion' is a numeric field
 
                                     // Get total clicks
                                     $totalClicks = $user->clicks->count();
@@ -117,7 +139,7 @@
                                 @endphp 
                                 <div class="d-flex align-items-center">
                                     
-                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ $conversionRate }}" data-kt-countup-prefix="%">0</div>
+                                    <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ $conversionRate }}" data-kt-countup-suffix="%">0</div>
                                 </div>
                                 <!--end::Number-->
                                 

@@ -34,10 +34,10 @@
 				<div class="hero-1-txt color--white wow fadeInRight">
 
 					<!-- Title -->
-					<h2 class="s-58 w-700">Transform Your Affiliate Program with Tracklia</h2>
+					<h2 class="s-58 w-700">Effortless Affiliate Management for Your Business</h2>
 
 					<!-- Text -->
-					<p class="p-xl">Simplify affiliate management, boost performance, and grow your business with Tracklia's all-in-one SaaS platform.
+					<p class="p-xl">Simplify affiliate management, maximize performance, and scale your business with Tracklia—an all-in-one SaaS platform designed for SaaS and eCommerce stores.
 					</p>
 
 					<!-- Button -->	
@@ -378,7 +378,7 @@
 						<div class="fbox-txt">
 							<h6 class="s-22 w-700">Payment Automation</h6>
 							<p>
-								Streamline payouts with secure and automated payment processing.
+								Streamline payouts to affiliates with secure and automated payment processing, currently Paypal.
 							</p>
 						</div>
 

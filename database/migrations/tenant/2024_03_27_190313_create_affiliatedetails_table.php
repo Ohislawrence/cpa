@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('country');
             $table->string('region');
             $table->string('phonenumber');
+            $table->string('paypal_email');
+            $table->string('wise_email');
+            $table->string('payoneer_ID');
             $table->text('instantmessageid');
             $table->integer('referral_id')->nullable();
            $table->integer('referred_by')->nullable();

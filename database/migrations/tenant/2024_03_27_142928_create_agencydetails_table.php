@@ -34,6 +34,12 @@ return new class extends Migration
             $table->text('brandinterestedtraffic');
             $table->text('brandmonthlybudget');
             $table->text('brandtracking');
+            $table->string('paypal_webhook_id');
+            $table->string('payoneer_api_token');
+            $table->string('payoneer_merchant_id');
+            $table->string('client_id');
+            $table->string('secret');
+            $table->string('paypal_email');
             $table->text('note');
             $table->timestamps();
         });

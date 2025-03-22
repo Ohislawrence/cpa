@@ -14,7 +14,7 @@
 @section('footer')
 <script>
     ClassicEditor
-        .create( document.querySelector( '#body' ),{
+        .create( document.querySelector( '#description' ),{
             ckfinder: {
                 uploadUrl: "{{route('admin.ckedit.upload.integration').'?_token='.csrf_token() }}",
             }
@@ -139,7 +139,7 @@
                             <label class="form-label">Long Decription</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <textarea name="desc" id="body" class="form-control form-control-lg form-control-solid" rows="100"></textarea>
+                            <textarea name="desc" id="description" class="form-control form-control-lg form-control-solid" rows="100"></textarea>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->

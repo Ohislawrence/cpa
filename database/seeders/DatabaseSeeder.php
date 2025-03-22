@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'timezone', 'val' => NULL],
             ['name' => 'commission_rate', 'val' => NULL],
             ['name' => 'cookie_lifetime_days', 'val' => NULL],
-            ['name' => 'minimum_payout_amount', 'val' => NULL],
+            ['name' => 'minimum_payout_amount', 'val' => 50],
             ['name' => 'payout_frequency', 'val' => NULL],
             ['name' => 'payout_methods', 'val' => NULL],
             ['name' => 'affiliate_auto_approval', 'val' => 'yes'],

@@ -13,6 +13,7 @@
 
 @section('footer')
 @include('affiliate.components.addTrafficSource')
+@include('affiliate.components.addPaymentDetails')
 <script src="{{ url('assets/js/custom/account/settings/profile-details.js') }}"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
@@ -57,6 +58,7 @@
     <!--begin::Container-->
     <div class="container-xxl" id="kt_content_container">
         <!--begin::Navbar-->
+        @include('admin.components.alert')
         <div class="card mb-5 mb-xl-10">
             <div class="card-body pt-9 pb-0">
                 <!--begin::Details-->
@@ -123,11 +125,11 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-2 fw-bold">$ {{ auth()->user()->balanceFloat }}</div>
+                                            <div class="fs-2 fw-bold">{{ $currency->symbol }}{{ $earnings['paid'] }}</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500 center">Balance</div>
+                                        <div class="fw-semibold fs-6 text-gray-500 center">Paid Commissions</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -135,15 +137,12 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-down fs-3 text-danger me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="80">3</div>
+                                            
+                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-prefix="{{ $currency->symbol }}" data-kt-countup-value="{{ $earnings['unpaid'] }}">0</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500">Total Earned</div>
+                                        <div class="fw-semibold fs-6 text-gray-500">Unpaid Commissions</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -151,15 +150,24 @@
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-up fs-3 text-success me-2">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                            </i>
-                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">0</div>
+                                            
+                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-prefix="{{ $currency->symbol }}" data-kt-countup-value="{{ $earnings['net'] }}">0</div>
                                         </div>
                                         <!--end::Number-->
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500">EPC</div>
+                                        <div class="fw-semibold fs-6 text-gray-500">Net Earning</div>
+                                        <!--end::Label-->
+                                    </div>
+                                    <!--end::Stat-->
+                                    <!--begin::Stat-->
+                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                        <!--begin::Number-->
+                                        <div class="d-flex align-items-center">
+                                            <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="{{ $earnings['conversion'] }}">0</div>
+                                        </div>
+                                        <!--end::Number-->
+                                        <!--begin::Label-->
+                                        <div class="fw-semibold fs-6 text-gray-500">Net Conversions</div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -167,13 +175,7 @@
                                 <!--end::Stats-->
                             </div>
                             <!--end::Wrapper-->
-                            <!--begin::Progress-->
-                            <div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
-                                <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                    <span class="fw-semibold fs-6 text-gray-500">Account is {{ auth()->user()->affiliatedetails->status }}</span>
-                                </div>
-                            </div>
-                            <!--end::Progress-->
+                            
                         </div>
                         <!--end::Stats-->
                     </div>
@@ -190,7 +192,10 @@
                     <div class="card-header cursor-pointer">
                         <!--begin::Card title-->
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Basic Information</h3>
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800 ">Your Info</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">Check and edit.</span>
+                            </h3>
                         </div>
                         <!--end::Card title-->
                         <!--begin::Action-->
@@ -277,6 +282,68 @@
                         <!--end::Input group-->
                         
                         
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::details View-->
+
+                <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+                    <!--begin::Card header-->
+                    <div class="card-header cursor-pointer">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label fw-bold text-gray-800 ">Payment details for {{ $payoutType }}</span>
+                                <span class="text-gray-500 mt-1 fw-semibold fs-6">You can only add this once, be sure before you add this detail.</span>
+                            </h3>
+                        </div>
+                        <!--end::Card title-->
+                        <!--begin::Action-->
+                        <a href="#" class="btn btn-sm btn-primary align-self-center" data-bs-toggle="modal" data-bs-target="#edit_payment_details">Edit Payment details</a>
+                        <!--end::Action-->
+                    </div>
+                    <!--begin::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body p-9">
+                        @if($payoutType == 'Payoneer')
+                        <!--begin::Row-->
+                        <div class="row mb-7">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 fw-semibold text-muted">Payoneer ID</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <span class="fw-bold fs-6 text-gray-800">{{ auth()->user()->affiliatedetails->payoneer_ID ?? 'Not set' }}</span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                        @elseif ($payoutType == 'Wise')
+                        <div class="row mb-7">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 fw-semibold text-muted">Wise Email</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <span class="fw-bold fs-6 text-gray-800">{{ auth()->user()->affiliatedetails->wise_email ?? 'Not set'}}</span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+                        @elseif ($payoutType == 'Paypal')
+                        <div class="row mb-7">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 fw-semibold text-muted">Paypal Email</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <span class="fw-bold fs-6 text-gray-800">{{ auth()->user()->affiliatedetails->paypal_email ?? 'Not set'}}</span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Row-->
+
+                        @endif
                     </div>
                     <!--end::Card body-->
                 </div>

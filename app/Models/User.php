@@ -9,13 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
-use Bavix\Wallet\Traits\HasWalletFloat;
-use Bavix\Wallet\Interfaces\WalletFloat;
-use Bavix\Wallet\Interfaces\Wallet;
+//use Bavix\Wallet\Traits\HasWalletFloat;
+//use Bavix\Wallet\Interfaces\WalletFloat;
+//use Bavix\Wallet\Interfaces\Wallet;
 use Illuminate\Auth\Access\Gate;
+use Laravel\Paddle\Billable;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable implements Wallet, WalletFloat
+class User extends Authenticatable 
 {
     
     use HasFactory;
@@ -23,7 +24,7 @@ class User extends Authenticatable implements Wallet, WalletFloat
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
-    use HasWalletFloat;
+    use Billable;
     //use SoftDeletes;
 
     /**
@@ -89,9 +90,9 @@ class User extends Authenticatable implements Wallet, WalletFloat
         return $this->hasMany(Offer::class);
     }
 
-    public function subscription()
+    public function subscriptiontracker()
     {
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(Subscriptiontracker::class);
     }
 
     public function messages()
@@ -107,6 +108,16 @@ class User extends Authenticatable implements Wallet, WalletFloat
     public function clicks()
     {
         return $this->hasMany(Click::class);
+    }
+
+    public function affiliatepayouts()
+    {
+        return $this->hasMany(Affiliatepayout::class);
+    }
+
+    public function payoutbatches()
+    {
+        return $this->hasMany(Payoutbatch::class);
     }
 
    

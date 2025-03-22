@@ -13,7 +13,7 @@ class TransactionController extends Controller
     public function index()
     {
 
-        return view('agency.transactions');
+        return view('agency.unpaidcommissions');
     }
 
     public function getusertransaction(Request $request)

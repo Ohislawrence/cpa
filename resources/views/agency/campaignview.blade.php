@@ -150,21 +150,12 @@
                                 <!--begin::Row-->
                                 <tr>
                                     @php
-                                    if (is_null($offer->click)) {
-                                        $totalclicks = 0;
-                                        $totalearnings = 0;
-                                    }else {
-                                        foreach ($offer->click as $click) {
-                                            $clicks = $click;
-                                            $clickk[] = $clicks ;
-                                        }
-                                        $totalearnings = (round(array_sum($payys)/count($payys),2)) * $offer->click::where('status', 'Approved')->count() ;
-                                        $totalclicks = count($clickk) ? count($clickk) : 0;
-                                    }
+                                    $totalClicks =$offer->click->where('offer_id', $offer->offerid)->count();
+                                    $EPC = number_format($totalClicks > 0 ? $offer->click->where('offer_id', $offer->offerid)->sum('earned') / $totalClicks : 0, 2);
                                         
                                     @endphp
                                     <td class="text-gray-500">Network EPC:</td>
-                                    <td class="text-gray-800">{{ $currency->symbol}}{{ ($totalclicks > 0) ? (round($totalearnings/$totalclicks,2)) : 0 }}</td>
+                                    <td class="text-gray-800">{{ $currency->symbol}}{{ $EPC }}</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->

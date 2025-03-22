@@ -58,6 +58,7 @@ class ClickController extends Controller
                         'earned'=> 0,
                         'conversion' => 0,
                         'smartlink' => 0,
+                        'refstatus'=> 'Pending',
                     ]);
 
 
@@ -75,7 +76,7 @@ class ClickController extends Controller
                         }
                     }
 
-                    return redirect()->away($offerURL->url.'?clickID='.$click->clickID.'&OS='.$device->getOs('name').'&product_id=70');
+                    return redirect()->away($offerURL->url.'?clickID='.$click->clickID.'&OS='.$device->getOs('name').'&product_id='.$offers->product_id);
                 }else{
                     return redirect()->away('https://tracklia.com');
                 }

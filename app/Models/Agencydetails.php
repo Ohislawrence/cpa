@@ -9,7 +9,16 @@ class Agencydetails extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id','active',	'companyname',	'brandurl',	'brandaddress',	'city',	'country','region','phonenumber','brandname','branddesc','brandproductlandingurl','category_id','brandtargetgeos','brandpreferredpayouttype','brandpaymenyterm','brandinstantmessager','brandinstantmessageid','brandinterestedtraffic','brandmonthlybudget','brandtracking','note','client_id', 'secret','paypal_email'
+        'user_id','active',	'companyname',	
+        'brandurl',	'brandaddress',	'city',	
+        'country','region','phonenumber',
+        'brandname','branddesc','brandproductlandingurl',
+        'category_id','brandtargetgeos','brandpreferredpayouttype',
+        'brandpaymenyterm','brandinstantmessager',
+        'brandinstantmessageid','brandinterestedtraffic',
+        'brandmonthlybudget','brandtracking','note','client_id', 
+        'secret','paypal_email','paypal_webhook_id','payoneer_api_token',
+        'payoneer_merchant_id',
     ];
 
     public function place()

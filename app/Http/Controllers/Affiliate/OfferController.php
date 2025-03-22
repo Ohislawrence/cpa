@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Models\Category;
 use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Geo;
 use App\Models\Offer;
 use App\Models\Payout;
@@ -72,12 +73,9 @@ class OfferController extends Controller
                     return $payouttype;
                 })
                 ->addColumn('epc', function($row){
-
-
-                // Avoid division by zero
-                $averageEarnings =  0;
-
-                   return $averageEarnings;
+                    $totalClicks =$row->click->where('offer_id', $row->offerid)->count();
+                    $epc = $totalClicks > 0 ? $row->click->where('offer_id', $row->offerid)->sum('earned') / $totalClicks : 0;
+                    return number_format($epc, 2);
                })
                 ->rawColumns(['action','category','targetting', 'payout', 'payouttype', 'geos','epc'])
                 ->make(true);
@@ -87,12 +85,10 @@ class OfferController extends Controller
     public function thisoffer($id, Request $request)
     {
         $offer = Offer::where('offerid', $id)->first();
-        if($offer && $offer->click){
-            $EPC = $offer->click->where('offer_id', $offer->offerid)->sum('earned')/$offer->click->where('offer_id', $offer->offerid)->count();
-        }else{
-            $EPC = 0;
-        }
-        return view('affiliate.viewoffer', compact('offer', 'EPC'));
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        $totalClicks =$offer->click->where('offer_id', $offer->offerid)->count();
+        $EPC = number_format($totalClicks > 0 ? $offer->click->where('offer_id', $offer->offerid)->sum('earned') / $totalClicks : 0, 2);
+        return view('affiliate.viewoffer', compact('offer', 'EPC','currency'));
     }
 
 

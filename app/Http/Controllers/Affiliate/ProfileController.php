@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Affiliatedetail;
+use App\Models\Click;
+use App\Models\Currency;
+use App\Models\Payout;
+use App\Models\Payoutoption;
 use App\Models\Trafficsource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,14 +15,54 @@ use DataTables;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Yajra\DataTables\Contracts\DataTable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
-    protected function index()
-    {
+    public function index()
+    {  
+        // Retrieve necessary settings in one query
+        $settings = settings();
 
-        return view('affiliate.profile');
+        // Fetch payout method & currency in a single query each
+        $payoutType = Payoutoption::find($settings->get('payout_methods'))?->processor ?? 'Not set';
+        $currency = Currency::find($settings->get('default_currency'));
+
+        // Get the authenticated user with only necessary relations
+        $user = auth()->user()->load(['clicks' => function ($query) {
+            $query->select('user_id', 'status', 'earned','conversion','refcommission');
+        }]);
+
+        $referralId = auth()->user()->id;
+
+        $referralStats = DB::table('clicks')
+            ->where('referral', $referralId)
+            ->selectRaw("
+                SUM(CASE WHEN status IN ('Approved', 'Paid') THEN refcommission ELSE 0 END) as refCommissionsEarned,
+                SUM(CASE WHEN refstatus = 'Paid' THEN refcommission ELSE 0 END) as refCommissionsPaid,
+                SUM(CASE WHEN status IN ('Refunded', 'Chargeback') THEN refcommission ELSE 0 END) as refCommissionsRefund
+            ")
+            ->first();
+
+        // Extract values
+        $refCommissionsEarned = $referralStats->refCommissionsEarned ?? 0;
+        $refCommissionsPaid = $referralStats->refCommissionsPaid ?? 0;
+        $refCommissionsRefund = $referralStats->refCommissionsRefund ?? 0;
+
+        // Calculate earnings efficiently
+        $earnings = [
+            'unpaid' => $user->clicks->where('status', 'Approved')->sum('earned'),
+            'paid' => $user->clicks->where('status', 'paid')->sum('earned') + $refCommissionsPaid,
+            'net' => $user->clicks->sum('earned') + $refCommissionsEarned,
+            'conversion' => $user->clicks->sum('conversion'),
+        ];
+
+        //dd($earnings['unpaid']);
+
+        return view('affiliate.profile', compact('currency', 'payoutType', 'earnings'));
     }
+
 
     public function edit(){
         $user = auth()->user();
@@ -45,6 +89,23 @@ class ProfileController extends Controller
 
         return back()->with('message','Traffic Source Added');
     }
+    public function editPaymentdetails(Request $request){
+        $validated = $request->validate([
+            'payoneer_ID' => 'integer',
+            'wise_ID' => 'email:rfc,dns',
+            'paypal_email' => 'email:rfc,dns'
+        ]);
+        $user = Affiliatedetail::where('user_id', Auth::id())->first();
+
+        $user->update([
+            'payoneer_ID' => $request->payoneer_ID ?? null,
+            'wise_ID' => $request->wise_email ?? null,
+            'paypal_email' => $request->paypal_email ?? null,
+        ]);
+
+        return back()->with('message','Payment Details Updated');
+
+    }
 
     public function editPost(Request $request){
         $validated = $request->validate([
@@ -61,7 +122,7 @@ class ProfileController extends Controller
             $path = $file->storeAs("profiles/{$tenantId}", $filename, 'tenant');
         }
         //dd($path );
-        $user = Affiliatedetail::where('user_id', auth()->user()->id)->first();
+        $user = Affiliatedetail::where('user_id', Auth::id())->first();
  
         $user->update([
             'city' => $request->region,

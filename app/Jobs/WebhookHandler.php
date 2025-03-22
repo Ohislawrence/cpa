@@ -91,8 +91,7 @@ class WebhookHandler implements ShouldQueue
                     {
                         $conversion = 1;
                         // Credit affiliate
-                        $click->user->deposit($earned * 100);
-
+                        //$click->user->deposit($earned * 100);
                         //logic for referral
                         if(settings()->get('allow_affiliate_referral') == 1){
                                     
@@ -103,8 +102,9 @@ class WebhookHandler implements ShouldQueue
                             if($click->user->created_at > $period )
                             {
                                 $refCommision = $earned * (settings()->get('allowed_affiliate_referral_payout_percentage')/100);
-                                $referral->deposit($refCommision); //credit commission
-                                
+                                $refstatus = 'Approved';
+                            } else {
+                                $refCommision  = 0;
                             }
                         }
 
@@ -112,20 +112,17 @@ class WebhookHandler implements ShouldQueue
 
                     }elseif ($status == 'Refunded' || $status == 'Chargeback') {
                         $conversion = 0;
-                        // Reverse the affiliate's earnings
-                        $click->user->withdraw($earned * 100);
+                        //Reverse the affiliate's earnings
+                        //$click->user->withdraw($earned * 100);
+                        
                         // Handle referral commission reversal
                         if (settings()->get('allow_affiliate_referral') == 1) {
                             if ($click->user->affiliatedetails && $click->user->affiliatedetails->referral_id) {
                                 $referralget = Affiliatedetail::where('referral_id', $click->user->affiliatedetails->referral_id)->first();
-                                
                                 if ($referralget) {
                                     $referral = $referralget->user;
                                     $refCommision = $earned * (settings()->get('allowed_affiliate_referral_payout_percentage') / 100);
-                                    
-                                    if ($referral->balance >= $refCommision) { // Ensure no negative balance
-                                        $referral->withdraw($refCommision);
-                                    }
+                                    $refstatus = 'Pending';
                                 }
                             }
                         }
@@ -139,6 +136,9 @@ class WebhookHandler implements ShouldQueue
                         'cost' => $cost,
                         'status' => $status,
                         'earned' => ($status == 'Refunded' || $status == 'Chargeback') ? 0 : $earned,
+                        'referral' => $referral->id,
+                        'refcommision' => $refCommision,
+                        'refstatus' => $refstatus,
                         
                     ]);
                 }
@@ -169,6 +169,7 @@ class WebhookHandler implements ShouldQueue
         "status": "Approved" or "Refunded" or "Chargeback"
     }
     
+    webhook url = yoursite.com/verify-action-taken
 
 
     **/

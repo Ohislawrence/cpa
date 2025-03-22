@@ -146,7 +146,7 @@
                                 <!--begin::Row-->
                                 <tr>
                                     <td class="text-gray-500">Network EPC:</td>
-                                    <td class="text-gray-800">$ {{ number_format(round($EPC,2) ) ?? 0 }}</td>
+                                    <td class="text-gray-800">$ {{ $EPC }}</td>
                                 </tr>
                                 <!--end::Row-->
                                 <!--begin::Row-->
@@ -158,7 +158,12 @@
                                 <!--begin::Row-->
                                 <tr>
                                     <td class="text-gray-500">Currency:</td>
-                                    <td class="text-gray-800">USD - US Dollar</td>
+                                    <td class="text-gray-800">{{ $currency->currency}} ( {{ $currency->country}} )</td>
+                                </tr>
+                                <!--end::Row-->
+                                <tr>
+                                    <td class="text-gray-500">Campaign ID</td>
+                                    <td class="text-gray-800">{{ $offer->offerid}}</td>
                                 </tr>
                                 <!--end::Row-->
                             </table>

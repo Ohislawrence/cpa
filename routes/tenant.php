@@ -15,6 +15,7 @@ use App\Http\Controllers\Affiliate\ProfileController;
 use App\Http\Controllers\Affiliate\PromotionalController;
 use App\Http\Controllers\Affiliate\ReferralController;
 use App\Http\Controllers\Affiliate\RegistrationController;
+use App\Http\Controllers\Affiliate\ReportController as AffiliateReportController;
 use App\Http\Controllers\Agency\DashboardController as AgencyDashboardController;
 use App\Http\Controllers\Agency\OfferController as AgencyOfferController;
 use App\Http\Controllers\Agency\ProfileController as AgencyProfileController;
@@ -132,9 +133,9 @@ Route::middleware([
     Route::post('logingout/logout', [FrontController::class, 'logout'])->name('logout.post');
 
     //general profile
-    Route::get('/profile', function () {
-        return view('Profile');
-    })->name('profile');
+    //Route::get('/profile', function () {
+    //    return view('Profile');
+    //})->name('profile');
 
 
 //Affiliate
@@ -145,9 +146,13 @@ Route::middleware([
         'as' => 'affiliate.',
         
     ], function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard/stat/getdata', [DashboardController::class, 'topcampaignsDash'])->name('topcampaigns.affiliates');
+
         Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
         Route::get('profile/edit' , [ProfileController::class, 'edit'])->name('edit');
         Route::post('profile/edit' , [ProfileController::class, 'editPost'])->name('profile.edit');
+        Route::post('profile/payemdatils/edit' , [ProfileController::class, 'editPaymentdetails'])->name('payment.details');
         Route::post('profile/edit/password' , [ProfileController::class, 'editpasswordPost'])->name('profile.edit.password');
         Route::post('profile/traffic/source' , [ProfileController::class, 'trafficsource'])->name('trafficsource');
         Route::get('my/profile/traffic/source' , [ProfileController::class, 'gettrafficsource'])->name('gettrafficsource');
@@ -157,14 +162,16 @@ Route::middleware([
         Route::get('offers/view/all', [AffiliateOfferController::class, 'viewoffers'])->name('viewoffers');
         Route::get('offers/{id}/view', [AffiliateOfferController::class, 'thisoffer'])->name('thisoffer');
 
-        Route::get('dashboard', [DashboardController::class, 'dashboardone'])->name('dashboard');
-        Route::get('dashboard/statistics', [DashboardController::class, 'dashboardtwo'])->name('statistics');
-        Route::post('dashboard/getclickchart', [DashboardController::class, 'showclickchart'])->name('showclickchart');
-        Route::get('dashboard/stat/getdata', [DashboardController::class, 'getUserClicks'])->name('getUserClicks');
-
+        //reports
+        Route::get('report', [AffiliateReportController::class, 'report'])->name('reports');
+        Route::get('report/getreportdata', [AffiliateReportController::class, 'getReportData'])->name('report.data');
+        Route::get('report/getdata/tabledata', [AffiliateReportController::class, 'getDatatableData'])->name('report.datatable');
+        
+        //payments
         Route::get('payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('payments/getpaymentdata', [PaymentController::class, 'getpaymentdata'])->name('getpaymentdata');
         Route::post('payments/post/requestpayment', [PaymentController::class, 'requestpayment'])->name('requestpayment');
+       
 
         Route::get('referral', [ReferralController::class, 'index'])->name('referral');
 
@@ -210,7 +217,7 @@ Route::middleware([
         Route::get('report/data', [ReportController::class, 'getReportData'])->name('report.data');
         Route::get('report-datatable', [ReportController::class, 'getDatatableData'])->name('report.datatable');
         //affiliates
-        Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
+        //Route::get('unpaidcommissions', [TransactionController::class, 'index'])->name('unpaidCommissions');
         Route::get('affiliates', [AffiliateController::class, 'index'])->name('affiliates');
         Route::post('campaign/single/update/status', [AffiliateController::class, 'updateClickStatus'])->name('clicks.updateStatus');
         //affiliate profile
@@ -218,32 +225,40 @@ Route::middleware([
         Route::get('affiliates/get/all', [AffiliateController::class, 'getusers'])->name('getusers');
         Route::get('affiliates/{id}/get', [AffiliateController::class, 'getuserclickstats'])->name('getuserclickstats');
         Route::get('transaction/all/transaction', [TransactionController::class, 'getusertransaction'])->name('all.getusertransaction');
-        Route::get('affiliates/{id}/getusertransaction', [AffiliateController::class, 'getusertransaction'])->name('getusertransaction');
+        Route::get('affiliates/{id}/payouts/table', [AffiliateController::class, 'getuserPayout'])->name('getuserpayouts');
         Route::get('affiliates/{id}/gettrafficsource', [AffiliateController::class, 'gettrafficsource'])->name('gettrafficsource');
-        Route::get('affiliates/{id}/request', [AffiliateController::class, 'getpaymentrequest'])->name('getpaymentrequest');
+        Route::get('affiliates/{id}/referral/get', [AffiliateController::class, 'getreferrals'])->name('getreferrals');
         Route::get('affiliates/request/forall', [AffiliateController::class, 'getpaymentrequestforall'])->name('getpaymentrequestforall');
         Route::get('affiliate/{id}/overview', [AffiliateController::class, 'overview'])->name('affiliate.overview');
         Route::get('affiliate/{id}/clicks/overview/user', [AffiliateController::class, 'viewuserTopClicks'])->name('viewuserTopClicks');
         Route::get('affiliate/{id}/clicks/stats', [AffiliateController::class, 'clickstats'])->name('affiliate.clickstats');
-        Route::get('affiliate/{id}/clicks/request', [AffiliateController::class, 'paymentrequest'])->name('affiliate.paymentrequest');
         Route::get('affiliate/{id}/all/transactions', [AffiliateController::class, 'transactions'])->name('affiliate.transactions');
         Route::get('affiliate/{id}/referrals', [AffiliateController::class, 'referrals'])->name('affiliate.referrals');
         Route::get('affiliate/{id}/updateuserdetails', [AffiliateController::class, 'updateuserdetails'])->name('affiliate.updateuserdetails');
         Route::put('affiliate/{id}/updateuser', [AffiliateController::class, 'updateuser'])->name('affiliate.updateuser');
-        Route::get('affiliate/{id}/transactions', [AffiliateController::class, 'transactions'])->name('affiliate.transactions');
+        Route::get('affiliate/{id}/payouts', [AffiliateController::class, 'payouts'])->name('affiliate.payouts');
         Route::get('affiliate/{id}/trafficsource', [AffiliateController::class, 'trafficsource'])->name('affiliate.trafficsource');
         Route::post('affiliate/{id}/trafficsource/post', [AffiliateController::class, 'traffic'])->name('affiliate.traffic');
         Route::post('affiliate/create/new/post', [AffiliateController::class, 'inviteaffiliate'])->name('affiliate.createaffiliate');
         Route::delete('affiliate/{id}/trafficsource/delete', [AffiliateController::class, 'trafficsourcedestroy'])->name('affiliate.trafficsourcedestroy');
         //Route::delete('/users/delete/{id}', [AffiliateController::class, 'deleteUser'])->name('users.delete');
         //payouts
-        Route::get('payouts/request', [AgencyPayoutController::class, 'index'])->name('payout.request');
+        Route::get('payouts/all', [AgencyPayoutController::class, 'index'])->name('payout.all');
+        Route::get('payouts/table/all', [AgencyPayoutController::class, 'getallPayout'])->name('table.getallPayout');
+        Route::get('payouts/table/unpaidcommissions', [AgencyPayoutController::class, 'getallunpaidcommissionsTable'])->name('table.getallunpaidcommissionsTable');
+        Route::get('payouts/unpaidcommissions', [AgencyPayoutController::class, 'unpaidcommissions'])->name('payout.unpaidcommissions');
         Route::get('payouts/options', [AgencyPayoutController::class, 'options'])->name('payout.option');
         Route::post('payouts/paypal/details', [AgencyPayoutController::class, 'storePaypalDetails'])->name('payout.option.storePaypalDetails');
-        Route::post('mass/payouts/paypal/all', [MassPaymentController::class, 'processMassPayment'])->name('payout.option.processMassPayment');
+        Route::post('payouts/wise/details', [AgencyPayoutController::class, 'storeWiseDetails'])->name('payout.option.storeWiseDetails');
+        Route::post('payouts/payoneer/details', [AgencyPayoutController::class, 'storePayoneerDetails'])->name('payout.option.storePayoneerDetails');
+        Route::post('process-affiliate-payout/post', [MassPaymentController::class, 'processMassPayout'])->name('payout.option.processMassPayment');
+        
+        Route::post('paypal/batch/process/webhook', [MassPaymentController::class, 'batchPaypalWebhook'])->name('batchPaypalWebhook');
+        Route::post('payoneer/batch/process/webhook', [MassPaymentController::class, 'batchPayoneerWebhook'])->name('batchPayoneerWebhook');
         //settings
         Route::get('setting/configuration', [ConfigurationController::class, 'index'])->name('configuration');
         Route::post('setting/configuration/post', [ConfigurationController::class, 'update'])->name('configuration.update');
+        Route::post('setting/update/domain/post', [ConfigurationController::class, 'domainupdate'])->name('configuration.domainupdate');
         //emails
         Route::get('email/send', [EmailController::class, 'send'])->name('email.send');
         Route::get('email/sent/all', [EmailController::class, 'showSentMessages'])->name('email.showSentMessages');

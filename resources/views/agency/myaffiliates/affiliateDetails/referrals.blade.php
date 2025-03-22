@@ -17,22 +17,18 @@
 <script type="text/javascript">
 	$(function () {
 
-	var table = $('.yajra-datatable').DataTable({
+	var table = $('.referralTable').DataTable({
 		searchDelay: 500,
 		processing: true,
+        responsive: true,
 		serverSide: true,
-		ajax: "{{ route('merchant.getpaymentrequest', ['id'=> $user->id]) }}",
+		ajax: "{{ route('merchant.getreferrals', ['id'=> $user->id]) }}",
 		columns: [
-            {data: 'date', name: 'date'},
-            {data: 'amount', name: 'amount'},
-			{data: 'status', name: 'status'},
-			{
-				data: 'action',
-				name: 'action',
-				orderable: true,
-				searchable: false,
-			},
-		]
+			{data: 'clickID'},
+            {data: 'date'},
+            {data: 'commission'},
+			{data: 'status'},
+			]
 	}).ajax.reload();
 
 	});
@@ -62,7 +58,7 @@
 				<div class="card-title">
 					<!--begin::Search-->
 					<div class="d-flex align-items-center position-relative my-1">
-						<h3>payment Request for {{ $user->name }}</h3>
+						<h3>Referrals Earnings</h3>
 					</div>
 					<!--end::Search-->
 				</div>
@@ -73,26 +69,26 @@
 					<!--end::Toolbar-->
                 </div>
             </div>
-                    <!--begin::Card body-->
-								<div class="card-body py-4">
-									<!--begin::Table-->
-                            <table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
-                                <thead>
-                                    <tr class="fw-bold fs-6 text-gray-800 px-7">
-                                        <th>Request Date</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 fw-semibold">
+	<!--begin::Card body-->
+				<div class="card-body py-4">
+					<!--begin::Table-->
+			<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable referralTable" id="kt_datatable_dom_positioning">
+				<thead>
+					<tr class="fw-bold fs-6 text-gray-800 px-7">
+						<th>Click ID</th>
+						<th>Date</th>
+						<th>Commission({{ $currency->symbol }})</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody class="text-gray-600 fw-semibold">
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <!--end::Card body-->
-                    </div>
-                    <!--end::Card-->
+				</tbody>
+			</table>
+		</div>
+		<!--end::Card body-->
+	</div>
+	<!--end::Card-->
         </div>
     </div>
 </div>

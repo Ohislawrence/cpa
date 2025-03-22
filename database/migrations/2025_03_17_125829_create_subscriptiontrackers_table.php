@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('subscriptiontrackers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id'); // Foreign key to users table
             $table->string('tenant_id')->nullable(); // Foreign key to tenants table
             $table->unsignedBigInteger('plan_id'); // Foreign key to plans table
+            $table->unsignedBigInteger('subscriptions_id');
             $table->enum('status', ['active', 'inactive', 'canceled', 'past_due', 'trialing'])->default('active'); // Subscription status
             $table->date('start_date'); // Start date of the subscription
             $table->date('end_date')->nullable(); // End date of the subscription
@@ -27,8 +28,6 @@ return new class extends Migration
             $table->decimal('price', 10, 2); // Subscription price
             $table->string('currency', 3)->default('USD'); // Currency code
             $table->timestamps();
-
-            
         });
     }
 
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('subscriptiontrackers');
     }
 };

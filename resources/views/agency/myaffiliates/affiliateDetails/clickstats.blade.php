@@ -53,7 +53,7 @@
         success: function(response) {
             if (response.success) {
                 alert(response.message);
-                $('#clicksTable').DataTable().ajax.reload(); // Refresh DataTable
+                $('.clicksTable').DataTable().ajax.reload(); // Refresh DataTable
             } else {
                 alert('Error updating status.');
             }

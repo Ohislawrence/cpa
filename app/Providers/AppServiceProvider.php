@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
                 Config::set($setting->key, $setting->value);
             }
         }
+        
 
     }
 }

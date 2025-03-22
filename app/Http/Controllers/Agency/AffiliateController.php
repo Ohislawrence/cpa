@@ -16,7 +16,6 @@ use App\Models\Currency;
 use App\Models\Emailinvite;
 use App\Models\Requestpayment;
 use App\Models\Trafficsource;
-use Bavix\Wallet\Models\Transaction;
 use Carbon\Carbon;
 use DataTables;
 use Yajra\DataTables\Contracts\DataTable;
@@ -114,13 +113,11 @@ class AffiliateController extends Controller
 
         if($request->status == 'Pending' || $request->status == 'Chargeback' && $click->status != 'Pending' || $click->status != 'Chargeback')
         {
-            $earned = $click->earned;
             $click->status = $request->status;
             $click->conversion = 0;
-            $click->earned = 0;
             $click->save();
 
-            $click->user->withdraw($earned * 100);
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
         }
         if($request->status == 'Approved' && $click->status != 'Approved')
         {
@@ -128,70 +125,93 @@ class AffiliateController extends Controller
             $click->conversion = 1;
             $click->save();
 
-            //$click->user->deposit($earned * 100);
+            return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
         }
+
+        return response()->json(['success' => true, 'message' => 'No change was made!']);
+        
+    }
+
+    public function getreferrals(Request $request, $id)
+    {
+        if ($request->ajax()) {
         
 
-        return response()->json(['success' => true, 'message' => 'Status updated successfully!']);
+        $data = Click::where('referral',$id )->whereIn('status',['Paid','Approved'] )->latest()->get(); // Fixed query
+
+        return Datatables::of($data)
+            ->addColumn('date', function($row) {
+                return $row->updated_at ? Carbon::parse($row->updated_at)->format('d/m/Y') : 'N/A';
+            })
+            ->addColumn('commission', function($row) { // Return actual commission
+                return number_format($row->refcommission, 2);
+            })
+            ->addColumn('status', function($row) { // Return actual status
+                return ucfirst($row->refstatus);
+            })
+            ->rawColumns(['date', 'commission', 'status'])
+            ->make(true);
+        }
     }
 
-    public function getpaymentrequest(Request $request, $id)
+
+    public function getpaymentrequestforall(Request $request) 
     {
         if ($request->ajax()) {
-            $data = Requestpayment::where('user_id', $id)->latest()->get();
+            $data = Click::select('user_id')
+                ->where('status', 'Approved')
+                ->with('user')
+                ->selectRaw('SUM(earned) as total_amount, MAX(updated_at) as last_updated')
+                ->groupBy('user_id')
+                ->latest('last_updated')
+                ->get();
+
             return Datatables::of($data)
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>
-                    <a href="" class="edit btn btn-primary btn-sm">Pay</a>';
-                    return $actionBtn;
+                    return '<a href="" class="edit btn btn-primary btn-sm">Pay</a>';
                 })
-                ->addColumn('date', function($row){
-                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
-                    return $date;
+                ->addColumn('name', function($row){
+                    return $row->user->name ?? 'N/A';
                 })
-                ->rawColumns(['action','date'])
+                ->addColumn('amount', function($row){
+                    return number_format($row->total_amount, 2);
+                })
+                ->addColumn('dateOfLastPayment', function($row) {
+                    $lastPayment = $row->user->affiliatepayouts
+                        ->where('status', 'paid')
+                        ->sortByDesc('processed_at')
+                        ->first();
+                
+                    return $lastPayment ? Carbon::parse($lastPayment->processed_at)->format('d/m/Y') : 'No payment yet';
+                })
+                ->rawColumns(['action', 'dateOfLastPayment', 'name', 'amount'])
                 ->make(true);
         }
     }
 
 
-    public function getpaymentrequestforall(Request $request)
+
+
+    public function getuserPayout(Request $request, $id)
     {
         if ($request->ajax()) {
-            $data = Requestpayment::latest()->get();
-            return Datatables::of($data)
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="" class="edit btn btn-primary btn-sm">View</a>
-                    <a href="" class="edit btn btn-primary btn-sm">Pay</a>';
-                    return $actionBtn;
-                })
-                ->addColumn('date', function($row){
-                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
-                    return $date;
-                })
-                ->rawColumns(['action','date'])
-                ->make(true);
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
         }
-    }
 
+        $data = $user->affiliatepayouts()->latest()->get(); // Correctly fetch payouts
 
-
-
-    public function getusertransaction(Request $request, $id)
-    {
-        if ($request->ajax()) {
-            $data = Transaction::where('payable_id', $id)->latest()->get();
-            return Datatables::of($data)
-                ->addColumn('date', function($row){
-                    $date = Carbon::createFromFormat('Y-m-d H:i:s', $row->updated_at)->format('d/m/Y');
-                    return $date;
-                })
-                ->addColumn('amounts', function($row){
-                    $amounts = number_format($row->amount/100, 2) ;
-                    return $amounts;
-                })
-                ->rawColumns(['action','date','amounts'])
-                ->make(true);
+        return Datatables::of($data)
+            ->addColumn('date', function($row) {
+                return $row->updated_at ? Carbon::parse($row->updated_at)->format('d/m/Y') : 'N/A';
+            })
+            ->addColumn('amount', function($row) { // Fixed column name
+                return number_format($row->amount, 2); // Correctly access the amount per row
+            })
+            ->rawColumns(['date', 'amount'])
+            ->make(true);
         }
     }
 
@@ -302,21 +322,14 @@ class AffiliateController extends Controller
     public function overview($id)
     {
         $user = User::find($id);
-        $netEarning = $user->transactions()
-        ->where('type', 'deposit')
-        ->sum('amount');
+        $netEarning = $user->clicks->sum('earned')+ $user->clicks->where('referral', $user->id)->sum('refcommission');
         $numberOfReferral = Affiliatedetail::where('referred_by','=',$user->affiliatedetails->referral_id)->count();
         $conversion = $user->clicks->sum('conversion');
         $currency = Currency::where('id', settings()->get('default_currency'))->first();
         return view('agency.myaffiliates.affiliateDetails.overview', compact('user','currency','netEarning','numberOfReferral','conversion'));
     }
 
-    public function paymentrequest($id)
-    {
-        $user = User::find($id);
-        $currency = Currency::where('id', settings()->get('default_currency'))->first();
-        return view('agency.myaffiliates.affiliateDetails.paymentRequest', compact('user','currency'));
-    }
+    
 
     public function referrals($id)
     {
@@ -341,11 +354,11 @@ class AffiliateController extends Controller
         return view('agency.myaffiliates.affiliateDetails.updateuserDetails', compact('user','country','categories','currency'));
     }
 
-    public function transactions($id)
+    public function payouts($id)
     {
         $user = User::find($id);
         $currency = Currency::where('id', settings()->get('default_currency'))->first();
-        return view('agency.myaffiliates.affiliateDetails.transactions', compact('user','currency'));
+        return view('agency.myaffiliates.affiliateDetails.payouts', compact('user','currency'));
     }
 
     public function trafficsourcedestroy($id)

@@ -12,7 +12,7 @@ use App\Mail\WelcomeTenant;
 use App\Models\Currency;
 use App\Models\Kyc;
 use App\Models\Plan;
-use App\Models\Subscription;
+use App\Models\Subscriptiontracker;
 use App\Models\User;
 use Exception;
 use Illuminate\Container\Attributes\Log;
@@ -90,7 +90,7 @@ class CreateTenantJob implements ShouldQueue
 
         $plan = Plan::find($plan)->first();
 
-        $subscription = Subscription::create([
+        $subscription = Subscriptiontracker::create([
             'user_id' => $user->id,
             'tenant_id' => $this->subdomain,
             'plan_id' => $this->data['plan'] ?? 1,

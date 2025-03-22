@@ -10,7 +10,9 @@ class Affiliatedetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id','status','city','country','region','phonenumber','instantmessageid', 'referral_id','referred_by',
+        'user_id','status','city','country','region','phonenumber','instantmessageid', 'referral_id','referred_by','paypal_email',
+'wise_email',
+'payoneer_ID',
     ];
 
     public function place()
@@ -26,5 +28,10 @@ class Affiliatedetail extends Model
     public function thiscountry()
     {
         return $this->belongsTo(Country::class, 'country', 'id' );
+    }
+
+    public function requestpayment()
+    {
+        return $this->hasMany(Requestpayment::class, 'user_id','user_id');
     }
 }

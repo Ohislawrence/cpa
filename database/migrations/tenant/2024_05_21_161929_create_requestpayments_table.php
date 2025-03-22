@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('amount');
             $table->string('method');
             $table->integer('number');
-            $table->enum('status', ['Request', 'Paid', 'On-hold']);
+            $table->string('batch_id');
+            $table->enum('status', ['Request', 'Paid', 'On-hold','Failed','Processing']);
             $table->timestamps();
         });
     }

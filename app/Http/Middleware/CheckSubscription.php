@@ -29,7 +29,7 @@ class CheckSubscription
         }
 
         // Fetch the tenant's subscription
-        $subscription = $tenant->subscription; 
+        $subscription = $tenant->subscriptiontracker; 
         //dd($subscription->plan->id);
 
         if (!$subscription) {

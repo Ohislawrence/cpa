@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('headername',  'Transactions' )
+@section('headername',  'Unpaid Commisions' )
 @section('bread1',  'Payments' )
-@section('bread2',  'Transactions' )
+@section('bread2',  'Unpaid Commisions' )
 
 
 @section('header')
@@ -23,22 +23,17 @@
 		searchDelay: 500,
 		processing: true,
 		serverSide: true,
-		ajax: "{{ route('merchant.all.getusertransaction') }}",
+		ajax: "{{ route('merchant.table.getallunpaidcommissionsTable') }}",
 		columns: [
-			{data: 'date',searchable: true},
-			{data: 'type',searchable: true},
-			{data: 'amounts',searchable: true},
-            {data: 'payable',searchable: true},
-			{
-				data: 'action',
-				orderable: true,
-				searchable: false,
-			},
+			{data: 'name',searchable: true},
+			{data: 'commission',searchable: true},
+            {data: 'date',searchable: true},
 		]
 	}).ajax.reload();
 
 	});
 </script>
+@include('agency.payout.masspaymentverification')
 @endsection
 
 
@@ -62,6 +57,8 @@
 				<!--begin::Card toolbar-->
 				<div class="card-toolbar">
 					<!--begin::Toolbar-->
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#massPayoutOption">
+						Process Mass Payout</button>
 
 					<!--end::Toolbar-->
 					@include('admin.components.payviapaypal')
@@ -71,11 +68,9 @@
 									<table class="table align-middle table-row-dashed fs-6 gy-5 yajra-datatable" id="kt_datatable_dom_positioning">
 										<thead>
 											<tr class="fw-bold fs-6 text-gray-800 px-7">
-												<th>Date</th>
-												<th>Transaction</th>
-                                                <th>Amount</th>
-                                                <th>Paid To</th>
-												<th>Actions</th>
+												<th>Name</th>
+												<th>Commission/Referral Commi. ({{ $currency->symbol }})</th>
+                                                <th>Last conversion date</th>
 											</tr>
 										</thead>
 										<tbody class="text-gray-600 fw-semibold">

@@ -5,7 +5,6 @@
     else{
         $headerName = $campaigns[request('campaign_id')] ?? 'None Selected';
     }
-    
 @endphp
 
 @extends('layouts.app')
@@ -15,20 +14,8 @@
 
 
 @section('header')
-<style>
-    .google-visualization-tooltip {
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        padding: 8px;
-        z-index: 1000;
-        pointer-events: none;
-    }
-</style>
 <!-- Include Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Include Leaflet.js for map -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>

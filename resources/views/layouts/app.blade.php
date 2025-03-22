@@ -36,7 +36,7 @@
 		@yield('header')
 		<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 		<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+		@paddleJS
     </head>
     <body id="kt_body" class="header-fixed">
         <div class="d-flex flex-column flex-root">

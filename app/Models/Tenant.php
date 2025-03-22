@@ -12,9 +12,9 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     use HasDatabase, HasDomains;
     public $timestamps = false;
 
-    public function subscription()
+    public function subscriptiontracker()
     {
-        return $this->hasOne(Subscription::class, "tenant_id","id");
+        return $this->hasOne(Subscriptiontracker::class, "tenant_id","id");
     }
 
     public function kyc()

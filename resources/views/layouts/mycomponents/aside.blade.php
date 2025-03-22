@@ -27,12 +27,12 @@
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <a class="" href="{{ route('affiliate.statistics') }}">
+                <a class="" href="{{ route('affiliate.reports', [ 'campaign_id'=>'all', 'start_date'=> \Carbon\Carbon::now()->subDays(7)->format('Y-m-d') , 'end_date'=>\Carbon\Carbon::today()->format('Y-m-d') ]) }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
-                    <span class="menu-title">Statistics</span>
+                    <span class="menu-title">Reports</span>
                 </span>
                 </a>
             </div>
@@ -52,7 +52,7 @@
             </div>
             <!--end:Menu item-->
 
-            @if(tenant()->subscription->canAccess(26))
+            @if(tenant()->subscriptiontracker->canAccess(26))
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
@@ -115,22 +115,22 @@
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <a class="" href="{{ route('merchant.dashboard') }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-black-right fs-2"></i>
+                    <span class="menu-link {{ request()->routeIs('merchant.dashboard') ? 'active fw-bold' : '' }}">
+                        <span class="menu-icon">
+                            <i class="ki-duotone ki-black-right fs-2"></i>
+                        </span>
+                        <span class="menu-title">Dashboard</span>
                     </span>
-                    <span class="menu-title">Dashboard</span>
-                </span>
                 </a>
             </div>
             <!--end:Menu item-->
 
-            @if(tenant()->subscription->canAccess(26))
+            @if(tenant()->subscriptiontracker->canAccess(26))
                 <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <a class="" href="{{ route('merchant.all.smartlink') }}">
-                <span class="menu-link">
+                <span class="menu-link {{ request()->routeIs('merchant.all.smartlink') ? 'active fw-bold' : '' }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
@@ -145,7 +145,7 @@
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <a class="" href="{{ route('merchant.campaigns') }}">
-                <span class="menu-link">
+                <span class="menu-link {{ request()->routeIs('merchant.campaigns') ? 'active fw-bold' : '' }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
@@ -158,12 +158,12 @@
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <a class="@active('merchant.affiliates')" href="{{ route('merchant.affiliates') }}">
-                <span class="menu-link">
+                <a class="" href="{{ route('merchant.affiliates') }}">
+                <span class="menu-link @active('merchant.affiliates')">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
-                    <span class="menu-title">All Affiliates</span>
+                    <span class="menu-title">My Affiliates</span>
                 </span>
                 </a>
             </div>
@@ -184,23 +184,9 @@
             <!--end:Menu item-->
 
             <!--begin:Menu item-->
-            <div class="menu-item menu-accordion">
-                <!--begin:Menu link-->
-                <a class="" href="{{ route('merchant.transaction') }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="ki-duotone ki-black-right fs-2"></i>
-                    </span>
-                    <span class="menu-title">Transactions</span>
-                </span>
-                </a>
-            </div>
-            <!--end:Menu item-->
-
-            <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <span class="menu-link @active(['merchant.payout.request','merchant.payout.option'])">
+                <span class="menu-link @active(['merchant.payout.all','merchant.payout.unpaidcommissions','merchant.payout.option'])">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
@@ -213,11 +199,23 @@
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link @active('merchant.payout.request')" href="{{ route('merchant.payout.request') }}">
+                        <a class="menu-link @active('merchant.payout.all')" href="{{ route('merchant.payout.all') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">View requests</span>
+                            <span class="menu-title">View Payouts</span>
+                        </a>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div class="menu-item">
+                        <!--begin:Menu link-->
+                        <a class="menu-link @active('merchant.payout.unpaidcommissions')" href="{{ route('merchant.payout.unpaidcommissions') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Unpaid Commisions</span>
                         </a>
                         <!--end:Menu link-->
                     </div>
@@ -296,7 +294,7 @@
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <a class="" href="{{ route('merchant.plan.active') }}">
-                <span class="menu-link">
+                <span class="menu-link @active('merchant.plan.active')">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>
@@ -310,7 +308,7 @@
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <a class="" href="{{ route('merchant.configuration') }}">
-                <span class="menu-link">
+                <span class="menu-link @active('merchant.configuration')">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
                     </span>

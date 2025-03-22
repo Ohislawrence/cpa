@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Paddle\Subscription;
 
-class Subscription extends Model
+class Subscriptiontracker extends Model
 {
     protected $connection = 'mysql';
-    protected $table = 'subscriptions';
+    protected $table = 'subscriptiontrackers';
 
     protected $fillable = [
         'user_id',
@@ -23,10 +24,7 @@ class Subscription extends Model
         'renewal',
         'price',
         'currency',
-        'webhook_id',
-        'flw_ref',
-        'flw_trans_id',
-        'webhook_status',
+        'subscriptions_id',
     ];
 
     public function user()

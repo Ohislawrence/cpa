@@ -70,57 +70,37 @@
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <div class="fs-2 fw-bold" data-kt-countup="" >{{ $currency->symbol }} {{ number_format($user->balanceFloat,2) }}</div>
+                                    <div class="fs-2 fw-bold" data-kt-countup="" >{{ $currency->symbol }} {{ number_format($user->clicks->where('status','Paid')->sum('earned') + $user->clicks->where('referral', $user->id)->where('refstatus', 'Paid')->sum('refcommission'),2) }} </div>
                                 </div>
                                 <!--end::Number-->
                                 <!--begin::Label-->
-                                <div class="fw-semibold fs-6 text-gray-500">Balance</div>
+                                <div class="fw-semibold fs-6 text-gray-500">Paid Commissions</div>
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
                             <!--begin::Stat-->
                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                @php
-                                    $totalEarnings = $user->transactions()
-                                        ->where('amount', '>', 0) // Sum only deposits
-                                        ->sum('amount');
-
-                                    // Get total clicks
-                                    $totalClicks = $user->clicks->count();
-
-                                    // Calculate EPC
-                                    $epc = $totalClicks > 0 ? $totalEarnings / $totalClicks : 0;
-                                @endphp
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <div class="fs-2 fw-bold">{{ $currency->symbol }}{{ number_format($epc,2) }}</div>
+                                    <div class="fs-2 fw-bold">{{ $currency->symbol }} {{ number_format($user->clicks->where('status','Approved')->sum('earned') + $user->clicks->where('referral', $user->id)->where('status', ['Approved'])->sum('refcommission'),2) }}</div>
                                 </div>
                                 <!--end::Number-->
                                 
                                 <!--begin::Label-->
-                                <div class="fw-semibold fs-6 text-gray-500">EPC</div>
+                                <div class="fw-semibold fs-6 text-gray-500">Unpaid Commissions</div>
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
                              <!--begin::Stat-->
                              <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                @php
-                                    $totalRevenue = $user->clicks->sum('cost');
-
-                                    // Get total earned
-                                    $totalCommission = $user->clicks->sum('earned');
-
-                                    // Calculate returnOnAdSpend
-                                    $returnOnAdSpend = $totalRevenue > 0 ? ($totalRevenue / $totalCommission)*100 : 0;
-                                @endphp
                                 <!--begin::Number-->
                                 <div class="d-flex align-items-center">
-                                    <div class="fs-2 fw-bold">{{ number_format($returnOnAdSpend,2) }}%</div>
+                                    <div class="fs-2 fw-bold">{{ $currency->symbol }} {{ number_format($user->clicks->whereIn('status',['Chargeback','Refunded'])->sum('earned') + $user->clicks->where('referral', $user->id)->where('status', ['Approved'])->sum('refcommission'),2) }}</div>
                                 </div>
                                 <!--end::Number-->
                                 
                                 <!--begin::Label-->
-                                <div class="fw-semibold fs-6 text-gray-500">ROAS</div>
+                                <div class="fw-semibold fs-6 text-gray-500">Refunds</div>
                                 <!--end::Label-->
                             </div>
                             <!--end::Stat-->
@@ -174,12 +154,7 @@
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/clicks/request') ? 'active' : ''}}" href="{{ route('merchant.affiliate.paymentrequest', $user->id) }}">Payment Requests</a>
-            </li>
-            <!--end::Nav item-->
-            <!--begin::Nav item-->
-            <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/transactions') ? 'active' : ''}}" href="{{ route('merchant.affiliate.transactions', $user->id) }}">Transaction</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('merchant/affiliate/*/payouts') ? 'active' : ''}}" href="{{ route('merchant.affiliate.payouts', $user->id) }}">Payouts</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->

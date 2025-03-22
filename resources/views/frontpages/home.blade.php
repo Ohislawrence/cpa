@@ -376,7 +376,7 @@
 
 						<!-- Text -->
 						<div class="fbox-txt">
-							<h6 class="s-22 w-700">Payment Automation</h6>
+							<h6 class="s-22 w-700">Payout Automation</h6>
 							<p>
 								Streamline payouts to affiliates with secure and automated payment processing, currently Paypal.
 							</p>

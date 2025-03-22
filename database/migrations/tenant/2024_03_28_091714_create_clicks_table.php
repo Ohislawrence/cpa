@@ -19,12 +19,15 @@ return new class extends Migration
             $table->string('device');
             $table->string('platform');
             $table->string('browser');
-            $table->enum('status', ['Pending', 'Refunded', 'Approved', 'Chargeback']);
+            $table->enum('status', ['Pending', 'Refunded', 'Approved', 'Chargeback', 'Paid','Processing']);
+            $table->enum('refstatus', ['Pending', 'Approved','Processing', 'Paid']);
             $table->string('smartlink')->nullable();
             $table->string('cost')->nullable();
             $table->string('ip');
             $table->string('clickID');
             $table->float('earned')->nullable();
+            $table->float('refcommission')->nullable();
+            $table->integer('$referral')->nullable();
             $table->integer('conversion')->nullable();
             $table->string('referrerurl')->nullable();
             $table->timestamps();

@@ -92,8 +92,8 @@ class DashboardController extends Controller
             //dd($data);
             return Datatables::of($data)
 
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="campaign/details/1/view" class="edit btn btn-primary btn-sm">View</a>';
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="reports?start_date=' . now()->startOfMonth()->format('Y-m-d') . '&end_date=' . now()->format('Y-m-d') . '&campaign_id=' . $row->offer_id . '" class="edit btn btn-primary btn-sm">View</a>';
                     return $actionBtn;
                 })
                 ->addColumn('offerName', function($row){

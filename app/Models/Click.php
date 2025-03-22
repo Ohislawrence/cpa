@@ -23,7 +23,10 @@ class Click extends Model
             'earned',
             'smartlink',
             'cost',
-            'conversion'
+            'conversion',
+            'refcommission',
+            'referral',
+            'refstatus',
     ];
 
     public function offer()

@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Agency;
 use App\Http\Controllers\Controller;
 use App\Models\Configuration;
 use App\Models\Currency;
+use App\Models\Payoutoption;
 use App\Models\Setting;
 use App\Models\Timezone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Stancl\Tenancy\Database\Models\Domain;
+use Stancl\Tenancy\Database\Models\Tenant;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
@@ -15,7 +20,10 @@ class ConfigurationController extends Controller
     { 
         $countries = Currency::all();
         $timezones = Timezone::all();
-        return view('agency.configuration', compact('countries','timezones'));
+        $payoutMethods = Payoutoption::all();
+        //currency
+        $setCurrency = Currency::where('id', settings()->get('default_currency'))->first()->symbol;
+        return view('agency.configuration', compact('countries','timezones','payoutMethods','setCurrency'));
     }
 
     public function updateOLD(Request $request)
@@ -116,6 +124,47 @@ class ConfigurationController extends Controller
 
 
         return redirect()->back()->with('message', 'Settings updated successfully.');
+    }
+
+    public function domainupdate(Request $request)
+    {
+        $tenant = tenant();
+
+        //dd(tenant()->domains()->first()->changed);
+        $validator = Validator::make($request->all(), [
+            'custom_domain' => [
+                'required',
+                'regex:/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('message', 'Use the proper domain name format - e.g. business.yourname.com');
+        }
+        $newDomain = strtolower($request->custom_domain);
+        $exists = Domain::where('domain', $newDomain)->where('tenant_id', '!=', $tenant->id)->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('message', 'The domain you entered is not available for registration');
+        }
+
+        try {
+            // Remove the old domain(no need)
+            //Domain::where('tenant_id', $tenant->id)->delete();
+
+            // Attach the new domain
+            $tenant->domains()->update([
+                'domain' => $newDomain,
+                'changed' =>'1',
+            ]);
+
+            return redirect()->back()->with('message', 'Domain updated successfully.');
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to update domain. ' . $e->getMessage()
+            ], 500);
+        }
     }
 
 }

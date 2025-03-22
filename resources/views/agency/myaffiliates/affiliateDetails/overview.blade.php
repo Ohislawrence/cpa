@@ -61,9 +61,9 @@
             <!--begin::Col-->
             <div class="col">
                 <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                    <span class="fs-4 fw-semibold text-primary pb-1 px-2">Balance</span>
+                    <span class="fs-4 fw-semibold text-primary pb-1 px-2">Referral Earning</span>
                     <span class="fs-lg-2tx fw-bold d-flex justify-content-center">{{ $currency->symbol }}
-                    <span data-kt-countup="true" data-kt-countup-value="{{ number_format($user->balanceFloat,2) }}">0</span></span>
+                    <span data-kt-countup="true" data-kt-countup-value="{{ number_format($user->clicks->where('status', 'Approved')->sum('refcommission') ,2) }}">0</span></span>
                 </div>
             </div>
             <!--end::Col-->

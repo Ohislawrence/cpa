@@ -7,7 +7,10 @@
             <!--begin::Modal header-->
             <div class="modal-header" id="kt_modal_add_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">Request Payment</h2>
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bold text-gray-800 ">Request Payment</span><br/>
+                    <span class="text-gray-500 mt-1 fw-semibold fs-6">{{ $info }}</span>
+                </h3>
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <!--begin::Close-->
@@ -33,7 +36,7 @@
                             <label class="required fw-semibold fs-6 mb-2">Amount($)</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="number" name="amount" class="form-control form-control-solid mb-3 mb-lg-0" />
+                            <input type="number" name="amount" class="form-control form-control-solid mb-3 mb-lg-0" {{ $readonly }}/>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->

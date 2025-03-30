@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ClicksController;
 use App\Http\Controllers\Admin\CreatetenantController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\EmailControler;
+use App\Http\Controllers\Admin\InfoController;
 use App\Http\Controllers\Admin\IntegrationController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PaymentsController;
@@ -207,7 +208,8 @@ Route::middleware([
         Route::post('tenant/create/post', [TenantController::class, 'createTenant'])->name('createTenant.post');
         Route::post('tenant/newsubdomain/api', [TenantController::class, 'subdomainapi'])->name('subdomainapi');
         //users
-        Route::get('user', [UserController::class, 'index'])->name('viewusers');
+        Route::get('users', [UserController::class, 'index'])->name('viewusers');
+        Route::delete('user/delete/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
         Route::get('getuser', [UserController::class, 'getusers'])->name('getusers');
         Route::post('user/post', [UserController::class, 'store'])->name('creatuser');
         //Route::get('user/view/{id}', [UserController::class, 'viewuser'])->name('');
@@ -239,6 +241,9 @@ Route::middleware([
         //dashboard
         Route::get('dashboard/main', [AdminDashboardController::class, 'dashboard1'])->name('dashboard');
         Route::get('dashboard/stats', [AdminDashboardController::class, 'dashboard2'])->name('stats');
+
+        //info
+        Route::resource('info', InfoController::class);
 
         //blogs
         Route::get('blogs/getblogs/get', [BlogController::class, 'getblogs'])->name('getblogs');

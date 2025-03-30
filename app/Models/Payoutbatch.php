@@ -12,9 +12,12 @@ class Payoutbatch extends Model
     protected $fillable = [
         'user_id',
         'total_amount',
+        'batch_id',
         'status',
         'payment_processor',
         'processed_at',
+        'start_date',
+        'end_date',
     ];
 
 

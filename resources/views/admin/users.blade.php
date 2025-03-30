@@ -25,8 +25,10 @@
 		columns: [
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 			{data: 'name', name: 'name'},
+			{data: 'tenantName', name: 'tenantName'},
+			{data: 'tenantDomain', name: 'tenantDomain'},
 			{data: 'email', name: 'email'},
-            {data: 'role', name: 'role'},
+			{data: 'plan', name: 'plan'},
 			{
 				data: 'action',
 				name: 'action',
@@ -37,6 +39,36 @@
 	}).ajax.reload();
 
 	});
+// Delete function
+function hapus(e) {
+    var url = '{{ route("admin.deleteUser", ":id") }}';
+    url = url.replace(':id', e);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    Swal.fire({
+        title: "Delete this info",
+        text: "Do you really want to delete this Tenant?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Delete this Tenant!"
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                success: function (data) {
+                    $('.yajra-datatable').DataTable().ajax.reload();
+                }
+            });
+        }
+    });
+}
 </script>
 @endsection
 
@@ -145,9 +177,11 @@
 										<thead>
 											<tr class="fw-bold fs-6 text-gray-800 px-7">
 												<th></th>
-												<th>User</th>
+												<th>Name</th>
+												<th>Tenant Name</th>
+												<th>Tenant Domain</th>
 												<th>Email</th>
-                                                <th>Role</th>
+												<th>Plan</th>
 												<th>Actions</th>
 											</tr>
 										</thead>

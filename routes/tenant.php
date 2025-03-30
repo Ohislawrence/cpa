@@ -246,7 +246,9 @@ Route::middleware([
         Route::get('payouts/all', [AgencyPayoutController::class, 'index'])->name('payout.all');
         Route::get('payouts/table/all', [AgencyPayoutController::class, 'getallPayout'])->name('table.getallPayout');
         Route::get('payouts/table/unpaidcommissions', [AgencyPayoutController::class, 'getallunpaidcommissionsTable'])->name('table.getallunpaidcommissionsTable');
+        Route::get('payouts/table/batchpayouts', [AgencyPayoutController::class, 'getallbatchpayoutTable'])->name('table.batchpayout');
         Route::get('payouts/unpaidcommissions', [AgencyPayoutController::class, 'unpaidcommissions'])->name('payout.unpaidcommissions');
+        Route::get('payouts/batchpayout', [AgencyPayoutController::class, 'batchpayout'])->name('payout.batch');
         Route::get('payouts/options', [AgencyPayoutController::class, 'options'])->name('payout.option');
         Route::post('payouts/paypal/details', [AgencyPayoutController::class, 'storePaypalDetails'])->name('payout.option.storePaypalDetails');
         Route::post('payouts/wise/details', [AgencyPayoutController::class, 'storeWiseDetails'])->name('payout.option.storeWiseDetails');

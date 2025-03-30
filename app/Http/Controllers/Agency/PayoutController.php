@@ -7,6 +7,7 @@ use App\Models\Affiliatepayout;
 use App\Models\Agencydetails;
 use App\Models\Click;
 use App\Models\Currency;
+use App\Models\Payoutbatch;
 use App\Models\Payoutoption;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -126,6 +127,22 @@ class PayoutController extends Controller
         return view('agency.payout.unpaidcommissions', compact('info', 'readonly','currency'));
     }
 
+    public function batchpayout()
+    {
+        $payoutMethodId = settings()->get('payout_methods');
+        $payoutType = Payoutoption::where('id', $payoutMethodId)->value('processor') ?? 'not set';
+
+        $info = 'Note that you are processing this payment with '.$payoutType;
+        $readonly = '';
+
+        if (empty($payoutMethodId)) {
+            $info = 'Go to Configurations and set the Payout option';
+            $readonly = 'readonly';
+        }
+        $currency = Currency::where('id', settings()->get('default_currency'))->first();
+        return view('agency.payout.batchpayout', compact('info', 'readonly','currency'));
+    }
+
     public function getallPayout(Request $request)
     {
         if ($request->ajax()) {
@@ -167,6 +184,28 @@ class PayoutController extends Controller
                     return number_format($row->total_earned + $refcomm, 2); // Display total earned
                 })
                 ->rawColumns(['date', 'commission', 'name'])
+                ->make(true);
+        }
+    }
+
+    public function getallbatchpayoutTable(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Payoutbatch::get();
+
+            return Datatables::of($data)
+                ->addColumn('processedAT', function ($row) {
+                    return $row->processed_at ? Carbon::parse($row->processed_at)->format('d/m/Y') : 'N/A';
+                })
+                ->addColumn('range', function ($row) {
+                    $start = $row->start_date ? Carbon::parse($row->start_date)->format('d/m/Y') : 'N/A';
+                    $end = $row->end_date ? Carbon::parse($row->end_date)->format('d/m/Y') : 'N/A';
+                    return '<div>' . $start . ' - ' . $end . '</div>';
+                })
+                ->addColumn('payees', function ($row) {
+                    return 'View Payees';
+                })
+                ->rawColumns(['range', 'payees']) // Only 'range' & 'payees' contain HTML
                 ->make(true);
         }
     }

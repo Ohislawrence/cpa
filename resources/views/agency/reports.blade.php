@@ -106,12 +106,13 @@
                 }
             },
             columns: [
-                { data: 'date', name: 'date' },
-                { data: 'clicks', name: 'clicks' },
-                { data: 'conversions', name: 'conversions' },
-                { data: 'epc', name: 'epc' },
-                { data: 'affiliates', name: 'affiliates' },
-                { data: 'conversionRate', name: 'conversionRate' }
+                { data: 'date', searchable: true },
+                { data: 'clicks', searchable: true },
+                { data: 'unique_clicks', searchable: true }, // New column
+                { data: 'epc', searchable: true },
+                { data: 'conversions', searchable: true },
+                { data: 'affiliates', searchable: true },
+                { data: 'conversionRate', searchable: true }
             ]
         });
 
@@ -530,6 +531,7 @@
                     <tr class="fw-semibold fs-6 text-gray-700">
                         <th>Date</th>
                         <th>Click Count</th>
+                        <th>Unique Clicks</th>
                         <th>Conversions</th>
                         <th>EPC({{ $currency->symbol }})</th>
                         <th>No. of Affiliates</th>

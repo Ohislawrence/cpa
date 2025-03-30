@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('device');
             $table->string('platform');
             $table->string('browser');
-            $table->enum('status', ['Pending', 'Refunded', 'Approved', 'Chargeback', 'Paid','Processing']);
+            $table->enum('status', ['Pending', 'Refunded', 'Approved', 'Chargeback', 'Paid','Processing','Failed']);
             $table->enum('refstatus', ['Pending', 'Approved','Processing', 'Paid']);
             $table->string('smartlink')->nullable();
             $table->string('cost')->nullable();

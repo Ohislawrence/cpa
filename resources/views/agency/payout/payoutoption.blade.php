@@ -49,6 +49,7 @@
 
     <!--begin::Content-->
     <div class="flex-lg-row-fluid me-0 me-lg-20">
+        <p class="mb-9">paypal/batch/process/webhook</p>
 
         <!--begin::Form-->
         <form action="{{ route('merchant.payout.option.storePaypalDetails') }}" class="form mb-9" method="post" id="kt_careers_form">

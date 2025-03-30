@@ -25,6 +25,12 @@
     <!--end::Alert-->
 @endif
 
+@if(session('payout_errors'))
+    @foreach(session('payout_errors') as $error)
+        <div class="alert alert-warning">{{ $error }}</div>
+    @endforeach
+@endif
+
 
 @if(session()->has('message'))
     <!--begin::Alert-->

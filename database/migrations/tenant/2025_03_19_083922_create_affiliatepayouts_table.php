@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('affiliatepayouts', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('payoutbatche_id');
+            $table->integer('payoutbatch_id');
             $table->string('batch_id');
+            $table->string('transaction_id');
             $table->decimal('amount', 10,2);
             $table->string('status');
             $table->date('processed_at');

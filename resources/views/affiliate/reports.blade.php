@@ -182,6 +182,7 @@
             columns: [
                 { data: 'date', name: 'date' },
                 { data: 'clicks', name: 'clicks' },
+                { data:'unique_clicks', name: 'unique_clicks'},
                 { data: 'conversions', name: 'conversions' },
                 { data: 'epc', name: 'epc' },
                 { data: 'conversionRate', name: 'conversionRate' }
@@ -385,6 +386,7 @@
                     <tr class="fw-semibold fs-6 text-gray-700">
                         <th>Date</th>
                         <th>Click Count</th>
+                        <th>Unique Clicks</th>
                         <th>Conversions</th>
                         <th>EPC({{ $currency->symbol }})</th>
                         <th>CR(%)</th>

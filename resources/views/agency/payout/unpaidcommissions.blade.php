@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('headername',  'Unpaid Commisions' )
-@section('bread1',  'Payments' )
+@section('bread1',  'Payouts' )
 @section('bread2',  'Unpaid Commisions' )
 
 
@@ -12,8 +12,6 @@
 
 
 @section('footer')
-
-@include('admin.components.creditdebit')
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 <script type="text/javascript">
@@ -33,7 +31,6 @@
 
 	});
 </script>
-@include('agency.payout.masspaymentverification')
 @endsection
 
 
@@ -57,11 +54,9 @@
 				<!--begin::Card toolbar-->
 				<div class="card-toolbar">
 					<!--begin::Toolbar-->
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#massPayoutOption">
-						Process Mass Payout</button>
-
+				</div>
+			</div>
 					<!--end::Toolbar-->
-					@include('admin.components.payviapaypal')
                     <!--begin::Card body-->
 								<div class="card-body py-4">
 									<!--begin::Table-->
@@ -69,7 +64,7 @@
 										<thead>
 											<tr class="fw-bold fs-6 text-gray-800 px-7">
 												<th>Name</th>
-												<th>Commission/Referral Commi. ({{ $currency->symbol }})</th>
+												<th>Commission+Referral Commission ({{ $currency->symbol }})</th>
                                                 <th>Last conversion date</th>
 											</tr>
 										</thead>

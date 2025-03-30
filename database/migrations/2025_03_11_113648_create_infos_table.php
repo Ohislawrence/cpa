@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('info_type');
             $table->string('slug');
+            $table->text('information');
             $table->timestamps();
         });
     }

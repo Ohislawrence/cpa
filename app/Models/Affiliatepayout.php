@@ -12,7 +12,8 @@ class Affiliatepayout extends Model
     protected $fillable = [
         'user_id',
         'batch_id',
-        'payoutbatche_id',
+        'payoutbatch_id',
+        'transaction_id',
         'amount',
         'status',
         'processed_at',

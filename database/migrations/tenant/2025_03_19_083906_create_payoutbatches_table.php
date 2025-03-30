@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('payoutbatches', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->decimal('total_amount', 10,2);
+            $table->float('total_amount', 10,2);
             $table->string('status');
+            $table->string('batch_id');
             $table->string('payment_processor');
             $table->date('processed_at');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

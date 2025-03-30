@@ -8,13 +8,17 @@ use App\Models\Requestpayment;
 use App\Services\PayPalService;
 use Illuminate\Http\Request;
 use App\Jobs\ProcessMassPayoutJob;
+use App\Models\Affiliatepayout;
 use App\Models\Agencydetails;
+use App\Models\Click;
+use App\Models\Payoutbatch;
 use App\Models\Payoutoption;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use PayPal\Api\WebhookEvent;
 use PayPal\Api\VerifyWebhookSignature;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class MassPaymentController extends Controller
 {
@@ -31,69 +35,226 @@ class MassPaymentController extends Controller
             return redirect()->back()->withErrors(['password' => 'Invalid password.']);
         }
 
-        // Step 2: Check if there are any pending requests within the specified date range
-        $pendingPayments = RequestPayment::whereIn('status', ['Failed', 'Request'])
-            ->whereBetween('created_at', [$request->start_date, $request->end_date])
-            ->exists();
-
-        if (!$pendingPayments) {
-            return redirect()->back()->withErrors(['date_range' => 'No pending payment requests found within the specified date range.']);
+        // Step 2: Ensure minimum payout amount is configured
+        $minimumPayoutAmount = settings()->get('minimum_payout_amount');
+        if (empty($minimumPayoutAmount) || $minimumPayoutAmount <= 0) {
+            return redirect()->back()->withErrors(['payout' => 'No action was done. Please set up the minimum payout in the configuration tab.']);
         }
 
-        // Step 3: Dispatch the mass payout job with the selected date range
-        ProcessMassPayoutJob::dispatch(Auth::id(), $request->start_date, $request->end_date);
+        // Step 3: Get total earnings per affiliate (grouped by user_id)
+        $earningsPerAffiliate = Click::where('status', 'Approved')
+            ->whereBetween('created_at', [$request->start_date, $request->end_date])
+            ->groupBy('user_id')
+            ->selectRaw('user_id, SUM(earned) as total_earned')
+            ->get();
+
+        // Step 4: Filter eligible affiliates
+        $affiliatesEligible = $earningsPerAffiliate
+            ->where('total_earned', '>=', $minimumPayoutAmount)
+            ->pluck('user_id')
+            ->toArray();
+
+        $errors = [];
+        foreach ($earningsPerAffiliate as $affiliate) {
+            if ($affiliate->total_earned < $minimumPayoutAmount) {
+                $errors[] = "Affiliate ID {$affiliate->user_id} has not met the minimum payout amount ({$affiliate->total_earned} < $minimumPayoutAmount).";
+            }
+        }
+
+        // Step 5: Handle cases where no affiliates qualify
+        if (empty($affiliatesEligible)) {
+            return redirect()->back()->withErrors(['payout' => 'No affiliates meet the minimum payout requirement.']);
+        }
+
+        // Step 6: Dispatch the mass payout job
+        ProcessMassPayoutJob::dispatch(Auth::id(), $request->start_date, $request->end_date, $affiliatesEligible);
+
+        // Step 7: Store errors for display
+        if (!empty($errors)) {
+            session()->flash('payout_errors', $errors);
+        }
 
         return back()->with('message', 'Mass payout has been queued for processing.');
     }
 
     public function batchPaypalWebhook(Request $request)
     {
-        $agencyDetails = Agencydetails::where('user_id', Auth::id())->firstOrFail();
-        try {
-            $payload = $request->all();
-            $headers = getallheaders();
-            
-            // Validate PayPal signature
-            $verification = new VerifyWebhookSignature();
-            $verification->setAuthAlgo($headers['PAYPAL-AUTH-ALGO'] ?? '');
-            $verification->setTransmissionId($headers['PAYPAL-TRANSMISSION-ID'] ?? '');
-            $verification->setCertUrl($headers['PAYPAL-CERT-URL'] ?? '');
-            $verification->setWebhookId($agencyDetails->paypal_webhook_id); // Store this in config
-            $verification->setTransmissionSig($headers['PAYPAL-TRANSMISSION-SIG'] ?? '');
-            $verification->setTransmissionTime($headers['PAYPAL-TRANSMISSION-TIME'] ?? '');
-            $verification->setRequestBody(json_encode($payload));
-    
-            $apiContext = new \PayPal\Rest\ApiContext(
-                new \PayPal\Auth\OAuthTokenCredential(config($agencyDetails->client_id), config($agencyDetails->secret))
-            );
-            
-            $verificationResult = $verification->post($apiContext);
-    
-            if ($verificationResult->getVerificationStatus() !== 'SUCCESS') {
-                Log::error('Invalid PayPal webhook signature');
-                return response()->json(['status' => 'error'], 403);
-            }
-    
-            // Process webhook event
-            if (isset($payload['event_type']) && $payload['event_type'] === 'PAYMENT.PAYOUTSBATCH.SUCCESS') {
-                $batchId = $payload['resource']['batch_header']['payout_batch_id'] ?? null;
-                
-                if ($batchId) {
-                    foreach ($payload['resource']['items'] as $payout) {
-                        if ($payout['transaction_status'] === 'SUCCESS') {
-                            RequestPayment::where('transaction_id', $payout['payout_item_id'])
-                                ->update(['status' => 'Paid']);
-                        }
-                    }
-                    Log::info("Payout batch $batchId processed. Individual transactions updated.");
-                }
-            }
-    
-            return response()->json(['status' => 'success']);
-        } catch (\Exception $e) {
-            Log::error('PayPal Webhook Error: ' . $e->getMessage());
-            return response()->json(['status' => 'error'], 500);
+        Log::info('PayPal Webhook Received', ['data' => $request->all()]);
+
+        // Verify webhook
+        if (!$this->verifyWebhook($request)) {
+            Log::error("PayPal Webhook Verification Failed");
+            return response()->json(['message' => 'Invalid Webhook'], 400);
         }
+
+        // Extract event data
+        $event = $request->input('event_type');
+        $resource = $request->input('resource');
+
+        if (!$event || !$resource) {
+            return response()->json(['message' => 'Invalid webhook payload'], 400);
+        }
+
+        try {
+            if ($event === 'PAYMENT.PAYOUTS-ITEM.SUCCEEDED') {
+                return $this->handlePayoutSuccess($resource);
+            } elseif ($event === 'PAYMENT.PAYOUTS-ITEM.DENIED' || $event === 'PAYMENT.PAYOUTS-ITEM.FAILED') {
+                return $this->handlePayoutFailure($resource);
+            }
+        } catch (\Exception $e) {
+            Log::error('PayPal Webhook Processing Error: ' . $e->getMessage());
+            return response()->json(['message' => 'Error processing webhook'], 500);
+        }
+
+        return response()->json(['message' => 'Webhook received'], 200);
+    }
+
+    private function verifyWebhook(Request $request)
+    {
+        $paypalEndpoint = "https://api-m.sandbox.paypal.com/v1/notifications/verify-webhook-signature";
+        $agencyDetails = Agencydetails::where('user_id', 1)->firstOrFail();
+
+        // Get PayPal credentials from your database (modify this based on your app)
+        $paypalClientId = $agencyDetails->client_id;
+        $paypalSecret = $agencyDetails->secret;
+
+        if (!$paypalClientId || !$paypalSecret) {
+            Log::error("Missing PayPal credentials");
+            return false;
+        }
+
+        // Get an access token
+        $authResponse = Http::asForm()->withBasicAuth($paypalClientId, $paypalSecret)
+            ->post('https://api-m.sandbox.paypal.com/v1/oauth2/token', [
+                'grant_type' => 'client_credentials'
+            ]);
+
+        if (!$authResponse->successful()) {
+            Log::error("Failed to get PayPal Access Token");
+            return false;
+        }
+
+        $accessToken = $authResponse->json('access_token');
+
+        // Prepare verification payload
+        $verificationData = [
+            'auth_algo'         => $request->header('PAYPAL-AUTH-ALGO'),
+            'cert_url'          => $request->header('PAYPAL-CERT-URL'),
+            'transmission_id'   => $request->header('PAYPAL-TRANSMISSION-ID'),
+            'transmission_sig'  => $request->header('PAYPAL-TRANSMISSION-SIG'),
+            'transmission_time' => $request->header('PAYPAL-TRANSMISSION-TIME'),
+            'webhook_id'        => $agencyDetails->paypal_webhook_id, // Set this 
+            'webhook_event'     => $request->all(),
+        ];
+
+        // Verify webhook signature
+        $verificationResponse = Http::withToken($accessToken)
+            ->post($paypalEndpoint, $verificationData);
+
+        if (!$verificationResponse->successful()) {
+            Log::error("PayPal Webhook Signature Verification Failed", [
+                'response' => $verificationResponse->json(),
+            ]);
+            return false;
+        }
+
+        $verificationStatus = $verificationResponse->json('verification_status');
+
+        if ($verificationStatus === 'SUCCESS') {
+            return true;
+        }
+
+        Log::error("Invalid PayPal Webhook Signature", ['verification_status' => $verificationStatus]);
+        return false;
+    }
+
+    private function handlePayoutSuccess($resource)
+    {
+        $batchId = $resource['payout_batch_id'] ?? null;
+
+        if (!$batchId) {
+            Log::error("Missing batch ID in PayPal payout success webhook.");
+            return response()->json(['message' => 'Missing batch ID'], 400);
+        }
+
+        // Find the payout batch
+        $payoutBatch = Payoutbatch::where('batch_id', $batchId)->first();
+        if (!$payoutBatch) {
+            Log::error("No matching payout batch found for batch ID: $batchId");
+            return response()->json(['message' => 'Payout batch not found'], 404);
+        }
+
+        // Process each payout item
+        foreach ($resource['items'] as $item) {
+            $receiverEmail = $item['payout_item']['receiver'] ?? null;
+            $transactionId = $item['transaction_id'] ?? null;
+            
+            if (!$receiverEmail || !$transactionId) {
+                Log::error("Missing email or transaction ID for an affiliate payout in batch: $batchId");
+                continue;
+            }
+
+            // Find the affiliate payout record
+            $payout = Affiliatepayout::where('batch_id', $batchId)
+                ->whereHas('affiliateDetails', function ($query) use ($receiverEmail) {
+                    $query->where('paypal_email', $receiverEmail);
+                })
+                ->first();
+
+            if ($payout) {
+                // Update affiliate payout status
+                $payout->update([
+                    'status' => 'Completed',
+                    'transaction_id' => $transactionId,
+                    'processed_at' => now(),
+                ]);
+
+                // ✅ **Update clicks table from 'Approved' to 'Paid'**
+                Click::where('user_id', $payout->user_id)
+                    ->where('status', 'Approved')
+                    ->whereBetween('created_at', [$payoutBatch->start_date, $payoutBatch->end_date])
+                    ->update(['status' => 'Paid']);
+
+                Log::info("Payout successful for email: $receiverEmail, batch: $batchId, transaction: $transactionId");
+            } else {
+                Log::error("No matching payout found for email: $receiverEmail in batch: $batchId");
+            }
+        }
+
+        return response()->json(['message' => 'Payout success processed'], 200);
+    }
+
+    private function handlePayoutFailure($resource)
+    {
+        $batchId = $resource['payout_batch_id'] ?? null;
+        $receiverEmail = $resource['payout_item']['receiver'] ?? null;
+        $errorMessage = $resource['errors']['message'] ?? 'Unknown error';
+
+        if (!$batchId || !$receiverEmail) {
+            Log::error("Missing batch ID or receiver email in PayPal payout failure webhook.");
+            return response()->json(['message' => 'Missing data'], 400);
+        }
+
+        // Find and update the specific affiliate payout record
+        $payout = Affiliatepayout::where('batch_id', $batchId)
+            ->whereHas('affiliateDetails', function ($query) use ($receiverEmail) {
+                $query->where('paypal_email', $receiverEmail);
+            })
+            ->first();
+
+        if ($payout) {
+            $payout->update([
+                'status' => 'Failed',
+                'error_message' => $errorMessage,
+                'processed_at' => now(),
+            ]);
+
+            Log::error("Payout failed for email: $receiverEmail, batch: $batchId, error: $errorMessage");
+        } else {
+            Log::error("No matching payout found for email: $receiverEmail in batch: $batchId");
+        }
+
+        return response()->json(['message' => 'Payout failure processed'], 200);
     }
 
     public function batchPayoneerWebhook(Request $request)

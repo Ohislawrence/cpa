@@ -9,6 +9,7 @@ use App\Models\Currency;
 use App\Models\Kyc;
 use App\Models\Plan;
 use App\Models\Subscription;
+use App\Models\Subscriptiontracker;
 use App\Models\Tenant;
 use App\Models\User;
 use Exception;
@@ -123,7 +124,7 @@ class CreatetenantController extends Controller
 
         $plan = Plan::find(1)->first();
 
-        Subscription::create([
+        Subscriptiontracker::create([
             'user_id' => $user->id,
             'tenant_id' => $subdomain,
             'plan_id' => $request->plan ?? 1,
@@ -153,7 +154,9 @@ class CreatetenantController extends Controller
 
         if(env('APP_ENV') == 'production') 
         {
-            $subdomainCreatedOnServer = $this->subdomainapi($subdomain);
+            $subdomainCert = $subdomain.'tracklia.com';
+            $this->subdomainapi($subdomain);
+            $this->certapi($subdomainCert);
         }
         
 
@@ -198,6 +201,46 @@ class CreatetenantController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
         }
 
+        // Get response from the server. 
+        $resp = curl_exec($ch);
+        if(!empty(curl_error($ch))){
+            echo curl_error($ch); die();
+        }
+
+        // The response will hold a string as per the API response method. 
+        $res = json_decode($resp, true);
+        // Done ?
+        if(!empty($res['done'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function certapi($subdomainCert){
+        $user = 'tracklia';
+        $pass = 'Victor@358@1616';
+        $host = 'tracklia.com';
+        
+        $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=acme'; 
+
+        $post = array('install_cert' => '1',
+              'domain' => [$subdomainCert]
+              );
+
+        // Set the curl parameters 
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+
+        if(!empty($post)){
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+        }
+ 
         // Get response from the server. 
         $resp = curl_exec($ch);
         if(!empty(curl_error($ch))){

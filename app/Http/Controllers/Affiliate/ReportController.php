@@ -180,11 +180,11 @@ class ReportController extends Controller
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-
         if ($campaignId == 'all') {
             $data = Click::select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('COUNT(*) as total_clicks'),
+                DB::raw('COUNT(DISTINCT ip) as unique_clicks'), // Count distinct IPs
                 DB::raw('SUM(cost) as total_earnings')
             )
             ->where('user_id', $userId)
@@ -192,10 +192,11 @@ class ReportController extends Controller
             ->groupBy('date')
             ->orderBy('date')
             ->get();
-        }else{
+        } else {
             $data = Click::select(
                 DB::raw('DATE(created_at) as date'),
                 DB::raw('COUNT(*) as total_clicks'),
+                DB::raw('COUNT(DISTINCT ip) as unique_clicks'), // Count distinct IPs
                 DB::raw('SUM(cost) as total_earnings')
             )
             ->where('user_id', $userId)
@@ -205,8 +206,6 @@ class ReportController extends Controller
             ->orderBy('date')
             ->get();
         }
-        
-        
 
         return Datatables::of($data)
             ->addColumn('date', function ($row) {
@@ -214,6 +213,9 @@ class ReportController extends Controller
             })
             ->addColumn('clicks', function ($row) {
                 return number_format($row->total_clicks, 0);
+            })
+            ->addColumn('unique_clicks', function ($row) { // Add unique clicks column
+                return number_format($row->unique_clicks, 0);
             })
             ->addColumn('epc', function ($row) {
                 $epc = $row->total_clicks > 0 ? $row->total_earnings / $row->total_clicks : 0;
@@ -234,16 +236,16 @@ class ReportController extends Controller
                 if ($campaignId === 'all') {
                     $conversions = Click::whereDate('created_at', $row->date)
                         ->sum('conversion');
-                    $CR = ($conversions/$row->total_clicks)*100;
+                    $CR = ($conversions / $row->total_clicks) * 100;
                 } else {
                     $conversions = Click::where('offer_id', $campaignId)
                         ->whereDate('created_at', $row->date)
                         ->sum('conversion');
-                    $CR = ($conversions/$row->total_clicks)*100;
+                    $CR = ($conversions / $row->total_clicks) * 100;
                 }
                 return number_format($CR, 2);
             })
-            ->rawColumns(['date', 'clicks', 'epc', 'conversions','conversionRate'])
+            ->rawColumns(['date', 'clicks', 'unique_clicks', 'epc', 'conversions', 'conversionRate'])
             ->make(true);
     }
 }

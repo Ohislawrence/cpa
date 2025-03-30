@@ -90,8 +90,11 @@ class CreateTenantJob implements ShouldQueue
 
         $plan = Plan::find($plan)->first();
 
-        $subscription = Subscriptiontracker::create([
+        $subscription = (['id'=>'11']);
+
+        $subscriptiontracker = Subscriptiontracker::create([
             'user_id' => $user->id,
+            'subscription' => $subscription->id,
             'tenant_id' => $this->subdomain,
             'plan_id' => $this->data['plan'] ?? 1,
             'status' => 'active',

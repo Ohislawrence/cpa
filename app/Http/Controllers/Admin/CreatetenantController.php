@@ -138,6 +138,7 @@ class CreatetenantController extends Controller
             'renewal' => 1,
             'price' => $plan->cost,
             'currency' => 'USD',
+            'subscriptions_id' => 1,
         ]);
 
         Tenancy::initialize($tenant);

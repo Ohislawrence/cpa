@@ -155,9 +155,9 @@ class CreatetenantController extends Controller
 
         if(env('APP_ENV') == 'production') 
         {
-            $subdomainCert = $subdomain.'tracklia.com';
+            //$subdomainCert = $subdomain.'tracklia.com';
             $this->subdomainapi($subdomain);
-            $this->certapi($subdomainCert);
+            //$this->certapi($subdomainCert);
         }
         
 

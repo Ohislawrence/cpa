@@ -20,4 +20,14 @@ class Kyc extends Model
         'website',
         'about'
     ];
+
+    public function plan()
+    {
+        return $this->hasOne(Plan::class,'id','current_plan');
+    }
+
+    public function tenant()
+    {
+        return $this->hasOne(Tenant::class);
+    }
 }

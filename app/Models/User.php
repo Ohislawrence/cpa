@@ -85,6 +85,8 @@ class User extends Authenticatable
         return $this->hasMany(Trafficsource::class);
     }
 
+    
+
     public function offers()
     {
         return $this->hasMany(Offer::class);

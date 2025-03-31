@@ -121,7 +121,7 @@ class UserController extends Controller
                     return $row->getRoleNames()->first();
                 })
                 ->addColumn('plan', function($row) {
-                    return $row->subscriptiontracker[0]->plan->name;
+                    return $row->tenants[0]->kyc->plan->name;
                 })
                 ->rawColumns(['action', 'role','tenantName','tenantDomain','plan'])
                 ->make(true);

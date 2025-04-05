@@ -54,6 +54,13 @@ class CreateTenantJob implements ShouldQueue
             $tenant = Tenant::create(['id' => $subdomain]);
             $tenant->domains()->create(['domain' => $subdomain]);
 
+            if (env('APP_ENV') == 'production') {
+                $subdomainCert = $subdomain.'tracklia.com';
+                $this->subdomainapi($subdomain);
+                Sleep::for(30)->seconds();
+                $this->certapi($subdomainCert);
+            }
+
             $kyc = Kyc::create([
                 'tenant_id' => $tenant->id,
                 'business_name' => $data['business_name'],
@@ -99,12 +106,7 @@ class CreateTenantJob implements ShouldQueue
                 $tenantUser->assignRole($role);
             Tenancy::end();
 
-            if (env('APP_ENV') == 'production') {
-                $subdomainCert = $subdomain.'tracklia.com';
-                $this->subdomainapi($subdomain);
-                Sleep::for(30)->seconds();
-                $this->certapi($subdomainCert);
-            }
+            
 
             Mail::to($user->email)->queue(new WelcomeTenant($user, $password, $website));
             Mail::to('business@tracklia.com')->queue(new NewTenant());

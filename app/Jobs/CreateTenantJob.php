@@ -17,12 +17,13 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\SerializesModels;
-use Stancl\Tenancy\Tenancy;
+//use Stancl\Tenancy\Tenancy;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Sleep;
 use Spatie\Permission\Models\Role as ModelsRole;
+use Stancl\Tenancy\Facades\Tenancy;
 
 class CreateTenantJob implements ShouldQueue
 {
@@ -87,26 +88,8 @@ class CreateTenantJob implements ShouldQueue
                 'trial_ends_at' => now()->addDays($plan->free_days)
             ]);
 
-            /*
-            Subscriptiontracker::create([
-                'user_id' => $user->id,
-                'tenant_id' => $subdomain,
-                'plan_id' => $request->plan ?? 1,
-                'status' => 'active',
-                'start_date' => Carbon::today(),
-                'end_date' => Carbon::now()->addDays($plan->free_days),
-                'trial_ends_at' => Carbon::now()->addDays($plan->free_days),
-                'next_billing_date' => Carbon::now()->addDays($plan->free_days),
-                'cancel_at' => null,
-                'canceled_at' => null,
-                'renewal' => 1,
-                'price' => $plan->cost,
-                'currency' => 'USD',
-                'subscriptions_id' => 1,
-            ]);
-            */
 
-            tenancy()->initialize($tenant);
+            Tenancy::initialize($tenant);
                 $tenantUser = User::create([
                     'name' => $data['business_name'],
                     'email' => $data['business_email'],
@@ -114,7 +97,7 @@ class CreateTenantJob implements ShouldQueue
                 ]);
                 $role = ModelsRole::where('name', 'merchant')->first();
                 $tenantUser->assignRole($role);
-            tenancy()->end();
+            Tenancy::end();
 
             if (env('APP_ENV') == 'production') {
                 $subdomainCert = $subdomain.'tracklia.com';

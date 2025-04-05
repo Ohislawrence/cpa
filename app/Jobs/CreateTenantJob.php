@@ -21,6 +21,7 @@ use Stancl\Tenancy\Tenancy;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Sleep;
 use Spatie\Permission\Models\Role as ModelsRole;
 
 class CreateTenantJob implements ShouldQueue
@@ -118,7 +119,7 @@ class CreateTenantJob implements ShouldQueue
             if (env('APP_ENV') == 'production') {
                 $subdomainCert = $subdomain.'tracklia.com';
                 $this->subdomainapi($subdomain);
-                sleep(30);
+                Sleep::for(30)->seconds();
                 $this->certapi($subdomainCert);
             }
 
@@ -143,7 +144,7 @@ class CreateTenantJob implements ShouldQueue
             'domain' => 'tracklia.com',
             'domainpath' => 'public_html',
             'wildcard' => 0,
-            'issue_lecert' => '1',
+            'issue_lecert' => '0',
             'subdomain' => $subdomain,
         ];
 

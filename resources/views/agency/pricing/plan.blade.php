@@ -101,7 +101,7 @@
                                         @if ($owner->subscribed('pro') || $owner->subscribed('leader') || $owner->subscribed('network'))
                                             <a class="btn btn-sm btn-primary">Active</a>
                                         @else
-                                            <a class="btn btn-sm btn-primary" href="http://cpa.test/subscribe?user={{ auth()->user()->email }}&redirect={{ urlencode(url()->full()) }}&plan={{ $plan->id }}">Subscribe</a>
+                                            <a class="btn btn-sm btn-primary" href="https://{{ config('tenancy.central_domains')[1] }}/subscribe?user={{ auth()->user()->email }}&redirect={{ urlencode(url()->full()) }}&plan={{ $plan->id }}">Subscribe</a>
                                         @endif
                                     
                                 @else

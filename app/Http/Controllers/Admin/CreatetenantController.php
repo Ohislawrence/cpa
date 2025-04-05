@@ -59,13 +59,11 @@ class CreatetenantController extends Controller
 
     public function createTenant(Request $request)
     {
-
-        //try {
-            //Code that may throw an Exception
         $disallowedDomains = [
             'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 
             'aol.com', 'icloud.com', 'protonmail.com'
         ];
+    
         $request->validate([
             'business_email' => ['required','unique:users,email',function ($attribute, $value, $fail) use ($disallowedDomains) {
                 $domain = substr(strrchr($value, "@"), 1);
@@ -76,109 +74,23 @@ class CreatetenantController extends Controller
             'business_name' => 'required',
             'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
         ]);
-
-        // Honeypot validation
+    
         if ($request->filled('username')) {
             return redirect()->back()->withErrors(['error' => 'Bot detected!']);
         }
 
-
-        $subdomain = $this->formatForSubdomain($request->subdomain);
-        $tenant = Tenant::create([
-            'id' =>$subdomain,
+        $data = $request->only([
+            'business_email',
+            'business_name',
+            'subdomain',
+            'plan',
+            'country',
+            'website',
         ]);
-
-        $tenant->domains()->create(['domain' => $subdomain]);
-
-        $kyc = Kyc::create([
-            'tenant_id' => $tenant->id,
-            'business_name' => $request->business_name,
-            'business_email' => $request->business_email,
-            'contact_email' => $request->business_email,
-            'contact_name' => 'set this',
-            'business_phone' => $request->business_email,
-            'contact_phone' => $request->business_email,
-            'status' => 'Active',
-            'current_plan' =>$request->plan ?? 1,
-            'country' => $request->country,
-            'website' => $request->website,
-            'about' => 'set this',
-        ]);
-
-        //$password = 'victor@358';
-        $password = Str::password(9, true, true, false, false);
-        $password_hash = Hash::make($password);
-        $website = $subdomain . '.' . env('TENANT_ROOT_URL');
-
-        $user = User::create([
-            'name' => $request->business_name,
-            'email' => $request->business_email,
-            'password' => $password_hash,
-        ]);
-
-        $role = Role::where('name', 'tenant')->first();
-        $user->assignRole($role);
-
-        $user->tenants()->attach($tenant);
-
-        //createsubscription
-
-        $plan = Plan::find(1)->first();
-
-        $user->createAsCustomer([
-            'trial_ends_at' => now()->addDays($plan->free_days)
-        ]);
-
-        /**
-          
-          Subscriptiontracker::create([
-            'user_id' => $user->id,
-            'tenant_id' => $subdomain,
-            'plan_id' => $request->plan ?? 1,
-            'status' => 'active',
-            'start_date' => Carbon::today(),
-            'end_date' => Carbon::now()->addDays($plan->free_days), //Carbon::now()->addMonth(),
-            'trial_ends_at' => Carbon::now()->addDays($plan->free_days),
-            'next_billing_date' => Carbon::now()->addDays($plan->free_days),
-            'cancel_at' => null,
-            'canceled_at' => null,
-            'renewal' => 1,
-            'price' => $plan->cost,
-            'currency' => 'USD',
-            'subscriptions_id' => 1,
-        ]);
-        */
-
-        Tenancy::initialize($tenant);
-            // Register the user on the tenant's database
-            $tenantUser = User::create([
-                'name' => $request->business_name,
-                'email' => $request->business_email,
-                'password' => $password_hash,
-            ]);
-
-            $role = Role::where('name', 'merchant')->first();
-            $tenantUser->assignRole($role);
-        Tenancy::end();
-
-        if(env('APP_ENV') == 'production') 
-        {
-            //$subdomainCert = $subdomain.'tracklia.com';
-            $this->subdomainapi($subdomain);
-            //$this->certapi($subdomainCert);
-        }
-        
-
-        Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
-        Mail::to('business@tracklia.com')->queue(new NewTenant());
-
+    
+        CreateTenantJob::dispatch($data);
+    
         return redirect()->route('tenantCreated');
-
-   //} catch (Exception $e) {
-   //     FacadesLog::debug($e->getMessage());
-    //    return redirect()->route('error');
-   // }
-        
     }
     
 

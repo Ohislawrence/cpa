@@ -17,7 +17,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\SerializesModels;
-//use Stancl\Tenancy\Tenancy;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -55,7 +54,7 @@ class CreateTenantJob implements ShouldQueue
             $tenant->domains()->create(['domain' => $subdomain]);
 
             if (env('APP_ENV') == 'production') {
-                $subdomainCert = $subdomain.'tracklia.com';
+                $subdomainCert = $subdomain.'.tracklia.com';
                 $this->subdomainapi($subdomain);
                 Sleep::for(30)->seconds();
                 $this->certapi($subdomainCert);

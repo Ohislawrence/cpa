@@ -12,15 +12,12 @@ use Stancl\Tenancy\Facades\Tenancy;
 
 
 class SubscribeController extends Controller
-{
-    
+{ 
     public function subscribe(){
         $plans = Plan::all();
-        $tenantUser = User::on('mysql')->where('email', auth()->user()->email)->first();
-        $subscription = Subscriptiontracker::where('user_id', $tenantUser->id)->first();
+        $owner = tenancy()->tenant->owner();
         $currentDate = Carbon::now();
-        //dd($currentDate->lt($subscription->end_date));
-        return view("agency.pricing.plan", compact("plans", "subscription", "currentDate"));
+        return view("agency.pricing.plan", compact("plans", "currentDate","owner"));
     }
 
     public function nosubaffiliate(){

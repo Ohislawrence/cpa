@@ -51,8 +51,7 @@
                 </a>
             </div>
             <!--end:Menu item-->
-
-            @if(tenant()->subscriptiontracker->canAccess(26))
+            @if(tenancy()->tenant->owner())
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
@@ -125,7 +124,7 @@
             </div>
             <!--end:Menu item-->
 
-            @if(tenant()->subscriptiontracker->canAccess(26))
+            @if(tenancy()->tenant->owner())
                 <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->

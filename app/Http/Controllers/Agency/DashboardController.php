@@ -19,6 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         
+        
         $now = now();
         $today = $now->toDateString();
         $yesterday = $now->copy()->subDay()->toDateString();

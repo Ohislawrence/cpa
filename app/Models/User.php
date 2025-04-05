@@ -92,11 +92,6 @@ class User extends Authenticatable
         return $this->hasMany(Offer::class);
     }
 
-    public function subscriptiontracker()
-    {
-        return $this->hasMany(Subscriptiontracker::class);
-    }
-
     public function messages()
     {
     return $this->belongsToMany(Message::class, 'message_user');
@@ -104,7 +99,7 @@ class User extends Authenticatable
 
     public function tenants()
     {
-        return $this->belongsToMany(Tenant::class);
+        return $this->belongsToMany(Tenant::class, 'tenant_user');
     }
 
     public function clicks()

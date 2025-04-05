@@ -25,8 +25,7 @@
 						<!-- POSTS WRAPPER -->
 					<div class="posts-wrapper">
 						<div class="row">
-
-							@forelse (\App\Models\Blog::take(3)->get() as $blog )
+							@forelse (\App\Models\Blog::take(3)->latest()->get() as $blog )
 								<!-- BLOG POST #7 -->
 								<div class="col-md-6 col-lg-4">
 									<div class="blog-post mb-40 wow fadeInUp clearfix">	

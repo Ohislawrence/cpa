@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\CreateTenantJob;
+use App\Mail\NewTenant;
 use App\Mail\WelcomeTenant;
 use App\Models\Currency;
 use App\Models\Kyc;
@@ -124,7 +125,13 @@ class CreatetenantController extends Controller
 
         $plan = Plan::find(1)->first();
 
-        Subscriptiontracker::create([
+        $user->createAsCustomer([
+            'trial_ends_at' => now()->addDays($plan->free_days)
+        ]);
+
+        /**
+          
+          Subscriptiontracker::create([
             'user_id' => $user->id,
             'tenant_id' => $subdomain,
             'plan_id' => $request->plan ?? 1,
@@ -140,6 +147,7 @@ class CreatetenantController extends Controller
             'currency' => 'USD',
             'subscriptions_id' => 1,
         ]);
+        */
 
         Tenancy::initialize($tenant);
             // Register the user on the tenant's database
@@ -162,6 +170,7 @@ class CreatetenantController extends Controller
         
 
         Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
+        Mail::to('business@tracklia.com')->queue(new NewTenant());
 
         return redirect()->route('tenantCreated');
 
@@ -185,7 +194,7 @@ class CreatetenantController extends Controller
                 'domain' => 'tracklia.com',
                 'domainpath' => 'public_html',
                 'wildcard' => 0,
-                'issue_lecert' => 1,
+                'issue_lecert' => '1',
                 'subdomain' => $subdomain,
         );
 

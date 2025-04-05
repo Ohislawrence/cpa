@@ -89,7 +89,11 @@ foreach (config('tenancy.central_domains') as $domain) {
             //advertiser registration
             //Route::get('sign-up/advertiser', [RegistrationController::class, 'advertiser'])->name('advertiserreg');
             //Route::post('sign-up/advertiser/post', [RegistrationController::class, 'postAdvertiser'])->name('advertiserregpost');
+            
+            //paddle subscribe
+            Route::get('/subscribe', [SubscriptionController::class, 'checkout'])->name('subscribe');
 
+            //Route::post('/paddle/webhook', '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook');
 
             //redirect to affiate
             Route::get('/register', function () {
@@ -184,13 +188,14 @@ Route::middleware([
 
 
     Route::group([
-        'namespace' => 'App\Http\Controllers\Affiliate',
+        'namespace' => 'App\Http\Controllers\Agency',
         'prefix' => 'merchant',
         'middleware' => 'role:merchant',
-        'as' => 'affiliate.',
+        'as' => 'merchant.',
         
     ], function () {
        // Route::get('profile' , [ProfileController::class, 'index'])->name('myprofile');
+       
     });
 
 

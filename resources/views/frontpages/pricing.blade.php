@@ -176,7 +176,7 @@
 
         <!-- PRICING COMPARE PAYMENT -->
         <div class="comp-table-payment">	
-            <div class="row row-cols-1 row-cols-md-3">
+            <div class="row row-cols-1 row-cols-md-3 justify-content-center">
 
 
                 <!-- Payment Methods -->

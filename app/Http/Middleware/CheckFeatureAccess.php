@@ -15,22 +15,29 @@ class CheckFeatureAccess
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next, $feature): Response
-    {
-        // Get the current tenant
-        $tenant = tenant();
-        $subscription = $tenant->subscription; 
+{
+    $owner = tenancy()->tenant->owner();
+    
+    $planID = match (true) {
+        $owner->subscribed('pro') => 1,
+        $owner->subscribed('leader') => 2,
+        $owner->subscribed('network') => 3,
+        default => null,
+    };
 
-        // get the features for the plan tenant is on
-        //$planfeatures = Planfeature::where('plan_id',$subscription->plan->id)->pluck('feature_id')->unique();
-        $planfeatures = Planfeature::where('plan_id',$subscription->plan->id)
-                        ->where('feature_id', $feature)->where('is_included', 1)->exists();
-        //$planfeatures =$planfeatures->toArray();
-
-        //check if feature is in the array
-        
-        if ($planfeatures == false) {
-            abort(403, 'This feature is not available on your current plan.');
-        }
-        return $next($request);
+    if (is_null($planID)) {
+        abort(403, 'You do not have an active subscription yet.');
     }
+
+    $hasFeature = Planfeature::where('plan_id', $planID)
+        ->where('feature_id', $feature)
+        ->where('is_included', 1)
+        ->exists();
+
+    if (!$hasFeature) {
+        abort(403, 'This feature is not available on your current plan.');
+    }
+
+    return $next($request);
+}
 }

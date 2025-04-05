@@ -21,5 +21,15 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     {
         return $this->hasOne(Kyc::class, "tenant_id","id");
     }
-    
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'tenant_user');
+    }
+
+    public function owner()
+    {
+        return $this->users()->first(); // or add `wherePivot('role', 'owner')` if you're tracking roles
+    }
+        
 }

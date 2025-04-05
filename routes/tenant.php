@@ -41,6 +41,7 @@ use Spatie\Sitemap\SitemapGenerator;
 use Stancl\Tenancy\Middleware\IdentificationMiddleware;
 use Stancl\Tenancy\Middleware\ScopeSessions;
 use function Laravel\Prompts\alert;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -305,6 +306,8 @@ Route::middleware([
             'as' => 'merchant.',
         ], function () {
             Route::get('plans/active', [SubscribeController::class, 'subscribe'])->name('plan.active');
+
+
             //flutterwave
             Route::post('subscription/create/new', [SubscriptionController::class, 'subscribe'])->name('subscription.create');
             Route::get('subscription/callback', [SubscriptionController::class, 'callback'])->name('subscription.callback');

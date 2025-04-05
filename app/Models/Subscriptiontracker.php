@@ -3,38 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Paddle\Subscription;
+use Laravel\Paddle\Subscription as CashierSubscription;
 
-class Subscriptiontracker extends Model
+class Subscriptiontracker extends CashierSubscription
 {
     protected $connection = 'mysql';
     protected $table = 'subscriptiontrackers';
 
-    protected $fillable = [
-        'user_id',
-        'tenant_id',
-        'plan_id',
-        'status',
-        'start_date',
-        'end_date',
-        'trial_ends_at',
-        'next_billing_date',
-        'cancel_at',
-        'canceled_at',
-        'renewal',
-        'price',
-        'currency',
-        'subscriptions_id',
-    ];
-
+    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function plan()
+    public function tenantPlan()
     {
-        return $this->belongsTo(Plan::class);
+        $this->type;
     }
 
     public function tenant()
@@ -44,8 +28,22 @@ class Subscriptiontracker extends Model
 
     public function canAccess($featureId): bool
     {
-        return Planfeature:://\DB::table('planfeatures')
-            where('plan_id', $this->plan_id)
+        // Get the value of the 'type' column for this subscription (assumed to be tenant owner row)
+        $type = $this->type;
+
+        if (!$type) {
+            return false;
+        }
+
+        // Find the corresponding plan based on the 'type' field
+        $plan = Plan::where('name', $type)->first();
+
+        if (!$plan) {
+            return false;
+        }
+
+        // Check if the feature is included in the plan
+        return Planfeature::where('plan_id', $plan->id)
             ->where('feature_id', $featureId)
             ->where('is_included', 1)
             ->exists();

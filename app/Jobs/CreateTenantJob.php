@@ -94,9 +94,9 @@ class CreateTenantJob implements ShouldQueue
             $tenant->domains()->create(['domain' => $subdomain]);
 
             // Handle production environment setup
-            if (app()->environment('production')) {
+            //if (app()->environment('production')) {
                 $this->setupProductionEnvironment($subdomain);
-            }
+            //}
 
             // Create KYC record with proper data
             $kyc = $this->createKycRecord($tenant, $data);

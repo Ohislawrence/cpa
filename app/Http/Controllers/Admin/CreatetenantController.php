@@ -191,9 +191,9 @@ class CreatetenantController extends Controller
     
 
     public function subdomainapi($subdomain){
-        $user = 'tracklia';
-        $pass = 'Victor@358@1616';
-        $host = 'tracklia.com';
+        $user = env('WebuzoUser');
+        $pass = env('WebuzoPass');
+        $host = env('WebuzoHost');
         
         $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=domainadd'; 
 
@@ -236,9 +236,9 @@ class CreatetenantController extends Controller
     }
 
     public function certapi($subdomainCert){
-        $user = 'tracklia';
-        $pass = 'Victor@358@1616';
-        $host = 'tracklia.com';
+        $user = env('WebuzoUser');
+        $pass = env('WebuzoPass');
+        $host = env('WebuzoHost');
         
         $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=acme'; 
 

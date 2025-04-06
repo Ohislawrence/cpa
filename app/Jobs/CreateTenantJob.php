@@ -94,7 +94,7 @@ class CreateTenantJob implements ShouldQueue
             $tenant->domains()->create(['domain' => $subdomain]);
 
             // Handle production environment setup
-            if (env('APP_ENV') === 'production') {
+            if (app()->environment('production')) {
                 $this->setupProductionEnvironment($subdomain);
             }
 

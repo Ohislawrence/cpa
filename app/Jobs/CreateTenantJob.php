@@ -94,6 +94,7 @@ class CreateTenantJob implements ShouldQueue
             $tenant->domains()->create(['domain' => $subdomain]);
 
             // Handle production environment setup
+            
             //if (app()->environment('production')) {
                 $this->setupProductionEnvironment($subdomain);
             //}
@@ -225,8 +226,7 @@ class CreateTenantJob implements ShouldQueue
             throw new \Exception('Webuzo credentials not configured');
         }
 
-        $url = 'https://' . rawurlencode($user) . ':' . rawurlencode($pass) . '@' . $host . ':2003/index.php?api=json&act=domainadd';
-
+        $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=domainadd'; 
         $post = [
             'add' => '1',
             'domain_type' => 'subdomain',

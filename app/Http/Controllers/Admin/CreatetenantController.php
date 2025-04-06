@@ -35,28 +35,17 @@ class CreatetenantController extends Controller
         return view('frontpages.tenantsSignUp', compact('plans','countries'));
     }
 
-    public function tenantCreated()
+    public function tenantCreated($sub = null)
     {
-        return view('frontpages.tenantCreated');
+        if($sub){
+            return view('frontpages.tenantCreated', compact('sub'));
+        }
+
+        //return redirect()->back()->with('message', 'Invalid information');
+        
     }
 
-    public function formatForSubdomain($input)
-    {
-        // Convert to lowercase
-        $subdomain = Str::lower($input);
     
-        // Replace spaces and underscores with hyphens
-        $subdomain = Str::replace([' ', '_'], '', $subdomain);
-    
-        // Remove any characters that are not alphanumeric or hyphens
-        $subdomain = preg_replace('/[^a-z0-9-]/', '', $subdomain);
-    
-        // Trim leading and trailing hyphens
-        $subdomain = trim($subdomain, '-');
-    
-        return $subdomain;
-    }
-
     public function createTenant(Request $request)
     {
         $disallowedDomains = [
@@ -72,7 +61,7 @@ class CreatetenantController extends Controller
                 }
             }],
             'business_name' => 'required',
-            'subdomain' => 'required|unique:domains,domain|unique:tenants,id',
+            'subdomain' => 'required|unique:domains,domain|unique:tenants,id|max:63',
         ]);
     
         if ($request->filled('username')) {
@@ -89,93 +78,9 @@ class CreatetenantController extends Controller
         ]);
     
         CreateTenantJob::dispatch($data);
+        $webSite = $data['subdomain'];
     
-        return redirect()->route('tenantCreated');
+        return redirect()->route('tenantCreated',['sub' => $webSite]  );
     }
     
-
-    public function subdomainapi($subdomain){
-        $user = 'tracklia';
-        $pass = 'Victor@358@1616';
-        $host = 'tracklia.com';
-        
-        $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=domainadd'; 
-
-        $post = array('add' => '1',
-                'domain_type' => 'subdomain',
-                'domain' => 'tracklia.com',
-                'domainpath' => 'public_html',
-                'wildcard' => 0,
-                'issue_lecert' => '1',
-                'subdomain' => $subdomain,
-        );
-
-        // Set the curl parameters 
-        $ch = curl_init(); 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-
-        if(!empty($post)){
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-        }
-
-        // Get response from the server. 
-        $resp = curl_exec($ch);
-        if(!empty(curl_error($ch))){
-            echo curl_error($ch); die();
-        }
-
-        // The response will hold a string as per the API response method. 
-        $res = json_decode($resp, true);
-        // Done ?
-        if(!empty($res['done'])){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public function certapi($subdomainCert){
-        $user = 'tracklia';
-        $pass = 'Victor@358@1616';
-        $host = 'tracklia.com';
-        
-        $url = 'https://'.rawurlencode($user).':'.rawurlencode($pass).'@'.$host.':2003/index.php?api=json&act=acme'; 
-
-        $post = array('install_cert' => '1',
-              'domain' => [$subdomainCert]
-              );
-
-        // Set the curl parameters 
-        $ch = curl_init(); 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5); 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-
-        if(!empty($post)){
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-        }
- 
-        // Get response from the server. 
-        $resp = curl_exec($ch);
-        if(!empty(curl_error($ch))){
-            echo curl_error($ch); die();
-        }
-
-        // The response will hold a string as per the API response method. 
-        $res = json_decode($resp, true);
-        // Done ?
-        if(!empty($res['done'])){
-            return true;
-        }else{
-            return false;
-        }
-    }
 }

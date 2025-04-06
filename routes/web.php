@@ -102,7 +102,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             //tenant creation
             Route::get('start', [CreatetenantController::class,'create'])->name('start');
             Route::post('start/create', [CreatetenantController::class,'createTenant'])->name('start.post');
-            Route::get('congratulations/created', [CreatetenantController::class,'tenantCreated'])->name('tenantCreated');
+            Route::get('congratulations/created/{sub?}', [CreatetenantController::class,'tenantCreated'])->name('tenantCreated');
 
             Route::get('get/features', function () {
                 $sub= \App\Models\Subscription::where('tenant_id','timeday')->first();

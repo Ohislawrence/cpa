@@ -32,9 +32,9 @@
 									
 
 								<!-- Title -->	
-								<h2 class="s-52 w-700">Congratulations, your web app is ready!</h2>	
+								<h2 class="s-52 w-700">Your request has been successfully received!</h2>	
 								<!-- Text -->	
-								<p class="p-lg">Check your email and sign in to your new affiliate managment web app!
+								<p class="p-lg">Hang tight! We’re creating your affiliate dashboard on {{ $sub }}.tracklia.com, you’ll get an email shortly.
 								</p>
 									
 							</div>	

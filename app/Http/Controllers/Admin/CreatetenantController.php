@@ -178,9 +178,9 @@ class CreatetenantController extends Controller
         Mail::to($user->email)->queue(new WelcomeTenant($user,$password, $website));
         Mail::to('business@tracklia.com')->queue(new NewTenant());
 
-        $webSite = $subdomain;
+      
     
-        return redirect()->route('tenantCreated',['sub' => $webSite]  );
+        return redirect()->route('tenantCreated',['sub' => $subdomain]  );
 
    //} catch (Exception $e) {
    //     FacadesLog::debug($e->getMessage());

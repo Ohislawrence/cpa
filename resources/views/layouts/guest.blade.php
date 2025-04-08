@@ -38,7 +38,7 @@
 		<!-- PLUGINS STYLESHEET -->
 		<link href="{{ asset('publicassets/css/menu.css') }}" rel="stylesheet">	
 		<link id="effect" href="{{ asset('publicassets/css/dropdown-effects/fade-down.css') }}" media="all" rel="stylesheet">
-		<link href="{{ asset('publicassets/css/magnific-popup.css') }}" rel="stylesheet">	
+			
 		<link href="{{ asset('publicassets/css/owl.carousel.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('publicassets/css/owl.theme.default.min.css') }}" rel="stylesheet">
 		<link href="{{ asset('publicassets/css/lunar.css') }}" rel="stylesheet">
@@ -51,6 +51,7 @@
 
         @yield('header')
         @include('layouts.frontcomponents.meta')
+		
     </head>
     <body>
         <!-- PAGE CONTENT
@@ -61,6 +62,17 @@
             @yield('slot')
             @include('layouts.frontcomponents.footer')
         </div>
+
+
+	@include('components.cookie-notice')
+
+	@if(session('cookie_success'))
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			alert('{{ session('cookie_success') }}');
+		});
+	</script>
+	@endif
 		<!--Start of Tawk.to Script-->
 	<script type="text/javascript">
 		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -74,5 +86,6 @@
 		})();
 	</script>
 	<!--End of Tawk.to Script-->
+	
     </body>
 </html>

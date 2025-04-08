@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\UserController;
 //use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
+use App\Http\Controllers\CookieConsentController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubscriptionController;
@@ -81,6 +82,12 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::get('support', [FrontController::class, 'Support'])->name('support');
             Route::get('support/{support}', [FrontController::class, 'showSupport'])->name('app.support');
             Route::get('support/{support}/{slug}', [FrontController::class, 'showContent'])->name('support.content');
+
+            Route::prefix('cookies')->group(function () {
+                Route::post('/accept-all', [CookieConsentController::class, 'acceptAll'])->name('cookies.accept-all');
+                Route::post('/reject-all', [CookieConsentController::class, 'rejectAll'])->name('cookies.reject-all');
+                Route::post('/save-preferences', [CookieConsentController::class, 'savePreferences'])->name('cookies.save-preferences');
+            });
 
             //Route::post('login/post/check', [FrontController::class, 'login'])->name('login.check.post');
 

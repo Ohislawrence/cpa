@@ -19,6 +19,7 @@ return [
     'central_domains' => [
         'localhost/cpa',
         'tracklia.com',
+        'www.tracklia.com',
         'cpa.test',
         env('TENANT_ROOT_URL', 'localhost/cpa'),
         

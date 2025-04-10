@@ -37,10 +37,13 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\WebhookController;
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Spatie\Sitemap\SitemapGenerator;
 use function Laravel\Prompts\alert;
+use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\Tags\Url;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,6 +155,72 @@ foreach (config('tenancy.central_domains') as $domain) {
             Route::post('post/password/reset', [FrontController::class, 'passwordresetpost'])->name('password.reset.post');
 
             Route::post('get/sub/details/flutterwave', [SubscriptionController::class, 'webhook']);
+
+            //sitemap
+            Route::get('/sitemap.xml', function () {
+                $sitemap = Sitemap::create()
+                    ->add(Url::create('/')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
+                        ->setPriority(1.0))
+                    ->add(Url::create('/start')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                        ->setPriority(0.8))
+                    ->add(Url::create('/pricing')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                        ->setPriority(0.8))
+                    ->add(Url::create('/blogs')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                        ->setPriority(0.8))
+                    ->add(Url::create('/#tracklia_features')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                        ->setPriority(0.8))
+                    ->add(Url::create('/contact-us')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6))
+                    ->add(Url::create('/support')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6))
+                    ->add(Url::create('/support/integrations')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6))
+                    ->add(Url::create('/refund-policy')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6))
+                    ->add(Url::create('/privacy-policy')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6))
+                    ->add(Url::create('/refund-policy')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6))
+                    ->add(Url::create('/about-us')
+                        ->setLastModificationDate(now())
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                        ->setPriority(0.6));
+            
+                // Add all blog posts dynamically
+                $posts = Blog::latest()->get();
+            
+                foreach ($posts as $post) {
+                    $sitemap->add(
+                        Url::create("/blog/{$post->slug}")
+                            ->setLastModificationDate($post->updated_at)
+                            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+                            ->setPriority(0.7)
+                    );
+                }
+                return $sitemap->toResponse(request());
+            });
 
         });
     });

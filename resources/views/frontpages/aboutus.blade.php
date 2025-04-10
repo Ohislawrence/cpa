@@ -33,10 +33,10 @@
 					<div class="about-2-title mb-60">
 
 						<!-- Title -->
-						<h2 class="s-52 w-700 mb-30">Welcome to DealsIntel, </h2>
+						<h2 class="s-52 w-700 mb-30">Empowering Growth Through Smarter Affiliate Management </h2>
 
 						<!-- Text -->	
-						<p class="mb-0">Your go-to platform for uncovering the best deals, discounts, and promotions across a wide range of products and services. Our mission is to help you save money and time by providing comprehensive and up-to-date information on the latest offers available in the market.
+						<p class="mb-0">At Tracklia, we believe that every great product deserves a powerful affiliate program behind it. Built from the ground up with modern SaaS, eCommerce brands, and content creators in mind, Tracklia helps you launch, manage, and scale your own affiliate marketing program — with ease, confidence, and full control.
 						</p>
 
 					</div>
@@ -93,7 +93,11 @@
 								</div>
 
 								<!-- Text -->
-								<p>I am delighted to welcome you to DealsIntel, where our mission is to help you save money and time by uncovering the best deals available. As we continue to grow and evolve, our commitment to providing you with comprehensive, reliable, and up-to-date deal information remains unwavering.
+								<p>Tracklia was born from a simple idea — that growing a business through affiliate marketing shouldn't be complicated or expensive. After years in the affiliate space, I saw firsthand how messy and limiting most affiliate tools were. So, I decided to build something better.
+
+									At Tracklia, we’re not just creating software. We’re building a platform that empowers businesses to grow through real, human partnerships. Whether you’re a solo founder or a growing team, my goal is to give you the tools, insights, and support you need to succeed.
+									
+									Thank you for trusting us to be part of your journey.
 								</p>
 
 								<!-- Author -->
@@ -136,8 +140,10 @@
 						<h5 class="s-24 w-700 mb-20">Our Mission</h5>
 
 						<!-- Text -->	
-						<p>At DealsIntel, our mission is to empower consumers by making it easier to find and take advantage of the best deals. We believe that everyone should have access to affordable products and services without compromising on quality. We strive to be your trusted source for reliable, accurate, and timely deal information.
-						</p>
+						<p>Our mission is simple yet ambitious:
+							To help digital businesses unlock new revenue streams by building strong, scalable, and transparent affiliate partnerships.
+							
+							We’re here to eliminate the complexity that often comes with affiliate management, so you can focus on what really matters — growing your business and building meaningful relationships with the people who promote your brand.</p>
 					</div>	
 				</div>	<!-- END ABOUT-3 TEXT -->
 
@@ -147,11 +153,17 @@
 					<div id="a3-2" class="txt-block">	
 
 						<!-- Title -->
-						<h5 class="s-24 w-700 mb-20">What We Offer</h5>
+						<h5 class="s-24 w-700 mb-20">Our Values</h5>
 
 						<!-- Text -->	
-						<p>We curate and verify deals from various categories, including electronics, fashion, travel, home goods, and more. Our team of experts works diligently to ensure that all deals listed on our platform are valid and provide real value to our users.
+						<p>
+							<ol>
+								<li>We care. About your business, your time, and your success.</li>
+								<li>Stronger together. We believe affiliate partnerships are about collaboration.</li>
+								<li>Learn and grow. Tracklia evolves with your needs, and so do we.</li>
+							</ol>
 						</p>
+							
 					</div>	
 				</div>	<!-- END ABOUT-3 TEXT -->
 
@@ -179,13 +191,15 @@
 					<div class="txt-block left-column wow fadeInRight">
 
 						<!-- Title -->	
-						<h2 class="s-50 w-700">Why Choose DealsIntel?</h2>
+						<h2 class="s-50 w-700">Why Choose Tracklia?</h2>
 
 						<!-- Text -->	
-						<p class="p-lg"><h5>Expert Curation</h5> Our team of deal hunters and analysts are passionate about finding the best offers. We thoroughly research and vet each deal to ensure it meets our high standards of quality and value.
+						<p class="p-lg"><h5>🛠️ Built for Modern Businesses</h5> Tracklia was created by people who’ve been in there — developers, affiliate marketers, and SaaS founders. That means we get your needs and have built a tool to match.
 						</p>
-						<p class="p-lg"><h5>Community-Driven Insights</h5>We value the input of our community. User reviews and ratings help us maintain the quality of our listings and provide you with real-life feedback on the deals you're interested in.</p>
-						<p class="p-lg"><h5>Exclusive Offers</h5> partnerships with leading brands and retailers, we often secure exclusive deals that you won't find anywhere else. Sign up for our newsletter to get these special offers delivered straight to your inbox.</p>
+						<p class="p-lg"><h5>⚡ Fast, Easy Setup</h5>We’ve stripped away the fluff. You don’t need a dev team to launch your affiliate program — just plug in your details, and you’re live.</p>
+						<p class="p-lg"><h5>🔒 Secure & Scalable</h5>With robust user permission systems, secure payout handling, and real-time reporting, Tracklia is built to support your business — whether you have 5 affiliates or 5,000.</p>
+						<p class="p-lg"><h5>💬 Human Support That Cares</h5> From setup to scaling, our team is here for you. We treat your success like our own and provide personalized guidance along the way.</p>
+						<p class="p-lg"><h5>📈 Insight-Driven Decisions</h5> Get clear insights into what’s working, which affiliates drive the most value, and how to improve — with visual dashboards and detailed reports.</p>
 					</div>
 				</div>	<!-- END TEXT BLOCK -->	
 
@@ -223,7 +237,7 @@
 								<h2 class="s-46 w-700">Ready to Drive Results?</h2>
 
 								<!-- Text -->
-								<p class="p-lg">Partner with DealsIntel today and take your advertising to the next level. Enjoy high-quality traffic, scalable solutions, and dedicated support. Sign up now and start achieving your marketing goals!
+								<p class="p-lg">Partner with Tracklia today and take your advertising to the next level. Enjoy high-quality traffic, scalable solutions, and dedicated support. Sign up now and start achieving your marketing goals!
 								</p>
 
 								<!-- Button -->

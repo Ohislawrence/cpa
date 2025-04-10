@@ -34,7 +34,7 @@
                 <div class="section-title mb-70">	
 
                     <!-- Title -->	
-                    <h2 class="s-52 w-700">Hello {{ $merchant->name }},</h2>	
+                    <h2 class="s-52 w-700">Hello {{ $user->name }},</h2>	
 
                     <!-- TOGGLE BUTTON -->
                     <div class="toggle-btn ext-toggle-btn toggle-btn-md mt-30">

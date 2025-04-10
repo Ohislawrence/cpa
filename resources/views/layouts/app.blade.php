@@ -10,11 +10,11 @@
 			@if (settings()->get('favicon') !== null)
 				<link rel="icon" href="http://{{ tenant()->id }}.{{ Storage::disk('tenant')->url(settings()->get('favicon')) }}" type="image/x-icon">
 			@else
-				<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
+				<link rel="icon" href="{{ url('assets/media/logos/logo_fade.png') }}" type="image/x-icon">
 			@endif
 		@else
 		<title>@yield('headername') | {{ env('APP_NAME') }}</title>
-		<link rel="icon" href="{{ url('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
+		<link rel="icon" href="{{ url('assets/media/logos/logo_fade.png') }}" type="image/x-icon">
 		@endif
         
 

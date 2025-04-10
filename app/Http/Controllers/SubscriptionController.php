@@ -22,23 +22,23 @@ class SubscriptionController extends Controller
     public function checkout(Request $request)
     {
         $userEmail = $request->input('user');
-        $merchant = User::where('email', $userEmail)->first();
+        $user = User::where('email', $userEmail)->first();
         $selectedPlanID = $request->input('plan');
         $plan = Plan::findorfail($selectedPlanID);
 
         
 
-        if (!$merchant) {
+        if (!$user) {
             return redirect()->route('error.page')->with('message', 'User not found.');
         }
 
         $redirectUrl = $request->input('redirect') ?? url('/dashboard'); // Default redirect if none provided
 
         // Ensure the user is billable (Laravel Cashier)
-        if (!$merchant->subscribed('pro')) { // Check the correct plan
-            $checkout = $merchant->subscribe($premium = $plan->plan_code, 'lower plan - pro')
+        if (!$user->subscribed('pro')) { // Check the correct plan
+            $checkout = $user->subscribe($premium = $plan->plan_code, 'pro')
                 ->returnTo($redirectUrl);
-            return view('admin.inlinePayment', compact('checkout','merchant','plan'));
+            return view('admin.inlinePayment', compact('checkout','user','plan'));
         }
 
         return redirect($redirectUrl)->with('message', 'Already subscribed.');

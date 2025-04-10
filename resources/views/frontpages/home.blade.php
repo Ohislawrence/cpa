@@ -8,7 +8,66 @@
 
 
 @section('header')
-
+<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "SoftwareApplication",
+	  "name": "Tracklia",
+	  "url": "https://tracklia.com",
+	  "logo": "https://tracklia.com/assets/media/logos/logo_fade.png",
+	  "applicationCategory": "BusinessApplication",
+	  "applicationSubCategory": "Affiliate Marketing Software",
+	  "operatingSystem": "All",
+	  "description": "Tracklia helps SaaS, eCommerce, and creator businesses launch and manage their own affiliate programs with ease. Track affiliate performance, automate payouts, and grow your revenue.",
+	  "founder": {
+		"@type": "Person",
+		"name": "Lawrence Ohis"
+	  },
+	  "offers": [
+		{
+		  "@type": "Offer",
+		  "name": "Pro",
+		  "price": "49.95",
+		  "priceCurrency": "USD",
+		  "availability": "https://schema.org/InStock",
+		  "description": "Includes all core features to manage a small affiliate program with up to 50 affiliates."
+		},
+		{
+		  "@type": "Offer",
+		  "name": "Leader",
+		  "price": "99.99",
+		  "priceCurrency": "USD",
+		  "availability": "https://schema.org/InStock",
+		  "description": "Perfect for scaling programs with up to 250 affiliates and advanced customization."
+		},
+		{
+		  "@type": "Offer",
+		  "name": "Network",
+		  "price": "359.99",
+		  "priceCurrency": "USD",
+		  "availability": "https://schema.org/InStock",
+		  "description": "For businesses that want to build an affiliate network."
+		}
+	  ],
+	  "publisher": {
+		"@type": "Organization",
+		"name": "Tracklia",
+		"url": "https://tracklia.com",
+		"logo": "https://tracklia.com/assets/media/logos/logo_fade.png"
+	  },
+	  "contactPoint": {
+		"@type": "ContactPoint",
+		"contactType": "Customer Support",
+		"email": "business@tracklia.com",
+		"url": "https://tracklia.com/contact-us"
+	  },
+	  "sameAs": [
+		"https://twitter.com/tracklia",
+		"https://www.linkedin.com/tracklia",
+		"https://www.facebook.com/tracklia"
+	  ]
+	}
+	</script>
 @endsection
 
 

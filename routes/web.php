@@ -213,7 +213,7 @@ foreach (config('tenancy.central_domains') as $domain) {
             
                 foreach ($posts as $post) {
                     $sitemap->add(
-                        Url::create("/blog/{$post->slug}")
+                        Url::create("/blog/{$post->cat->category}/{$post->slug}")
                             ->setLastModificationDate($post->updated_at)
                             ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
                             ->setPriority(0.7)

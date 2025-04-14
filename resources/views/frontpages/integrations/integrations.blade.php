@@ -1,5 +1,5 @@
 @extends('layouts.guest')
-@section('title',  'Integrations' )
+@section('title',  'Integrate '  )
 @section('type',  'website' )
 @section('url',  Request::url() )
 @section('image',  asset("images/tracklia-page.jpg") )

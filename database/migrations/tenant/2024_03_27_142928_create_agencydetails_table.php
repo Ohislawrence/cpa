@@ -37,10 +37,12 @@ return new class extends Migration
             $table->string('paypal_webhook_id');
             $table->string('payoneer_api_token');
             $table->string('payoneer_merchant_id');
+            $table->string('last_tier_evaluation_at')->nullable();
             $table->string('client_id');
+            $table->enum('tier_evaluation_frequency', ['daily', 'weekly', 'monthly'])->default('monthly');
             $table->string('secret');
             $table->string('paypal_email');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Affiliatedetail;
 use App\Models\Click;
+use App\Models\Tier;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -129,13 +130,22 @@ class WebhookHandler implements ShouldQueue
                     } else {
                         $conversion = 0;
                     }
-                    
-            
+
+                    if (settings()->get('allowed_affiliate_tier') == 1){
+                        $affiliateTier = $click->user->affiliatedetails->tier_id;
+                        if($affiliateTier != null){
+                            $affiliatePercentage = Tier::find($affiliateTier)->commission_rate ;
+                            $additionalEarning = ($earned * $affiliatePercentage) /100 ;
+                        }else{
+                            $additionalEarning = 0;
+                        }
+                    }
+
                     $click->update([
                         'conversion' => $conversion,
                         'cost' => $cost,
                         'status' => $status,
-                        'earned' => ($status == 'Refunded' || $status == 'Chargeback') ? 0 : $earned,
+                        'earned' => ($status == 'Refunded' || $status == 'Chargeback') ? 0 : ($earned + $additionalEarning),
                         'referral' => $referral->id,
                         'refcommision' => $refCommision,
                         'refstatus' => $refstatus,

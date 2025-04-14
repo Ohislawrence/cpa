@@ -167,6 +167,19 @@
                 </a>
             </div>
             <!--end:Menu item-->
+            <!--begin:Menu item-->
+            <div class="menu-item menu-accordion">
+                <!--begin:Menu link-->
+                <a class="" href="{{ route('merchant.tier.index') }}">
+                <span class="menu-link @active('merchant.tier.index')">
+                    <span class="menu-icon">
+                        <i class="ki-duotone ki-black-right fs-2"></i>
+                    </span>
+                    <span class="menu-title">Affiliate Tier</span>
+                </span>
+                </a>
+            </div>
+            <!--end:Menu item-->
 
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">

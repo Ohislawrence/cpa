@@ -10,6 +10,7 @@
 
 		gtag('config', 'G-WCEE48XWJ7');
 		</script>
+		
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -17,12 +18,12 @@
         <title>@yield('title') | {{ config('app.name') }}</title>
         <!-- FAVICON AND TOUCH ICONS -->
 		<link rel="shortcut icon" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
-		<link rel="icon" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
-		<link rel="apple-touch-icon" sizes="152x152" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}">
-		<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}">
-		<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}">
-		<link rel="apple-touch-icon" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}">
-		<link rel="icon" href="{{ asset('assets/media/logos/icon-for-tracklia.png') }}" type="image/x-icon">
+		<link rel="icon" href="{{ asset('assets/media/logos/logo_fade.png') }}" type="image/x-icon">
+		<link rel="apple-touch-icon" sizes="152x152" href="{{ asset('assets/media/logos/logo_fade.png') }}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('assets/media/logos/logo_fade.png') }}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/media/logos/logo_fade.png') }}">
+		<link rel="apple-touch-icon" href="{{ asset('assets/media/logos/logo_fade.png') }}">
+		<link rel="icon" href="{{ asset('assets/media/logos/logo_fade.png') }}" type="image/x-icon">
 
 		<!-- GOOGLE FONTS -->
 		<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -48,6 +49,7 @@
 		<link href="{{ asset('publicassets/css/animate.css') }}" rel="stylesheet">
 		<!-- TEMPLATE CSS -->
 		<link href="{{ asset('publicassets/css/crocus-theme.css') }}" rel="stylesheet">
+		<link href="{{ asset('publicassets/css/buttondown.css') }}" rel="stylesheet">
 
         @yield('header')
         @include('layouts.frontcomponents.meta')
@@ -73,19 +75,17 @@
 		});
 	</script>
 	@endif
-		<!--Start of Tawk.to Script-->
+		
+	@include('layouts.mycomponents.buttonDown')
 	<script type="text/javascript">
-		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-		(function(){
-		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-		s1.async=true;
-		s1.src='https://embed.tawk.to/676a683849e2fd8dfefcdff5/1ifrqe7hs';
-		s1.charset='UTF-8';
-		s1.setAttribute('crossorigin','*');
-		s0.parentNode.insertBefore(s1,s0);
-		})();
+		// Select elements
+		const contactBtn = document.getElementById('contact-btn');
+		const contactPanel = document.getElementById('contact-panel');
+
+		// Toggle the panel visibility
+		contactBtn.addEventListener('click', () => {
+		contactPanel.classList.toggle('active');
+		});
 	</script>
-	<!--End of Tawk.to Script-->
-	
     </body>
 </html>

@@ -41,6 +41,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'allow_affiliate_referral', 'val' => '0'],
             ['name' => 'allowed_affiliate_referral_payout_percentage', 'val' => '10'],
             ['name' => 'allowed_affiliate_referral_duration_months', 'val' => '0'],
+            ['name' => 'allowed_affiliate_tier', 'val' => '0'],
+            ['name' => 'tier_evaluation_frequency', 'val' => 'monthly'],
             ['name' => 'allow_affiliate_registration', 'val' => '1']
         ]);
 

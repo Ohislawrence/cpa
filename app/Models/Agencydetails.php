@@ -18,7 +18,7 @@ class Agencydetails extends Model
         'brandinstantmessageid','brandinterestedtraffic',
         'brandmonthlybudget','brandtracking','note','client_id', 
         'secret','paypal_email','paypal_webhook_id','payoneer_api_token',
-        'payoneer_merchant_id',
+        'payoneer_merchant_id','tier_evaluation_frequency','last_tier_evaluation_at',
     ];
 
     public function place()

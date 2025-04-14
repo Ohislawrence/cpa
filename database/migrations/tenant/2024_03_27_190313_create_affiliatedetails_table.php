@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string('region');
             $table->string('phonenumber');
             $table->string('paypal_email');
+            $table->unsignedInteger('tier_id')->default(1); 
             $table->string('wise_email');
             $table->string('payoneer_ID');
             $table->text('instantmessageid');
             $table->integer('referral_id')->nullable();
-           $table->integer('referred_by')->nullable();
+            $table->integer('referred_by')->nullable();
             $table->timestamps();
         });
     }

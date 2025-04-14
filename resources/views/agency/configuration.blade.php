@@ -455,6 +455,7 @@ Set Domain</span>
     </div> 
 </div>
 <!--end::Input group-->
+
 <!--begin::Input group-->
 
 <div class="row mb-5">
@@ -482,8 +483,39 @@ Set Domain</span>
         </select>
         <!--end::Input-->
     </div>
+</div>
+<!--end::Input group-->
+<div class="row mb-5">
+    <div class="col-md-6 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Allowed Affiliate Tier</label>
+        <!--end::Label-->
 
-    
+        <!--begin::Input-->
+        <select class="form-control form-control-solid" name="allowed_affiliate_tier" value="{{ settings()->get('allowed_affiliate_tier') }}">
+            <option value="">Select one</option>
+            <option value="1" {{ ('1'==  settings()->get('allowed_affiliate_tier')) ? 'selected' : '' }}>Yes</option>
+            <option value="0" {{ ('0'==  settings()->get('allowed_affiliate_tier')) ? 'selected' : '' }}>No</option>
+            
+        </select>
+        <!--end::Input-->
+    </div>
+
+    <div class="col-md-6 fv-row">
+        <!--begin::Label-->
+        <label class="required fs-5 fw-semibold mb-2">Tier Evaluation Frequency</label>
+        <!--end::Label-->
+
+        <!--begin::Input-->
+        <select class="form-control form-control-solid" name="tier_evaluation_frequency" value="{{ settings()->get('tier_evaluation_frequency') }}">
+            <option value="">Select one</option>
+            <option value="daily" {{ ('daily'==  settings()->get('tier_evaluation_frequency')) ? 'selected' : '' }}>Daily</option>
+            <option value="weekly" {{ ('weekly'==  settings()->get('tier_evaluation_frequency')) ? 'selected' : '' }}>Weekly</option>
+            <option value="monthly" {{ ('monthly'==  settings()->get('tier_evaluation_frequency')) ? 'selected' : '' }}>Monthly</option>
+            
+        </select>
+        <!--end::Input-->
+    </div> 
 </div>
 <!--end::Input group-->
 

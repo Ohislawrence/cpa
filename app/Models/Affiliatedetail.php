@@ -12,12 +12,17 @@ class Affiliatedetail extends Model
     protected $fillable = [
         'user_id','status','city','country','region','phonenumber','instantmessageid', 'referral_id','referred_by','paypal_email',
 'wise_email',
-'payoneer_ID',
+'payoneer_ID','tier_id',
     ];
 
     public function place()
     {
         return $this->hasOne(Country::class, 'id','country');
+    }
+
+    public function tier()
+    {
+        return $this->hasOne(Tier::class);
     }
 
     public function user()

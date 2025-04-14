@@ -27,6 +27,7 @@ use App\Http\Controllers\Agency\EmailController;
 use App\Http\Controllers\Agency\MassPaymentController;
 use App\Http\Controllers\Agency\PayoutController as AgencyPayoutController;
 use App\Http\Controllers\Agency\SubscribeController;
+use App\Http\Controllers\Agency\TierController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClickController;
 use App\Http\Controllers\FrontController;
@@ -212,7 +213,13 @@ Route::middleware([
         //Route::get('campaign/details/single/{id}/stats', [AgencyOfferController::class, 'singleGetStat'])->name('singleGetStat');
         Route::get('campaign/chart/single/charts/{offerId}', [AgencyOfferController::class, 'clicksChart'])->name('clicksChart');
         Route::get('campaign/details/single/{offerid}/clicks', [AgencyOfferController::class, 'viewClicksTable'])->name('viewClicksTable');
-        
+        //tier
+        Route::get('tier/view', [TierController::class, 'index'])->name('tier.index');
+        Route::get('tier/edit/{id}', [TierController::class, 'edit'])->name('tier.edit');
+        Route::get('tier/table/data', [TierController::class, 'table'])->name('tier.get');
+        Route::post('tier/create', [TierController::class, 'store'])->name('tier.create');
+        Route::post('tier/update/{id}', [TierController::class, 'update'])->name('tier.update');
+        Route::delete('tier/delete', [TierController::class, 'destroy'])->name('tier.delete');
         //reports
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('report/data', [ReportController::class, 'getReportData'])->name('report.data');

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Agency;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tier;
+use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TierController extends Controller
 {
@@ -15,7 +18,10 @@ class TierController extends Controller
     public function index()
     {
         $tier =  Tier::latest()->paginate(10);
-        return view('agency.tier.view', compact('tier'));
+        $lastEvaluated = DB::table('agencydetails')
+        ->where('user_id', auth()->id())
+        ->value('last_tier_evaluation_at');
+        return view('agency.tier.view', compact('tier','lastEvaluated'));
     }
 
     public function table(Request $request)
@@ -106,4 +112,48 @@ class TierController extends Controller
         return redirect()->back()
             ->with('message', 'Tier deleted successfully.');
     }
+
+    public function evaluate(Request $request)
+    {
+        $merchant = auth()->user();
+
+        if (!$merchant->hasRole('merchant')) {
+            abort(403, 'Unauthorized');
+        }
+    
+        if (!settings()->get('allowed_affiliate_tier')) {
+            return back()->with('error', 'Affiliate tier evaluation is not enabled.');
+        }
+    
+        $affiliates = User::role('affiliate')
+            ->with(['clicks', 'affiliatedetails'])
+            ->get();
+    
+        $changes = 0;
+    
+        foreach ($affiliates as $affiliate) {
+            $totalConversions = $affiliate->clicks()->sum('conversion');
+    
+            $newTier = Tier::where('min_sales', '<=', $totalConversions)
+                ->orderByDesc('min_sales')
+                ->first();
+    
+            if ($newTier && optional($affiliate->affiliatedetails)->tier_id !== $newTier->id) {
+                $affiliate->affiliatedetails?->update([
+                    'tier_id' => $newTier->id,
+                ]);
+                $changes++;
+            }
+        }
+    
+        // Save evaluation date in the agencydetails table
+        DB::table('agencydetails')->where('user_id', $merchant->id)->update([
+            'last_tier_evaluation_at' => now(),
+        ]);
+    
+        $message = $changes > 0
+            ? "Evaluation complete. {$changes} affiliates had their tier updated."
+            : "Evaluation complete. No changes were made.";
+    
+        return back()->with('message', $message);    }
 }

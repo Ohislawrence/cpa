@@ -120,6 +120,8 @@ class ConfigurationController extends Controller
             'allowed_affiliate_referral_payout_percentage'=> $request->allowed_affiliate_referral_payout_percentage,
             'allowed_affiliate_referral_duration_months'=> $request->allowed_affiliate_referral_duration_months,
             'allow_affiliate_registration' => $request->allow_affiliate_registration,
+            'allowed_affiliate_tier' =>$request->allowed_affiliate_tier,
+            'tier_evaluation_frequency' => $request->tier_evaluation_frequency,
          ]);
 
 

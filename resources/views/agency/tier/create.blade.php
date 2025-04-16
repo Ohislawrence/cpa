@@ -10,13 +10,13 @@
                 <h2 class="fw-bold">Create Affiliate Tier</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
-						<div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-							<i class="ki-duotone ki-cross fs-1">
-								<span class="path1"></span>
-								<span class="path2"></span>
-							</i>
-						</div>
-						<!--end::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+                <!--end::Close-->
             </div>
             <!--end::Modal header-->
             <!--begin::Modal body-->
@@ -79,7 +79,3 @@
     <!--end::Modal dialog-->
 </div>
 <!--end::Modal - Add task-->
-</div>
-<!--end::Card toolbar-->
-</div>
-<!--end::Card header-->

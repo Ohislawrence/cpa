@@ -220,6 +220,7 @@ Route::middleware([
         Route::post('tier/create', [TierController::class, 'store'])->name('tier.create');
         Route::post('tier/update/{id}', [TierController::class, 'update'])->name('tier.update');
         Route::delete('tier/delete', [TierController::class, 'destroy'])->name('tier.delete');
+        Route::post('evaluate-affiliates', [TierController::class, 'evaluate'])->name('evaluate.affiliates');
         //reports
         Route::get('reports', [ReportController::class, 'index'])->name('reports');
         Route::get('report/data', [ReportController::class, 'getReportData'])->name('report.data');

@@ -65,7 +65,11 @@ class AffiliateController extends Controller
                     $role = $row->getRoleNames()->first();
                     return $role;
                 })
-                ->rawColumns(['action','role'])
+                ->addColumn('tier',function($row){
+                    $tier = $row->affiliatedetails->tier->level;
+                    return $tier;
+                })
+                ->rawColumns(['action','role','tier'])
                 ->make(true);
         }
     }

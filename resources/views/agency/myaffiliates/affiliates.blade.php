@@ -31,7 +31,7 @@
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 			{data: 'name', name: 'name'},
 			{data: 'email', name: 'email'},
-            {data: 'role', name: 'role'},
+            {data: 'tier', name: 'tier'},
 			{
 				data: 'action',
 				name: 'action',
@@ -94,7 +94,7 @@
 												<th></th>
 												<th>User</th>
 												<th>Email</th>
-                                                <th>Role</th>
+                                                <th>Tier</th>
 												<th>Actions</th>
 											</tr>
 										</thead>

@@ -22,7 +22,7 @@ class Affiliatedetail extends Model
 
     public function tier()
     {
-        return $this->hasOne(Tier::class);
+        return $this->belongsTo(Tier::class);
     }
 
     public function user()

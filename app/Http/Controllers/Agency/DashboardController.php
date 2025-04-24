@@ -61,7 +61,7 @@ class DashboardController extends Controller
 
         //currency
         $currency = Currency::where('id', settings()->get('default_currency'))->first()->symbol;
-        
+        $shouldShowTour = Auth::user()->has_completed_tour;
 
         return view('agency.dashboard', compact('clicksToday',
                                                 'clicksYesterday', 
@@ -75,7 +75,8 @@ class DashboardController extends Controller
                                                 'yesterdayEPC',
                                                 'weekToDateEPC',
                                                 'monthToDateEPC',
-                                                'currency'
+                                                'currency',
+                                                'shouldShowTour'
                                             ));
 
     }

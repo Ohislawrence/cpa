@@ -53,7 +53,7 @@
 
         @yield('header')
         @include('layouts.frontcomponents.meta')
-		
+		{!! CookieConsent::styles() !!}
     </head>
     <body>
         <!-- PAGE CONTENT
@@ -87,5 +87,6 @@
 		contactPanel.classList.toggle('active');
 		});
 	</script>
+	{!! CookieConsent::scripts() !!}
     </body>
 </html>

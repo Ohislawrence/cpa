@@ -40,6 +40,100 @@
 
 	});
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        @if ($shouldShowTour)
+            const tour = new Shepherd.Tour({
+                defaultStepOptions: {
+                    scrollTo: true,
+                    cancelIcon: { enabled: true },
+                    classes: 'shadow-lg rounded-md bg-white',
+                }
+            });
+
+            // Step 1: Welcome Message
+            tour.addStep({
+                id: 'welcome',
+                title: 'Welcome to Tracklia',
+                text: 'Let’s explore how to run your affiliate program.',
+                buttons: [
+                    { text: 'Next', action: tour.next }
+                ]
+            });
+
+            // Step 2: Adding Their First Offer
+            tour.addStep({
+                id: 'add-offer',
+                title: 'Add Your First Offer',
+                text: 'Click here to add your first offer.',
+                attachTo: { element: '#add-offer-link', on: 'right' },
+                buttons: [
+                    { text: 'Back', action: tour.back },
+                    { text: 'Next', action: tour.next }
+                ]
+            });
+
+            // Step 3: Setting Up Basic Configuration
+            tour.addStep({
+                id: 'configuration',
+                title: 'Set Up Basic Configuration',
+                text: 'Configure your business and payout preferences here.',
+                attachTo: { element: '#configuration-link', on: 'right' },
+                buttons: [
+                    { text: 'Back', action: tour.back },
+                    { text: 'Next', action: tour.next }
+                ]
+            });
+
+            // Step 4: Creating an Offer
+            tour.addStep({
+                id: 'create-offer',
+                title: 'Create an Offer',
+                text: 'Create a new offer by clicking here.',
+                attachTo: { element: '#create-offer-link', on: 'right' },
+                buttons: [
+                    { text: 'Back', action: tour.back },
+                    { text: 'Next', action: tour.next }
+                ]
+            });
+
+            // Step 5: Invite Affiliates
+            tour.addStep({
+                id: 'invite-affiliate',
+                title: 'Invite Affiliates',
+                text: 'Invite affiliates to join your program.',
+                attachTo: { element: '#invite-affiliate-link', on: 'right' },
+                buttons: [
+                    { text: 'Back', action: tour.back },
+                    { text: 'Next', action: tour.next }
+                ]
+            });
+
+            // Step 6: Set Up Payouts
+            tour.addStep({
+                id: 'setup-payout',
+                title: 'Set Up Payouts',
+                text: 'Configure your payout settings here.',
+                attachTo: { element: '#payout-settings-link', on: 'right' },
+                buttons: [
+                    { text: 'Back', action: tour.back },
+                    { text: 'Finish', action: () => completeTour() }
+                ]
+            });
+
+            // Start the tour
+            tour.start();
+
+            // Mark the tour as completed
+            function completeTour() {
+                fetch('merchant/user/complete-tour', { method: 'POST' })
+                    .then(() => console.log('Tour completed'))
+                    .catch(err => console.error('Error completing tour:', err));
+            }
+        @endif
+    });
+</script>
 @endsection
 
 

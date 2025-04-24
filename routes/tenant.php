@@ -197,6 +197,11 @@ Route::middleware([
         'middleware' => 'role:merchant',
         'as' => 'merchant.',
     ], function () {
+        //onboarding
+        Route::post('user/complete-tour', function (Request $request) {
+            Auth::user()->update(['has_completed_tour' => true]);
+            return response()->json(['message' => 'Tour completed']);
+        });
         Route::get('profile', [AgencyProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyDashboardController::class, 'index'])->name('dashboard');
         Route::get('topcampaignsDash/view/table', [AgencyDashboardController::class, 'topcampaignsDash'])->name('topcampaignsDash');

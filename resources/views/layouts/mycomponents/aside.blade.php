@@ -143,7 +143,7 @@
             <!--begin:Menu item-->
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
-                <a class="" href="{{ route('merchant.campaigns') }}">
+                <a id="add-offer-link" class="" href="{{ route('merchant.campaigns') }}">
                 <span class="menu-link {{ request()->routeIs('merchant.campaigns') ? 'active fw-bold' : '' }}">
                     <span class="menu-icon">
                         <i class="ki-duotone ki-black-right fs-2"></i>
